@@ -51,7 +51,7 @@ GENERATION_QUEUE = [
 ]
 
 
-def generate_audio(asset_config: Dict) -> Dict:
+def generate_audio(asset_config: Dict, output_dir: Path) -> Dict:
     """Generate a single audio track using fal.ai"""
     print(f"\n{'='*60}")
     print(f"🎵 Generating: {asset_config['name']}")
@@ -90,7 +90,7 @@ def generate_audio(asset_config: Dict) -> Dict:
             print(f"   URL: {audio_url}")
             
             # Save metadata
-            output_path = OUTPUT_DIR / f"{asset_config['name']}.json"
+            output_path = output_dir / f"{asset_config['name']}.json"
             metadata = {
                 **asset_config,
                 "result_url": audio_url,
@@ -108,7 +108,7 @@ def generate_audio(asset_config: Dict) -> Dict:
             if "wav" in audio_url.lower():
                 ext = ".wav"
                 
-            audio_path = OUTPUT_DIR / f"{asset_config['name']}{ext}"
+            audio_path = output_dir / f"{asset_config['name']}{ext}"
             urllib.request.urlretrieve(audio_url, audio_path)
             print(f"💾 Audio saved: {audio_path}")
             
@@ -126,10 +126,9 @@ def generate_audio(asset_config: Dict) -> Dict:
         print(f"❌ Error generating audio: {str(e)}")
         return {"success": False, "error": str(e)}
 
-
-def main():
-    """Main execution"""
-    print("\n" + "="*60)
+def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
+    """Process a queue of music tracks to generate"""
+    print(f"\n{'='*60}")
     print("🚀 FAL.AI BATCH ASSET GENERATOR - MUSIC")
     print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
@@ -140,38 +139,34 @@ def main():
         print("\n❌ ERROR: FAL_KEY environment variable not set")
         print("   Set it with: export FAL_KEY='your-api-key-here'")
         print("   Get your key from: https://fal.ai/dashboard/keys")
-        return
+        return []
     
     print(f"\n✅ API Key found")
-    print(f"📁 Output directory: {OUTPUT_DIR.absolute()}")
-    print(f"\n🎵 Tracks to generate: {len(GENERATION_QUEUE)}")
+    print(f"📁 Output directory: {output_dir.absolute()}")
+    print(f"\n🎵 Tracks to generate: {len(queue)}")
     
-    if not GENERATION_QUEUE:
+    # Ensure output directory exists
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    if not queue:
         print("\n⚠️  QUEUE IS EMPTY.")
-        return
+        return []
 
     # Count by priority
-    high_priority = [a for a in GENERATION_QUEUE if a.get("priority") == "HIGH"]
-    medium_priority = [a for a in GENERATION_QUEUE if a.get("priority") == "MEDIUM"]
+    high_priority = [a for a in queue if a.get("priority") == "HIGH"]
+    medium_priority = [a for a in queue if a.get("priority") == "MEDIUM"]
     
     print(f"   • HIGH priority: {len(high_priority)}")
     print(f"   • MEDIUM priority: {len(medium_priority)}")
     
-    # Confirm before proceeding
-    print("\n" + "="*60)
-    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
-    if response not in ['yes', 'y']:
-        print("❌ Cancelled by user")
-        return
-    
     # Generate assets
     results = []
-    for i, asset in enumerate(GENERATION_QUEUE, 1):
+    for i, asset in enumerate(queue, 1):
         print(f"\n\n{'#'*60}")
-        print(f"# Track {i}/{len(GENERATION_QUEUE)}")
+        print(f"# Track {i}/{len(queue)}")
         print(f"{'#'*60}")
         
-        result = generate_audio(asset)
+        result = generate_audio(asset, output_dir)
         results.append({
             "asset_id": asset.get("id", f"auto_{i}"),
             "name": asset["name"],
@@ -201,7 +196,7 @@ def main():
             print(f"   • {r['asset_id']}: {r['name']} - {r.get('error', 'Unknown error')}")
     
     # Save summary
-    summary_path = OUTPUT_DIR / "generation_summary.json"
+    summary_path = output_dir / "generation_summary.json"
     with open(summary_path, 'w') as f:
         json.dump({
             "total": len(results),
@@ -212,6 +207,19 @@ def main():
     
     print(f"\n💾 Summary saved: {summary_path}")
     print("\n✅ Done!")
+    
+    return results
+
+def main():
+    """Main execution"""
+    # Confirm before proceeding
+    print("\n" + "="*60)
+    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
+    if response not in ['yes', 'y']:
+        print("❌ Cancelled by user")
+        return
+        
+    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
 
 
 if __name__ == "__main__":

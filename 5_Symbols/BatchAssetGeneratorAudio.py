@@ -10,7 +10,7 @@ import re
 from pathlib import Path
 
 # Configuration
-EDL_PATH = Path("Feb1Youtube/edl.md")
+EDL_PATH = Path("../3_Simulation/Feb1Youtube/source_edl.md") # Default path
 OUTPUT_DIR = Path("./generated_audio")
 OUTPUT_DIR.mkdir(exist_ok=True)
 OUTPUT_FILE = OUTPUT_DIR / "chapter_markers.txt"
@@ -45,26 +45,19 @@ def format_title(text):
     fixed_words = [corrections.get(w, w) for w in words]
     return " ".join(fixed_words)
 
-def generate_chapter_markers():
+def generate_chapter_markers(edl_path: Path, output_file: Path):
     """Parse EDL and generate YouTube chapter markers"""
-    global EDL_PATH
-
+    
     print(f"\n{'='*60}")
     print("🔖 GENERATING CHAPTER MARKERS")
-    print(f"   Source: {EDL_PATH}")
+    print(f"   Source: {edl_path}")
     print(f"{'='*60}")
 
-    if not EDL_PATH.exists():
-        print(f"❌ Error: {EDL_PATH} not found.")
-        # Fallback for running from within Feb1Youtube
-        fallback_path = Path("edl.md")
-        if fallback_path.exists():
-            print(f"✅ Found at {fallback_path}")
-            EDL_PATH = fallback_path
-        else:
-            return
+    if not edl_path.exists():
+        print(f"❌ Error: {edl_path} not found.")
+        return
 
-    content = EDL_PATH.read_text(encoding='utf-8')
+    content = edl_path.read_text(encoding='utf-8')
     lines = content.splitlines()
 
     markers = []
@@ -99,12 +92,15 @@ def generate_chapter_markers():
             current_scene_title = None # Reset until next scene
 
     if markers:
+        # Ensure parent dir exists
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        
         output_content = "\n".join(markers)
-        OUTPUT_FILE.write_text(output_content, encoding='utf-8')
+        output_file.write_text(output_content, encoding='utf-8')
         
         print(f"\n{'='*60}")
         print(f"✅ Generated {len(markers)} markers")
-        print(f"💾 Saved to: {OUTPUT_FILE}")
+        print(f"💾 Saved to: {output_file}")
         print(f"{'='*60}")
         print("\nCHAPTER MARKERS LIST:")
         print("-" * 20)
@@ -113,5 +109,8 @@ def generate_chapter_markers():
     else:
         print("\n❌ No markers found. Check EDL format.")
 
+def main():
+    generate_chapter_markers(EDL_PATH, OUTPUT_FILE)
+
 if __name__ == "__main__":
-    generate_chapter_markers()
+    main()
