@@ -1,0 +1,2 @@
+# Python dependencies for BatchAssetGenerator.py
+fal-client
