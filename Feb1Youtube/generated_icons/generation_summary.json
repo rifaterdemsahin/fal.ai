@@ -1,0 +1,87 @@
+{
+  "total": 10,
+  "successful": 10,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "icon_001",
+      "name": "ferrari_icon",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc2/ZM0aHEYhdxNFWFrsVCtC6.jpg",
+      "local_path": "generated_icons/ferrari_icon.png"
+    },
+    {
+      "asset_id": "icon_002",
+      "name": "shopping_cart_icon",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc2/6IJHpRJdw-UrFDOMgVVNq.jpg",
+      "local_path": "generated_icons/shopping_cart_icon.png"
+    },
+    {
+      "asset_id": "icon_003",
+      "name": "database_cylinder",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc3/UDxvzGDBw1kN-c75IN9Jz.jpg",
+      "local_path": "generated_icons/database_cylinder.png"
+    },
+    {
+      "asset_id": "icon_004",
+      "name": "brain_processor",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc3/ZCOKxQ5MWJ9_O6AhbG97t.jpg",
+      "local_path": "generated_icons/brain_processor.png"
+    },
+    {
+      "asset_id": "icon_005",
+      "name": "notification_bell",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc3/6KaME6pZtVpRGGQ7_fgOm.jpg",
+      "local_path": "generated_icons/notification_bell.png"
+    },
+    {
+      "asset_id": "icon_006",
+      "name": "family_house",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc4/mYZsIui5FEevZw_XJ0mF1.jpg",
+      "local_path": "generated_icons/family_house.png"
+    },
+    {
+      "asset_id": "icon_007",
+      "name": "finance_dollar",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc4/5KJVcD7Xu6ZGzYh1FzxEV.jpg",
+      "local_path": "generated_icons/finance_dollar.png"
+    },
+    {
+      "asset_id": "icon_008",
+      "name": "project_folder",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc4/F1SJ9ZAA91OBcxTw63O6N.jpg",
+      "local_path": "generated_icons/project_folder.png"
+    },
+    {
+      "asset_id": "icon_009",
+      "name": "workflow_branch",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc5/Bq-X0MIDDDYacanryQbZk.jpg",
+      "local_path": "generated_icons/workflow_branch.png"
+    },
+    {
+      "asset_id": "icon_010",
+      "name": "save_disk",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2bc5/PEWxOl96iz9IiK46TPv5m.jpg",
+      "local_path": "generated_icons/save_disk.png"
+    }
+  ]
+}

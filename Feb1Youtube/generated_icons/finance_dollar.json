@@ -1,0 +1,16 @@
+{
+  "id": "icon_007",
+  "name": "finance_dollar",
+  "priority": "MEDIUM",
+  "scene": "Scene 5: Bounded Contexts",
+  "seed_key": "SEED_002",
+  "prompt": "Dollar sign icon inside circle, financial symbol, purple accent #7b2cbf, modern clean lines, vector icon, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc4/5KJVcD7Xu6ZGzYh1FzxEV.jpg",
+  "seed_value": 123456
+}

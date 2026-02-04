@@ -1,0 +1,16 @@
+{
+  "id": "icon_005",
+  "name": "notification_bell",
+  "priority": "MEDIUM",
+  "scene": "Scene 4: Skills Gap",
+  "seed_key": "SEED_002",
+  "prompt": "Notification bell icon with active badge, modern iOS style, orange accent #ff6b35, clean vector graphics, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc3/6KaME6pZtVpRGGQ7_fgOm.jpg",
+  "seed_value": 123456
+}

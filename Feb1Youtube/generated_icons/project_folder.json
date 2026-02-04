@@ -1,0 +1,16 @@
+{
+  "id": "icon_008",
+  "name": "project_folder",
+  "priority": "MEDIUM",
+  "scene": "Scene 5: Bounded Contexts",
+  "seed_key": "SEED_002",
+  "prompt": "Project folder icon, file management symbol, teal accent #00bfa5, flat minimalist design, vector icon, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc4/F1SJ9ZAA91OBcxTw63O6N.jpg",
+  "seed_value": 123456
+}

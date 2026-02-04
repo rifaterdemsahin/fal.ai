@@ -1,0 +1,16 @@
+{
+  "id": "icon_002",
+  "name": "shopping_cart_icon",
+  "priority": "HIGH",
+  "scene": "Scene 1: Hook",
+  "seed_key": "SEED_003",
+  "prompt": "Simple shopping cart icon, minimalist flat design, clean vector style, isolated on white background, professional tech presentation aesthetic",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc2/6IJHpRJdw-UrFDOMgVVNq.jpg",
+  "seed_value": 789012
+}

@@ -1,0 +1,16 @@
+{
+  "id": "icon_003",
+  "name": "database_cylinder",
+  "priority": "HIGH",
+  "scene": "Scene 4: Skills Gap",
+  "seed_key": "SEED_002",
+  "prompt": "Database cylinder icon, modern UI style, cyan accent #00d4ff, clean vector graphics, isolated on white background, tech infographic element",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc3/UDxvzGDBw1kN-c75IN9Jz.jpg",
+  "seed_value": 123456
+}

@@ -1,0 +1,16 @@
+{
+  "id": "icon_004",
+  "name": "brain_processor",
+  "priority": "HIGH",
+  "scene": "Scene 4: Skills Gap",
+  "seed_key": "SEED_002",
+  "prompt": "Brain circuit board icon, artificial intelligence symbol, purple accent #7b2cbf, minimalist vector design, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2bc3/ZCOKxQ5MWJ9_O6AhbG97t.jpg",
+  "seed_value": 123456
+}
