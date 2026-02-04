@@ -24,6 +24,8 @@ import BatchAssetGeneratorMusic as gen_music
 import BatchAssetGeneratorGraphics as gen_graphics
 import BatchAssetGeneratorChapterMarkers as gen_chapter_markers
 import BatchAssetGeneratorAudio as gen_audio
+import BatchAssetGeneratorDiagrams as gen_diagrams
+import BatchAssetGeneratorMemoryPalace as gen_memory_palace
 
 # Estimated costs per generation (USD)
 COST_ESTIMATES = {
@@ -126,7 +128,7 @@ def main():
     if response == 'select':
         selected_mode = True
         print("\nSelect categories to run (comma separated, e.g. images,video):")
-        categories = list(config.keys()) + ["chapter_markers", "audio_markers"]
+        categories = list(config.keys()) + ["chapter_markers", "audio_markers", "memory_palace"]
         print(f"Available: {', '.join(categories)}")
         selection = input("> ").strip().lower().split(',')
         selection = [s.strip() for s in selection]
@@ -167,6 +169,12 @@ def main():
         print("\n" + "!"*60)
         print("📊 GENERATING GRAPHICS")
         gen_graphics.process_queue(config["graphics"], week_dir / "generated_graphics")
+
+    # 7. Diagrams
+    if "diagrams" in config and (not selected_mode or "diagrams" in selection):
+        print("\n" + "!"*60)
+        print("📐 GENERATING DIAGRAMS")
+        gen_diagrams.process_queue(config["diagrams"], week_dir / "generated_diagrams")
     
     # 7. Chapter Markers (Visuals)
     if marker_file.exists() and (not selected_mode or "chapter_markers" in selection):
@@ -180,6 +188,12 @@ def main():
         print("\n" + "!"*60)
         print("📝 GENERATING TEXT MARKERS FROM EDL")
         gen_audio.generate_chapter_markers(edl_file, week_dir / "generated_audio" / "chapter_markers.txt")
+
+    # 9. Memory Palace
+    if "memory_palace" in config and (not selected_mode or "memory_palace" in selection):
+        print("\n" + "!"*60)
+        print("🧠 GENERATING MEMORY PALACE ASSETS")
+        gen_memory_palace.process_queue(config["memory_palace"], week_dir / "generated_memory_palace")
 
     print("\n" + "="*60)
     print("✅ MASTER GENERATION COMPLETE")
