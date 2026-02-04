@@ -1,0 +1,12 @@
+{
+  "id": "4.1",
+  "name": "uk_streets_sunday",
+  "priority": "MEDIUM",
+  "scene": "Scene 4: Skills Gap",
+  "prompt": "Cinematic shot of empty UK high street on Sunday evening, closed shop fronts with metal shutters down, dim streetlights beginning to illuminate, deserted pedestrian area, typical British town center architecture, moody atmospheric lighting, golden hour or early dusk, realistic urban photography style, slight film grain, 16:9 cinematic aspect ratio, melancholic mood, 4k, high resolution",
+  "model": "fal-ai/minimax/video-01",
+  "duration_seconds": 5,
+  "aspect_ratio": "16:9",
+  "result_url": "https://v3b.fal.media/files/b/0a8d2c50/i8O9vhoOgeH-ICOFVc4Eb_output.mp4",
+  "generated_at": 1770240808.4251351
+}

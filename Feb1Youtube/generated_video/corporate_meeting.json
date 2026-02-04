@@ -1,0 +1,12 @@
+{
+  "id": "9.1",
+  "name": "corporate_meeting",
+  "priority": "LOW",
+  "scene": "Scene 9: AI Transformation",
+  "prompt": "Cinematic shot of modern corporate meeting room, 4-5 business professionals sitting around conference table looking at laptops with frustrated expressions, large monitor on wall displaying generic charts, glass walls visible, fluorescent office lighting, professional business environment, realistic corporate photography style, slightly desaturated colors for serious tone, slow camera movement, 4k",
+  "model": "fal-ai/minimax/video-01",
+  "duration_seconds": 5,
+  "aspect_ratio": "16:9",
+  "result_url": "https://v3b.fal.media/files/b/0a8d2c66/sIsezeScqp4rtUmiVk45y_output.mp4",
+  "generated_at": 1770241023.031056
+}

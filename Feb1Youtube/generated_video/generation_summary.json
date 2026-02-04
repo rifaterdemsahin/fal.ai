@@ -1,0 +1,30 @@
+{
+  "total": 3,
+  "successful": 2,
+  "failed": 1,
+  "results": [
+    {
+      "asset_id": "4.1",
+      "name": "uk_streets_sunday",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c50/i8O9vhoOgeH-ICOFVc4Eb_output.mp4",
+      "local_path": "generated_video/uk_streets_sunday.mp4"
+    },
+    {
+      "asset_id": "9.1",
+      "name": "corporate_meeting",
+      "priority": "LOW",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c66/sIsezeScqp4rtUmiVk45y_output.mp4",
+      "local_path": "generated_video/corporate_meeting.mp4"
+    },
+    {
+      "asset_id": "1.1",
+      "name": "ferrari_cart_morph",
+      "priority": "HIGH",
+      "success": false,
+      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+    }
+  ]
+}
