@@ -1,0 +1,18 @@
+{
+  "id": "CH_04",
+  "name": "chapter_04_the_real_problem_skills_gap",
+  "priority": "HIGH",
+  "scene": "Chapter 4: The Real Problem - Skills Gap (04:00)",
+  "seed_key": "SEED_CHAPTERS",
+  "prompt": "Cinematic video chapter title card with text 'The Real Problem - Skills Gap' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point.",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "timestamp": "04:00",
+  "original_title": "The Real Problem - Skills Gap",
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b98/GkT0h-cWxI5fnEkPx-MVv.jpg",
+  "seed_value": 999001
+}

@@ -1,0 +1,84 @@
+{
+  "total": 11,
+  "successful": 11,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "CH_01",
+      "name": "chapter_01_hook_problem_statement",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b96/wmuuqmP2zAzIts5FvkH7r.jpg",
+      "local_path": "generated_chapter_markers/chapter_01_hook_problem_statement.png"
+    },
+    {
+      "asset_id": "CH_02",
+      "name": "chapter_02_system_overview",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b97/Wh5zhGhjggfeCiEgb0SHu.jpg",
+      "local_path": "generated_chapter_markers/chapter_02_system_overview.png"
+    },
+    {
+      "asset_id": "CH_03",
+      "name": "chapter_03_error_handling_mcp",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b97/Fm8cFq3e3eoMgSqsTQpS7.jpg",
+      "local_path": "generated_chapter_markers/chapter_03_error_handling_mcp.png"
+    },
+    {
+      "asset_id": "CH_04",
+      "name": "chapter_04_the_real_problem_skills_gap",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b98/GkT0h-cWxI5fnEkPx-MVv.jpg",
+      "local_path": "generated_chapter_markers/chapter_04_the_real_problem_skills_gap.png"
+    },
+    {
+      "asset_id": "CH_05",
+      "name": "chapter_05_telegram_channels_bounded_contexts",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b98/bgMWx4JRAnpudFKp5HB2f.jpg",
+      "local_path": "generated_chapter_markers/chapter_05_telegram_channels_bounded_contexts.png"
+    },
+    {
+      "asset_id": "CH_06",
+      "name": "chapter_06_para_method_obsidian_integration",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b99/PfxUIQN0JQCbqg8Jvm2am.jpg",
+      "local_path": "generated_chapter_markers/chapter_06_para_method_obsidian_integration.png"
+    },
+    {
+      "asset_id": "CH_07",
+      "name": "chapter_07_github_repositories_backup_system",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b99/VqFbQC2EtFaWBlKIUcRAh.jpg",
+      "local_path": "generated_chapter_markers/chapter_07_github_repositories_backup_system.png"
+    },
+    {
+      "asset_id": "CH_08",
+      "name": "chapter_08_blacklist_system_state_management",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b9a/MbyJce-xq2oVEwMEBu8-P.jpg",
+      "local_path": "generated_chapter_markers/chapter_08_blacklist_system_state_management.png"
+    },
+    {
+      "asset_id": "CH_09",
+      "name": "chapter_09_the_bigger_picture_ai_transformation",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b9a/pLZ5jiGQZeXPeA72HQ9tg.jpg",
+      "local_path": "generated_chapter_markers/chapter_09_the_bigger_picture_ai_transformation.png"
+    },
+    {
+      "asset_id": "CH_10",
+      "name": "chapter_10_personal_commitment_call_to_action",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b9b/kcA-3QA7sk4Hi_vATj-Sh.jpg",
+      "local_path": "generated_chapter_markers/chapter_10_personal_commitment_call_to_action.png"
+    },
+    {
+      "asset_id": "CH_11",
+      "name": "chapter_11_closing_statement",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b9b/P7dvCwepiNb6QjpbMAPgU.jpg",
+      "local_path": "generated_chapter_markers/chapter_11_closing_statement.png"
+    }
+  ]
+}

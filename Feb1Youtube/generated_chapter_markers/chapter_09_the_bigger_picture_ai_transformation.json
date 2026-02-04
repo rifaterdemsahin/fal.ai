@@ -1,0 +1,18 @@
+{
+  "id": "CH_09",
+  "name": "chapter_09_the_bigger_picture_ai_transformation",
+  "priority": "HIGH",
+  "scene": "Chapter 9: The Bigger Picture - AI Transformation (10:30)",
+  "seed_key": "SEED_CHAPTERS",
+  "prompt": "Cinematic video chapter title card with text 'The Bigger Picture - AI Transformation' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point.",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "timestamp": "10:30",
+  "original_title": "The Bigger Picture - AI Transformation",
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b9a/pLZ5jiGQZeXPeA72HQ9tg.jpg",
+  "seed_value": 999001
+}

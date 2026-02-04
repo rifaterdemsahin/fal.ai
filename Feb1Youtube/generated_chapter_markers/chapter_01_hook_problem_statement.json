@@ -1,0 +1,18 @@
+{
+  "id": "CH_01",
+  "name": "chapter_01_hook_problem_statement",
+  "priority": "HIGH",
+  "scene": "Chapter 1: Hook & Problem Statement (00:00)",
+  "seed_key": "SEED_CHAPTERS",
+  "prompt": "Cinematic video chapter title card with text 'Hook & Problem Statement' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point.",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "timestamp": "00:00",
+  "original_title": "Hook & Problem Statement",
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b96/wmuuqmP2zAzIts5FvkH7r.jpg",
+  "seed_value": 999001
+}
