@@ -1,0 +1,16 @@
+{
+  "id": "7.1",
+  "name": "deliverpilot_methodology",
+  "priority": "MEDIUM",
+  "scene": "Scene 7",
+  "seed_key": "SEED_002",
+  "prompt": "Horizontal flowchart showing 4 connected stages from left to right: 'UNKNOWN PROBLEM' box with question mark icon \u2192 'SYMBOL/MODEL' box with diagram icon \u2192 'n8n SIMULATION' box with workflow icon \u2192 'TESTING/VALIDATION' box with checkmark icon, connected by right-pointing arrows, each box has distinct color (red, yellow, blue, green gradients), clean process diagram style, dark background (#1a1a2e), modern infographic design, professional methodology visualization, sans-serif labels, 16:9 format",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b41/8OslGiIECcYOru9ZU2HO-.jpg",
+  "seed_value": 123456
+}

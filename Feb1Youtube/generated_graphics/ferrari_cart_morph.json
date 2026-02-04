@@ -1,0 +1,16 @@
+{
+  "id": "1.1",
+  "name": "ferrari_cart_morph",
+  "priority": "HIGH",
+  "scene": "Scene 1",
+  "seed_key": "SEED_003",
+  "prompt": "Sleek red Ferrari sports car icon smoothly morphing into simple shopping cart icon, clean vector style, white/transparent background, particle effects during transformation, professional tech presentation aesthetic, minimalist flat design, modern motion graphics style, 16:9",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b3e/3c186p65FNI_jt6TYun6h.jpg",
+  "seed_value": 789012
+}

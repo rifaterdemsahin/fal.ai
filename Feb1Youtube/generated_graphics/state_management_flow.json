@@ -1,0 +1,16 @@
+{
+  "id": "8.1",
+  "name": "state_management_flow",
+  "priority": "MEDIUM",
+  "scene": "Scene 8",
+  "seed_key": "SEED_002",
+  "prompt": "Technical diagram showing state management flow in 5 connected boxes: 'PREVIOUS STATE' (database cylinder icon) \u2192 'CURRENT INPUT' (arrow icon) \u2192 'STATE COMPARISON' (equals/not-equals icon) \u2192 'DECISION' (fork/branch icon) \u2192 'UPDATE STATE' (save icon), connected by arrows with data flow indicators, positioned to overlay on workflow nodes, clean technical documentation style, cyan/blue color scheme (#00d4ff, #0096c7), dark transparent background, professional system architecture diagram, 16:9 format",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b42/AvSYB20MHXZaypXjSZEWU.jpg",
+  "seed_value": 123456
+}

@@ -1,0 +1,16 @@
+{
+  "id": "4.2",
+  "name": "sunday_5pm_timeline",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "seed_key": "SEED_002",
+  "prompt": "Motion graphics timeline visualization showing Sunday evening 5:00 PM prominently displayed, large clock icon showing 17:00, row of 5-6 shop icons with red 'X' or 'CLOSED' indicators overlaid, Cambridge location pin subtle in background, clean infographic design, dark background (#1a1a2e) with blue/purple accent colors (#00d4ff, #7b2cbf), modern minimalist style, professional data visualization, 16:9 format",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b3f/Ps1Dm887uhMsmZHqEl9C0.jpg",
+  "seed_value": 123456
+}

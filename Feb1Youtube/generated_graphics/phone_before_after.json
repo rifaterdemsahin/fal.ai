@@ -1,0 +1,16 @@
+{
+  "id": "10.1",
+  "name": "phone_before_after",
+  "priority": "MEDIUM",
+  "scene": "Scene 10",
+  "seed_key": "SEED_002",
+  "prompt": "Side-by-side phone screens in 16:9 layout, LEFT 'BEFORE': iPhone home screen cluttered with social media apps - YouTube (red icon), Instagram (gradient icon), Reddit (orange icon), TikTok, multiple game apps, notification badges, chaotic layout; RIGHT 'AFTER': same iPhone with minimalist clean home screen showing only Google Gemini app icon, Claude app icon, Calendar, Notes app, mostly empty screen with clean modern wallpaper, visual contrast between distraction vs focus, realistic iOS interface design, modern smartphone mockup",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b44/MYl-t0_CPv5feNzXJkmvk.jpg",
+  "seed_value": 123456
+}

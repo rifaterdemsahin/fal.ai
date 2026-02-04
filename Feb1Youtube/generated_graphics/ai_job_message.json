@@ -1,0 +1,16 @@
+{
+  "id": "11.1",
+  "name": "ai_job_message",
+  "priority": "HIGH",
+  "scene": "Scene 11",
+  "seed_key": "SEED_003",
+  "prompt": "Bold typographic design with powerful message, main text 'AI ISN'T COMING FOR YOUR JOB' in very large prominent letters (96pt sans-serif, all caps), positioned in upper two-thirds, secondary text below 'YOU MUST TRANSFORM TO KEEP IT' in medium size (48pt), dramatic color scheme with dark background (#0a0a0a) and bright white/gold text (#ffffff, #f7931e), empowering yet serious tone, professional motivational graphic design, clean modern typography, strong visual hierarchy, 16:9 aspect ratio",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b44/b_gday0gB7RA3Wvt5aNVI.jpg",
+  "seed_value": 789012
+}

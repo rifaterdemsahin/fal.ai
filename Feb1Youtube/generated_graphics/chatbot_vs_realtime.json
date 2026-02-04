@@ -1,0 +1,16 @@
+{
+  "id": "4.4",
+  "name": "chatbot_vs_realtime",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "seed_key": "SEED_002",
+  "prompt": "Split-screen comparison graphic in 16:9 format, LEFT SIDE: traditional chatbot interface showing static conversation bubbles, waiting cursor, inactive state, muted gray colors (#6b6b6b); RIGHT SIDE: active real-time AI system showing live notification badges, proactive alert icons, dynamic response indicators, vibrant blue/purple colors (#00d4ff, #7b2cbf), visual contrast between passive vs active AI systems, modern UI design elements, professional software comparison layout, clean typography, dark background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b40/lsVI-6_U1B7hl2MhNo-3R.jpg",
+  "seed_value": 123456
+}

@@ -1,0 +1,16 @@
+{
+  "id": "4.1",
+  "name": "uk_streets_sunday_evening",
+  "priority": "MEDIUM",
+  "scene": "Scene 4",
+  "seed_key": "SEED_001",
+  "prompt": "Cinematic shot of empty UK high street on Sunday evening, closed shop fronts with metal shutters down, dim streetlights beginning to illuminate, deserted pedestrian area, typical British town center architecture, moody atmospheric lighting, golden hour or early dusk, realistic urban photography style, slight film grain, 16:9 cinematic aspect ratio, melancholic mood",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b3e/P5Mb724d3iP9S7cwlr9Xz.jpg",
+  "seed_value": 987654
+}

@@ -1,0 +1,119 @@
+{
+  "total": 14,
+  "successful": 14,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "1.1",
+      "name": "ferrari_cart_morph",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b3e/3c186p65FNI_jt6TYun6h.jpg",
+      "local_path": "generated_graphics/ferrari_cart_morph.png"
+    },
+    {
+      "asset_id": "4.1",
+      "name": "uk_streets_sunday_evening",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b3e/P5Mb724d3iP9S7cwlr9Xz.jpg",
+      "local_path": "generated_graphics/uk_streets_sunday_evening.png"
+    },
+    {
+      "asset_id": "4.2",
+      "name": "sunday_5pm_timeline",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b3f/Ps1Dm887uhMsmZHqEl9C0.jpg",
+      "local_path": "generated_graphics/sunday_5pm_timeline.png"
+    },
+    {
+      "asset_id": "4.3",
+      "name": "agent_workflow_diagram",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b3f/XXkOpfx65pYYa30eFcLOD.jpg",
+      "local_path": "generated_graphics/agent_workflow_diagram.png"
+    },
+    {
+      "asset_id": "4.4",
+      "name": "chatbot_vs_realtime",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b40/lsVI-6_U1B7hl2MhNo-3R.jpg",
+      "local_path": "generated_graphics/chatbot_vs_realtime.png"
+    },
+    {
+      "asset_id": "5.1",
+      "name": "bounded_contexts_diagram",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b40/Q1PTSt1pqjZHeoMZoOxTI.jpg",
+      "local_path": "generated_graphics/bounded_contexts_diagram.png"
+    },
+    {
+      "asset_id": "6.1",
+      "name": "20_dollar_pricing",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b41/Mbymt3nqtWrD0B2gVL6cx.jpg",
+      "local_path": "generated_graphics/20_dollar_pricing.png"
+    },
+    {
+      "asset_id": "7.1",
+      "name": "deliverpilot_methodology",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b41/8OslGiIECcYOru9ZU2HO-.jpg",
+      "local_path": "generated_graphics/deliverpilot_methodology.png"
+    },
+    {
+      "asset_id": "8.1",
+      "name": "state_management_flow",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b42/AvSYB20MHXZaypXjSZEWU.jpg",
+      "local_path": "generated_graphics/state_management_flow.png"
+    },
+    {
+      "asset_id": "9.1",
+      "name": "corporate_meeting",
+      "priority": "LOW",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b42/RLBGjAI0S07Krpe1aRj3C.jpg",
+      "local_path": "generated_graphics/corporate_meeting.png"
+    },
+    {
+      "asset_id": "9.2",
+      "name": "silos_vs_agents",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b43/3M9Q-r-a8uAQNGTOWZvSw.jpg",
+      "local_path": "generated_graphics/silos_vs_agents.png"
+    },
+    {
+      "asset_id": "9.3",
+      "name": "bottom_up_revolution",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b43/WuvarWHBA_-WRNm_b26fv.jpg",
+      "local_path": "generated_graphics/bottom_up_revolution.png"
+    },
+    {
+      "asset_id": "10.1",
+      "name": "phone_before_after",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b44/MYl-t0_CPv5feNzXJkmvk.jpg",
+      "local_path": "generated_graphics/phone_before_after.png"
+    },
+    {
+      "asset_id": "11.1",
+      "name": "ai_job_message",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2b44/b_gday0gB7RA3Wvt5aNVI.jpg",
+      "local_path": "generated_graphics/ai_job_message.png"
+    }
+  ]
+}

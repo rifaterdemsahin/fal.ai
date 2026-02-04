@@ -1,0 +1,16 @@
+{
+  "id": "4.3",
+  "name": "agent_workflow_diagram",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "seed_key": "SEED_002",
+  "prompt": "Professional workflow diagram showing AI agent process flow in three connected stages from left to right: Stage 1 'DATA COLLECTION' with database/cloud storage icons and arrows pointing inward, Stage 2 'UNDERSTANDING' with brain/AI processor icon and location symbols (home icon transforming to shopping cart), Stage 3 'NOTIFICATION' with mobile phone and notification bell icon, connected by flowing arrows with subtle gradient, clean modern infographic style, dark background (#1a1a2e) with gradient accent colors (blue #00d4ff to purple #7b2cbf), each stage clearly labeled in sans-serif font, professional technical diagram, 16:9 aspect ratio",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b3f/XXkOpfx65pYYa30eFcLOD.jpg",
+  "seed_value": 123456
+}

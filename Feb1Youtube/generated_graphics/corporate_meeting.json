@@ -1,0 +1,16 @@
+{
+  "id": "9.1",
+  "name": "corporate_meeting",
+  "priority": "LOW",
+  "scene": "Scene 9",
+  "seed_key": "SEED_001",
+  "prompt": "Cinematic shot of modern corporate meeting room, 4-5 business professionals sitting around conference table looking at laptops with frustrated expressions, large monitor on wall displaying generic charts, glass walls visible, fluorescent office lighting, professional business environment, realistic corporate photography style, slightly desaturated colors for serious tone, 16:9 cinematic aspect ratio",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b42/RLBGjAI0S07Krpe1aRj3C.jpg",
+  "seed_value": 987654
+}
