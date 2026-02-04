@@ -26,6 +26,7 @@ import BatchAssetGeneratorChapterMarkers as gen_chapter_markers
 import BatchAssetGeneratorAudio as gen_audio
 import BatchAssetGeneratorDiagrams as gen_diagrams
 import BatchAssetGeneratorMemoryPalace as gen_memory_palace
+import EstimateWeeklyVideoCost as gen_cost
 
 # Estimated costs per generation (USD)
 COST_ESTIMATES = {
@@ -114,7 +115,7 @@ def main():
         marker_file = week_dir / "chapter_markers.txt"
 
     # Estimate Cost
-    estimate_cost(config)
+    gen_cost.generate_report(week_dir)
     
     # Confirm
     print("\n⚠️  You are about to generate assets which will incur costs.")
