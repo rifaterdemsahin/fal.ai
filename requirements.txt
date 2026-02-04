@@ -1,2 +1,2 @@
 # Python dependencies for BatchAssetGenerator.py
-fal-client
+fal-client>=0.13.0,<1.0.0

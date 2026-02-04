@@ -22,7 +22,7 @@ Generate Video Artifacts
    # Set the environment variable
    export FAL_KEY="your-api-key-here"
    
-   # Or use python-dotenv to load from .env automatically
+   # Run the script
    python BatchAssetGenerator.py
    ```
 
