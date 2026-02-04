@@ -1,0 +1,16 @@
+{
+  "id": "6.1",
+  "name": "20_dollar_pricing",
+  "priority": "HIGH",
+  "scene": "Scene 6: PARA Method",
+  "seed_key": "SEED_002",
+  "prompt": "Bold pricing graphic with '$20' in very large prominent numbers (72pt+), '/month' text below in medium size (36pt), surrounded by circular arrangement of 5 tool icons: n8n logo, Telegram icon, Obsidian icon, Gemini sparkle, Claude icon, clean modern design with subtle gradient background (dark blue to purple #1a1a2e to #7b2cbf), pricing emphasis layout with glowing effect around price, professional infographic style, affordability message clear, minimalist design, white/cyan text (#ffffff, #00d4ff), 16:9 aspect ratio",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2af1/zKq50PQFwfPZNJxjIPTJ-.jpg",
+  "seed_value": 123456
+}

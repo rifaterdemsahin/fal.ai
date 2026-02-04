@@ -1,0 +1,16 @@
+{
+  "id": "5.1",
+  "name": "bounded_contexts_diagram",
+  "priority": "MEDIUM",
+  "scene": "Scene 5: Bounded Contexts",
+  "seed_key": "SEED_002",
+  "prompt": "Technical architecture diagram showing three parallel workflow streams, each enclosed in a distinct containment box with rounded corners, left workflow labeled 'BOUNDED CONTEXT: FAMILY' with house icon and blue border (#00d4ff), middle workflow 'BOUNDED CONTEXT: FINANCE' with dollar icon and purple border (#7b2cbf), right workflow 'BOUNDED CONTEXT: PROJECTS' with folder icon and teal border (#00bfa5), each box contains simplified workflow nodes ending in Telegram icon, clean separation between contexts, professional software architecture visualization, dark background, modern tech diagram style, 16:9 format",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2af3/TfsOE9UNbdOEcyyXb94IT.jpg",
+  "seed_value": 123456
+}

@@ -1,0 +1,16 @@
+{
+  "id": "9.3",
+  "name": "bottom_up_revolution",
+  "priority": "HIGH",
+  "scene": "Scene 9: AI Transformation",
+  "seed_key": "SEED_002",
+  "prompt": "Bold motivational graphic showing large upward arrow labeled 'BOTTOM-UP' in vibrant gold/orange gradient (#ff6b35, #f7931e) moving from bottom to top, crossed-out downward arrow labeled 'TOP-DOWN' faded in background, individual empowerment icon (person silhouette with gear/tools) at bottom of upward arrow, Microsoft Copilot button icon shown dimmed/crossed out, revolutionary theme with energetic colors, grassroots movement aesthetic, strong typographic emphasis with sans-serif bold font, motivational infographic style, dark background (#1a1a2e), 16:9 aspect ratio",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2af2/CeXrp4TyD9GHZb9C4JvgD.jpg",
+  "seed_value": 123456
+}

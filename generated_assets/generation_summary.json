@@ -1,0 +1,111 @@
+{
+  "total": 13,
+  "successful": 13,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "1.1",
+      "name": "ferrari_cart_morph",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2aef/0hN0PbD1BhlUrl7OfpDCv.jpg",
+      "local_path": "generated_assets/ferrari_cart_morph.png"
+    },
+    {
+      "asset_id": "4.2",
+      "name": "sunday_5pm_timeline",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2aef/4itIdKrbJEy3g7d5Y6z9l.jpg",
+      "local_path": "generated_assets/sunday_5pm_timeline.png"
+    },
+    {
+      "asset_id": "4.3",
+      "name": "agent_workflow_diagram",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af0/wTvVQXa4wWmaM5X0TlHqd.jpg",
+      "local_path": "generated_assets/agent_workflow_diagram.png"
+    },
+    {
+      "asset_id": "4.4",
+      "name": "chatbot_vs_realtime",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af0/yNwr4LbSuJIrw9wZdiMA4.jpg",
+      "local_path": "generated_assets/chatbot_vs_realtime.png"
+    },
+    {
+      "asset_id": "6.1",
+      "name": "20_dollar_pricing",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af1/zKq50PQFwfPZNJxjIPTJ-.jpg",
+      "local_path": "generated_assets/20_dollar_pricing.png"
+    },
+    {
+      "asset_id": "9.2",
+      "name": "silos_vs_agents",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af1/WcEzEelPcLh5DStIItxWK.jpg",
+      "local_path": "generated_assets/silos_vs_agents.png"
+    },
+    {
+      "asset_id": "9.3",
+      "name": "bottom_up_revolution",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af2/CeXrp4TyD9GHZb9C4JvgD.jpg",
+      "local_path": "generated_assets/bottom_up_revolution.png"
+    },
+    {
+      "asset_id": "11.1",
+      "name": "ai_job_message",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af2/ZiQ0V7x5yBeGmDZoLY1En.jpg",
+      "local_path": "generated_assets/ai_job_message.png"
+    },
+    {
+      "asset_id": "4.1",
+      "name": "uk_streets_sunday",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af3/HOfaiGDot-1Pyph099IbO.jpg",
+      "local_path": "generated_assets/uk_streets_sunday.png"
+    },
+    {
+      "asset_id": "5.1",
+      "name": "bounded_contexts_diagram",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af3/TfsOE9UNbdOEcyyXb94IT.jpg",
+      "local_path": "generated_assets/bounded_contexts_diagram.png"
+    },
+    {
+      "asset_id": "7.1",
+      "name": "deliverpilot_methodology",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af4/GBVO4gIeOWALLbqd4p7hp.jpg",
+      "local_path": "generated_assets/deliverpilot_methodology.png"
+    },
+    {
+      "asset_id": "8.1",
+      "name": "state_management_flow",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af5/2ClnsS7HRlT0BB3CnBxga.jpg",
+      "local_path": "generated_assets/state_management_flow.png"
+    },
+    {
+      "asset_id": "10.1",
+      "name": "phone_before_after",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2af5/f20mPEsyncTh6Auv6h0BM.jpg",
+      "local_path": "generated_assets/phone_before_after.png"
+    }
+  ]
+}

@@ -12,8 +12,6 @@ env/
 ENV/
 .venv
 
-# Generated assets
-generated_assets/
 
 # IDEs
 .vscode/
