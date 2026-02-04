@@ -1,0 +1,10 @@
+{
+  "id": "1.1",
+  "name": "ferrari_cart_morph_sfx",
+  "priority": "HIGH",
+  "scene": "Scene 1",
+  "prompt": "Sound of a sleek sports car engine revving up then seamlessly transforming into a digital shopping cart sound, sci-fi transformation effect, high quality",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 10,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b5d/CI3uPdHGJBJ1-KNmm4M4S_tmpwy75394p.wav"
+}

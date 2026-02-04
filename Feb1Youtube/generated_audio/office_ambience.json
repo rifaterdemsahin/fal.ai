@@ -1,0 +1,10 @@
+{
+  "id": "9.1",
+  "name": "office_ambience",
+  "priority": "LOW",
+  "scene": "Scene 9",
+  "prompt": "Muffled corporate office ambience, quiet murmurs, paper shuffling, distant phone ringing, realistic",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 15,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b79/h0amXOy6DKs6-A4F4luyw_tmpulqdbces.wav"
+}

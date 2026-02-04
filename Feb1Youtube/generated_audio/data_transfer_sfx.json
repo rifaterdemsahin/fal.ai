@@ -1,0 +1,10 @@
+{
+  "id": "8.1",
+  "name": "data_transfer_sfx",
+  "priority": "MEDIUM",
+  "scene": "Scene 8",
+  "prompt": "Digital data transfer sound, electronic switch click, routing sound effects, clean technology ambience",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 8,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b76/rvo4yVszsJQGvkbaiCAy8_tmpd_7f6suz.wav"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "4.3",
+  "name": "agent_workflow_processing",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "prompt": "Futuristic data flow sound, soft beeps and processing noise, digital hum, high tech atmosphere",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 10,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b68/CpR8WFbgkZmfdZvEXIGNj_tmp32cnbhpu.wav"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "7.1",
+  "name": "methodology_flow_whoosh",
+  "priority": "MEDIUM",
+  "scene": "Scene 7",
+  "prompt": "Clean futuristic whoosh sound for workflow transitions, followed by a positive checkmark ping, corporate tech style",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 6,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b72/W9Ah_ykanUQEFj3twT4df_tmpiti4jpqa.wav"
+}

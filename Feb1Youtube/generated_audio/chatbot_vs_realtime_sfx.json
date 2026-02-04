@@ -1,0 +1,10 @@
+{
+  "id": "4.4",
+  "name": "chatbot_vs_realtime_sfx",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "prompt": "Contrast between boring monotone mechanical typing sound and dynamic fast-paced digital alert sounds, vibrant and active",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 12,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b6b/yVGbyWQzwexv7ydcYtBDb_tmpk44565vx.wav"
+}

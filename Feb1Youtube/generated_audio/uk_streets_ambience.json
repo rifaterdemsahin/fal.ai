@@ -1,0 +1,10 @@
+{
+  "id": "4.1",
+  "name": "uk_streets_ambience",
+  "priority": "MEDIUM",
+  "scene": "Scene 4",
+  "prompt": "Cinematic ambient sound of an empty UK high street on a Sunday evening, light wind, distant quiet urban atmosphere, melancholic mood",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 15,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b61/VyE4fgPN40lZ3-y119QUf_tmpnluuj_zn.wav"
+}

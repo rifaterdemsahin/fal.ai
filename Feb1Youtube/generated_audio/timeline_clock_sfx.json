@@ -1,0 +1,10 @@
+{
+  "id": "4.2",
+  "name": "timeline_clock_sfx",
+  "priority": "HIGH",
+  "scene": "Scene 4",
+  "prompt": "Rhythmic ticking clock sound, clean digital blips for timeline markers, modern notification sound, high fidelity",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 8,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b64/1EsI39tSvG9hjxc-c-FQ2_tmpqdax3a6u.wav"
+}

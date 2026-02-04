@@ -1,0 +1,10 @@
+{
+  "id": "6.1",
+  "name": "pricing_success_chime",
+  "priority": "HIGH",
+  "scene": "Scene 6",
+  "prompt": "Cash register ching sound mixed with a digital success chime, satisfying coin drop, clean and crisp",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 5,
+  "result_url": "https://v3b.fal.media/files/b/0a8d2b6f/BxAHoUFr2XukZBV4EAIS__tmpa6rwfq17.wav"
+}
