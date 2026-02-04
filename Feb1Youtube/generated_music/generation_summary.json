@@ -1,0 +1,28 @@
+{
+  "total": 3,
+  "successful": 0,
+  "failed": 3,
+  "results": [
+    {
+      "asset_id": "music_01",
+      "name": "tech_innovation_background",
+      "priority": "HIGH",
+      "success": false,
+      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 180, 'ctx': {'le': 47}}]"
+    },
+    {
+      "asset_id": "music_02",
+      "name": "cta_energy_build",
+      "priority": "HIGH",
+      "success": false,
+      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 60, 'ctx': {'le': 47}}]"
+    },
+    {
+      "asset_id": "music_03",
+      "name": "screen_recording_bed",
+      "priority": "MEDIUM",
+      "success": false,
+      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 180, 'ctx': {'le': 47}}]"
+    }
+  ]
+}
