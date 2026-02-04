@@ -1,0 +1,87 @@
+{
+  "total": 10,
+  "successful": 10,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "LT_01",
+      "name": "lt_agentic_era",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c09/PLs97rBXMyhdNfbMlawD8.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_agentic_era.png"
+    },
+    {
+      "asset_id": "LT_02",
+      "name": "lt_mcp",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c09/AxUmuVHKea_2FMC1qJdaa.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_mcp.png"
+    },
+    {
+      "asset_id": "LT_03",
+      "name": "lt_skills_gap",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0a/vU5BFrnPFA-nn7PDujngK.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_skills_gap.png"
+    },
+    {
+      "asset_id": "LT_04",
+      "name": "lt_bounded_contexts",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0b/V2qtUDiO3joY0Rtj95QvW.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_bounded_contexts.png"
+    },
+    {
+      "asset_id": "LT_05",
+      "name": "lt_para_method",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0b/x85ucAwa6aMHSb_FUe5si.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_para_method.png"
+    },
+    {
+      "asset_id": "LT_06",
+      "name": "lt_state_management",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0c/hR-WQz8W9Ns0Ko2UT063n.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_state_management.png"
+    },
+    {
+      "asset_id": "LT_07",
+      "name": "lt_deliverpilot",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0c/teXjHmnpXYPOoeIXZi1zR.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_deliverpilot.png"
+    },
+    {
+      "asset_id": "LT_08",
+      "name": "lt_bottom_up",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0d/_mNivKtgw4hM41yxJg7u2.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_bottom_up.png"
+    },
+    {
+      "asset_id": "LT_09",
+      "name": "lt_n8n_workflows",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0d/Rh_PNyNjHiXuAXwQVna4y.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_n8n_workflows.png"
+    },
+    {
+      "asset_id": "LT_10",
+      "name": "lt_ai_transformation",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d2c0e/fdyuZFIYwvXuS2sgqvjfP.jpg",
+      "local_path": "generated_assets/lower_thirds/lt_ai_transformation.png"
+    }
+  ]
+}
