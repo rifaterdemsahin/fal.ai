@@ -8,7 +8,7 @@ Generates background music tracks based on EDL suggestions
 import os
 import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 # Install: pip install fal-client
 try:
@@ -16,6 +16,16 @@ try:
 except ImportError:
     print("❌ fal_client not installed. Run: pip install fal-client")
     exit(1)
+
+# Import asset utilities
+try:
+    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+except ImportError:
+    # Fallback if running standalone
+    print("⚠️  asset_utils not found. Using legacy naming convention.")
+    generate_filename = None
+    extract_scene_number = None
+    ManifestTracker = None
 
 # Configuration
 OUTPUT_DIR = Path("./generated_music")
@@ -51,7 +61,7 @@ GENERATION_QUEUE = [
 ]
 
 
-def generate_audio(asset_config: Dict, output_dir: Path) -> Dict:
+def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single audio track using fal.ai"""
     print(f"\n{'='*60}")
     print(f"🎵 Generating: {asset_config['name']}")
@@ -89,11 +99,33 @@ def generate_audio(asset_config: Dict, output_dir: Path) -> Dict:
             print(f"✅ Generated successfully!")
             print(f"   URL: {audio_url}")
             
+            # Determine extension
+            ext = ".mp3" # Defaulting to mp3
+            if "wav" in audio_url.lower():
+                ext = ".wav"
+            
+            # Generate filename using new convention if available
+            if generate_filename and extract_scene_number:
+                scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                base_filename = generate_filename(
+                    scene_num,
+                    'music',
+                    asset_config['name'],
+                    version
+                )
+                filename_json = base_filename + '.json'
+                filename_audio = base_filename + ext
+            else:
+                # Fallback to legacy naming
+                filename_json = f"{asset_config['name']}.json"
+                filename_audio = f"{asset_config['name']}{ext}"
+            
             # Save metadata
-            output_path = output_dir / f"{asset_config['name']}.json"
+            output_path = output_dir / filename_json
             metadata = {
                 **asset_config,
                 "result_url": audio_url,
+                "filename": filename_audio,
             }
             
             with open(output_path, 'w') as f:
@@ -103,19 +135,32 @@ def generate_audio(asset_config: Dict, output_dir: Path) -> Dict:
             
             # Download audio
             import urllib.request
-            # Determine extension
-            ext = ".mp3" # Defaulting to mp3
-            if "wav" in audio_url.lower():
-                ext = ".wav"
                 
-            audio_path = output_dir / f"{asset_config['name']}{ext}"
+            audio_path = output_dir / filename_audio
             urllib.request.urlretrieve(audio_url, audio_path)
             print(f"💾 Audio saved: {audio_path}")
+            
+            # Add to manifest if provided
+            if manifest:
+                manifest.add_asset(
+                    filename=filename_audio,
+                    prompt=asset_config["prompt"],
+                    asset_type="music",
+                    asset_id=asset_config.get("id", "unknown"),
+                    result_url=audio_url,
+                    local_path=str(audio_path),
+                    metadata={
+                        "scene": asset_config.get("scene", ""),
+                        "priority": asset_config.get("priority", ""),
+                        "model": asset_config.get("model", ""),
+                    }
+                )
             
             return {
                 "success": True,
                 "url": audio_url,
                 "local_path": str(audio_path),
+                "filename": filename_audio,
             }
         else:
             print(f"❌ Generation failed: No audio URL in result")
@@ -126,7 +171,7 @@ def generate_audio(asset_config: Dict, output_dir: Path) -> Dict:
         print(f"❌ Error generating audio: {str(e)}")
         return {"success": False, "error": str(e)}
 
-def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
+def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object] = None) -> List[Dict]:
     """Process a queue of music tracks to generate"""
     print(f"\n{'='*60}")
     print("🚀 FAL.AI BATCH ASSET GENERATOR - MUSIC")
@@ -166,7 +211,7 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
         print(f"# Track {i}/{len(queue)}")
         print(f"{'#'*60}")
         
-        result = generate_audio(asset, output_dir)
+        result = generate_audio(asset, output_dir, manifest)
         results.append({
             "asset_id": asset.get("id", f"auto_{i}"),
             "name": asset["name"],

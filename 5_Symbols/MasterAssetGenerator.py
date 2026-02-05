@@ -27,6 +27,7 @@ import BatchAssetGeneratorAudio as gen_audio
 import BatchAssetGeneratorDiagrams as gen_diagrams
 import BatchAssetGeneratorMemoryPalace as gen_memory_palace
 import EstimateWeeklyVideoCost as gen_cost
+from asset_utils import ManifestTracker
 
 # Estimated costs per generation (USD)
 COST_ESTIMATES = {
@@ -134,54 +135,58 @@ def main():
         selection = input("> ").strip().lower().split(',')
         selection = [s.strip() for s in selection]
     
+    # Initialize Manifest Tracker
+    manifest = ManifestTracker(week_dir)
+    print(f"\n📋 Manifest tracking initialized")
+    
     # Execute Generators
     # 1. Images
     if "images" in config and (not selected_mode or "images" in selection):
         print("\n" + "!"*60)
         print("🖼️  GENERATING IMAGES")
-        gen_images.process_queue(config["images"], week_dir / "generated_assets_Images")
+        gen_images.process_queue(config["images"], week_dir / "generated_assets_Images", manifest)
 
     # 2. Lower Thirds
     if "lower_thirds" in config and (not selected_mode or "lower_thirds" in selection):
         print("\n" + "!"*60)
         print("📺 GENERATING LOWER THIRDS")
-        gen_lower_thirds.process_queue(config["lower_thirds"], week_dir / "generated_assets_lowerthirds")
+        gen_lower_thirds.process_queue(config["lower_thirds"], week_dir / "generated_assets_lowerthirds", manifest)
     
     # 3. Icons
     if "icons" in config and (not selected_mode or "icons" in selection):
         print("\n" + "!"*60)
         print("🔹 GENERATING ICONS")
-        gen_icons.process_queue(config["icons"], week_dir / "generated_icons")
+        gen_icons.process_queue(config["icons"], week_dir / "generated_icons", manifest)
         
     # 4. Video
     if "video" in config and (not selected_mode or "video" in selection):
         print("\n" + "!"*60)
         print("🎥 GENERATING VIDEO CLIPS")
-        gen_video.process_queue(config["video"], week_dir / "generated_video")
+        gen_video.process_queue(config["video"], week_dir / "generated_video", manifest)
 
     # 5. Music
     if "music" in config and (not selected_mode or "music" in selection):
         print("\n" + "!"*60)
         print("🎵 GENERATING MUSIC")
-        gen_music.process_queue(config["music"], week_dir / "generated_music")
+        gen_music.process_queue(config["music"], week_dir / "generated_music", manifest)
         
     # 6. Graphics
     if "graphics" in config and (not selected_mode or "graphics" in selection):
         print("\n" + "!"*60)
         print("📊 GENERATING GRAPHICS")
-        gen_graphics.process_queue(config["graphics"], week_dir / "generated_graphics")
+        gen_graphics.process_queue(config["graphics"], week_dir / "generated_graphics", manifest)
 
     # 7. Diagrams
     if "diagrams" in config and (not selected_mode or "diagrams" in selection):
         print("\n" + "!"*60)
         print("📐 GENERATING DIAGRAMS")
-        gen_diagrams.process_queue(config["diagrams"], week_dir / "generated_diagrams")
+        gen_diagrams.process_queue(config["diagrams"], week_dir / "generated_diagrams", manifest)
     
     # 7. Chapter Markers (Visuals)
     if marker_file.exists() and (not selected_mode or "chapter_markers" in selection):
         print("\n" + "!"*60)
         print("🔖 GENERATING CHAPTER MARKER IMAGES")
-        gen_chapter_markers.generate_from_file(marker_file, week_dir / "generated_chapter_markers")
+        gen_chapter_markers.generate_from_file(marker_file, week_dir / "generated_chapter_markers", manifest)
     
     # 8. Audio/Text Markers (from EDL)
     edl_file = week_dir / "source_edl.md"
@@ -194,8 +199,11 @@ def main():
     if "memory_palace" in config and (not selected_mode or "memory_palace" in selection):
         print("\n" + "!"*60)
         print("🧠 GENERATING MEMORY PALACE ASSETS")
-        gen_memory_palace.process_queue(config["memory_palace"], week_dir / "generated_memory_palace")
+        gen_memory_palace.process_queue(config["memory_palace"], week_dir / "generated_memory_palace", manifest)
 
+    # Save the unified manifest
+    manifest.save_manifest()
+    
     print("\n" + "="*60)
     print("✅ MASTER GENERATION COMPLETE")
     print("="*60)
