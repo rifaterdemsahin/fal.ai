@@ -7,10 +7,27 @@ Generates SVG diagrams to showcase processes in video scripts
 
 import os
 import json
+import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom import minidom
+
+# Import asset utilities from 5_Symbols directory
+# Add parent directories to path to find asset_utils
+current_dir = Path(__file__).parent
+project_root = current_dir.parent.parent.parent
+symbols_dir = project_root / "5_Symbols"
+sys.path.insert(0, str(symbols_dir))
+
+try:
+    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+except ImportError:
+    # Fallback if running standalone
+    print("⚠️  asset_utils not found. Using legacy naming convention.")
+    generate_filename = None
+    extract_scene_number = None
+    ManifestTracker = None
 
 # Configuration
 OUTPUT_DIR = Path("./generated_svgs")
@@ -435,7 +452,7 @@ def add_arrow(
         text_elem.text = label
 
 
-def generate_svg(config: Dict, output_dir: Path) -> Dict:
+def generate_svg(config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate an SVG diagram based on configuration"""
     print(f"\n{'='*SEPARATOR_WIDTH}")
     print(f"🎨 Generating SVG: {config['name']}")
@@ -485,25 +502,67 @@ def generate_svg(config: Dict, output_dir: Path) -> Dict:
         # Remove extra blank lines
         pretty_xml = "\n".join([line for line in pretty_xml.split("\n") if line.strip()])
         
+        # Generate filename using new convention if available
+        if generate_filename and extract_scene_number:
+            # Extract scene number from SVG ID (e.g., "SVG1.1" -> 1)
+            svg_id = config.get('id', '0.0')
+            # Remove "SVG" prefix if present
+            numeric_id = svg_id.replace('SVG', '') if svg_id.startswith('SVG') else svg_id
+            scene_num = extract_scene_number(numeric_id)
+            
+            base_filename = generate_filename(
+                scene_num,
+                'svg',
+                config['name'],
+                version
+            )
+            filename_json = base_filename + '.json'
+            filename_svg = base_filename + '.svg'
+        else:
+            # Fallback to legacy naming
+            filename_json = f"{config['name']}.json"
+            filename_svg = f"{config['name']}.svg"
+        
         # Save SVG file
-        svg_path = output_dir / f"{config['name']}.svg"
+        svg_path = output_dir / filename_svg
         with open(svg_path, "w") as f:
             f.write(pretty_xml)
         
         print(f"✅ SVG generated successfully!")
         print(f"💾 Saved to: {svg_path}")
         
+        # Create prompt description for manifest
+        prompt_description = f"{config.get('scene', 'Scene')}: {config['diagram_type']} diagram showing {config['name']}"
+        
         # Save metadata
-        metadata_path = output_dir / f"{config['name']}.json"
+        metadata_path = output_dir / filename_json
         metadata = {
             **config,
             "output_file": str(svg_path),
+            "filename": filename_svg,
         }
         
         with open(metadata_path, "w") as f:
             json.dump(metadata, f, indent=2)
         
         print(f"💾 Metadata saved: {metadata_path}")
+        
+        # Add to manifest if provided
+        if manifest:
+            manifest.add_asset(
+                filename=filename_svg,
+                prompt=prompt_description,
+                asset_type="svg",
+                asset_id=config.get("id", "unknown"),
+                local_path=str(svg_path),
+                metadata={
+                    "scene": config.get("scene", ""),
+                    "priority": config.get("priority", ""),
+                    "diagram_type": config.get("diagram_type", ""),
+                    "canvas_width": config.get("canvas_width", 0),
+                    "canvas_height": config.get("canvas_height", 0),
+                }
+            )
         
         return {
             "success": True,
@@ -516,7 +575,7 @@ def generate_svg(config: Dict, output_dir: Path) -> Dict:
         return {"success": False, "error": str(e)}
 
 
-def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
+def process_queue(queue: List[Dict], output_dir: Path, version: int = 1) -> List[Dict]:
     """Process a queue of SVG diagrams to generate"""
     print(f"\n{'='*SEPARATOR_WIDTH}")
     print("🚀 SVG BATCH ASSET GENERATOR")
@@ -528,6 +587,12 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
     
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Initialize manifest tracker if available
+    manifest = None
+    if ManifestTracker:
+        manifest = ManifestTracker(output_dir)
+        print(f"✅ Manifest tracking enabled")
     
     # Count by priority
     high_priority = [a for a in queue if a["priority"] == "HIGH"]
@@ -545,7 +610,7 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
         print(f"# SVG {i}/{len(queue)}")
         print(f"{'#'*SEPARATOR_WIDTH}")
         
-        result = generate_svg(config, output_dir)
+        result = generate_svg(config, output_dir, manifest, version)
         results.append({
             "svg_id": config["id"],
             "name": config["name"],
@@ -589,6 +654,11 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
         )
     
     print(f"\n💾 Summary saved: {summary_path}")
+    
+    # Save manifest if tracker was initialized
+    if manifest:
+        manifest.save_manifest()
+    
     print("\n✅ Done!")
     
     return results

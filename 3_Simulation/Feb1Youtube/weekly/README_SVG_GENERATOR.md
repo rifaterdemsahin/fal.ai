@@ -9,6 +9,36 @@ This tool generates SVG diagrams programmatically to showcase processes in video
 - **Multiple Diagram Types**: Supports flow diagrams, comparisons, and more
 - **Metadata Export**: Saves configuration and metadata for each diagram
 - **No External APIs**: Generates SVG files locally without API calls
+- **New Versioning System**: Follows standardized file naming convention from main branch
+- **Manifest Tracking**: Generates manifest.json with all asset metadata
+
+## File Naming Convention
+
+Generated SVG files follow the standardized naming pattern:
+
+```
+{scene_number:03d}_svg_{clean_description}_v{version}.svg
+```
+
+**Examples:**
+- `001_svg_agentic_era_transition_v1.svg`
+- `002_svg_workflow_process_v1.svg`
+- `003_svg_data_collection_understanding_notification_v1.svg`
+
+The naming convention ensures:
+- Easy scene-based organization (zero-padded 3-digit scene numbers)
+- Clear asset type identification (`svg`)
+- Version tracking built into filename
+- Clean, alphanumeric descriptions
+
+## Manifest System
+
+Every generation run creates a `manifest.json` file that maps:
+- Filename → Description
+- Filename → Timestamp
+- Filename → Additional metadata (scene, priority, diagram type, dimensions)
+
+This makes it easy to track and manage all generated SVG assets.
 
 ## Usage
 
@@ -72,9 +102,10 @@ Edit the `GENERATION_QUEUE` in the script to add or modify diagrams. Each diagra
 ## Output
 
 Generated files are saved to `./generated_svgs/`:
-- `.svg` files - The actual SVG diagrams
+- `.svg` files - The actual SVG diagrams (with new naming convention)
 - `.json` files - Metadata for each diagram
 - `generation_summary.json` - Overall generation report
+- `manifest.json` - Unified manifest tracking all assets
 
 ## Brand Colors
 
