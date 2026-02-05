@@ -1,0 +1,74 @@
+{
+  "id": "SVG4.1",
+  "name": "traditional_vs_agentic",
+  "priority": "MEDIUM",
+  "scene": "Comparison: Traditional vs Agentic",
+  "diagram_type": "comparison",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Traditional\nWorkflow",
+      "x": 100,
+      "y": 100,
+      "width": 200,
+      "height": 100,
+      "fill": "#3a3a3a",
+      "stroke": "#6b6b6b",
+      "text_color": "#cccccc"
+    },
+    {
+      "type": "arrow",
+      "x1": 200,
+      "y1": 220,
+      "x2": 200,
+      "y2": 280,
+      "color": "#6b6b6b"
+    },
+    {
+      "type": "box",
+      "text": "Manual\nProcessing",
+      "x": 100,
+      "y": 300,
+      "width": 200,
+      "height": 100,
+      "fill": "#3a3a3a",
+      "stroke": "#6b6b6b",
+      "text_color": "#cccccc"
+    },
+    {
+      "type": "box",
+      "text": "Agentic\nWorkflow",
+      "x": 500,
+      "y": 100,
+      "width": 200,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 600,
+      "y1": 220,
+      "x2": 600,
+      "y2": 280,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "Automated\nIntelligence",
+      "x": 500,
+      "y": 300,
+      "width": 200,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    }
+  ],
+  "canvas_width": 800,
+  "canvas_height": 500,
+  "background": "#1a1a2e",
+  "output_file": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/004_svg_traditional_vs_agentic_v1.svg",
+  "filename": "004_svg_traditional_vs_agentic_v1.svg"
+}

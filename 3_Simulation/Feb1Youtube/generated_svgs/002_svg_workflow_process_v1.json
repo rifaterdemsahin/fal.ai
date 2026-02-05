@@ -1,0 +1,63 @@
+{
+  "id": "SVG2.1",
+  "name": "workflow_process",
+  "priority": "HIGH",
+  "scene": "Workflow Process Flow",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Input",
+      "x": 50,
+      "y": 175,
+      "width": 150,
+      "height": 80,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 220,
+      "y1": 215,
+      "x2": 280,
+      "y2": 215,
+      "color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "Process",
+      "x": 300,
+      "y": 175,
+      "width": 150,
+      "height": 80,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 470,
+      "y1": 215,
+      "x2": 530,
+      "y2": 215,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "Output",
+      "x": 550,
+      "y": 175,
+      "width": 150,
+      "height": 80,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    }
+  ],
+  "canvas_width": 750,
+  "canvas_height": 430,
+  "background": "#1a1a2e",
+  "output_file": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/002_svg_workflow_process_v1.svg",
+  "filename": "002_svg_workflow_process_v1.svg"
+}
