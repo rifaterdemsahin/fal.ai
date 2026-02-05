@@ -101,7 +101,8 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | 🎨 **`BatchAssetGeneratorGraphics.py`** | General graphics and artwork | Image generation models |
 | 🧩 **`BatchAssetGeneratorIcons.py`** | Vector-style minimalist icons | Image generation models |
 | 📊 **`BatchAssetGeneratorDiagrams.py`** | Technical diagrams and charts | Image generation models |
-| 🗺️ **`BulkMermaidGenerator.py`** | **NEW** - Mermaid diagrams for documentation and workflows | Text-to-diagram generation |
+| 🗺️ **`BulkMermaidGenerator.py`** | Mermaid diagrams for documentation and workflows | Text-to-diagram generation |
+| 🎨 **`BulkSVGGenerator.py`** | **NEW** - SVG diagrams for visual explanations | SVG generation |
 | 🏛️ **`BatchAssetGeneratorMemoryPalace.py`** | Memory palace visualizations | Image generation models |
 | 📺 **`BatchAssetGeneratorLowerThirds.py`** | Text overlay graphics for video | Image generation models |
 
@@ -275,6 +276,59 @@ cat 3_Simulation/Feb1Youtube/weekly/cost_report_YYYY-MM-DD.md
 - ⏱️ Generation time
 - 📊 Asset breakdown by type
 - 🎞️ DaVinci Resolve import instructions
+
+---
+
+## 🤖 GitHub Actions Workflows
+
+The project includes automated workflows that can generate assets via GitHub Actions, perfect for scheduled generation or manual triggers.
+
+### 🚀 Available Workflows
+
+| Workflow | Description | Trigger |
+|----------|-------------|---------|
+| **Bulk SVG Generator** | Generates SVG diagrams for documentation | Manual or on push |
+| **Bulk Mermaid Generator** | Generates Mermaid diagrams in Markdown | Manual or on push |
+| **All Bulk Generators** | Runs multiple generators at once | Manual only |
+
+### 📖 How to Run Workflows
+
+#### From GitHub UI:
+1. Go to **Actions** tab in the repository
+2. Select the workflow from the left sidebar
+3. Click **"Run workflow"** button
+4. Choose options (generators to run, commit/push settings)
+5. Click **"Run workflow"** to start
+
+#### From GitHub Codespaces:
+All workflows are designed to work in Codespaces with commit/push capabilities:
+
+```bash
+# Run SVG generator
+gh workflow run bulk-svg-generator.yml
+
+# Run Mermaid generator
+gh workflow run bulk-mermaid-generator.yml
+
+# Run all generators
+gh workflow run all-bulk-generators.yml -f generators=all
+
+# Run without committing
+gh workflow run bulk-svg-generator.yml -f commit_and_push=false
+```
+
+### 🎨 What Gets Generated
+
+- **SVG files**: Professional diagrams in `5_Symbols/generated_svgs/`
+- **Mermaid diagrams**: Documentation in `5_Symbols/generated_mermaid_diagrams/`
+- **Manifest files**: `manifest.json` with complete asset tracking
+- **Summary reports**: `generation_summary.json` with metrics
+
+### 📦 Artifacts
+
+Each workflow uploads generated files as artifacts (retained for 30 days). Workflows can also automatically commit and push generated files back to the repository.
+
+**See [.github/workflows/README.md](.github/workflows/README.md) for complete workflow documentation.**
 
 ---
 
