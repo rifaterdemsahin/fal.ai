@@ -29,6 +29,21 @@ class BaseAssetGenerator(ABC):
     Provides common functionality for generating assets using fal.ai.
     """
     
+    # File extension mapping for asset types
+    ASSET_TYPE_EXTENSIONS = {
+        'image': 'png',
+        'graphic': 'png',
+        'icon': 'png',
+        'lower_third': 'png',
+        'svg': 'png',
+        'diagram': 'png',
+        'memory_palace': 'png',
+        'chapter_marker': 'png',
+        'video': 'mp4',
+        'music': 'mp3',
+        'audio': 'mp3',
+    }
+    
     def __init__(
         self,
         output_dir: Path,
@@ -130,14 +145,7 @@ class BaseAssetGenerator(ABC):
         Returns:
             File extension (e.g., 'png', 'mp4', 'mp3')
         """
-        if self.asset_type in ['image', 'graphic', 'icon', 'lower_third', 'svg', 'diagram', 'memory_palace', 'chapter_marker']:
-            return 'png'
-        elif self.asset_type == 'video':
-            return 'mp4'
-        elif self.asset_type in ['music', 'audio']:
-            return 'mp3'
-        else:
-            return 'bin'
+        return self.ASSET_TYPE_EXTENSIONS.get(self.asset_type, 'bin')
     
     def generate_asset(
         self,

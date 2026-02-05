@@ -4,6 +4,7 @@ SVG Asset Generator
 Generates SVG diagram assets with base class architecture
 """
 
+import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from xml.etree.ElementTree import Element, SubElement, tostring
@@ -11,6 +12,7 @@ from xml.dom import minidom
 
 from base.base_asset_generator import BaseAssetGenerator
 from base.generator_config import SEEDS, BRAND_COLORS
+from asset_utils import generate_filename, extract_scene_number
 
 
 # Display constants
@@ -225,8 +227,6 @@ class SVGAssetGenerator(BaseAssetGenerator):
             pretty_xml = reparsed.toprettyxml(indent="  ")
             pretty_xml = "\n".join([line for line in pretty_xml.split("\n") if line.strip()])
             
-            from asset_utils import generate_filename, extract_scene_number
-            
             svg_id = asset_config.get('id', '0.0')
             numeric_id = svg_id.replace('SVG', '') if svg_id.startswith('SVG') else svg_id
             scene_num = extract_scene_number(numeric_id)
@@ -249,7 +249,6 @@ class SVGAssetGenerator(BaseAssetGenerator):
             
             prompt_description = f"{asset_config.get('scene', 'Scene')}: {asset_config.get('diagram_type', 'flow')} diagram showing {asset_config['name']}"
             
-            import json
             metadata_path = self.output_dir / filename_json
             metadata = {
                 **asset_config,

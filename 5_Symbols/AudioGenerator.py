@@ -15,7 +15,7 @@ from base.generator_config import SEEDS, BRAND_COLORS
 class AudioAssetGenerator(BaseAssetGenerator):
     """Generator for audio/chapter marker text files"""
     
-    def __init__(self):
+    def __init__(self, edl_path: Path = None):
         super().__init__(
             output_dir=Path("./generated_audio"),
             seeds=SEEDS,
@@ -23,7 +23,12 @@ class AudioAssetGenerator(BaseAssetGenerator):
             asset_type="audio"
         )
         
-        self.edl_path = Path("../3_Simulation/Feb1Youtube/source_edl.md")
+        # Allow custom EDL path or use default
+        if edl_path is None:
+            self.edl_path = Path("../3_Simulation/Feb1Youtube/source_edl.md")
+        else:
+            self.edl_path = edl_path
+            
         self.output_file = self.output_dir / "chapter_markers.txt"
     
     def parse_timecode(self, time_str: str) -> str:
