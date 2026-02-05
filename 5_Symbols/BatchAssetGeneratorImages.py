@@ -8,7 +8,7 @@ Generates all required visual assets with consistency controls
 import os
 import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 # Install: pip install fal-client
 try:
@@ -16,6 +16,16 @@ try:
 except ImportError:
     print("❌ fal_client not installed. Run: pip install fal-client")
     exit(1)
+
+# Import asset utilities
+try:
+    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+except ImportError:
+    # Fallback if running standalone
+    print("⚠️  asset_utils not found. Using legacy naming convention.")
+    generate_filename = None
+    extract_scene_number = None
+    ManifestTracker = None
 
 # Configuration
 OUTPUT_DIR = Path("./generated_assets")
@@ -284,7 +294,7 @@ GENERATION_QUEUE = [
 ]
 
 
-def generate_asset(asset_config: Dict, output_dir: Path) -> Dict:
+def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single asset using fal.ai"""
     print(f"\n{'='*60}")
     print(f"🎨 Generating: {asset_config['name']}")
@@ -316,12 +326,29 @@ def generate_asset(asset_config: Dict, output_dir: Path) -> Dict:
             print(f"✅ Generated successfully!")
             print(f"   URL: {image_url}")
             
+            # Generate filename using new convention if available
+            if generate_filename and extract_scene_number:
+                scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                base_filename = generate_filename(
+                    scene_num,
+                    'image',
+                    asset_config['name'],
+                    version
+                )
+                filename_json = base_filename + '.json'
+                filename_png = base_filename + '.png'
+            else:
+                # Fallback to legacy naming
+                filename_json = f"{asset_config['name']}.json"
+                filename_png = f"{asset_config['name']}.png"
+            
             # Save metadata
-            output_path = output_dir / f"{asset_config['name']}.json"
+            output_path = output_dir / filename_json
             metadata = {
                 **asset_config,
                 "result_url": image_url,
                 "seed_value": SEEDS[asset_config["seed_key"]],
+                "filename": filename_png,
             }
             
             with open(output_path, 'w') as f:
@@ -331,14 +358,32 @@ def generate_asset(asset_config: Dict, output_dir: Path) -> Dict:
             
             # Download image
             import urllib.request
-            image_path = output_dir / f"{asset_config['name']}.png"
+            image_path = output_dir / filename_png
             urllib.request.urlretrieve(image_url, image_path)
             print(f"💾 Image saved: {image_path}")
+            
+            # Add to manifest if provided
+            if manifest:
+                manifest.add_asset(
+                    filename=filename_png,
+                    prompt=asset_config["prompt"],
+                    asset_type="image",
+                    asset_id=asset_config.get("id", "unknown"),
+                    result_url=image_url,
+                    local_path=str(image_path),
+                    metadata={
+                        "scene": asset_config.get("scene", ""),
+                        "priority": asset_config.get("priority", ""),
+                        "model": asset_config.get("model", ""),
+                        "seed_key": asset_config.get("seed_key", ""),
+                    }
+                )
             
             return {
                 "success": True,
                 "url": image_url,
                 "local_path": str(image_path),
+                "filename": filename_png,
             }
         else:
             print(f"❌ Generation failed: No images in result")
@@ -348,7 +393,7 @@ def generate_asset(asset_config: Dict, output_dir: Path) -> Dict:
         print(f"❌ Error generating asset: {str(e)}")
         return {"success": False, "error": str(e)}
 
-def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
+def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object] = None) -> List[Dict]:
     """Process a queue of assets to generate"""
     print(f"\n{'='*60}")
     print("🚀 FAL.AI BATCH ASSET GENERATOR - IMAGES")
@@ -383,7 +428,7 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
         print(f"# Asset {i}/{len(queue)}")
         print(f"{'#'*60}")
         
-        result = generate_asset(asset, output_dir)
+        result = generate_asset(asset, output_dir, manifest)
         results.append({
             "asset_id": asset["id"],
             "name": asset["name"],

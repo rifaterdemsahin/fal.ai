@@ -16,12 +16,22 @@ The project is structured into 7 core layers:
 
 ## 🔧 Core Generators (Files in `5_Symbols/`)
 
+*   **`MasterAssetGenerator.py`**: **Master Controller** - Orchestrates all generators and creates unified manifest.
 *   **`BatchAssetGeneratorVideo.py`**: Generates B-roll video clips.
 *   **`BatchAssetGeneratorAudio.py`**: Generates background music and sound effects.
 *   **`BatchAssetGeneratorImages.py`**: Generates photorealistic images.
 *   **`BatchAssetGeneratorIcons.py`**: Generates vector-style icon sets.
 *   **`BatchAssetGeneratorLowerThirds.py`**: Generates text overlay graphics.
 *   **`BatchAssetGeneratorChapterMarkers.py`**: Generates chapter title cards.
+*   **`asset_utils.py`**: Utilities for standardized naming and manifest tracking.
+
+## 📋 Asset Versioning and Manifest System
+
+All batch processes now include:
+- **Standardized file naming**: `{scene_number:03d}_{asset_type}_{clean_desc}_v{version}.ext`
+- **Unified manifest.json**: Maps filenames to prompts, timestamps, and metadata
+
+For detailed documentation, see [5_Symbols/VERSIONING_AND_MANIFEST.md](./5_Symbols/VERSIONING_AND_MANIFEST.md).
 
 ## 🚀 Quick Start
 
