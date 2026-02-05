@@ -38,11 +38,11 @@ Examples:
 ```
 
 **Manifest Tracking**:
-The `manifest.json` file provides complete asset traceability:
+The `manifest.json` file provides complete asset traceability. Adjust the path based on your workspace structure:
 ```python
 import json
 
-# Load manifest
+# Load manifest (adjust path to your workspace)
 with open('3_Simulation/Feb1Youtube/manifest.json', 'r') as f:
     manifest = json.load(f)
 

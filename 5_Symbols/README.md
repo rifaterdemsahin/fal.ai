@@ -114,7 +114,8 @@ Each batch script typically follows a standard pattern:
 
 **Versioning & Manifest**:
 All generators now support:
-- Standardized naming: `{scene:03d}_{asset_type}_{desc}_v{version}.{ext}`
+- Standardized naming (Python format): `{scene:03d}_{asset_type}_{desc}_v{version}.{ext}`
+  - Example: `001_image_ferrari_v1.png`, `004_video_streets_v2.mp4`
 - Manifest tracking: Complete prompt-to-file traceability
 - Version control: Automatic version numbering for iterations
 
