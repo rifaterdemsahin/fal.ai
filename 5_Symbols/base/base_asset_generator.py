@@ -130,11 +130,11 @@ class BaseAssetGenerator(ABC):
         Returns:
             File extension (e.g., 'png', 'mp4', 'mp3')
         """
-        if self.asset_type in ['image', 'graphic', 'icon', 'lower_third', 'svg', 'diagram', 'memory_palace']:
+        if self.asset_type in ['image', 'graphic', 'icon', 'lower_third', 'svg', 'diagram', 'memory_palace', 'chapter_marker']:
             return 'png'
         elif self.asset_type == 'video':
             return 'mp4'
-        elif self.asset_type == 'music':
+        elif self.asset_type in ['music', 'audio']:
             return 'mp3'
         else:
             return 'bin'
