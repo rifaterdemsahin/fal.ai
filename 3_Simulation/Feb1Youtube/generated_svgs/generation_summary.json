@@ -1,0 +1,39 @@
+{
+  "total": 4,
+  "successful": 4,
+  "failed": 0,
+  "results": [
+    {
+      "svg_id": "SVG1.1",
+      "name": "agentic_era_transition",
+      "priority": "HIGH",
+      "success": true,
+      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/001_svg_agentic_era_transition_v1.svg",
+      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/001_svg_agentic_era_transition_v1.json"
+    },
+    {
+      "svg_id": "SVG2.1",
+      "name": "workflow_process",
+      "priority": "HIGH",
+      "success": true,
+      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/002_svg_workflow_process_v1.svg",
+      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/002_svg_workflow_process_v1.json"
+    },
+    {
+      "svg_id": "SVG3.1",
+      "name": "data_collection_understanding_notification",
+      "priority": "MEDIUM",
+      "success": true,
+      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/003_svg_data_collection_understanding_notification_v1.svg",
+      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/003_svg_data_collection_understanding_notification_v1.json"
+    },
+    {
+      "svg_id": "SVG4.1",
+      "name": "traditional_vs_agentic",
+      "priority": "MEDIUM",
+      "success": true,
+      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/004_svg_traditional_vs_agentic_v1.svg",
+      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/004_svg_traditional_vs_agentic_v1.json"
+    }
+  ]
+}

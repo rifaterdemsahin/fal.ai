@@ -1,0 +1,63 @@
+{
+  "id": "SVG3.1",
+  "name": "data_collection_understanding_notification",
+  "priority": "MEDIUM",
+  "scene": "AI Agent Process",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Data\nCollection",
+      "x": 50,
+      "y": 150,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 250,
+      "y1": 200,
+      "x2": 320,
+      "y2": 200,
+      "color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "Understanding",
+      "x": 340,
+      "y": 150,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 540,
+      "y1": 200,
+      "x2": 610,
+      "y2": 200,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "Notification",
+      "x": 630,
+      "y": 150,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    }
+  ],
+  "canvas_width": 860,
+  "canvas_height": 400,
+  "background": "#1a1a2e",
+  "output_file": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/003_svg_data_collection_understanding_notification_v1.svg",
+  "filename": "003_svg_data_collection_understanding_notification_v1.svg"
+}
