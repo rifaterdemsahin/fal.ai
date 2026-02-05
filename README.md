@@ -1,8 +1,42 @@
-# 🎬 Fal.ai Asset Generator for "The Agentic Era"
+# 🎬 Weekly Video Creation Pipeline with Gemini Agent
 
-> 🤖 **Automated multimedia asset generation for YouTube video production using AI**
+> 🤖 **Automated multimedia asset generation pipeline using fal.ai and Gemini AI for weekly video production**
 
-This project provides a comprehensive suite of Python batch generators that leverage the [fal.ai](https://fal.ai) API to create high-quality visual and audio assets for "The Agentic Era" video project. Generate everything from B-roll footage to icons, music, and chapter markers—all automated and production-ready.
+This project is a comprehensive **weekly video creation pipeline** that leverages [fal.ai](https://fal.ai) API and Gemini agent to generate high-quality visual and audio assets in bulk. The objective is to **create artifacts efficiently and integrate them seamlessly into DaVinci Resolve timelines** with standardized naming conventions for professional video editing workflows.
+
+---
+
+## 🎯 Pipeline Overview
+
+```mermaid
+graph TB
+    A[📝 Weekly Video Script] --> B[🤖 Gemini Agent Analysis]
+    B --> C[📋 Asset Requirements]
+    C --> D[🎨 Batch Generators]
+    D --> E1[🎬 Video Assets]
+    D --> E2[🎵 Audio Assets]
+    D --> E3[🖼️ Visual Assets]
+    D --> E4[📊 Diagrams & Graphics]
+    E1 --> F[📝 Manifest Generation]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+    F --> G[🎞️ DaVinci Resolve Timeline]
+    G --> H[✅ Final Video Output]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3cd
+    style G fill:#d4edda
+    style H fill:#d1ecf1
+```
+
+### 🎯 Core Objectives
+
+- **Bulk Asset Creation**: Generate hundreds of video, audio, and visual assets per week
+- **DaVinci Resolve Integration**: Standardized naming for seamless timeline import
+- **Automated Pipeline**: Minimize manual work with AI-powered generation
+- **Quality & Consistency**: Maintain professional standards across all assets
+- **Comprehensive Reporting**: Track generation metrics, costs, and asset inventory
 
 ---
 
@@ -67,6 +101,7 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | 🎨 **`BatchAssetGeneratorGraphics.py`** | General graphics and artwork | Image generation models |
 | 🧩 **`BatchAssetGeneratorIcons.py`** | Vector-style minimalist icons | Image generation models |
 | 📊 **`BatchAssetGeneratorDiagrams.py`** | Technical diagrams and charts | Image generation models |
+| 🗺️ **`BulkMermaidGenerator.py`** | **NEW** - Mermaid diagrams for documentation and workflows | Text-to-diagram generation |
 | 🏛️ **`BatchAssetGeneratorMemoryPalace.py`** | Memory palace visualizations | Image generation models |
 | 📺 **`BatchAssetGeneratorLowerThirds.py`** | Text overlay graphics for video | Image generation models |
 
@@ -100,8 +135,25 @@ All assets follow a consistent naming pattern:
 
 ### 📝 Unified Manifest Tracking
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant M as MasterAssetGenerator
+    participant G as Batch Generators
+    participant F as File System
+    participant R as Report Generator
+    
+    U->>M: Run weekly pipeline
+    M->>G: Trigger generators
+    G->>F: Save assets with naming convention
+    G->>M: Return metadata
+    M->>F: Save manifest.json
+    M->>R: Generate completion report
+    R->>U: Display metrics & summary
+```
+
 The `MasterAssetGenerator.py` creates a comprehensive `manifest.json` that maps:
-- 📁 **Filename** → Full file path
+- 📁 **Filename** → Full file path (DaVinci Resolve compatible)
 - 📝 **Prompt** → Complete generation prompt used
 - ⏰ **Timestamp** → When the asset was created
 - 🔗 **Result URL** → Original fal.ai result URL
@@ -112,8 +164,38 @@ The `MasterAssetGenerator.py` creates a comprehensive `manifest.json` that maps:
 - 📜 Complete traceability from prompt to final file
 - 🔄 Version control for asset iterations
 - 🤖 Automated tracking—no manual logging needed
+- 🎞️ **DaVinci Resolve Ready** - Import directly into timeline using standardized names
 
 For comprehensive documentation, see **[VERSIONING_AND_MANIFEST.md](./5_Symbols/VERSIONING_AND_MANIFEST.md)**.
+
+---
+
+## 💻 Environment Support
+
+This pipeline runs seamlessly on multiple platforms:
+
+```mermaid
+graph LR
+    A[🚀 Pipeline] --> B[☁️ GitHub Codespaces]
+    A --> C[🪟 Windows 10/11]
+    A --> D[🍎 macOS]
+    
+    B --> E[✅ Pre-configured]
+    C --> F[✅ Python 3.8+]
+    D --> G[✅ Python 3.8+]
+    
+    style B fill:#e1f5ff
+    style C fill:#fff3cd
+    style D fill:#d4edda
+```
+
+### Platform Requirements
+
+| Platform | Requirements | Notes |
+|----------|--------------|-------|
+| **☁️ GitHub Codespaces** | Pre-configured devcontainer | Recommended for teams |
+| **🪟 Windows 10/11** | Python 3.8+, pip | Works in PowerShell/CMD |
+| **🍎 macOS** | Python 3.8+, pip | Native support |
 
 ---
 
@@ -171,7 +253,62 @@ The Master Controller will:
 3. ❓ Prompt for confirmation
 4. 🚀 Generate all assets with standardized naming
 5. 📝 Track everything in manifest.json
-6. ✅ Save complete manifest in project directory
+6. 📊 **Generate completion report**
+7. ✅ Save complete manifest and report in project directory
+
+### 4️⃣ View Generated Reports
+
+After every run, the pipeline generates comprehensive reports:
+
+```bash
+# View the latest generation report
+cat 3_Simulation/Feb1Youtube/weekly/generation_report_YYYY-MM-DD.md
+
+# View cost analysis
+cat 3_Simulation/Feb1Youtube/weekly/cost_report_YYYY-MM-DD.md
+```
+
+**Report Contents:**
+- ✅ Assets successfully generated
+- ❌ Failed generations (if any)
+- 💰 Total API costs
+- ⏱️ Generation time
+- 📊 Asset breakdown by type
+- 🎞️ DaVinci Resolve import instructions
+
+---
+
+## 🎞️ DaVinci Resolve Integration
+
+Import your generated assets directly into DaVinci Resolve with the standardized naming convention:
+
+```mermaid
+flowchart LR
+    A[Generated Assets] --> B[manifest.json]
+    B --> C[Scene-based Organization]
+    C --> D[001_video_..., 001_audio_...]
+    D --> E[DaVinci Resolve Media Pool]
+    E --> F[Timeline Assembly]
+    
+    style A fill:#e1f5ff
+    style E fill:#d4edda
+    style F fill:#d1ecf1
+```
+
+### Import Steps:
+
+1. **Open DaVinci Resolve** and create a new project
+2. **Navigate to Media Pool** → Right-click → Import Media
+3. **Select generated assets folder**: `3_Simulation/Feb1Youtube/generated_assets_*`
+4. Assets will be organized by scene number (001, 002, 003...)
+5. **Drag and drop** to timeline in sequential order
+6. Use the manifest.json for prompt reference and metadata
+
+### Naming Benefits:
+- 🔢 **Scene numbering** keeps assets in correct order
+- 🎯 **Asset type prefix** helps filter (video, audio, image)
+- 📝 **Descriptive names** make identification easy
+- 🔄 **Version numbers** track iterations
 
 ---
 
@@ -275,17 +412,19 @@ For more troubleshooting help, see **[6_Semblance/README.md](./6_Semblance/READM
 
 ## 🎯 Use Cases
 
-- **🎬 YouTube Video Production** - Generate all multimedia assets for "The Agentic Era" video
-- **🎨 Content Creation** - Batch-generate visual assets for presentations and marketing
-- **🎵 Audio Production** - Create background music and sound effects libraries
-- **🧩 Icon Libraries** - Generate consistent icon sets for UIs and documentation
-- **📺 Video Elements** - Create professional lower thirds and chapter markers
+- **📅 Weekly Video Production** - Automated asset generation for regular YouTube/social media content
+- **🎬 Educational Content** - Create course materials, tutorials, and explainer videos
+- **🎨 Marketing Campaigns** - Batch-generate visual assets for ads and promotions
+- **🎵 Podcast Enhancement** - Add visual elements to audio podcasts for video platforms
+- **📊 Corporate Communications** - Generate consistent branded assets for internal videos
+- **🧩 Documentation** - Create diagrams, icons, and visual aids for technical docs
+- **🎞️ DaVinci Resolve Workflows** - Professional video editing with organized asset imports
 
 ---
 
 ## 📜 License
 
-This project is part of "The Agentic Era" initiative. See individual files for specific licensing information.
+This project is a general-purpose weekly video creation pipeline. See individual files for specific licensing information.
 
 ---
 
