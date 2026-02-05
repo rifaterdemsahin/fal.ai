@@ -26,7 +26,9 @@ Thumbs.db
 .env.example
 
 # Generated assets
-generated_svgs/
-generated_assets/
-generated_diagrams/
-generated_mermaid_diagrams/
+5_Symbols/generated_svgs/
+5_Symbols/generated_assets/
+5_Symbols/generated_diagrams/
+5_Symbols/generated_mermaid_diagrams/
+# Allow generated_svgs in weekly folder
+!3_Simulation/*/weekly/generated_svgs/

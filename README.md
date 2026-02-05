@@ -319,7 +319,7 @@ gh workflow run bulk-svg-generator.yml -f commit_and_push=false
 
 ### 🎨 What Gets Generated
 
-- **SVG files**: Professional diagrams in `5_Symbols/generated_svgs/`
+- **SVG files**: Professional diagrams in `3_Simulation/Feb1Youtube/weekly/generated_svgs/`
 - **Mermaid diagrams**: Documentation in `5_Symbols/generated_mermaid_diagrams/`
 - **Manifest files**: `manifest.json` with complete asset tracking
 - **Summary reports**: `generation_summary.json` with metrics

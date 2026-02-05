@@ -6,6 +6,7 @@ Generates SVG diagrams for documentation, workflows, and visual explanations
 """
 
 import os
+import sys
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -23,8 +24,10 @@ except ImportError:
     ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_svgs")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Default to weekly folder for GitHub Actions workflow
+DEFAULT_OUTPUT_DIR = Path(__file__).parent.parent / "3_Simulation" / "Feb1Youtube" / "weekly" / "generated_svgs"
+OUTPUT_DIR = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUTPUT_DIR
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Display constants
 SEPARATOR_WIDTH = 60
