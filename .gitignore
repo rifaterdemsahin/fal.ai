@@ -24,3 +24,8 @@ ENV/
 .DS_Store
 Thumbs.db
 .env.example
+
+# Generated assets
+generated_svgs/
+generated_assets/
+generated_diagrams/
