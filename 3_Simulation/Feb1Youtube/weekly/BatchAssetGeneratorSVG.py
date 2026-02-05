@@ -16,6 +16,11 @@ from xml.dom import minidom
 OUTPUT_DIR = Path("./generated_svgs")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
+# Display constants
+SEPARATOR_WIDTH = 60
+TEXT_LINE_HEIGHT = 25
+LABEL_OFFSET = 15
+
 # Brand color palette
 BRAND_COLORS = {
     "primary_dark": "#1a1a2e",
@@ -329,11 +334,11 @@ def add_box(
     
     # Split text by newlines for multi-line support
     lines = text.split("\n")
-    line_height = 25
     
     # Calculate starting y position to center text vertically
-    total_text_height = len(lines) * line_height
-    text_start_y = y + (height - total_text_height) / 2 + line_height / 2
+    # We add line_height/2 to account for the dominant-baseline="middle" attribute
+    total_text_height = len(lines) * TEXT_LINE_HEIGHT
+    text_start_y = y + (height - total_text_height) / 2 + TEXT_LINE_HEIGHT / 2
     
     # Add text lines
     for i, line in enumerate(lines):
@@ -342,7 +347,7 @@ def add_box(
             "text",
             {
                 "x": str(x + width / 2),
-                "y": str(text_start_y + i * line_height),
+                "y": str(text_start_y + i * TEXT_LINE_HEIGHT),
                 "fill": text_color,
                 "font-family": "Arial, sans-serif",
                 "font-size": "18",
@@ -413,7 +418,7 @@ def add_arrow(
     # Add label if provided
     if label:
         mid_x = (x1 + x2) / 2
-        mid_y = (y1 + y2) / 2 - 15
+        mid_y = (y1 + y2) / 2 - LABEL_OFFSET
         text_elem = SubElement(
             svg,
             "text",
@@ -432,12 +437,12 @@ def add_arrow(
 
 def generate_svg(config: Dict, output_dir: Path) -> Dict:
     """Generate an SVG diagram based on configuration"""
-    print(f"\n{'='*60}")
+    print(f"\n{'='*SEPARATOR_WIDTH}")
     print(f"🎨 Generating SVG: {config['name']}")
     print(f"   Scene: {config['scene']}")
     print(f"   Priority: {config['priority']}")
     print(f"   Type: {config['diagram_type']}")
-    print(f"{'='*60}")
+    print(f"{'='*SEPARATOR_WIDTH}")
     
     try:
         # Create SVG root element
@@ -513,10 +518,10 @@ def generate_svg(config: Dict, output_dir: Path) -> Dict:
 
 def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
     """Process a queue of SVG diagrams to generate"""
-    print(f"\n{'='*60}")
+    print(f"\n{'='*SEPARATOR_WIDTH}")
     print("🚀 SVG BATCH ASSET GENERATOR")
     print("   Project: The Agentic Era - Managing 240+ Workflows")
-    print("="*60)
+    print("="*SEPARATOR_WIDTH)
     
     print(f"\n📁 Output directory: {output_dir.absolute()}")
     print(f"\n📊 SVGs to generate: {len(queue)}")
@@ -536,9 +541,9 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
     # Generate SVGs
     results = []
     for i, config in enumerate(queue, 1):
-        print(f"\n\n{'#'*60}")
+        print(f"\n\n{'#'*SEPARATOR_WIDTH}")
         print(f"# SVG {i}/{len(queue)}")
-        print(f"{'#'*60}")
+        print(f"{'#'*SEPARATOR_WIDTH}")
         
         result = generate_svg(config, output_dir)
         results.append({
@@ -549,9 +554,9 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
         })
     
     # Summary
-    print("\n\n" + "="*60)
+    print("\n\n" + "="*SEPARATOR_WIDTH)
     print("📊 GENERATION SUMMARY")
-    print("="*60)
+    print("="*SEPARATOR_WIDTH)
     
     successful = [r for r in results if r["success"]]
     failed = [r for r in results if not r["success"]]
@@ -591,10 +596,10 @@ def process_queue(queue: List[Dict], output_dir: Path) -> List[Dict]:
 
 def main():
     """Main execution"""
-    print("\n" + "="*60)
+    print("\n" + "="*SEPARATOR_WIDTH)
     print("SVG Batch Asset Generator")
     print("Generates process flow diagrams for video scripts")
-    print("="*60)
+    print("="*SEPARATOR_WIDTH)
     
     response = input("\n🤔 Proceed with SVG generation? (yes/no): ").strip().lower()
     if response not in ["yes", "y"]:
