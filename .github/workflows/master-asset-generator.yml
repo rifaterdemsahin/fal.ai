@@ -1,0 +1,82 @@
+---
+name: Master Asset Generator
+
+'on':
+  workflow_dispatch:
+    inputs:
+      commit_and_push:
+        description: 'Commit and push generated files'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  push:
+    branches:
+      - main
+    paths:
+      - '5_Symbols/MasterAssetGenerator.py'
+      - '.github/workflows/master-asset-generator.yml'
+
+jobs:
+  generate-all-assets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run MasterAssetGenerator
+        run: |
+          cd 5_Symbols
+          python MasterAssetGenerator.py
+
+      - name: Display generation summary
+        run: |
+          echo "=== Master Asset Generator Summary ==="
+          # Display summaries from all generated asset directories
+          for dir in 5_Symbols/generated_*/; do
+            if [ -d "$dir" ]; then
+              SUMMARY_FILE="${dir}generation_summary.json"
+              if [ -f "${SUMMARY_FILE}" ]; then
+                echo "=== $(basename $dir) ==="
+                cat "${SUMMARY_FILE}"
+                echo ""
+              fi
+            fi
+          done
+
+      - name: Commit and push generated files
+        if: ${{ github.event.inputs.commit_and_push != 'false' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add 5_Symbols/generated_* 3_Simulation/Feb1Youtube/weekly/generated_svgs/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Generated all assets via Master Asset Generator"
+            git push
+          fi
+
+      - name: Upload generated assets as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-generated-assets
+          path: |
+            5_Symbols/generated_*/
+            3_Simulation/Feb1Youtube/weekly/generated_svgs/
+          retention-days: 30
