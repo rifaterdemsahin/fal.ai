@@ -1,0 +1,11 @@
+00:00 Hook & Problem Statement
+00:45 System Overview
+02:15 Error Handling & MCP
+04:00 The Real Problem - Skills Gap
+05:30 Telegram Channels & Bounded Contexts
+07:00 PARA Method & Obsidian Integration
+08:30 Github Repositories & Backup System
+09:45 Blacklist System & State Management
+10:30 The Bigger Picture - AI Transformation
+11:30 Personal Commitment & Call To Action
+12:45 Closing Statement
