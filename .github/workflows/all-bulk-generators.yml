@@ -1,0 +1,106 @@
+---
+name: All Bulk Generators
+
+'on':
+  workflow_dispatch:
+    inputs:
+      generators:
+        description: 'Select generators to run'
+        required: true
+        type: choice
+        options:
+          - 'all'
+          - 'svg'
+          - 'mermaid'
+        default: 'all'
+      commit_and_push:
+        description: 'Commit and push generated files'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  generate-all:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run BulkSVGGenerator
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'svg' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BulkSVGGenerator ==="
+          python BulkSVGGenerator.py
+          echo ""
+
+      - name: Run BulkMermaidGenerator
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'mermaid' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BulkMermaidGenerator ==="
+          python BulkMermaidGenerator.py
+          echo ""
+
+      - name: Display all summaries
+        run: |
+          echo "=== SVG Generation Summary ==="
+          SVG_SUMMARY="5_Symbols/generated_svgs/generation_summary.json"
+          if [ -f "${SVG_SUMMARY}" ]; then
+            cat "${SVG_SUMMARY}"
+          else
+            echo "No SVG summary found"
+          fi
+          echo ""
+          echo "=== Mermaid Generation Summary ==="
+          MERMAID_SUMMARY="5_Symbols/generated_mermaid_diagrams"
+          MERMAID_SUMMARY="${MERMAID_SUMMARY}/generation_summary.json"
+          if [ -f "${MERMAID_SUMMARY}" ]; then
+            cat "${MERMAID_SUMMARY}"
+          else
+            echo "No Mermaid summary found"
+          fi
+
+      - name: Commit and push generated files
+        if: ${{ github.event.inputs.commit_and_push != 'false' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add 5_Symbols/generated_svgs/ \
+            5_Symbols/generated_mermaid_diagrams/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            MSG="Generated assets via GitHub Actions (all bulk generators)"
+            git commit -m "${MSG}"
+            git push
+          fi
+
+      - name: Upload all generated assets as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-generated-assets
+          path: |
+            5_Symbols/generated_svgs/
+            5_Symbols/generated_mermaid_diagrams/
+          retention-days: 30

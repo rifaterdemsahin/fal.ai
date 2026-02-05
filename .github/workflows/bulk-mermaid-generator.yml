@@ -1,0 +1,74 @@
+---
+name: Bulk Mermaid Generator
+
+'on':
+  workflow_dispatch:
+    inputs:
+      commit_and_push:
+        description: 'Commit and push generated files'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  push:
+    branches:
+      - main
+    paths:
+      - '5_Symbols/BulkMermaidGenerator.py'
+      - '.github/workflows/bulk-mermaid-generator.yml'
+
+jobs:
+  generate-mermaid:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run BulkMermaidGenerator
+        run: |
+          cd 5_Symbols
+          python BulkMermaidGenerator.py
+
+      - name: Display generation summary
+        run: |
+          SUMMARY_FILE="5_Symbols/generated_mermaid_diagrams"
+          SUMMARY_FILE="${SUMMARY_FILE}/generation_summary.json"
+          if [ -f "${SUMMARY_FILE}" ]; then
+            echo "=== Generation Summary ==="
+            cat "${SUMMARY_FILE}"
+          fi
+
+      - name: Commit and push generated files
+        if: ${{ github.event.inputs.commit_and_push != 'false' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add 5_Symbols/generated_mermaid_diagrams/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Generated Mermaid diagrams via GitHub Actions"
+            git push
+          fi
+
+      - name: Upload generated diagrams as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-mermaid-diagrams
+          path: 5_Symbols/generated_mermaid_diagrams/
+          retention-days: 30
