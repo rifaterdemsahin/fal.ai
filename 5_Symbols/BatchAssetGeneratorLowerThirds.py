@@ -6,6 +6,7 @@ Generates lower third graphics for important symbols and concepts derived from:
 - source_chapter_markers.txt
 - source_edl.md
 - source_transcript.md
+- assets_config.json (master configuration file)
 """
 
 import os
@@ -32,7 +33,7 @@ except ImportError:
 
 # Configuration
 OUTPUT_DIR = Path("./generated_assets/lower_thirds")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+CONFIG_FILE = Path("../3_Simulation/Feb1Youtube/assets_config.json")
 
 # Consistency seeds
 # Using SEED_004 as defined in the main generator for UI overlays/templates
@@ -371,8 +372,52 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     
     return results
 
+def load_config_from_json(config_path: Path = CONFIG_FILE) -> List[Dict]:
+    """Load lower thirds configuration from JSON file"""
+    if not config_path.exists():
+        print(f"⚠️  Config file not found: {config_path}")
+        print(f"   Falling back to hardcoded GENERATION_QUEUE")
+        return GENERATION_QUEUE
+    
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        
+        if "lower_thirds" not in config:
+            print(f"⚠️  No 'lower_thirds' section found in {config_path}")
+            print(f"   Falling back to hardcoded GENERATION_QUEUE")
+            return GENERATION_QUEUE
+        
+        lower_thirds_config = config["lower_thirds"]
+        
+        # Create a copy to avoid mutating the original config
+        # Transform config to match expected format with prompt base
+        lower_thirds_copy = []
+        for item in lower_thirds_config:
+            # Make a shallow copy of the item
+            item_copy = item.copy()
+            # If prompt doesn't exist, build it from text/subtext
+            if "prompt" not in item_copy or not item_copy["prompt"]:
+                item_copy["prompt"] = (
+                    f"{PROMPT_BASE}, main text '{item_copy['text'].upper()}' in bold white font, "
+                    f"subtext '{item_copy['subtext']}' in smaller font, "
+                    f"color theme: {item_copy.get('color_theme', 'accent_blue')}."
+                )
+            lower_thirds_copy.append(item_copy)
+        
+        print(f"✅ Loaded {len(lower_thirds_copy)} lower thirds from {config_path}")
+        return lower_thirds_copy
+        
+    except Exception as e:
+        print(f"❌ Error loading config: {e}")
+        print(f"   Falling back to hardcoded GENERATION_QUEUE")
+        return GENERATION_QUEUE
+
 def main():
     """Main execution"""
+    # Load configuration from JSON file
+    generation_queue = load_config_from_json()
+    
     # Confirm before proceeding
     print("\n" + "="*60)
     response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
@@ -380,7 +425,8 @@ def main():
         print("❌ Cancelled by user")
         return
         
-    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    process_queue(generation_queue, OUTPUT_DIR)
 
 
 if __name__ == "__main__":
