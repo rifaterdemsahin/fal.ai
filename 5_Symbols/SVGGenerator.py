@@ -225,7 +225,8 @@ class SVGAssetGenerator(BaseAssetGenerator):
             rough_string = tostring(svg, encoding="unicode")
             reparsed = minidom.parseString(rough_string)
             pretty_xml = reparsed.toprettyxml(indent="  ")
-            pretty_xml = "\n".join([line for line in pretty_xml.split("\n") if line.strip()])
+            # Remove extra blank lines while keeping the pretty formatting structure
+            pretty_xml = "\n".join([line for line in pretty_xml.split("\n") if line.strip() or line == ""])
             
             svg_id = asset_config.get('id', '0.0')
             numeric_id = svg_id.replace('SVG', '') if svg_id.startswith('SVG') else svg_id

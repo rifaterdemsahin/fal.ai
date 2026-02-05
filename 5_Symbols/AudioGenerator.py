@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
 
 
 class AudioAssetGenerator(BaseAssetGenerator):
@@ -27,9 +27,9 @@ class AudioAssetGenerator(BaseAssetGenerator):
             asset_type="audio"
         )
         
-        # Allow custom EDL path or use default
+        # Allow custom EDL path or use default from config
         if edl_path is None:
-            self.edl_path = Path("../3_Simulation/Feb1Youtube/source_edl.md")
+            self.edl_path = Path(DEFAULT_EDL_PATH)
         else:
             self.edl_path = edl_path
             
@@ -44,7 +44,7 @@ class AudioAssetGenerator(BaseAssetGenerator):
         return time_str
     
     def format_title(self, text: str) -> str:
-        """Convert ALL CAPS to Title Case and fix common acronyms"""
+        """Convert text to Title Case and fix common acronyms"""
         corrections = {
             "Ai": "AI",
             "Mcp": "MCP",

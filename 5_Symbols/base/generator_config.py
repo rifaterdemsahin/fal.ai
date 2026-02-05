@@ -5,6 +5,9 @@ Single source of truth for seeds, colors, and common settings
 
 from pathlib import Path
 
+# Default EDL path for chapter marker generation
+DEFAULT_EDL_PATH = "../3_Simulation/Feb1Youtube/source_edl.md"
+
 # Consistency seeds for different asset categories
 SEEDS = {
     "SEED_001": 42,      # B-roll (can vary)

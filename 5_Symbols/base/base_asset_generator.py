@@ -80,7 +80,8 @@ class BaseAssetGenerator(ABC):
         api_key = os.environ.get("FAL_KEY")
         if not api_key:
             print("\n❌ ERROR: FAL_KEY environment variable not set")
-            print("   Set it with: export FAL_KEY='your-api-key-here'")
+            print("   Set it in your shell with: export FAL_KEY='your-api-key-here'  (bash/zsh)")
+            print("   Or for Windows: set FAL_KEY=your-api-key-here  (cmd)")
             raise ValueError("FAL_KEY not set")
         return api_key
     
