@@ -15,7 +15,7 @@ Generates SVG diagrams for documentation and visual explanations.
 - `commit_and_push`: Whether to commit and push generated files (default: true)
 
 **Outputs:**
-- Generated SVG files in `5_Symbols/generated_svgs/`
+- Generated SVG files in `3_Simulation/Feb1Youtube/weekly/generated_svgs/`
 - Manifest and summary JSON files
 - Artifacts uploaded for 30 days
 

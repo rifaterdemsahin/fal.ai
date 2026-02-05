@@ -46,9 +46,11 @@ jobs:
 
       - name: Display generation summary
         run: |
-          if [ -f 5_Symbols/generated_svgs/generation_summary.json ]; then
+          SUMMARY_FILE="3_Simulation/Feb1Youtube/weekly/generated_svgs"
+          SUMMARY_FILE="${SUMMARY_FILE}/generation_summary.json"
+          if [ -f "${SUMMARY_FILE}" ]; then
             echo "=== Generation Summary ==="
-            cat 5_Symbols/generated_svgs/generation_summary.json
+            cat "${SUMMARY_FILE}"
           fi
 
       - name: Commit and push generated files
@@ -56,7 +58,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add 5_Symbols/generated_svgs/
+          git add 3_Simulation/Feb1Youtube/weekly/generated_svgs/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -68,5 +70,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: generated-svgs
-          path: 5_Symbols/generated_svgs/
+          path: 3_Simulation/Feb1Youtube/weekly/generated_svgs/
           retention-days: 30

@@ -65,7 +65,8 @@ jobs:
       - name: Display all summaries
         run: |
           echo "=== SVG Generation Summary ==="
-          SVG_SUMMARY="5_Symbols/generated_svgs/generation_summary.json"
+          SVG_SUMMARY="3_Simulation/Feb1Youtube/weekly/generated_svgs"
+          SVG_SUMMARY="${SVG_SUMMARY}/generation_summary.json"
           if [ -f "${SVG_SUMMARY}" ]; then
             cat "${SVG_SUMMARY}"
           else
@@ -86,7 +87,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add 5_Symbols/generated_svgs/ \
+          git add 3_Simulation/Feb1Youtube/weekly/generated_svgs/ \
             5_Symbols/generated_mermaid_diagrams/ || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
@@ -101,6 +102,6 @@ jobs:
         with:
           name: all-generated-assets
           path: |
-            5_Symbols/generated_svgs/
+            3_Simulation/Feb1Youtube/weekly/generated_svgs/
             5_Symbols/generated_mermaid_diagrams/
           retention-days: 30
