@@ -12,6 +12,17 @@ name: All Bulk Generators
           - 'all'
           - 'svg'
           - 'mermaid'
+          - 'audio'
+          - 'chapter-markers'
+          - 'diagrams'
+          - 'graphics'
+          - 'icons'
+          - 'images'
+          - 'lower-thirds'
+          - 'memory-palace'
+          - 'music'
+          - 'video'
+          - 'master'
         default: 'all'
       commit_and_push:
         description: 'Commit and push generated files'
@@ -62,6 +73,115 @@ jobs:
           python BulkMermaidGenerator.py
           echo ""
 
+      - name: Run BatchAssetGeneratorAudio
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'audio' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorAudio ==="
+          python BatchAssetGeneratorAudio.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorChapterMarkers
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'chapter-markers' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorChapterMarkers ==="
+          python BatchAssetGeneratorChapterMarkers.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorDiagrams
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'diagrams' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorDiagrams ==="
+          python BatchAssetGeneratorDiagrams.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorGraphics
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'graphics' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorGraphics ==="
+          python BatchAssetGeneratorGraphics.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorIcons
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'icons' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorIcons ==="
+          python BatchAssetGeneratorIcons.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorImages
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'images' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorImages ==="
+          python BatchAssetGeneratorImages.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorLowerThirds
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'lower-thirds' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorLowerThirds ==="
+          python BatchAssetGeneratorLowerThirds.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorMemoryPalace
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'memory-palace' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorMemoryPalace ==="
+          python BatchAssetGeneratorMemoryPalace.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorMusic
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'music' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorMusic ==="
+          python BatchAssetGeneratorMusic.py
+          echo ""
+
+      - name: Run BatchAssetGeneratorVideo
+        if: >-
+          ${{ github.event.inputs.generators == 'all' ||
+          github.event.inputs.generators == 'video' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running BatchAssetGeneratorVideo ==="
+          python BatchAssetGeneratorVideo.py
+          echo ""
+
+      - name: Run MasterAssetGenerator
+        if: >-
+          ${{ github.event.inputs.generators == 'master' }}
+        run: |
+          cd 5_Symbols
+          echo "=== Running MasterAssetGenerator ==="
+          python MasterAssetGenerator.py
+          echo ""
+
       - name: Display all summaries
         run: |
           echo "=== SVG Generation Summary ==="
@@ -81,6 +201,19 @@ jobs:
           else
             echo "No Mermaid summary found"
           fi
+          echo ""
+          # Display summaries from all generated asset directories
+          for dir in 5_Symbols/generated_*/; do
+            if [ -d "$dir" ]; then
+              DIR_NAME=$(basename "$dir")
+              SUMMARY_FILE="${dir}generation_summary.json"
+              if [ -f "${SUMMARY_FILE}" ]; then
+                echo "=== ${DIR_NAME} Summary ==="
+                cat "${SUMMARY_FILE}"
+                echo ""
+              fi
+            fi
+          done
 
       - name: Commit and push generated files
         if: ${{ github.event.inputs.commit_and_push != 'false' }}
@@ -88,7 +221,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add 3_Simulation/Feb1Youtube/weekly/generated_svgs/ \
-            5_Symbols/generated_mermaid_diagrams/ || true
+            5_Symbols/generated_*/ || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -103,5 +236,5 @@ jobs:
           name: all-generated-assets
           path: |
             3_Simulation/Feb1Youtube/weekly/generated_svgs/
-            5_Symbols/generated_mermaid_diagrams/
+            5_Symbols/generated_*/
           retention-days: 30
