@@ -43,11 +43,13 @@ This makes it easy to track and manage all generated SVG assets.
 ## Usage
 
 ```bash
-cd /path/to/fal.ai/3_Simulation/Feb1Youtube/weekly
+cd /path/to/fal.ai/5_Symbols
 python3 BatchAssetGeneratorSVG.py
 ```
 
 When prompted, type `yes` to proceed with generation.
+
+Generated files will be saved to `../3_Simulation/Feb1Youtube/generated_svgs/`.
 
 ## Example Diagrams Included
 
@@ -101,7 +103,7 @@ Edit the `GENERATION_QUEUE` in the script to add or modify diagrams. Each diagra
 
 ## Output
 
-Generated files are saved to `./generated_svgs/`:
+Generated files are saved to `../3_Simulation/Feb1Youtube/generated_svgs/`:
 - `.svg` files - The actual SVG diagrams (with new naming convention)
 - `.json` files - Metadata for each diagram
 - `generation_summary.json` - Overall generation report

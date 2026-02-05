@@ -13,12 +13,9 @@ from typing import Dict, List, Tuple, Optional
 from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom import minidom
 
-# Import asset utilities from 5_Symbols directory
-# Add parent directories to path to find asset_utils
+# Import asset utilities from same directory (5_Symbols)
 current_dir = Path(__file__).parent
-project_root = current_dir.parent.parent.parent
-symbols_dir = project_root / "5_Symbols"
-sys.path.insert(0, str(symbols_dir))
+project_root = current_dir.parent
 
 try:
     from asset_utils import generate_filename, extract_scene_number, ManifestTracker
@@ -29,9 +26,9 @@ except ImportError:
     extract_scene_number = None
     ManifestTracker = None
 
-# Configuration
-OUTPUT_DIR = Path("./generated_svgs")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Configuration - output to 3_Simulation/Feb1Youtube/generated_svgs
+OUTPUT_DIR = project_root / "3_Simulation" / "Feb1Youtube" / "generated_svgs"
+OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 
 # Display constants
 SEPARATOR_WIDTH = 60
