@@ -1,0 +1,72 @@
+---
+name: Bulk SVG Generator
+
+'on':
+  workflow_dispatch:
+    inputs:
+      commit_and_push:
+        description: 'Commit and push generated files'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  push:
+    branches:
+      - main
+    paths:
+      - '5_Symbols/BulkSVGGenerator.py'
+      - '.github/workflows/bulk-svg-generator.yml'
+
+jobs:
+  generate-svgs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run BulkSVGGenerator
+        run: |
+          cd 5_Symbols
+          python BulkSVGGenerator.py
+
+      - name: Display generation summary
+        run: |
+          if [ -f 5_Symbols/generated_svgs/generation_summary.json ]; then
+            echo "=== Generation Summary ==="
+            cat 5_Symbols/generated_svgs/generation_summary.json
+          fi
+
+      - name: Commit and push generated files
+        if: ${{ github.event.inputs.commit_and_push != 'false' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add 5_Symbols/generated_svgs/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Generated SVG assets via GitHub Actions"
+            git push
+          fi
+
+      - name: Upload generated SVGs as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-svgs
+          path: 5_Symbols/generated_svgs/
+          retention-days: 30
