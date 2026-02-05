@@ -8,14 +8,24 @@ graph TB
         M[MasterAssetGenerator.py]
     end
     
+    subgraph "Base Architecture"
+        B1[base/base_asset_generator.py]
+        B2[base/generator_config.py]
+        B3[base/__init__.py]
+    end
+    
     subgraph "Video & Animation"
         V1[BatchAssetGeneratorVideo.py]
         V2[BatchAssetGeneratorChapterMarkers.py]
+        V3[VideoGenerator.py]
+        V4[ChapterMarkersGenerator.py]
     end
     
     subgraph "Audio"
         A1[BatchAssetGeneratorMusic.py]
         A2[BatchAssetGeneratorAudio.py]
+        A3[MusicGenerator.py]
+        A4[AudioGenerator.py]
     end
     
     subgraph "Visual Assets"
@@ -24,51 +34,88 @@ graph TB
         I3[BatchAssetGeneratorGraphics.py]
         I4[BatchAssetGeneratorDiagrams.py]
         I5[BulkMermaidGenerator.py]
+        I6[BulkSVGGenerator.py]
+        I7[BatchAssetGeneratorLowerThirds.py]
+        I8[BatchAssetGeneratorMemoryPalace.py]
     end
     
     subgraph "Utilities"
         U1[asset_utils.py]
         U2[EstimateWeeklyVideoCost.py]
+        U3[test_asset_utils.py]
+        U4[test_integration.py]
     end
     
-    M --> V1
-    M --> V2
-    M --> A1
-    M --> A2
-    M --> I1
-    M --> I2
-    M --> I3
-    M --> I4
-    M --> I5
+    M --> B1
+    V1 --> B1
+    V2 --> B1
+    A1 --> B1
+    A2 --> B1
+    I1 --> B1
     M --> U1
-    M --> U2
     
     style M fill:#e1f5ff
-    style I5 fill:#fff3cd
+    style B1 fill:#fff3cd
+    style I5 fill:#d4edda
+    style I6 fill:#d4edda
 ```
 
 **Core Scripts**:
 
 *   **Video & Animation**:
     *   `BatchAssetGeneratorVideo.py`: Generates video clips using models like `fal-ai/minimax/video-01`. Handles aspect ratios and duration.
+    *   `VideoGenerator.py`: Individual video generator with versioning support.
     *   `BatchAssetGeneratorChapterMarkers.py`: Creates title cards for video chapters.
+    *   `ChapterMarkersGenerator.py`: Individual chapter marker generator.
 
 *   **Audio**:
     *   `BatchAssetGeneratorAudio.py` / `BatchAssetGeneratorMusic.py`: Generates audio tracks, sound effects, and background music.
+    *   `AudioGenerator.py` / `MusicGenerator.py`: Individual audio/music generators with versioning.
 
 *   **Static Graphics**:
     *   `BatchAssetGeneratorImages.py`: General purpose image generation (photorealistic or stylized).
+    *   `ImageGenerator.py`: Individual image generator with versioning support.
     *   `BatchAssetGeneratorIcons.py`: Specialized for vector-style, minimalist icons (often checks for transparency).
+    *   `IconGenerator.py`: Individual icon generator.
     *   `BatchAssetGeneratorGraphics.py`: General graphics utility.
+    *   `GraphicsGenerator.py`: Individual graphics generator.
     *   `BatchAssetGeneratorDiagrams.py`: Technical diagrams and charts.
-    *   `BulkMermaidGenerator.py`: **NEW** - Generates Mermaid diagrams for workflows and documentation.
+    *   `DiagramGenerator.py`: Individual diagram generator.
+    *   `BulkMermaidGenerator.py`: ✨ **NEW** - Generates Mermaid diagrams for workflows and documentation.
+    *   `BulkSVGGenerator.py`: ✨ **NEW** - Generates professional SVG diagrams for visual explanations.
+    *   `SVGGenerator.py`: Individual SVG generator.
 
 *   **Video Elements**:
     *   `BatchAssetGeneratorLowerThirds.py`: Creates overlay graphics for titling.
+    *   `LowerThirdsGenerator.py`: Individual lower thirds generator.
+    *   `BatchAssetGeneratorMemoryPalace.py`: Memory palace visualizations.
+    *   `MemoryPalaceGenerator.py`: Individual memory palace generator.
+
+*   **Base Architecture** (🏗️ NEW):
+    *   `base/base_asset_generator.py`: Abstract base class with shared generator logic, reducing code duplication.
+    *   `base/generator_config.py`: Centralized configuration management for all generators.
+    *   `base/__init__.py`: Package initialization and exports.
+
+*   **Utilities**:
+    *   `asset_utils.py`: Utilities for standardized naming, versioning, and manifest tracking.
+    *   `EstimateWeeklyVideoCost.py`: Calculate API costs for batch generation.
+    *   `demo_versioning_system.py`: Demonstration of versioning and manifest features.
+
+*   **Testing**:
+    *   `test_asset_utils.py`: ✅ Unit tests for asset utilities (13 tests, all passing).
+    *   `test_integration.py`: ✅ End-to-end integration tests for the complete workflow.
 
 **Structure**:
-Each script typically follows a standard pattern:
+Each batch script typically follows a standard pattern:
 1.  Configuration & Imports.
 2.  `GENERATION_QUEUE`: A list of dictionaries defining the assets to build.
 3.  `generate_*()` function: Handles the API call to fal.ai.
 4.  `main()`: Orchestrates the batch process, error handling, and summary reporting.
+
+**Versioning & Manifest**:
+All generators now support:
+- Standardized naming: `{scene:03d}_{asset_type}_{desc}_v{version}.{ext}`
+- Manifest tracking: Complete prompt-to-file traceability
+- Version control: Automatic version numbering for iterations
+
+For detailed documentation, see [VERSIONING_AND_MANIFEST.md](VERSIONING_AND_MANIFEST.md).
