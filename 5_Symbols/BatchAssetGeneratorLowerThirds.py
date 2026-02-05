@@ -346,19 +346,23 @@ def load_config_from_json(config_path: Path = CONFIG_FILE) -> List[Dict]:
         
         lower_thirds_config = config["lower_thirds"]
         
+        # Create a copy to avoid mutating the original config
         # Transform config to match expected format with prompt base
+        lower_thirds_copy = []
         for item in lower_thirds_config:
+            # Make a shallow copy of the item
+            item_copy = item.copy()
             # If prompt doesn't exist, build it from text/subtext
-            if "prompt" not in item or not item["prompt"]:
-                color = BRAND_COLORS.get(item.get("color_theme", "accent_blue"), "#00d4ff")
-                item["prompt"] = (
-                    f"{PROMPT_BASE}, main text '{item['text'].upper()}' in bold white font, "
-                    f"subtext '{item['subtext']}' in smaller font, "
-                    f"color theme: {item.get('color_theme', 'accent_blue')}."
+            if "prompt" not in item_copy or not item_copy["prompt"]:
+                item_copy["prompt"] = (
+                    f"{PROMPT_BASE}, main text '{item_copy['text'].upper()}' in bold white font, "
+                    f"subtext '{item_copy['subtext']}' in smaller font, "
+                    f"color theme: {item_copy.get('color_theme', 'accent_blue')}."
                 )
+            lower_thirds_copy.append(item_copy)
         
-        print(f"✅ Loaded {len(lower_thirds_config)} lower thirds from {config_path}")
-        return lower_thirds_config
+        print(f"✅ Loaded {len(lower_thirds_copy)} lower thirds from {config_path}")
+        return lower_thirds_copy
         
     except Exception as e:
         print(f"❌ Error loading config: {e}")
