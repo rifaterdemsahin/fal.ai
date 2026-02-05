@@ -15,6 +15,10 @@ from base.generator_config import SEEDS, BRAND_COLORS
 class AudioAssetGenerator(BaseAssetGenerator):
     """Generator for audio/chapter marker text files"""
     
+    # Regex patterns for EDL parsing
+    SCENE_PATTERN = re.compile(r'^### \*\*SCENE \d+: (.+)\*\*\s*$')
+    DURATION_PATTERN = re.compile(r'\*\*Duration:\*\* (\d+:\d+)')
+    
     def __init__(self, edl_path: Path = None):
         super().__init__(
             output_dir=Path("./generated_audio"),
@@ -76,19 +80,16 @@ class AudioAssetGenerator(BaseAssetGenerator):
         markers = []
         current_scene_title = None
 
-        scene_pattern = re.compile(r'^### \*\*SCENE \d+: (.+)\*\*\s*$')
-        duration_pattern = re.compile(r'\*\*Duration:\*\* (\d+:\d+)')
-
         for line in lines:
             line = line.strip()
             
-            scene_match = scene_pattern.match(line)
+            scene_match = self.SCENE_PATTERN.match(line)
             if scene_match:
                 raw_title = scene_match.group(1).strip()
                 current_scene_title = self.format_title(raw_title)
                 continue
 
-            duration_match = duration_pattern.search(line)
+            duration_match = self.DURATION_PATTERN.search(line)
             if duration_match and current_scene_title:
                 start_time = duration_match.group(1)
                 formatted_time = self.parse_timecode(start_time)

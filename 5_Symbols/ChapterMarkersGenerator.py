@@ -15,6 +15,9 @@ from base.generator_config import SEEDS, BRAND_COLORS
 class ChapterMarkersAssetGenerator(BaseAssetGenerator):
     """Generator for chapter marker assets"""
     
+    # Regex pattern for parsing chapter markers
+    CHAPTER_MARKER_PATTERN = re.compile(r'^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$')
+    
     def __init__(self):
         # Custom seeds for chapter markers
         chapter_seeds = {
@@ -43,7 +46,7 @@ class ChapterMarkersAssetGenerator(BaseAssetGenerator):
                 line = line.strip()
                 if not line:
                     continue
-                match = re.match(r'^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$', line)
+                match = self.CHAPTER_MARKER_PATTERN.match(line)
                 if match:
                     timestamp = match.group(1)
                     title = match.group(2)

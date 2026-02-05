@@ -35,7 +35,7 @@ class BaseAssetGenerator(ABC):
         'graphic': 'png',
         'icon': 'png',
         'lower_third': 'png',
-        'svg': 'png',
+        'svg': 'svg',
         'diagram': 'png',
         'memory_palace': 'png',
         'chapter_marker': 'png',

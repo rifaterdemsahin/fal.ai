@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Shared Configuration for Asset Generators
 Single source of truth for seeds, colors, and common settings
