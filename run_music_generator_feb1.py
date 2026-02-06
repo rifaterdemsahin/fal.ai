@@ -23,11 +23,12 @@ def main():
     print("🎵 Running Music Generator for Feb 1 Video")
     print("="*60)
     
-    # Check API key
-    api_key = os.environ.get("FAL_KEY")
+    # Check API key (supports both FAL_API_KEY and FAL_KEY for backwards compatibility)
+    api_key = os.environ.get("FAL_API_KEY") or os.environ.get("FAL_KEY")
     if not api_key:
-        print("\n❌ ERROR: FAL_KEY environment variable not set")
-        print("   Set it with: export FAL_KEY='your-api-key-here'")
+        print("\n❌ ERROR: FAL_API_KEY environment variable not set")
+        print("   Set it with: export FAL_API_KEY='your-api-key-here'")
+        print("   Or use: export FAL_KEY='your-api-key-here' (legacy)")
         print("   Get your key from: https://fal.ai/dashboard/keys")
         return 1
     

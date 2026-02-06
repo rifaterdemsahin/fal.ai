@@ -1,4 +1,4 @@
-# Setting Up FAL_KEY for Music Generation
+# Setting Up FAL_API_KEY for Music Generation
 
 This guide explains how to set up your fal.ai API key to enable actual MP3 music generation.
 
@@ -15,7 +15,7 @@ This guide explains how to set up your fal.ai API key to enable actual MP3 music
 
 ```bash
 # Set your API key (replace with your actual key)
-export FAL_KEY='your-api-key-here'
+export FAL_API_KEY='your-api-key-here'
 
 # Run the music generator for Feb 1 video
 python3 run_music_generator_feb1.py
@@ -34,12 +34,12 @@ This will:
 
 To run music generation automatically via GitHub Actions:
 
-### 1. Add FAL_KEY as a GitHub Secret
+### 1. Add FAL_API_KEY as a GitHub Secret
 
 1. Go to your repository: `https://github.com/rifaterdemsahin/fal.ai`
 2. Click **Settings** → **Secrets and variables** → **Actions**
 3. Click **New repository secret**
-4. Name: `FAL_KEY`
+4. Name: `FAL_API_KEY`
 5. Value: Your fal.ai API key
 6. Click **Add secret**
 
@@ -91,19 +91,19 @@ Once generated, you'll have:
 
 ## Troubleshooting
 
-### Error: "FAL_KEY environment variable not set"
+### Error: "FAL_API_KEY environment variable not set"
 
 **Local Execution:**
 ```bash
 # Make sure you exported the key
-echo $FAL_KEY
+echo $FAL_API_KEY
 # Should show your key, if empty, export it again
-export FAL_KEY='your-actual-key-here'
+export FAL_API_KEY='your-actual-key-here'
 ```
 
 **GitHub Actions:**
 - Verify the secret is set in repository settings
-- Secret name must be exactly `FAL_KEY` (case-sensitive)
+- Secret name must be exactly `FAL_API_KEY` (case-sensitive)
 - Re-run the workflow after adding the secret
 
 ### Error: "Authentication failed" or "Invalid API key"
@@ -141,7 +141,7 @@ Both commands will verify your setup without incurring any costs.
 
 ## Security Notes
 
-⚠️ **Never commit your FAL_KEY to git!**
+⚠️ **Never commit your FAL_API_KEY to git!**
 
 - Don't add it to `.env` files that are tracked
 - Don't hardcode it in Python scripts
@@ -183,4 +183,6 @@ After successful generation:
 ---
 
 **Last Updated:** 2026-02-06  
-**Status:** Ready to generate with valid FAL_KEY
+**Status:** Ready to generate with valid FAL_API_KEY
+
+**Note:** The scripts also support `FAL_KEY` for backwards compatibility, but `FAL_API_KEY` is the preferred variable name to match the repository secret.

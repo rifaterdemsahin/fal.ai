@@ -4,7 +4,7 @@
 
 The music generator has been **successfully configured** and **validated**. All technical prerequisites are complete.
 
-**🎵 To download actual MP3 files (not just JSON), you need to run with your FAL_KEY.**
+**To generate actual MP3 files (not just JSON), you need to run with your FAL_API_KEY.**
 
 ## Quick Start: Get MP3 Files Now
 
@@ -24,7 +24,7 @@ This script will:
 
 ```bash
 # 1. Set your API key
-export FAL_KEY='your-api-key-here'
+export FAL_API_KEY='your-api-key-here'
 
 # 2. Run the generator
 python3 run_music_generator_feb1.py

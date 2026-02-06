@@ -11,9 +11,9 @@ echo "  🎵 Music Generator Setup & Execution for Feb 1 Video"
 echo "════════════════════════════════════════════════════════════════════"
 echo ""
 
-# Check if FAL_KEY is set
-if [ -z "$FAL_KEY" ]; then
-    echo "⚠️  FAL_KEY environment variable is not set"
+# Check if FAL_API_KEY or FAL_KEY is set (FAL_API_KEY is preferred)
+if [ -z "$FAL_API_KEY" ] && [ -z "$FAL_KEY" ]; then
+    echo "⚠️  FAL_API_KEY environment variable is not set"
     echo ""
     echo "To generate actual MP3 files, you need a fal.ai API key."
     echo ""
@@ -24,23 +24,24 @@ if [ -z "$FAL_KEY" ]; then
     echo "  4. Copy the key"
     echo ""
     echo "Then run this script with:"
-    echo "  export FAL_KEY='your-api-key-here'"
+    echo "  export FAL_API_KEY='your-api-key-here'"
     echo "  ./generate_music_with_api.sh"
     echo ""
     echo "────────────────────────────────────────────────────────────────────"
     echo "Would you like to:"
     echo "  1) Enter your API key now (it will only be used for this session)"
     echo "  2) Run validation/dry-run without API key"
-    echo "  3) Exit and set FAL_KEY manually"
+    echo "  3) Exit and set FAL_API_KEY manually"
     echo ""
     read -p "Choose an option (1/2/3): " choice
     
     case $choice in
         1)
             echo ""
-            read -sp "Enter your FAL_KEY: " user_key
+            read -sp "Enter your FAL_API_KEY: " user_key
             echo ""
-            export FAL_KEY="$user_key"
+            export FAL_API_KEY="$user_key"
+            export FAL_KEY="$user_key"  # Set both for backwards compatibility
             echo "✅ API key set for this session"
             ;;
         2)
@@ -60,8 +61,8 @@ if [ -z "$FAL_KEY" ]; then
             ;;
         3)
             echo ""
-            echo "To set FAL_KEY manually, run:"
-            echo "  export FAL_KEY='your-api-key-here'"
+            echo "To set FAL_API_KEY manually, run:"
+            echo "  export FAL_API_KEY='your-api-key-here'"
             echo ""
             exit 0
             ;;
@@ -72,9 +73,16 @@ if [ -z "$FAL_KEY" ]; then
     esac
 fi
 
+# Ensure both variables are set for backwards compatibility
+if [ -n "$FAL_API_KEY" ] && [ -z "$FAL_KEY" ]; then
+    export FAL_KEY="$FAL_API_KEY"
+elif [ -n "$FAL_KEY" ] && [ -z "$FAL_API_KEY" ]; then
+    export FAL_API_KEY="$FAL_KEY"
+fi
+
 echo ""
 echo "════════════════════════════════════════════════════════════════════"
-echo "  ✅ FAL_KEY detected"
+echo "  ✅ FAL_API_KEY detected"
 echo "════════════════════════════════════════════════════════════════════"
 echo ""
 

@@ -26,7 +26,7 @@ This script will:
 - ✅ Download MP3 files automatically
 - ✅ Show you where the files are saved
 
-**No FAL_KEY?** The script will help you get one and set it up.
+**No FAL_API_KEY?** The script will help you get one and set it up.
 
 ### Option 2: Manual Execution
 
@@ -34,7 +34,7 @@ This script will:
 # 1. Get your API key from https://fal.ai/dashboard/keys
 
 # 2. Set the environment variable
-export FAL_KEY='your-actual-api-key-here'
+export FAL_API_KEY='your-actual-api-key-here'
 
 # 3. Install dependencies (if not already done)
 pip install -r requirements.txt
@@ -55,7 +55,7 @@ For automated generation without local execution:
 
 1. **Set up the secret:**
    - Go to repository Settings → Secrets → Actions
-   - Add new secret: `FAL_KEY` with your fal.ai API key
+   - Add new secret: `FAL_API_KEY` with your fal.ai API key
 
 2. **Run the workflow:**
    - Go to Actions tab
@@ -114,9 +114,9 @@ ffprobe -hide_banner 3_Simulation/Feb1Youtube/generated_music/tech_innovation_ba
    cat 3_Simulation/Feb1Youtube/generated_music/generation_summary.json
    ```
 
-2. Verify FAL_KEY is set:
+2. Verify FAL_API_KEY is set:
    ```bash
-   echo $FAL_KEY
+   echo $FAL_API_KEY
    # Should show your key, not empty
    ```
 
@@ -125,16 +125,16 @@ ffprobe -hide_banner 3_Simulation/Feb1Youtube/generated_music/tech_innovation_ba
    python3 run_music_generator_feb1.py 2>&1 | tee generation.log
    ```
 
-### Issue: "FAL_KEY environment variable not set"
+### Issue: "FAL_API_KEY environment variable not set"
 
 **Solution:** You must set the API key before running:
 
 ```bash
 # This is required - replace with your actual key
-export FAL_KEY='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+export FAL_API_KEY='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 
 # Verify it's set
-echo $FAL_KEY
+echo $FAL_API_KEY
 
 # Now run the generator
 python3 run_music_generator_feb1.py
@@ -241,7 +241,9 @@ If you're still having issues:
 
 ---
 
-**Remember:** The dry-run creates JSON only. For MP3s, you MUST use a valid FAL_KEY.
+**Remember:** The dry-run creates JSON only. For MP3s, you MUST use a valid FAL_API_KEY.
+
+**Note:** Scripts support both `FAL_API_KEY` (preferred) and `FAL_KEY` (legacy) for backwards compatibility.
 
 **Quick command to verify you have MP3s:**
 ```bash
