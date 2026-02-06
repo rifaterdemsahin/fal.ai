@@ -32,6 +32,17 @@ OUTPUT_FORMATS = {
 
 These assets **MUST** use PNG format to preserve transparency:
 
+### PNG Optimization for DaVinci Resolve
+
+**All PNG files are automatically optimized for DaVinci Resolve compatibility:**
+
+- **32-bit Format**: Converted to RGBA (8-bit per channel RGB + Alpha)
+- **No Indexed Colors**: Mode 'P' (palette/indexed) is converted to RGBA
+- **No Metadata**: EXIF, XMP, and other metadata removed
+- **Automatic**: Happens during the generation process
+
+This ensures PNG files work seamlessly in DaVinci Resolve without "Media Offline" errors.
+
 ### Lower Thirds (10 assets)
 - All lower thirds are broadcast overlays
 - Require transparent backgrounds for video compositing
@@ -65,6 +76,8 @@ These assets use JPEG format for smaller file sizes:
 
 ## How It Works
 
+### JPEG Conversion (for non-transparent assets)
+
 1. **Generation**: fal.ai generates images (always returns PNG format initially)
 2. **Download**: Image is downloaded from fal.ai
 3. **Conversion** (if needed):
@@ -74,12 +87,33 @@ These assets use JPEG format for smaller file sizes:
    - Original PNG is deleted after successful conversion
 4. **File Size Reporting**: Console output shows size comparison and savings percentage
 
+### PNG Optimization (for transparent assets)
+
+1. **Generation**: fal.ai generates images in PNG format
+2. **Download**: Image is downloaded from fal.ai
+3. **Optimization** (automatic for all PNGs):
+   - Convert to RGBA mode (32-bit: 8-bit per channel)
+   - Remove indexed colors (mode 'P' → RGBA)
+   - Strip all metadata (EXIF, XMP, etc.)
+   - Ensure DaVinci Resolve compatibility
+4. **Console Output**: Shows mode conversion if applied
+
 ## Example Output
+
+### JPEG Conversion
 
 ```
 💾 Downloaded temporary PNG: 001_image_timeline_v1_temp.png
 🔄 Converted to JPEG: 001_image_timeline_v1.jpeg
    📦 Size: 1840.2KB (PNG) → 845.3KB (JPEG) - 54.1% smaller
+```
+
+### PNG Optimization
+
+```
+💾 Asset saved: 001_icon_ferrari_v1.png
+🔧 Optimizing PNG for DaVinci Resolve...
+   🔄 Converted PNG mode: RGB → RGBA (32-bit)
 ```
 
 ## Usage in Generators
@@ -105,28 +139,36 @@ Run the test suite to verify format configuration:
 ```bash
 cd 5_Symbols
 python3 test_output_format.py      # Verify format configuration
-python3 test_jpeg_conversion.py    # Test conversion logic
+python3 test_jpeg_conversion.py    # Test JPEG conversion logic
+python3 test_png_optimization.py   # Test PNG optimization for DaVinci Resolve
 ```
 
 ## Benefits
 
-1. **Reduced Storage**: 40-60% smaller file sizes for most assets
+1. **Reduced Storage**: 40-60% smaller file sizes for JPEG assets
 2. **Faster Downloads**: Smaller files transfer faster
 3. **Better Performance**: Video editing software loads smaller files faster
 4. **Preserved Quality**: High-quality JPEG (quality=95) maintains visual fidelity
 5. **Automatic**: No manual intervention required
+6. **DaVinci Resolve Compatible**: All PNG files optimized with 32-bit format and no metadata
+7. **No Indexed Colors**: Prevents "Media Offline" errors in DaVinci Resolve
 
 ## Transparency Requirements Summary
 
-| Asset Type | Format | Reason |
-|------------|--------|--------|
-| Lower Thirds | PNG | Video overlay transparency |
-| Icons | PNG | Flexible use with transparency |
-| Graphics (some) | PNG | Specific transparency needs |
-| Images | JPEG | Solid backgrounds |
-| Diagrams | JPEG | Solid backgrounds |
-| Memory Palace | JPEG | Solid backgrounds |
-| Chapter Markers | JPEG | Solid backgrounds |
+| Asset Type | Format | Optimization | Reason |
+|------------|--------|--------------|--------|
+| Lower Thirds | PNG | 32-bit RGBA | Video overlay transparency |
+| Icons | PNG | 32-bit RGBA | Flexible use with transparency |
+| Graphics (some) | PNG | 32-bit RGBA | Specific transparency needs |
+| Images | JPEG | Quality 95 | Solid backgrounds |
+| Diagrams | JPEG | Quality 95 | Solid backgrounds |
+| Memory Palace | JPEG | Quality 95 | Solid backgrounds |
+| Chapter Markers | JPEG | Quality 95 | Solid backgrounds |
+
+**PNG Optimization Details:**
+- All PNG files converted to RGBA (32-bit: 8-bit per channel)
+- Indexed colors (mode 'P') automatically converted to RGBA
+- All metadata stripped for DaVinci Resolve compatibility
 
 ## Dependencies
 
@@ -144,7 +186,15 @@ generator.output_format = "png"  # Force PNG if needed
 
 ## Notes
 
-- JPEG does not support transparency (alpha channel)
-- Transparent areas in PNG are replaced with white background during conversion
-- For assets requiring transparency, PNG is always used regardless of configuration
-- The conversion is automatic and happens during the generation process
+- **JPEG Conversion**:
+  - JPEG does not support transparency (alpha channel)
+  - Transparent areas in PNG are replaced with white background during conversion
+  - For assets requiring transparency, PNG is always used regardless of configuration
+  - The conversion is automatic and happens during the generation process
+
+- **PNG Optimization**:
+  - All PNG files are automatically converted to 32-bit RGBA format
+  - Bit depth is standardized to 8-bit per channel (never auto-detect or indexed)
+  - Metadata is completely removed to prevent DaVinci Resolve issues
+  - Optimization happens automatically for all PNG files
+  - No manual intervention or post-processing required
