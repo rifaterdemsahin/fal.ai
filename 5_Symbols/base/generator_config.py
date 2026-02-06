@@ -40,3 +40,20 @@ IMAGE_SIZES = {
     "square": {"width": 1024, "height": 1024},
     "portrait": {"width": 1080, "height": 1920},
 }
+
+# Output format configuration
+# Use "jpeg" for assets without transparency needs (smaller file size)
+# Use "png" for assets requiring transparency (icons, lower thirds, overlays)
+OUTPUT_FORMATS = {
+    "image": "jpeg",          # Images with solid backgrounds
+    "graphic": "png",         # Graphics may need transparency
+    "icon": "png",            # Icons need transparency
+    "lower_third": "png",     # Lower thirds need transparency for overlays
+    "svg": "svg",             # SVG is vector format
+    "diagram": "jpeg",        # Diagrams typically have solid backgrounds
+    "memory_palace": "jpeg",  # Memory palace images have solid backgrounds
+    "chapter_marker": "jpeg", # Chapter markers have solid backgrounds
+    "video": "mp4",           # Video format
+    "music": "mp3",           # Audio format
+    "audio": "mp3",           # Audio format
+}

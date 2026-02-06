@@ -120,3 +120,16 @@ All generators now support:
 - Version control: Automatic version numbering for iterations
 
 For detailed documentation, see [VERSIONING_AND_MANIFEST.md](VERSIONING_AND_MANIFEST.md).
+
+**Output Format Optimization** (✨ NEW):
+Automatic format selection for optimal file sizes:
+- **JPEG format** for assets with solid backgrounds (images, diagrams, chapter markers)
+  - Typical savings: 40-60% smaller file size
+  - High quality (quality=95) maintains visual fidelity
+- **PNG format** preserved for assets requiring transparency
+  - Lower thirds (video overlays)
+  - Icons (isolated graphics)
+  - Graphics with transparency needs
+- Automatic conversion during generation with size reporting
+
+For detailed documentation, see [OUTPUT_FORMAT_DOCUMENTATION.md](OUTPUT_FORMAT_DOCUMENTATION.md).

@@ -7,6 +7,7 @@ Common functionality for all asset generators
 import os
 import json
 import urllib.request
+import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from abc import ABC, abstractmethod
@@ -17,10 +18,23 @@ except ImportError:
     print("❌ fal_client not installed. Run: pip install fal-client")
     exit(1)
 
+try:
+    from PIL import Image
+except ImportError:
+    print("❌ Pillow not installed. Run: pip install Pillow")
+    exit(1)
+
 # Import from parent directory
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+
+# Import configuration (relative import from same package)
+from .generator_config import OUTPUT_FORMATS
+
+# Pre-compute image asset types that support conversion (computed once at module level)
+IMAGE_ASSET_TYPES = [k for k, v in OUTPUT_FORMATS.items() 
+                     if v in ('jpeg', 'png') and k != 'svg']
 
 
 class BaseAssetGenerator(ABC):
@@ -49,7 +63,8 @@ class BaseAssetGenerator(ABC):
         output_dir: Path,
         seeds: Dict[str, int],
         brand_colors: Dict[str, str],
-        asset_type: str
+        asset_type: str,
+        output_format: Optional[str] = None
     ):
         """
         Initialize the base generator.
@@ -59,6 +74,8 @@ class BaseAssetGenerator(ABC):
             seeds: Dictionary of seed values for consistency
             brand_colors: Brand color palette
             asset_type: Type of asset (e.g., 'image', 'video', 'music')
+            output_format: Override output format (e.g., 'jpeg', 'png'). 
+                          If None, uses OUTPUT_FORMATS from config
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -66,6 +83,7 @@ class BaseAssetGenerator(ABC):
         self.brand_colors = brand_colors
         self.asset_type = asset_type
         self.manifest = None
+        self.output_format = output_format  # Store the desired output format
         
     @abstractmethod
     def get_generation_queue(self) -> List[Dict]:
@@ -144,9 +162,55 @@ class BaseAssetGenerator(ABC):
             asset_config: Configuration for the asset
             
         Returns:
-            File extension (e.g., 'png', 'mp4', 'mp3')
+            File extension (e.g., 'png', 'jpeg', 'mp4', 'mp3')
         """
+        # Use output_format if specified, otherwise use default
+        if self.output_format:
+            return self.output_format
         return self.ASSET_TYPE_EXTENSIONS.get(self.asset_type, 'bin')
+    
+    def convert_to_jpeg(self, png_path: Path, jpeg_path: Path, quality: int = 95) -> bool:
+        """
+        Convert a PNG image to JPEG format.
+        
+        Transparency handling:
+        - RGBA (RGB with alpha): Alpha channel is used as mask, transparent areas become white
+        - LA (grayscale with alpha): Alpha channel is used as mask, transparent areas become white
+        - P (palette mode): Converted to RGBA first, then transparency becomes white
+        - RGB: Direct conversion to JPEG (no transparency handling needed)
+        
+        Args:
+            png_path: Path to the source PNG file
+            jpeg_path: Path to save the JPEG file
+            quality: JPEG quality (1-100, default 95 for high quality)
+            
+        Returns:
+            True if conversion successful, False otherwise
+        """
+        try:
+            # Open PNG image
+            with Image.open(png_path) as img:
+                # Convert RGBA to RGB if necessary (JPEG doesn't support transparency)
+                if img.mode in ('RGBA', 'LA', 'P'):
+                    # Create a white background
+                    background = Image.new('RGB', img.size, (255, 255, 255))
+                    # Convert palette mode to RGBA first
+                    if img.mode == 'P':
+                        img = img.convert('RGBA')
+                    # Extract alpha channel for mask (handles both RGBA and LA modes)
+                    # After P->RGBA conversion, img.mode will be 'RGBA', 'LA', or original mode
+                    background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                    img = background
+                elif img.mode != 'RGB':
+                    img = img.convert('RGB')
+                
+                # Save as JPEG
+                img.save(jpeg_path, 'JPEG', quality=quality, optimize=True)
+                
+            return True
+        except Exception as e:
+            print(f"⚠️  Warning: Failed to convert to JPEG: {e}")
+            return False
     
     def generate_asset(
         self,
@@ -221,10 +285,44 @@ class BaseAssetGenerator(ABC):
                 json.dump(metadata, f, indent=2)
             print(f"💾 Metadata saved: {metadata_path}")
             
-            # Download asset
+            # Download asset from fal.ai (always downloads as PNG for images)
+            # Use UUID to ensure unique temporary filename for guaranteed thread safety
+            unique_id = uuid.uuid4().hex[:8]  # First 8 hexadecimal characters (4 bytes)
+            temp_path = self.output_dir / f"{base_filename}_temp_{unique_id}.png"
             asset_path = self.output_dir / filename_asset
-            urllib.request.urlretrieve(result_url, asset_path)
-            print(f"💾 Asset saved: {asset_path}")
+            
+            # Determine if we need conversion
+            # Only convert to JPEG if:
+            # 1. The output format is 'jpeg'
+            # 2. The asset type is one that supports conversion (image-based assets)
+            needs_conversion = (
+                extension == 'jpeg' and 
+                self.asset_type in IMAGE_ASSET_TYPES
+            )
+            
+            if needs_conversion:
+                # Download as temporary PNG first
+                urllib.request.urlretrieve(result_url, temp_path)
+                print(f"💾 Downloaded temporary PNG: {temp_path}")
+                
+                # Convert to JPEG
+                if self.convert_to_jpeg(temp_path, asset_path, quality=95):
+                    print(f"🔄 Converted to JPEG: {asset_path}")
+                    # Get file size comparison
+                    png_size = temp_path.stat().st_size / 1024  # KB
+                    jpeg_size = asset_path.stat().st_size / 1024  # KB
+                    savings = ((png_size - jpeg_size) / png_size) * 100
+                    print(f"   📦 Size: {png_size:.1f}KB (PNG) → {jpeg_size:.1f}KB (JPEG) - {savings:.1f}% smaller")
+                    # Clean up temporary PNG
+                    temp_path.unlink()
+                else:
+                    # Conversion failed, use PNG instead
+                    print(f"⚠️  Using PNG format instead")
+                    temp_path.rename(asset_path)
+            else:
+                # Direct download without conversion
+                urllib.request.urlretrieve(result_url, asset_path)
+                print(f"💾 Asset saved: {asset_path}")
             
             # Add to manifest if available
             if self.manifest:
