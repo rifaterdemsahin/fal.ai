@@ -55,7 +55,7 @@ def main():
         print("\n✅ Generated files in:")
         print(f"   {OUTPUT_DIR.absolute()}")
     
-    return 0 if failed == 0 else 1
+    return 0 if len(failed) == 0 else 1
 
 if __name__ == "__main__":
     sys.exit(main())
