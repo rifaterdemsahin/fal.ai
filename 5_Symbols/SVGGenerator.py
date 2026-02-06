@@ -12,7 +12,7 @@ from xml.dom import minidom
 
 from base.base_asset_generator import BaseAssetGenerator
 from base.generator_config import SEEDS, BRAND_COLORS
-from asset_utils import generate_filename, extract_scene_number
+from asset_utils import generate_filename, extract_scene_number, convert_svg_to_jpeg
 
 
 # Display constants
@@ -247,6 +247,11 @@ class SVGAssetGenerator(BaseAssetGenerator):
             
             print(f"✅ Generated successfully!")
             print(f"💾 Saved to: {svg_path}")
+            
+            # Also save JPEG version
+            jpeg_path = convert_svg_to_jpeg(svg_path)
+            if jpeg_path:
+                print(f"📸 JPEG version saved: {jpeg_path.name}")
             
             prompt_description = f"{asset_config.get('scene', 'Scene')}: {asset_config.get('diagram_type', 'flow')} diagram showing {asset_config['name']}"
             

@@ -10,6 +10,15 @@ from pathlib import Path
 from typing import Dict, Optional
 from datetime import datetime
 
+# Optional imports for SVG to JPEG conversion
+try:
+    import cairosvg
+    from PIL import Image
+    import io
+    SVG_CONVERSION_AVAILABLE = True
+except ImportError:
+    SVG_CONVERSION_AVAILABLE = False
+
 
 def clean_description(description: str) -> str:
     """
@@ -176,3 +185,64 @@ class ManifestTracker:
         print(f"   Total assets tracked: {len(self.assets)}")
         
         return manifest_path
+
+
+def convert_svg_to_jpeg(svg_path: Path, jpeg_path: Optional[Path] = None, quality: int = 95) -> Optional[Path]:
+    """
+    Convert an SVG file to JPEG format.
+    
+    Process:
+    1. Read SVG file
+    2. Render SVG to PNG using cairosvg
+    3. Convert PNG to JPEG using Pillow
+    
+    Args:
+        svg_path: Path to the source SVG file
+        jpeg_path: Path to save the JPEG file (if None, uses same name with .jpeg extension)
+        quality: JPEG quality (1-100, default 95 for high quality)
+        
+    Returns:
+        Path to the saved JPEG file if successful, None otherwise
+    """
+    if not SVG_CONVERSION_AVAILABLE:
+        print(f"⚠️  Warning: SVG to JPEG conversion not available. Install cairosvg and Pillow.")
+        return None
+    
+    try:
+        # Generate JPEG path if not provided
+        if jpeg_path is None:
+            jpeg_path = svg_path.with_suffix('.jpeg')
+        
+        # Read SVG file
+        with open(svg_path, 'r', encoding='utf-8') as f:
+            svg_content = f.read()
+        
+        # Convert SVG to PNG in memory
+        png_data = cairosvg.svg2png(bytestring=svg_content.encode('utf-8'))
+        
+        # Open PNG with Pillow
+        with Image.open(io.BytesIO(png_data)) as img:
+            # Convert RGBA to RGB if necessary (JPEG doesn't support transparency)
+            if img.mode in ('RGBA', 'LA', 'P'):
+                # Create a white background
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                # Convert palette mode to RGBA first
+                if img.mode == 'P':
+                    img = img.convert('RGBA')
+                # Paste with alpha channel as mask
+                if img.mode in ('RGBA', 'LA'):
+                    background.paste(img, mask=img.split()[-1])
+                else:
+                    background.paste(img)
+                img = background
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
+            
+            # Save as JPEG
+            img.save(jpeg_path, 'JPEG', quality=quality, optimize=True)
+        
+        return jpeg_path
+        
+    except Exception as e:
+        print(f"⚠️  Warning: Failed to convert SVG to JPEG: {e}")
+        return None

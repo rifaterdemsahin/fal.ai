@@ -27,8 +27,10 @@ Thumbs.db
 
 # Generated assets
 5_Symbols/generated_svgs/
+5_Symbols/generated_svg/
 5_Symbols/generated_assets/
 5_Symbols/generated_diagrams/
 5_Symbols/generated_mermaid_diagrams/
+3_Simulation/*/generated_svgs/
 # Allow generated_svgs in weekly folder
 !3_Simulation/*/weekly/generated_svgs/
