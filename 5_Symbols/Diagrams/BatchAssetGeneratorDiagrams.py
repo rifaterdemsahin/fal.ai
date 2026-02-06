@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-fal.ai Batch Asset Generator - Memory Palace
-Project: The Agentic Era
-Generates memory palace imagery for the video.
+fal.ai Batch Asset Generator - Diagrams
+Project: The Agentic Era - Managing 240+ Workflows
+Generates technical diagrams, flowcharts, and architecture visualizations
 """
 
 import os
@@ -19,67 +19,97 @@ except ImportError:
 
 # Import asset utilities
 try:
-    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
 except ImportError:
     # Fallback if running standalone
-    print("⚠️  asset_utils not found. Using legacy naming convention.")
-    generate_filename = None
-    extract_scene_number = None
-    ManifestTracker = None
+    import sys
+    from pathlib import Path
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+    try:
+        from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    except ImportError:
+        print("⚠️  asset_utils not found. Using legacy naming convention.")
+        generate_filename = None
+        extract_scene_number = None
+        ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_memory_palace")
+OUTPUT_DIR = Path("./generated_diagrams")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-# Consistency seeds
+# Consistency seeds for different diagram styles
 SEEDS = {
-    "SEED_001": 555123,  # Ancient/Architectural
-    "SEED_002": 555456,  # Surreal/Dreamlike
+    "SEED_001": 555123,  # Technical Architecture
+    "SEED_002": 555456,  # Process Flows
+    "SEED_003": 555789,  # Concept Maps
+    "SEED_004": 555000,  # Data Visualization
 }
 
-# Default Queue (Example/Template)
+# Brand color palette (reference for prompts)
+BRAND_COLORS = {
+    "primary_dark": "#1a1a2e",
+    "accent_blue": "#00d4ff",
+    "accent_purple": "#7b2cbf",
+    "secondary_teal": "#00bfa5",
+    "highlight_orange": "#ff6b35",
+    "text_white": "#ffffff",
+}
+
+# Asset generation queue
+# Populated based on concepts from EDL - Diagrams specific
 GENERATION_QUEUE = [
     {
-        "id": "MP.1",
-        "name": "memory_palace_entrance",
+        "id": "D1.1",
+        "name": "agentic_workflow_architecture",
         "priority": "HIGH",
-        "scene": "Intro",
+        "scene": "Scene 1",
         "seed_key": "SEED_001",
-        "prompt": "Grand entrance to a memory palace, classical greek architecture, marble columns, golden light, floating geometric symbols, ethereal atmosphere, cinematic lighting, 8k resolution, wide angle",
+        "prompt": "High-level technical architecture diagram of an Agentic Workflow system, showing 'User Intent' box -> 'Orchestrator Agent' (central hub) -> connected to multiple specialized Sub-Agents (Research, Coding, Testing, Deployment), connected by data pipelines, clean modern aesthetic, dark background separate distinct nodes, professional software diagram style, 16:9",
         "model": "fal-ai/flux/dev",
         "image_size": {"width": 1920, "height": 1080},
         "num_inference_steps": 28,
     },
     {
-        "id": "MP.2",
-        "name": "locus_hall_of_mirrors",
+        "id": "D2.1",
+        "name": "data_flow_process",
         "priority": "MEDIUM",
-        "scene": "Hallway",
+        "scene": "Scene 2",
         "seed_key": "SEED_002",
-        "prompt": "A long hallway lined with mirrors, each mirror reflecting a different memory or data point, surreal style, infinite depth, glowing blue pathways on the floor, cybernetic architecture mixed with baroque style",
+        "prompt": "Horizontal process flowchart 'Raw Data' -> 'Processing Node' -> 'Structured Output', interconnected with directional arrows, gradients indicating flow, distinct steps, n8n style nodes, modern smooth vector graphics, dark mode UI, blue and purple neon accents, 16:9",
         "model": "fal-ai/flux/dev",
         "image_size": {"width": 1920, "height": 1080},
         "num_inference_steps": 28,
-    }
+    },
+     {
+        "id": "D3.1",
+        "name": "neural_network_concept",
+        "priority": "LOW",
+        "scene": "Scene 3",
+        "seed_key": "SEED_003",
+        "prompt": "Abstract concept map of a neural network, nodes connecting in a mesh, glowing connections, highlighting the concept of 'Learning' and 'Adaptation', futuristic tech style, deep blue background, cyber security aesthetic, 16:9",
+        "model": "fal-ai/flux/dev",
+        "image_size": {"width": 1920, "height": 1080},
+        "num_inference_steps": 28,
+    },
 ]
+
 
 def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single asset using fal.ai"""
     print(f"\n{'='*60}")
-    print(f"🧠 Generating Memory Palace Asset: {asset_config['name']}")
+    print(f"📊 Generating Diagram: {asset_config['name']}")
     print(f"   Scene: {asset_config.get('scene', 'Unknown')}")
     print(f"   Priority: {asset_config.get('priority', 'MEDIUM')}")
-    print(f"   Seed: {asset_config['seed_key']} ({SEEDS.get(asset_config['seed_key'], 'N/A')})")
+    print(f"   Seed: {asset_config['seed_key']} ({SEEDS[asset_config['seed_key']]})")
     print(f"{'='*60}")
     
     try:
         # Prepare arguments
-        seed_value = SEEDS.get(asset_config["seed_key"], 0)
         arguments = {
             "prompt": asset_config["prompt"],
             "image_size": asset_config["image_size"],
             "num_inference_steps": asset_config["num_inference_steps"],
-            "seed": seed_value,
+            "seed": SEEDS[asset_config["seed_key"]],
             "num_images": 1,
         }
         
@@ -101,7 +131,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 scene_num = extract_scene_number(asset_config.get('id', '0.0'))
                 base_filename = generate_filename(
                     scene_num,
-                    'memorypalace',
+                    'diagram',
                     asset_config['name'],
                     version
                 )
@@ -117,7 +147,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             metadata = {
                 **asset_config,
                 "result_url": image_url,
-                "seed_value": seed_value,
+                "seed_value": SEEDS[asset_config["seed_key"]],
                 "filename": filename_png,
             }
             
@@ -137,7 +167,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 manifest.add_asset(
                     filename=filename_png,
                     prompt=asset_config["prompt"],
-                    asset_type="memorypalace",
+                    asset_type="diagram",
                     asset_id=asset_config.get("id", "unknown"),
                     result_url=image_url,
                     local_path=str(image_path),
@@ -163,10 +193,10 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         return {"success": False, "error": str(e)}
 
 def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object] = None) -> List[Dict]:
-    """Process a queue of memory palace assets to generate"""
+    """Process a queue of diagrams to generate"""
     print(f"\n{'='*60}")
-    print("🚀 FAL.AI BATCH ASSET GENERATOR - MEMORY PALACE")
-    print("   Project: The Agentic Era")
+    print("🚀 FAL.AI BATCH ASSET GENERATOR - DIAGRAMS")
+    print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
     
     # Check API key
@@ -174,6 +204,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     if not api_key:
         print("\n❌ ERROR: FAL_KEY environment variable not set")
         print("   Set it with: export FAL_KEY='your-api-key-here'")
+        print("   Get your key from: https://fal.ai/dashboard/keys")
         return []
     
     print(f"\n✅ API Key found")
@@ -184,13 +215,15 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     output_dir.mkdir(parents=True, exist_ok=True)
 
     if not queue:
-        print("\n⚠️  QUEUE IS EMPTY. Needs configuration.")
+        print("\n⚠️  QUEUE IS EMPTY. Please populate GENERATION_QUEUE with concepts from EDL.")
         return []
 
     # Count by priority
     high_priority = [a for a in queue if a.get("priority") == "HIGH"]
+    medium_priority = [a for a in queue if a.get("priority") == "MEDIUM"]
     
     print(f"   • HIGH priority: {len(high_priority)}")
+    print(f"   • MEDIUM priority: {len(medium_priority)}")
     
     # Generate assets
     results = []
@@ -201,7 +234,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
         
         result = generate_asset(asset, output_dir, manifest)
         results.append({
-            "asset_id": asset.get("id", f"mp_{i}"),
+            "asset_id": asset.get("id", f"auto_{i}"),
             "name": asset["name"],
             "priority": asset.get("priority", "MEDIUM"),
             **result
@@ -216,11 +249,17 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     failed = [r for r in results if not r["success"]]
     
     print(f"\n✅ Successful: {len(successful)}/{len(results)}")
+    print(f"❌ Failed: {len(failed)}/{len(results)}")
+    
+    if successful:
+        print("\n✅ SUCCESSFUL GENERATIONS:")
+        for r in successful:
+            print(f"   • {r['asset_id']}: {r['name']} ({r['priority']})")
     
     if failed:
-        print(f"❌ Failed: {len(failed)}/{len(results)}")
+        print("\n❌ FAILED GENERATIONS:")
         for r in failed:
-            print(f"   • {r['name']} - {r.get('error')}")
+            print(f"   • {r['asset_id']}: {r['name']} - {r.get('error', 'Unknown error')}")
     
     # Save summary
     summary_path = output_dir / "generation_summary.json"
@@ -239,8 +278,9 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
 
 def main():
     """Main execution"""
+    # Confirm before proceeding
     print("\n" + "="*60)
-    response = input("🤔 Proceed with Memory Palace generation? (yes/no): ").strip().lower()
+    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
     if response not in ['yes', 'y']:
         print("❌ Cancelled by user")
         return

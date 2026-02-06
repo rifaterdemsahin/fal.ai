@@ -19,13 +19,19 @@ except ImportError:
 
 # Import asset utilities
 try:
-    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
 except ImportError:
     # Fallback if running standalone
-    print("⚠️  asset_utils not found. Using legacy naming convention.")
-    generate_filename = None
-    extract_scene_number = None
-    ManifestTracker = None
+    import sys
+    from pathlib import Path
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+    try:
+        from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    except ImportError:
+        print("⚠️  asset_utils not found. Using legacy naming convention.")
+        generate_filename = None
+        extract_scene_number = None
+        ManifestTracker = None
 
 # Configuration
 OUTPUT_DIR = Path("./generated_icons")

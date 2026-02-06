@@ -7,10 +7,10 @@ import unittest
 import sys
 from pathlib import Path
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+# Add symbol root to path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from ThreeDGenerator import ThreeDAssetGenerator
+from ThreeD.ThreeDGenerator import ThreeDAssetGenerator
 from base.generator_config import OUTPUT_FORMATS, DEFAULT_MODELS
 
 
@@ -103,21 +103,21 @@ class TestBatchAssetGenerator3D(unittest.TestCase):
     def test_module_imports(self):
         """Test that the module can be imported"""
         try:
-            import BatchAssetGenerator3D
+            from ThreeD import BatchAssetGenerator3D
             self.assertTrue(True)
         except ImportError as e:
             self.fail(f"Failed to import BatchAssetGenerator3D: {e}")
     
     def test_seeds_configuration(self):
         """Test that SEEDS are configured in the batch generator"""
-        import BatchAssetGenerator3D
+        from ThreeD import BatchAssetGenerator3D
         
         self.assertIn("SEED_001", BatchAssetGenerator3D.SEEDS)
         self.assertIn("SEED_002", BatchAssetGenerator3D.SEEDS)
     
     def test_generation_queue(self):
         """Test that GENERATION_QUEUE is properly configured"""
-        import BatchAssetGenerator3D
+        from ThreeD import BatchAssetGenerator3D
         
         # Check that queue exists and is not empty
         self.assertGreater(len(BatchAssetGenerator3D.GENERATION_QUEUE), 0)

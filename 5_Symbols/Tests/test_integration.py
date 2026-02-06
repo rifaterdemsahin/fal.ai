@@ -7,7 +7,12 @@ Tests the complete flow without calling the actual API
 import json
 import tempfile
 from pathlib import Path
-from asset_utils import ManifestTracker, generate_filename, extract_scene_number
+import sys
+
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from Utils.asset_utils import ManifestTracker, generate_filename, extract_scene_number
 
 
 def test_integration():

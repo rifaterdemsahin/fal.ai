@@ -3,12 +3,17 @@
 Test script to verify output_format configuration
 """
 
+import sys
 from pathlib import Path
+
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from base.generator_config import OUTPUT_FORMATS
-from ImageGenerator import ImageAssetGenerator
-from IconGenerator import IconAssetGenerator
-from LowerThirdsGenerator import LowerThirdsAssetGenerator
-from DiagramGenerator import DiagramAssetGenerator
+from Images.ImageGenerator import ImageAssetGenerator
+from Images.IconGenerator import IconAssetGenerator
+from Video.LowerThirdsGenerator import LowerThirdsAssetGenerator
+from Diagrams.DiagramGenerator import DiagramAssetGenerator
 
 
 def test_output_formats():

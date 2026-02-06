@@ -16,8 +16,8 @@ class MockFalClient:
 
 sys.modules['fal_client'] = MockFalClient()
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+# Add symbol root to path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from base.base_asset_generator import BaseAssetGenerator
 
 

@@ -16,18 +16,18 @@ from typing import Dict, List
 sys.path.append(str(Path(__file__).parent))
 
 # Import individual generators
-import BatchAssetGeneratorImages as gen_images
-import BatchAssetGeneratorLowerThirds as gen_lower_thirds
-import BatchAssetGeneratorIcons as gen_icons
-import BatchAssetGeneratorVideo as gen_video
-import BatchAssetGeneratorMusic as gen_music
-import BatchAssetGeneratorGraphics as gen_graphics
-import BatchAssetGeneratorChapterMarkers as gen_chapter_markers
-import BatchAssetGeneratorAudio as gen_audio
-import BatchAssetGeneratorDiagrams as gen_diagrams
-import BatchAssetGeneratorMemoryPalace as gen_memory_palace
-import EstimateWeeklyVideoCost as gen_cost
-from asset_utils import ManifestTracker
+from Images import BatchAssetGeneratorImages as gen_images
+from Video import BatchAssetGeneratorLowerThirds as gen_lower_thirds
+from Images import BatchAssetGeneratorIcons as gen_icons
+from Video import BatchAssetGeneratorVideo as gen_video
+from Audio import BatchAssetGeneratorMusic as gen_music
+from Images import BatchAssetGeneratorGraphics as gen_graphics
+from Video import BatchAssetGeneratorChapterMarkers as gen_chapter_markers
+from Audio import BatchAssetGeneratorAudio as gen_audio
+from Diagrams import BatchAssetGeneratorDiagrams as gen_diagrams
+from Images import BatchAssetGeneratorMemoryPalace as gen_memory_palace
+from Utils import EstimateWeeklyVideoCost as gen_cost
+from Utils.asset_utils import ManifestTracker
 
 # Estimated costs per generation (USD)
 COST_ESTIMATES = {

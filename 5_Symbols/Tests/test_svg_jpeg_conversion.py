@@ -3,8 +3,13 @@
 Test script to demonstrate SVG to JPEG conversion functionality
 """
 
+import sys
 from pathlib import Path
-from asset_utils import convert_svg_to_jpeg, SVG_CONVERSION_AVAILABLE
+
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from Utils.asset_utils import convert_svg_to_jpeg, SVG_CONVERSION_AVAILABLE
 
 def test_conversion():
     """Test SVG to JPEG conversion with a sample SVG"""

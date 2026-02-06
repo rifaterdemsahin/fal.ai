@@ -5,14 +5,18 @@ Generates SVG diagram assets with base class architecture
 """
 
 import json
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom import minidom
 
+# Add parent directory to path to allow imports from base and Utils
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from base.base_asset_generator import BaseAssetGenerator
 from base.generator_config import SEEDS, BRAND_COLORS
-from asset_utils import generate_filename, extract_scene_number, convert_svg_to_jpeg
+from Utils.asset_utils import generate_filename, extract_scene_number, convert_svg_to_jpeg
 
 
 # Display constants

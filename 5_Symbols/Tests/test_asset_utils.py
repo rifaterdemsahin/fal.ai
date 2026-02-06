@@ -6,8 +6,13 @@ Unit tests for asset_utils module
 import unittest
 import json
 import tempfile
+import sys
 from pathlib import Path
-from asset_utils import (
+
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from Utils.asset_utils import (
     clean_description,
     generate_filename,
     extract_scene_number,
