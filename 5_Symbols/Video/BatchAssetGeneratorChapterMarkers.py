@@ -2,7 +2,7 @@
 """
 fal.ai Batch Asset Generator for Chapter Markers
 Project: The Agentic Era - Managing 240+ Workflows
-Generates title cards/images for video chapters based on `chapter_markers.txt`
+Generates title cards/images for video chapters based on external YAML configuration
 """
 
 import os
@@ -37,92 +37,41 @@ except ImportError:
 # Configuration
 OUTPUT_DIR = Path("./generated_chapter_markers")
 OUTPUT_DIR.mkdir(exist_ok=True)
-CHAPTER_MARKERS_FILE = Path("./chapter_markers.txt")
 
 # Consistency seeds
 SEEDS = {
     "SEED_CHAPTERS": 999001,  # Consistent style for all chapters
 }
 
-# Brand color palette (reference for prompts)
-BRAND_COLORS = {
-    "primary_dark": "#1a1a2e",
-    "accent_blue": "#00d4ff",
-    "accent_purple": "#7b2cbf",
-    "secondary_teal": "#00bfa5",
-    "highlight_orange": "#ff6b35",
-    "text_white": "#ffffff",
-}
+# Loaded from external YAML configuration
+DATA_PATH = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml")
 
-def read_chapter_markers(file_path: Path) -> List[Tuple[str, str]]:
-    """
-    Parses the chapter markers file.
-    Expected format: "00:00 Hook & Problem Statement"
-    Returns a list of (timestamp, title) tuples.
-    """
-    if not file_path.exists():
-        print(f"❌ Chapter markers file not found: {file_path}")
+def load_queue():
+    """Load generation queue from YAML"""
+    if not DATA_PATH.exists():
+        print(f"⚠️  Configuration file not found: {DATA_PATH}")
+        return []
+    
+    try:
+        import yaml
+        with open(DATA_PATH, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+            return data.get("chapters", [])
+    except ImportError:
+        print("❌ PyYAML not installed. Run: pip install PyYAML")
+        return []
+    except Exception as e:
+        print(f"❌ Error loading configuration: {e}")
         return []
 
-    markers = []
-    with open(file_path, 'r') as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            # Regex to separate timestamp and title
-            # Matches "00:00 Title" or "1:00:00 Title"
-            match = re.match(r'^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$', line)
-            if match:
-                timestamp = match.group(1)
-                title = match.group(2)
-                markers.append((timestamp, title))
-            else:
-                print(f"⚠️ Could not parse line: {line}")
-    return markers
-
-def build_generation_queue(markers: List[Tuple[str, str]]) -> List[Dict]:
-    """Builds the asset generation queue from chapter markers."""
-    queue = []
-    for i, (timestamp, title) in enumerate(markers, 1):
-        # Create a safe filename from the title
-        safe_title = re.sub(r'[^a-z0-9]', '_', title.lower()).strip('_')
-        safe_title = re.sub(r'_+', '_', safe_title)  # Collapse multiple underscores
-        
-        asset_id = f"CH_{i:02d}"
-        
-        # Construct the prompt
-        # We want a consistent style: Title text, tech background, brand colors
-        prompt = (
-            f"Cinematic video chapter title card with text '{title}' written in large, bold, futuristic sans-serif font centered. "
-            f"Background is a sleek, modern tech abstract design with deep dark blue ({BRAND_COLORS['primary_dark']}) "
-            f"and glowing accents in cyan ({BRAND_COLORS['accent_blue']}) and purple ({BRAND_COLORS['accent_purple']}). "
-            "High contrast, professional motion graphics style, 8k resolution, highly detailed, "
-            "digital interface elements, subtle grid patterns, glassmorphism effects. "
-            "Text must be clearly legible and the focal point."
-        )
-
-        queue.append({
-            "id": asset_id,
-            "name": f"chapter_{i:02d}_{safe_title}",
-            "priority": "HIGH",
-            "scene": f"Chapter {i}: {title} ({timestamp})",
-            "seed_key": "SEED_CHAPTERS",
-            "prompt": prompt,
-            "model": "fal-ai/flux/dev",  # Using dev for better text rendering
-            "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "timestamp": timestamp,
-            "original_title": title
-        })
-    return queue
+GENERATION_QUEUE = load_queue()
 
 def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single asset using fal.ai"""
     print(f"\n{'='*60}")
     print(f"🎨 Generating: {asset_config['name']}")
     print(f"   Chapter: {asset_config['scene']}")
-    print(f"   Seed: {asset_config['seed_key']} ({SEEDS[asset_config['seed_key']]})")
+    print(f"   Seed: {asset_config['seed_key']} ({SEEDS.get(asset_config['seed_key'], 'Unknown')})")
     print(f"{'='*60}")
     
     try:
@@ -131,7 +80,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             "prompt": asset_config["prompt"],
             "image_size": asset_config["image_size"],
             "num_inference_steps": asset_config["num_inference_steps"],
-            "seed": SEEDS[asset_config["seed_key"]],
+            "seed": SEEDS.get(asset_config["seed_key"]),
             "num_images": 1,
         }
         
@@ -150,7 +99,12 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             
             # Generate filename using new convention if available
             if generate_filename and extract_scene_number:
-                scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                # Attempt to extract a number if possible, or use a default
+                try:
+                     scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                except:
+                     scene_num = 0
+                     
                 base_filename = generate_filename(
                     scene_num,
                     'chaptermarker',
@@ -169,7 +123,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             metadata = {
                 **asset_config,
                 "result_url": image_url,
-                "seed_value": SEEDS[asset_config["seed_key"]],
+                "seed_value": SEEDS.get(asset_config["seed_key"]),
                 "filename": filename_png,
             }
             
@@ -234,6 +188,10 @@ def process_queue(generation_queue: List[Dict], output_dir: Path, manifest: Opti
     print(f"\n📊 Assets to generate: {len(generation_queue)}")
     
     output_dir.mkdir(parents=True, exist_ok=True)
+    
+    if not generation_queue:
+        print("\n⚠️  QUEUE IS EMPTY. Check the YAML configuration.")
+        return []
 
     results = []
     for i, asset in enumerate(generation_queue, 1):
@@ -284,32 +242,21 @@ def process_queue(generation_queue: List[Dict], output_dir: Path, manifest: Opti
     
     return results
 
-def generate_from_file(marker_file: Path, output_dir: Path, manifest: Optional[object] = None) -> List[Dict]:
-    """Reads markers from file and generates assets"""
-    print(f"📄 Reading markers from: {marker_file.absolute()}")
-    markers = read_chapter_markers(marker_file)
-    if not markers:
-        print("❌ No markers found or file is empty.")
-        return []
-        
-    queue = build_generation_queue(markers)
-    return process_queue(queue, output_dir, manifest)
-
 def main():
     """Main execution"""
     
-    markers = read_chapter_markers(CHAPTER_MARKERS_FILE)
-    if not markers:
-        print("❌ No markers found or file is empty.")
+    # Use global GENERATION_QUEUE loaded from YAML
+    generation_queue = GENERATION_QUEUE
+    
+    if not generation_queue:
+        print("❌ No chapters found in YAML or YAML failed to load.")
         return
 
-    generation_queue = build_generation_queue(markers)
-    
     # Confirm before proceeding
     print("\n" + "="*60)
     print(f"📊 Assets to generate: {len(generation_queue)}")
     for item in generation_queue:
-        print(f"   • {item['timestamp']} - {item['original_title']}")
+        print(f"   • {item.get('timestamp', '??:??')} - {item.get('name', 'Unknown')}")
 
     response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
     if response not in ['yes', 'y']:

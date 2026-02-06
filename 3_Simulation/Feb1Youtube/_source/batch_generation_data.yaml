@@ -415,3 +415,147 @@ graphics:
       width: 1920
       height: 1080
     num_inference_steps: 28
+
+chapters:
+  - id: "CH_01"
+    name: "chapter_01_hook_problem_statement"
+    priority: "HIGH"
+    scene: "Chapter 1: Hook & Problem Statement (00:00)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "00:00"
+    prompt: "Cinematic video chapter title card with text 'Hook & Problem Statement' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_02"
+    name: "chapter_02_system_overview"
+    priority: "HIGH"
+    scene: "Chapter 2: System Overview (00:45)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "00:45"
+    prompt: "Cinematic video chapter title card with text 'System Overview' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_03"
+    name: "chapter_03_error_handling_mcp"
+    priority: "HIGH"
+    scene: "Chapter 3: Error Handling & MCP (02:15)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "02:15"
+    prompt: "Cinematic video chapter title card with text 'Error Handling & MCP' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_04"
+    name: "chapter_04_the_real_problem_skills_gap"
+    priority: "HIGH"
+    scene: "Chapter 4: The Real Problem - Skills Gap (04:00)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "04:00"
+    prompt: "Cinematic video chapter title card with text 'The Real Problem - Skills Gap' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_05"
+    name: "chapter_05_telegram_channels_bounded_contexts"
+    priority: "HIGH"
+    scene: "Chapter 5: Telegram Channels & Bounded Contexts (05:30)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "05:30"
+    prompt: "Cinematic video chapter title card with text 'Telegram Channels & Bounded Contexts' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_06"
+    name: "chapter_06_para_method_obsidian_integration"
+    priority: "HIGH"
+    scene: "Chapter 6: PARA Method & Obsidian Integration (07:00)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "07:00"
+    prompt: "Cinematic video chapter title card with text 'PARA Method & Obsidian Integration' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_07"
+    name: "chapter_07_github_repositories_backup_system"
+    priority: "HIGH"
+    scene: "Chapter 7: Github Repositories & Backup System (08:30)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "08:30"
+    prompt: "Cinematic video chapter title card with text 'Github Repositories & Backup System' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_08"
+    name: "chapter_08_blacklist_system_state_management"
+    priority: "HIGH"
+    scene: "Chapter 8: Blacklist System & State Management (09:45)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "09:45"
+    prompt: "Cinematic video chapter title card with text 'Blacklist System & State Management' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_09"
+    name: "chapter_09_the_bigger_picture_ai_transformation"
+    priority: "HIGH"
+    scene: "Chapter 9: The Bigger Picture - AI Transformation (10:30)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "10:30"
+    prompt: "Cinematic video chapter title card with text 'The Bigger Picture - AI Transformation' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_10"
+    name: "chapter_10_personal_commitment_call_to_action"
+    priority: "HIGH"
+    scene: "Chapter 10: Personal Commitment & Call To Action (11:30)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "11:30"
+    prompt: "Cinematic video chapter title card with text 'Personal Commitment & Call To Action' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_11"
+    name: "chapter_11_closing_statement"
+    priority: "HIGH"
+    scene: "Chapter 11: Closing Statement (12:45)"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "12:45"
+    prompt: "Cinematic video chapter title card with text 'Closing Statement' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
