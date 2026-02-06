@@ -33,9 +33,9 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Consistency seeds for different asset categories
 SEEDS = {
-    "SEED_001": 42,      # 3D models (can vary)
-    "SEED_002": 123456,  # Technical 3D objects (consistent)
-    "SEED_003": 789012,  # Decorative 3D elements
+    "SEED_001": 42,      # 3D models - B-roll style (can vary between generations)
+    "SEED_002": 123456,  # Technical 3D objects (consistent for matching sets)
+    "SEED_003": 789012,  # Decorative 3D elements (brand consistency)
 }
 
 # Asset generation queue for 3D models
@@ -288,7 +288,10 @@ def main():
     print(f"   • LOW priority: {low_priority}")
     
     # Ask for confirmation
-    print(f"\n⚠️  Estimated cost: ~${total_assets * 0.10:.2f} (approx $0.10 per 3D model)")
+    # NOTE: Cost estimate is approximate and should be verified with current API pricing
+    # See: https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d
+    estimated_cost_per_model = 0.10  # Approximate cost in USD per 3D model
+    print(f"\n⚠️  Estimated cost: ~${total_assets * estimated_cost_per_model:.2f} (approx ${estimated_cost_per_model:.2f} per 3D model)")
     user_input = input("\nProceed with generation? (yes/no): ").strip().lower()
     if user_input not in ['yes', 'y']:
         print("❌ Generation cancelled by user.")
