@@ -16,7 +16,7 @@ try:
     from PIL import Image
     import io
     SVG_CONVERSION_AVAILABLE = True
-except ImportError:
+except (ImportError, OSError):
     SVG_CONVERSION_AVAILABLE = False
 
 
