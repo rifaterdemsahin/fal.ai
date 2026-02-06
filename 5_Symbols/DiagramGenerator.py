@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class DiagramAssetGenerator(BaseAssetGenerator):
@@ -19,7 +19,8 @@ class DiagramAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_diagrams"),
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
-            asset_type="diagram"
+            asset_type="diagram",
+            output_format=OUTPUT_FORMATS.get("diagram", "jpeg")  # Use JPEG for diagrams (solid backgrounds)
         )
     
     def get_generation_queue(self) -> List[Dict]:

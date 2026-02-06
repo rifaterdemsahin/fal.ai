@@ -9,7 +9,7 @@ from typing import Dict, List
 import re
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class ChapterMarkersAssetGenerator(BaseAssetGenerator):
@@ -29,7 +29,8 @@ class ChapterMarkersAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_chapter_markers"),
             seeds=chapter_seeds,
             brand_colors=BRAND_COLORS,
-            asset_type="chapter_marker"
+            asset_type="chapter_marker",
+            output_format=OUTPUT_FORMATS.get("chapter_marker", "jpeg")  # Use JPEG for chapter markers (solid backgrounds)
         )
         
         self.chapter_markers_file = Path("./chapter_markers.txt")

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class MemoryPalaceAssetGenerator(BaseAssetGenerator):
@@ -26,7 +26,8 @@ class MemoryPalaceAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_assets/memory_palace"),
             seeds=memory_palace_seeds,
             brand_colors=BRAND_COLORS,
-            asset_type="memory_palace"
+            asset_type="memory_palace",
+            output_format=OUTPUT_FORMATS.get("memory_palace", "jpeg")  # Use JPEG for memory palace (solid backgrounds)
         )
     
     def get_generation_queue(self) -> List[Dict]:

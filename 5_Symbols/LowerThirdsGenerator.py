@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class LowerThirdsAssetGenerator(BaseAssetGenerator):
@@ -19,7 +19,8 @@ class LowerThirdsAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_assets/lower_thirds"),
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
-            asset_type="lower_third"
+            asset_type="lower_third",
+            output_format=OUTPUT_FORMATS.get("lower_third", "png")  # Keep PNG for lower thirds (transparency)
         )
     
     def get_generation_queue(self) -> List[Dict]:

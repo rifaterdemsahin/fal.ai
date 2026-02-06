@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class IconAssetGenerator(BaseAssetGenerator):
@@ -19,7 +19,8 @@ class IconAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_icons"),
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
-            asset_type="icon"
+            asset_type="icon",
+            output_format=OUTPUT_FORMATS.get("icon", "png")  # Keep PNG for icons (transparency)
         )
     
     def get_generation_queue(self) -> List[Dict]:

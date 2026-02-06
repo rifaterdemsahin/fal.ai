@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class ImageAssetGenerator(BaseAssetGenerator):
@@ -19,7 +19,8 @@ class ImageAssetGenerator(BaseAssetGenerator):
             output_dir=Path("./generated_assets"),
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
-            asset_type="image"
+            asset_type="image",
+            output_format=OUTPUT_FORMATS.get("image", "jpeg")  # Use JPEG for images
         )
     
     def get_generation_queue(self) -> List[Dict]:
