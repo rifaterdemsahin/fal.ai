@@ -280,7 +280,9 @@ class Model3DOptimizer:
                         else:
                             # Skip other chunks
                             f.seek(chunk_length, 1)
-                    except:
+                    except Exception as e:
+                        # Chunk parsing may fail at end of file or with malformed data
+                        logger.debug(f"Stopped chunk parsing: {e}")
                         break
                         
         except Exception as e:
