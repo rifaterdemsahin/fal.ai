@@ -40,53 +40,28 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Video Generation Queue
 # Based on EDL B-roll requirements of "Empty UK Streets", "Corporate Meeting"
-GENERATION_QUEUE = [
-    {
-        "id": "4.1",
-        "name": "uk_streets_sunday",
-        "priority": "MEDIUM",
-        "scene": "Scene 4: Skills Gap",
-        "prompt": (
-            "Cinematic shot of empty UK high street on Sunday evening, closed shop fronts with metal shutters down, "
-            "dim streetlights beginning to illuminate, deserted pedestrian area, typical British town center architecture, "
-            "moody atmospheric lighting, golden hour or early dusk, realistic urban photography style, "
-            "slight film grain, 16:9 cinematic aspect ratio, melancholic mood, 4k, high resolution"
-        ),
-        "model": "fal-ai/minimax/video-01",
-        "duration_seconds": 5,
-        "aspect_ratio": "16:9"
-    },
-    {
-        "id": "9.1",
-        "name": "corporate_meeting",
-        "priority": "LOW",
-        "scene": "Scene 9: AI Transformation",
-        "prompt": (
-            "Cinematic shot of modern corporate meeting room, 4-5 business professionals sitting around conference table "
-            "looking at laptops with frustrated expressions, large monitor on wall displaying generic charts, "
-            "glass walls visible, fluorescent office lighting, professional business environment, "
-            "realistic corporate photography style, slightly desaturated colors for serious tone, "
-            "slow camera movement, 4k"
-        ),
-        "model": "fal-ai/minimax/video-01",
-        "duration_seconds": 5,
-        "aspect_ratio": "16:9"
-    },
-     {
-        "id": "1.1",
-        "name": "ferrari_cart_morph",
-        "priority": "HIGH",
-        "scene": "Scene 1: Hook",
-        "prompt": (
-            "Sleek red Ferrari sports car icon smoothly morphing into simple shopping cart icon, "
-            "clean vector style, white/transparent background, particle effects during transformation, "
-            "professional tech presentation aesthetic, minimalist flat design, modern motion graphics style"
-        ),
-        "model": "fal-ai/minimax/video-01",
-        "duration_seconds": 5,
-        "aspect_ratio": "16:9"
-    }
-]
+# Loaded from external YAML configuration
+DATA_PATH = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml")
+
+def load_queue():
+    """Load generation queue from YAML"""
+    if not DATA_PATH.exists():
+        print(f"⚠️  Configuration file not found: {DATA_PATH}")
+        return []
+    
+    try:
+        import yaml
+        with open(DATA_PATH, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+            return data.get("video", [])
+    except ImportError:
+        print("❌ PyYAML not installed. Run: pip install PyYAML")
+        return []
+    except Exception as e:
+        print(f"❌ Error loading configuration: {e}")
+        return []
+
+GENERATION_QUEUE = load_queue()
 
 
 def generate_video(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
