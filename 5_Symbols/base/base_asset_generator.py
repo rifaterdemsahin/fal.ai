@@ -239,25 +239,17 @@ class BaseAssetGenerator(ABC):
                 
                 # Convert to RGBA (32-bit: 8-bit per channel RGB + Alpha)
                 # This ensures we never have indexed colors (mode 'P') or other problematic modes
+                # PIL handles all modes correctly when converting to RGBA:
+                # - P, PA: Palette with/without alpha → RGBA
+                # - RGB: RGB without alpha → RGBA (adds full opacity alpha)
+                # - L, LA: Grayscale with/without alpha → RGBA
+                # - 1: Binary → RGBA
                 if img.mode != 'RGBA':
-                    # Preserve transparency if present
-                    if img.mode in ('P', 'PA', 'LA'):
-                        # These modes have transparency/alpha that we want to keep
-                        img = img.convert('RGBA')
-                    elif img.mode == 'RGB':
-                        # Add full opacity alpha channel to RGB images
-                        img = img.convert('RGBA')
-                    elif img.mode in ('L', '1'):
-                        # Grayscale or binary - convert to RGBA
-                        img = img.convert('RGBA')
-                    else:
-                        # For any other mode, convert to RGBA
-                        img = img.convert('RGBA')
-                    
+                    img = img.convert('RGBA')
                     print(f"   🔄 Converted PNG mode: {original_mode} → RGBA (32-bit)")
                 
                 # Save with optimized settings for DaVinci Resolve
-                # - No metadata (exif=None removes EXIF, XMP, and other metadata)
+                # - No metadata (exif=b'' removes EXIF, XMP, and other metadata)
                 # - RGBA mode ensures 32-bit format
                 # - optimize=True for better compression
                 img.save(png_path, 'PNG', optimize=True, exif=b'')
