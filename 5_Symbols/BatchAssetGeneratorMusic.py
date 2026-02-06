@@ -40,7 +40,7 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 180,
+        "seconds_total": 47,
     },
     {
         "id": "music_02",
@@ -48,7 +48,7 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 60,
+        "seconds_total": 47,
     },
     {
         "id": "music_03",
@@ -56,7 +56,7 @@ GENERATION_QUEUE = [
         "priority": "MEDIUM",
         "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 180,
+        "seconds_total": 47,
     }
 ]
 
