@@ -259,9 +259,9 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
         # mmdc might add a suffix like -1.png, check for that
         actual_png_path = png_path
         if not Path(png_path).exists():
-            # Look for files with -1, -2, etc. suffix
-            for suffix in ["-1", "-2", "-3"]:
-                candidate = f"{base_path}{suffix}.png"
+            # Look for files with -1, -2, etc. suffix (up to -10)
+            for i in range(1, 11):
+                candidate = f"{base_path}-{i}.png"
                 if Path(candidate).exists():
                     actual_png_path = candidate
                     break
@@ -282,15 +282,9 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
                 if img.mode == 'P':
                     img = img.convert('RGBA')
                 
-                # Create a white background
+                # Create a white background and paste with alpha channel as mask
                 background = Image.new('RGB', img.size, (255, 255, 255))
-                
-                # Paste with alpha channel as mask if available
-                if img.mode in ('RGBA', 'LA'):
-                    background.paste(img, mask=img.split()[-1])
-                else:
-                    background.paste(img)
-                
+                background.paste(img, mask=img.split()[-1])
                 img = background
             else:
                 img = img.convert('RGB')
@@ -304,7 +298,9 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
             return jpeg_path
             
         except ImportError:
-            print(f"⚠️  Pillow not available. Keeping PNG file instead of JPEG.")
+            print(f"⚠️  Pillow not installed. PNG created but JPEG conversion skipped.")
+            print(f"⚠️  Install Pillow to enable JPEG export: pip install Pillow")
+            # Keep the PNG file since we can't convert to JPEG
             return actual_png_path
             
     except Exception as e:
