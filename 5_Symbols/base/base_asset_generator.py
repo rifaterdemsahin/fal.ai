@@ -212,6 +212,53 @@ class BaseAssetGenerator(ABC):
             print(f"⚠️  Warning: Failed to convert to JPEG: {e}")
             return False
     
+    def optimize_png_for_resolve(self, png_path: Path) -> bool:
+        """
+        Optimize PNG file for DaVinci Resolve compatibility.
+        
+        Ensures:
+        - 32-bit format (RGBA with 8-bit per channel) - standard RGB + Alpha
+        - Not indexed color mode (mode 'P')
+        - No metadata (removes EXIF, XMP, and other metadata)
+        
+        This prevents DaVinci Resolve issues with:
+        - Auto-detect or 8-bit indexed colors
+        - Hidden metadata that might confuse Resolve
+        
+        Args:
+            png_path: Path to the PNG file to optimize
+            
+        Returns:
+            True if optimization successful, False otherwise
+        """
+        try:
+            # Open PNG image
+            with Image.open(png_path) as img:
+                # Get original mode for logging
+                original_mode = img.mode
+                
+                # Convert to RGBA (32-bit: 8-bit per channel RGB + Alpha)
+                # This ensures we never have indexed colors (mode 'P') or other problematic modes
+                # PIL handles all modes correctly when converting to RGBA:
+                # - P, PA: Palette with/without alpha → RGBA
+                # - RGB: RGB without alpha → RGBA (adds full opacity alpha)
+                # - L, LA: Grayscale with/without alpha → RGBA
+                # - 1: Binary → RGBA
+                if img.mode != 'RGBA':
+                    img = img.convert('RGBA')
+                    print(f"   🔄 Converted PNG mode: {original_mode} → RGBA (32-bit)")
+                
+                # Save with optimized settings for DaVinci Resolve
+                # - No metadata (exif=b'' removes EXIF, XMP, and other metadata)
+                # - RGBA mode ensures 32-bit format
+                # - optimize=True for better compression
+                img.save(png_path, 'PNG', optimize=True, exif=b'')
+                
+            return True
+        except Exception as e:
+            print(f"⚠️  Warning: Failed to optimize PNG for Resolve: {e}")
+            return False
+    
     def generate_asset(
         self,
         asset_config: Dict,
@@ -319,10 +366,18 @@ class BaseAssetGenerator(ABC):
                     # Conversion failed, use PNG instead
                     print(f"⚠️  Using PNG format instead")
                     temp_path.rename(asset_path)
+                    # Optimize the PNG for DaVinci Resolve since we're keeping it
+                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    self.optimize_png_for_resolve(asset_path)
             else:
                 # Direct download without conversion
                 urllib.request.urlretrieve(result_url, asset_path)
                 print(f"💾 Asset saved: {asset_path}")
+                
+                # Optimize PNG files for DaVinci Resolve compatibility
+                if extension == 'png':
+                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    self.optimize_png_for_resolve(asset_path)
             
             # Add to manifest if available
             if self.manifest:
