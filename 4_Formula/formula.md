@@ -5,7 +5,7 @@ This document outlines the steps to set up, run, and rerun the `BatchAssetGenera
 ## Prerequisites
 
 - Python 3 installed
-- `fal.ai` API Key (Found in your `.env` file or dashboard)
+- `fal.ai` API Key - **See [api_key_setup.md](./api_key_setup.md) for detailed instructions on getting and configuring your API key**
 
 ## 1. Setup Virtual Environment (First Time Only)
 

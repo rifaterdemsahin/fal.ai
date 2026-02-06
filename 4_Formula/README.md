@@ -1,5 +1,13 @@
 ### 4_Formula - Guides and Best Practices
 
+**🔑 API Key Setup**:
+See the comprehensive [API Key Setup Guide](./api_key_setup.md) for:
+- How to get your fal.ai API key from the dashboard
+- Multiple methods to save and configure your key
+- Verification steps to ensure your key is working
+- Troubleshooting common API key issues
+- Security best practices
+
 **Setup Guide**:
 1.  **Install Dependencies**:
     ```bash

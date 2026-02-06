@@ -226,6 +226,9 @@ pip install fal-client
 
 ### 2️⃣ Configure API Key
 
+**📖 For detailed instructions**, see the **[API Key Setup Guide](./4_Formula/api_key_setup.md)**.
+
+**Quick Setup:**
 ```bash
 # Set your fal.ai API key
 export FAL_KEY="your-api-key-here"
@@ -233,6 +236,12 @@ export FAL_KEY="your-api-key-here"
 # Or add to .env file:
 echo 'FAL_KEY=your-api-key-here' > .env
 ```
+
+The guide covers:
+- How to get your API key from fal.ai dashboard
+- Multiple configuration methods (environment variable, .env file, shell config)
+- Verification and troubleshooting steps
+- Security best practices
 
 ### 3️⃣ Run Generators
 
@@ -377,6 +386,7 @@ flowchart LR
 
 ## 📖 Detailed Documentation
 
+- **[🔑 API Key Setup](./4_Formula/api_key_setup.md)** - Comprehensive guide to getting, saving, and using your fal.ai API key
 - **[Setup & Best Practices](./4_Formula/README.md)** - Installation, configuration, and usage tips
 - **[Versioning System](./5_Symbols/VERSIONING_AND_MANIFEST.md)** - Complete guide to asset naming and manifest
 - **[Implementation Summary](./IMPLEMENTATION_SUMMARY.md)** - Technical details of recent improvements
