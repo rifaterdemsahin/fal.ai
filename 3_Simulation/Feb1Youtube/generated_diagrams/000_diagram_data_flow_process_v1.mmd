@@ -1,0 +1,6 @@
+flowchart LR
+    Raw[Raw Data] -->|Ingest| Process[Processing Node]
+    Process -->|Transform| Struct[Structured Output]
+    style Raw fill:#1a1a2e,stroke:#00d4ff
+    style Process fill:#1a1a2e,stroke:#7b2cbf
+    style Struct fill:#1a1a2e,stroke:#00bfa5

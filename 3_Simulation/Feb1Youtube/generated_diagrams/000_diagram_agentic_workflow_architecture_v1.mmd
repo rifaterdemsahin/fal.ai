@@ -1,0 +1,10 @@
+graph TD
+    User([User Intent]) --> Orchestrator[Orchestrator Agent]
+    Orchestrator --> Research[Research Agent]
+    Orchestrator --> Coding[Coding Agent]
+    Orchestrator --> Testing[Testing Agent]
+    Orchestrator --> Deployment[Deployment Agent]
+    Research --> Data[(Knowledge Base)]
+    Coding --> Repo[(Code Repository)]
+    style Orchestrator fill:#7b2cbf,stroke:#fff
+    style User fill:#1a1a2e,stroke:#00d4ff

@@ -4,14 +4,15 @@
   "priority": "LOW",
   "scene": "Scene 3",
   "seed_key": "SEED_003",
-  "prompt": "Abstract concept map of a neural network, nodes connecting in a mesh, glowing connections, highlighting the concept of 'Learning' and 'Adaptation', futuristic tech style, deep blue background, cyber security aesthetic, 16:9",
+  "mermaid_content": "graph LR\n    Input1((Input 1)) --> H1((Hidden 1))\n    Input2((Input 2)) --> H1\n    Input1 --> H2((Hidden 2))\n    Input2 --> H2\n    H1 --> Output((Output))\n    H2 --> Output",
+  "prompt": "A conceptual visualization of a neural network. A complex mesh of glowing nodes and interconnected lines floating in deep space. The connections pulse with light, representing 'Learning'. The color palette is deep blue and electric blue. Cinematic lighting, shallow depth of field, high-end 3D render style (Blender/Octane). Abstract and beautiful.",
   "model": "fal-ai/flux/dev",
   "image_size": {
     "width": 1920,
     "height": 1080
   },
-  "num_inference_steps": 28,
-  "result_url": "https://v3b.fal.media/files/b/0a8d6f90/XtQYj0qVY6BlQgp8gPIrZ.jpg",
+  "num_inference_steps": 30,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6fb5/j9pX_LCytvg4upCSf4eFE.jpg",
   "seed_value": 555789,
   "filename": "000_diagram_neural_network_concept_v1.png"
 }

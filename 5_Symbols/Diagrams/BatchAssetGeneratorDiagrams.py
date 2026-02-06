@@ -64,10 +64,20 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "scene": "Scene 1",
         "seed_key": "SEED_001",
-        "prompt": "High-level technical architecture diagram of an Agentic Workflow system, showing 'User Intent' box -> 'Orchestrator Agent' (central hub) -> connected to multiple specialized Sub-Agents (Research, Coding, Testing, Deployment), connected by data pipelines, clean modern aesthetic, dark background separate distinct nodes, professional software diagram style, 16:9",
+        "mermaid_content": """graph TD
+    User([User Intent]) --> Orchestrator[Orchestrator Agent]
+    Orchestrator --> Research[Research Agent]
+    Orchestrator --> Coding[Coding Agent]
+    Orchestrator --> Testing[Testing Agent]
+    Orchestrator --> Deployment[Deployment Agent]
+    Research --> Data[(Knowledge Base)]
+    Coding --> Repo[(Code Repository)]
+    style Orchestrator fill:#7b2cbf,stroke:#fff
+    style User fill:#1a1a2e,stroke:#00d4ff""",
+        "prompt": "A professional software architecture diagram set against a dark void background. In the center, a glowing purple node labeled 'Orchestrator Agent'. Radiating outwards are connected nodes: 'Research', 'Coding', 'Testing', 'Deployment', each glowing with neon blue outlines. Data flows are represented by animated light trails in cyan. The style is sleek, modern, and high-tech, suitable for a tech conference keynote. 8k resolution, highly detailed, vector art style.",
         "model": "fal-ai/flux/dev",
         "image_size": {"width": 1920, "height": 1080},
-        "num_inference_steps": 28,
+        "num_inference_steps": 30,
     },
     {
         "id": "D2.1",
@@ -75,10 +85,16 @@ GENERATION_QUEUE = [
         "priority": "MEDIUM",
         "scene": "Scene 2",
         "seed_key": "SEED_002",
-        "prompt": "Horizontal process flowchart 'Raw Data' -> 'Processing Node' -> 'Structured Output', interconnected with directional arrows, gradients indicating flow, distinct steps, n8n style nodes, modern smooth vector graphics, dark mode UI, blue and purple neon accents, 16:9",
+        "mermaid_content": """flowchart LR
+    Raw[Raw Data] -->|Ingest| Process[Processing Node]
+    Process -->|Transform| Struct[Structured Output]
+    style Raw fill:#1a1a2e,stroke:#00d4ff
+    style Process fill:#1a1a2e,stroke:#7b2cbf
+    style Struct fill:#1a1a2e,stroke:#00bfa5""",
+        "prompt": "A stylized horizontal process flow visualization. From left to right: A raw data block transforming into a polished document. Three main stages: 'Raw Data' (wireframe cube), 'Processing' (glowing abstract gears), 'Structured Output' (holographic document). Connected by smooth, flowing gradients of teal and purple. Dark background. 3D isometric infographic style. Clean, minimal, futuristic.",
         "model": "fal-ai/flux/dev",
         "image_size": {"width": 1920, "height": 1080},
-        "num_inference_steps": 28,
+        "num_inference_steps": 30,
     },
      {
         "id": "D3.1",
@@ -86,10 +102,17 @@ GENERATION_QUEUE = [
         "priority": "LOW",
         "scene": "Scene 3",
         "seed_key": "SEED_003",
-        "prompt": "Abstract concept map of a neural network, nodes connecting in a mesh, glowing connections, highlighting the concept of 'Learning' and 'Adaptation', futuristic tech style, deep blue background, cyber security aesthetic, 16:9",
+        "mermaid_content": """graph LR
+    Input1((Input 1)) --> H1((Hidden 1))
+    Input2((Input 2)) --> H1
+    Input1 --> H2((Hidden 2))
+    Input2 --> H2
+    H1 --> Output((Output))
+    H2 --> Output""",
+        "prompt": "A conceptual visualization of a neural network. A complex mesh of glowing nodes and interconnected lines floating in deep space. The connections pulse with light, representing 'Learning'. The color palette is deep blue and electric blue. Cinematic lighting, shallow depth of field, high-end 3D render style (Blender/Octane). Abstract and beautiful.",
         "model": "fal-ai/flux/dev",
         "image_size": {"width": 1920, "height": 1080},
-        "num_inference_steps": 28,
+        "num_inference_steps": 30,
     },
 ]
 
@@ -137,10 +160,19 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 )
                 filename_json = base_filename + '.json'
                 filename_png = base_filename + '.png'
+                filename_mmd = base_filename + '.mmd'
             else:
                 # Fallback to legacy naming
                 filename_json = f"{asset_config['name']}.json"
                 filename_png = f"{asset_config['name']}.png"
+                filename_mmd = f"{asset_config['name']}.mmd"
+
+            # Save Mermaid
+            if "mermaid_content" in asset_config:
+                mmd_path = output_dir / filename_mmd
+                with open(mmd_path, 'w', encoding='utf-8') as f:
+                    f.write(asset_config["mermaid_content"])
+                print(f"💾 Mermaid saved: {mmd_path}")
             
             # Save metadata
             output_path = output_dir / filename_json

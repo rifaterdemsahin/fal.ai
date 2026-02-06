@@ -4,14 +4,15 @@
   "priority": "HIGH",
   "scene": "Scene 1",
   "seed_key": "SEED_001",
-  "prompt": "High-level technical architecture diagram of an Agentic Workflow system, showing 'User Intent' box -> 'Orchestrator Agent' (central hub) -> connected to multiple specialized Sub-Agents (Research, Coding, Testing, Deployment), connected by data pipelines, clean modern aesthetic, dark background separate distinct nodes, professional software diagram style, 16:9",
+  "mermaid_content": "graph TD\n    User([User Intent]) --> Orchestrator[Orchestrator Agent]\n    Orchestrator --> Research[Research Agent]\n    Orchestrator --> Coding[Coding Agent]\n    Orchestrator --> Testing[Testing Agent]\n    Orchestrator --> Deployment[Deployment Agent]\n    Research --> Data[(Knowledge Base)]\n    Coding --> Repo[(Code Repository)]\n    style Orchestrator fill:#7b2cbf,stroke:#fff\n    style User fill:#1a1a2e,stroke:#00d4ff",
+  "prompt": "A professional software architecture diagram set against a dark void background. In the center, a glowing purple node labeled 'Orchestrator Agent'. Radiating outwards are connected nodes: 'Research', 'Coding', 'Testing', 'Deployment', each glowing with neon blue outlines. Data flows are represented by animated light trails in cyan. The style is sleek, modern, and high-tech, suitable for a tech conference keynote. 8k resolution, highly detailed, vector art style.",
   "model": "fal-ai/flux/dev",
   "image_size": {
     "width": 1920,
     "height": 1080
   },
-  "num_inference_steps": 28,
-  "result_url": "https://v3b.fal.media/files/b/0a8d6f8f/T-poYZnnnfNeFPJ9zrb34.jpg",
+  "num_inference_steps": 30,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6fb4/Eoy7z-wpbYAce1keLriKV.jpg",
   "seed_value": 555123,
   "filename": "000_diagram_agentic_workflow_architecture_v1.png"
 }

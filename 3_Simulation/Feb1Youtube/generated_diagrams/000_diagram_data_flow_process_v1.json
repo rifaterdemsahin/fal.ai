@@ -4,14 +4,15 @@
   "priority": "MEDIUM",
   "scene": "Scene 2",
   "seed_key": "SEED_002",
-  "prompt": "Horizontal process flowchart 'Raw Data' -> 'Processing Node' -> 'Structured Output', interconnected with directional arrows, gradients indicating flow, distinct steps, n8n style nodes, modern smooth vector graphics, dark mode UI, blue and purple neon accents, 16:9",
+  "mermaid_content": "flowchart LR\n    Raw[Raw Data] -->|Ingest| Process[Processing Node]\n    Process -->|Transform| Struct[Structured Output]\n    style Raw fill:#1a1a2e,stroke:#00d4ff\n    style Process fill:#1a1a2e,stroke:#7b2cbf\n    style Struct fill:#1a1a2e,stroke:#00bfa5",
+  "prompt": "A stylized horizontal process flow visualization. From left to right: A raw data block transforming into a polished document. Three main stages: 'Raw Data' (wireframe cube), 'Processing' (glowing abstract gears), 'Structured Output' (holographic document). Connected by smooth, flowing gradients of teal and purple. Dark background. 3D isometric infographic style. Clean, minimal, futuristic.",
   "model": "fal-ai/flux/dev",
   "image_size": {
     "width": 1920,
     "height": 1080
   },
-  "num_inference_steps": 28,
-  "result_url": "https://v3b.fal.media/files/b/0a8d6f90/2CicRuykII8DmmoEOAvUf.jpg",
+  "num_inference_steps": 30,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6fb4/_CZ7s8K63vjMnpvs0wEsU.jpg",
   "seed_value": 555456,
   "filename": "000_diagram_data_flow_process_v1.png"
 }
