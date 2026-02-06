@@ -33,22 +33,22 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Asset generation queue
 # Derived from "Music Suggestions" in EDL
+# Asset generation queue
+# Derived from "Music Suggestions" in EDL
 GENERATION_QUEUE = [
     {
         "id": "music_01",
-        "name": "tech_innovation_background",
+        "name": "tech_innovation_stable",
         "priority": "HIGH",
-        "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
-        "model": "beatoven/music-generation",
-        "duration": 90,
-        "creativity": 14,
-        "refinement": 100,
+        "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation",
+        "model": "fal-ai/stable-audio", 
+        "duration": 47,
     },
     {
         "id": "music_02",
-        "name": "cta_energy_build",
+        "name": "cta_energy_beatoven",
         "priority": "HIGH",
-        "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
+        "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring",
         "model": "beatoven/music-generation",
         "duration": 60,
         "creativity": 16,
@@ -56,16 +56,39 @@ GENERATION_QUEUE = [
     },
     {
         "id": "music_03",
-        "name": "screen_recording_bed",
+        "name": "screen_recording_stable",
         "priority": "MEDIUM",
-        "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
-        "model": "beatoven/music-generation",
-        "duration": 120,
-        "creativity": 12,
-        "refinement": 100,
+        "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle",
+        "model": "fal-ai/stable-audio",
+        "duration": 45,
     }
 ]
 
+def convert_audio(input_path: Path, output_ext: str) -> Optional[Path]:
+    """Convert audio file using ffmpeg"""
+    import subprocess
+    
+    output_path = input_path.with_suffix(output_ext)
+    if output_path.exists():
+        return output_path
+        
+    print(f"   🔄 Converting to {output_ext}...")
+    try:
+        cmd = [
+            "ffmpeg", "-y", "-i", str(input_path),
+            "-acodec", "libmp3lame" if output_ext == ".mp3" else "pcm_s16le",
+            str(output_path)
+        ]
+        # Suppress output unless error
+        subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+        print(f"   ✅ Converted: {output_path.name}")
+        return output_path
+    except subprocess.CalledProcessError as e:
+        print(f"   ❌ Conversion failed: {e}")
+        return None
+    except FileNotFoundError:
+        print("   ❌ ffmpeg not found. Skipping conversion.")
+        return None
 
 def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single audio track using fal.ai"""
@@ -77,16 +100,24 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     print(f"{'='*60}")
     
     try:
-        # Prepare arguments for Beatoven model
+        # Prepare arguments
         arguments = {
             "prompt": asset_config["prompt"],
         }
         
-        # Add duration (support both 'duration' and legacy 'seconds_total')
-        if "duration" in asset_config:
-            arguments["duration"] = asset_config["duration"]
-        elif "seconds_total" in asset_config:
-            arguments["duration"] = asset_config["seconds_total"]
+        # Handle duration parameter based on model
+        if "stable-audio" in asset_config.get("model", ""):
+            # Stable Audio uses seconds_total
+            if "duration" in asset_config:
+                arguments["seconds_total"] = asset_config["duration"]
+            elif "seconds_total" in asset_config:
+                arguments["seconds_total"] = asset_config["seconds_total"]
+        else:
+            # Beatoven uses duration
+            if "duration" in asset_config:
+                arguments["duration"] = asset_config["duration"]
+            elif "seconds_total" in asset_config:
+                arguments["duration"] = asset_config["seconds_total"]
         
         # Add optional Beatoven parameters
         if "negative_prompt" in asset_config:
@@ -123,12 +154,13 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             print(f"✅ Generated successfully!")
             print(f"   URL: {audio_url}")
             
-            # Determine extension - Beatoven outputs WAV
-            ext = ".wav"
-            if "mp3" in audio_url.lower():
+            # Determine extension
+            ext = ".wav" # Default
+            if "stable-audio" in asset_config.get("model", ""):
                 ext = ".mp3"
-            elif "wav" not in audio_url.lower():
-                # Default to wav for Beatoven
+            elif "mp3" in audio_url.lower():
+                ext = ".mp3"
+            elif "wav" in audio_url.lower():
                 ext = ".wav"
             
             # Generate filename using new convention if available
@@ -166,6 +198,10 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             audio_path = output_dir / filename_audio
             urllib.request.urlretrieve(audio_url, audio_path)
             print(f"💾 Audio saved: {audio_path}")
+            
+            # Convert to the other format
+            target_ext = ".mp3" if ext == ".wav" else ".wav"
+            convert_audio(audio_path, target_ext)
             
             # Add to manifest if provided
             if manifest:

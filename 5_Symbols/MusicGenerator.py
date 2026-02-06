@@ -23,17 +23,22 @@ class MusicAssetGenerator(BaseAssetGenerator):
         )
     
     def prepare_arguments(self, asset_config: Dict) -> Dict[str, Any]:
-        """Prepare arguments for music generation using Beatoven"""
+        """Prepare arguments for music generation"""
         arguments = {
             "prompt": asset_config["prompt"],
         }
         
-        # Beatoven-specific parameters
+        # Handle duration parameter based on model
         if "duration" in asset_config:
-            arguments["duration"] = asset_config["duration"]
+            if "stable-audio" in asset_config.get("model", ""):
+                arguments["seconds_total"] = asset_config["duration"]
+            else:
+                arguments["duration"] = asset_config["duration"]
         elif "seconds_total" in asset_config:
-            # Support legacy parameter name for backwards compatibility
-            arguments["duration"] = asset_config["seconds_total"]
+            if "stable-audio" in asset_config.get("model", ""):
+                 arguments["seconds_total"] = asset_config["seconds_total"]
+            else:
+                 arguments["duration"] = asset_config["seconds_total"]
         
         if "negative_prompt" in asset_config:
             arguments["negative_prompt"] = asset_config["negative_prompt"]
@@ -53,35 +58,83 @@ class MusicAssetGenerator(BaseAssetGenerator):
         return arguments
     
     def extract_result_url(self, result: Dict, asset_config: Dict) -> Optional[str]:
-        """Extract result URL from Beatoven music generation response"""
-        # Beatoven returns: {"audio": {"url": "...", "content_type": "audio/wav", ...}, "prompt": "...", "metadata": {...}}
+        """Extract result URL from API response"""
+        # fal-ai/stable-audio returns: {"audio_file": {"url": "...", ...}}
+        if result and "audio_file" in result and "url" in result["audio_file"]:
+            return result["audio_file"]["url"]
+        
+        # Beatoven returns: {"audio": {"url": "...", ...}}
         if result and "audio" in result and "url" in result["audio"]:
             return result["audio"]["url"]
-        # Fallback for other response formats
-        elif result and "audio_file" in result:
-            return result["audio_file"]["url"]
-        elif result and "url" in result:
+            
+        # Fallback
+        if result and "url" in result:
             return result["url"]
         return None
+
+    def get_file_extension(self, asset_config: Dict) -> str:
+        """Get file extension based on model"""
+        if "stable-audio" in asset_config.get("model", ""):
+            return "mp3"
+        return "wav"
+
+    def convert_audio(self, input_path: Path, output_ext: str) -> Optional[Path]:
+        """Convert audio file using ffmpeg"""
+        import subprocess
+        
+        output_path = input_path.with_suffix(output_ext)
+        if output_path.exists():
+            return output_path
+            
+        print(f"   🔄 Converting to {output_ext}...")
+        try:
+            cmd = [
+                "ffmpeg", "-y", "-i", str(input_path),
+                "-acodec", "libmp3lame" if output_ext == ".mp3" else "pcm_s16le",
+                str(output_path)
+            ]
+            # Suppress output unless error
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+            print(f"   ✅ Converted: {output_path.name}")
+            return output_path
+        except subprocess.CalledProcessError as e:
+            print(f"   ❌ Conversion failed: {e}")
+            return None
+        except FileNotFoundError:
+            print("   ❌ ffmpeg not found. Skipping conversion.")
+            return None
+
+    def generate_asset(self, asset_config: Dict, version: int = 1) -> Dict:
+        """Override to add conversion step"""
+        result = super().generate_asset(asset_config, version)
+        
+        if result["success"] and "local_path" in result:
+            local_path = Path(result["local_path"])
+            
+            # Ensure we have both MP3 and WAV
+            if local_path.suffix.lower() == ".wav":
+                self.convert_audio(local_path, ".mp3")
+            elif local_path.suffix.lower() == ".mp3":
+                self.convert_audio(local_path, ".wav")
+                
+        return result
     
     def get_generation_queue(self) -> List[Dict]:
         """Return the list of music tracks to generate"""
         return [
             {
                 "id": "music_01",
-                "name": "tech_innovation_background",
+                "name": "tech_innovation_stable",
                 "priority": "HIGH",
-                "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
-                "model": "beatoven/music-generation",
-                "duration": 90,
-                "creativity": 14,
-                "refinement": 100,
+                "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation",
+                "model": "fal-ai/stable-audio", 
+                "duration": 47, # Stable Audio max is 47s
             },
             {
                 "id": "music_02",
-                "name": "cta_energy_build",
+                "name": "cta_energy_beatoven",
                 "priority": "HIGH",
-                "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
+                "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid",
                 "model": "beatoven/music-generation",
                 "duration": 60,
                 "creativity": 16,
@@ -89,13 +142,11 @@ class MusicAssetGenerator(BaseAssetGenerator):
             },
             {
                 "id": "music_03",
-                "name": "screen_recording_bed",
+                "name": "screen_recording_stable",
                 "priority": "MEDIUM",
-                "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
-                "model": "beatoven/music-generation",
-                "duration": 120,
-                "creativity": 12,
-                "refinement": 100,
+                "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle",
+                "model": "fal-ai/stable-audio",
+                "duration": 45,
             }
         ]
 

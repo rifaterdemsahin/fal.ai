@@ -84,7 +84,7 @@ def validate_configuration():
             if 'negative_prompt' in track:
                 print(f"   • Negative prompt: {track['negative_prompt'][:50]}...")
         elif 'stable-audio' in model.lower():
-            print(f"   ℹ️  Using stable-audio model (legacy)")
+            print(f"   ✅ Using stable-audio model")
         else:
             warnings.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Unknown model '{model}'")
         
