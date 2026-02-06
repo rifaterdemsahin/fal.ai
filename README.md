@@ -112,6 +112,7 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 |-----------|-------------|-------------|
 | 🎲 **`BatchAssetGenerator3D.py`** | **NEW** - 3D models from text descriptions | `fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d` |
 | 🎲 **`ThreeDGenerator.py`** | 3D asset generator with base class architecture | Hunyuan-3D text-to-3D |
+| 🔧 **`Batch3DModelOptimizer.py`** | **NEW** - Validates and optimizes 3D models for DaVinci Resolve Fusion | Supports FBX, OBJ, DAE, GLB |
 
 ### 🛠️ Utilities & Testing
 

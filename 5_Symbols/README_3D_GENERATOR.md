@@ -149,11 +149,36 @@ loader.load('path/to/model.glb', (gltf) => {
 });
 ```
 
-### In DaVinci Resolve
-While DaVinci Resolve doesn't directly import 3D models, you can:
-1. Render preview images/videos from the 3D model in Blender
-2. Use those renders as assets in your video timeline
-3. Or use Fusion page for 3D integration
+### In DaVinci Resolve Fusion
+
+DaVinci Resolve's Fusion page supports direct 3D model import. Use the **3D Model Optimizer** to prepare models:
+
+```bash
+# Optimize generated 3D models for Fusion
+cd 5_Symbols
+python3 Batch3DModelOptimizer.py
+```
+
+The optimizer will:
+- ✅ Validate 3D model files (GLB, FBX, OBJ, DAE)
+- 🔧 Optimize models for Fusion integration
+- 📊 Generate metadata and analysis reports
+- 💡 Provide Fusion integration tips
+
+**Manual Import in Fusion:**
+1. Open DaVinci Resolve → Fusion page
+2. File → Import → 3D Model
+3. Select optimized model file
+4. Add lights and camera nodes
+5. Use Merge3D to combine with other elements
+
+**Supported Formats:**
+- **FBX**: Best compatibility with animations
+- **OBJ**: Basic geometry, limited animation
+- **DAE**: COLLADA format with animation support
+- **GLB**: Exported from text-to-3D generator
+
+See `Batch3DModelOptimizer.py` for validation and optimization details.
 
 ## Testing
 
@@ -161,13 +186,22 @@ Run the test suite to verify everything works:
 
 ```bash
 cd 5_Symbols
+
+# Test 3D model generation
 python3 test_3d_generator.py
+
+# Test 3D model optimization
+python3 test_3d_optimizer.py
 ```
 
 Expected output:
 ```
+# 3D Generator Tests
 Ran 10 tests in 0.003s
+OK
 
+# 3D Optimizer Tests  
+Ran 13 tests in 0.004s
 OK
 ```
 
