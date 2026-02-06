@@ -106,6 +106,14 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | 🏛️ **`BatchAssetGeneratorMemoryPalace.py`** | Memory palace visualizations | Image generation models |
 | 📺 **`BatchAssetGeneratorLowerThirds.py`** | Text overlay graphics for video | Image generation models |
 
+### 🎲 3D Assets
+
+| Generator | Description | Models Used |
+|-----------|-------------|-------------|
+| 🎲 **`BatchAssetGenerator3D.py`** | **NEW** - 3D models from text descriptions | `fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d` |
+| 🎲 **`ThreeDGenerator.py`** | 3D asset generator with base class architecture | Hunyuan-3D text-to-3D |
+| 🔧 **`Batch3DModelOptimizer.py`** | **NEW** - Validates and optimizes 3D models for DaVinci Resolve Fusion | Supports FBX, OBJ, DAE, GLB |
+
 ### 🛠️ Utilities & Testing
 
 | File | Purpose |
@@ -255,6 +263,9 @@ python3 5_Symbols/BatchAssetGeneratorImages.py
 
 # Generate music tracks
 python3 5_Symbols/BatchAssetGeneratorMusic.py
+
+# Generate 3D models (NEW)
+python3 5_Symbols/BatchAssetGenerator3D.py
 ```
 
 **Run Master Controller (All Generators):**
@@ -415,6 +426,7 @@ flowchart LR
 - 🖼️ Images (photorealistic, stylized)
 - 🧩 Icons & graphics (vector-style)
 - 📺 Video elements (lower thirds, chapter markers)
+- 🎲 3D models (text-to-3D using Hunyuan-3D) **NEW**
 
 🎯 **Smart Asset Management**
 - 🏷️ Standardized naming with scene numbers

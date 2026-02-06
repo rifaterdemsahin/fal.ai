@@ -91,6 +91,11 @@ graph TB
     *   `BatchAssetGeneratorMemoryPalace.py`: Memory palace visualizations.
     *   `MemoryPalaceGenerator.py`: Individual memory palace generator.
 
+*   **3D Assets** (🎲 NEW):
+    *   `BatchAssetGenerator3D.py`: ✨ **NEW** - Generates 3D models from text descriptions using Hunyuan-3D API.
+    *   `ThreeDGenerator.py`: Individual 3D model generator with base class architecture.
+    *   `Batch3DModelOptimizer.py`: ✨ **NEW** - Validates and optimizes 3D models for DaVinci Resolve Fusion integration.
+
 *   **Base Architecture** (🏗️ NEW):
     *   `base/base_asset_generator.py`: Abstract base class with shared generator logic, reducing code duplication.
     *   `base/generator_config.py`: Centralized configuration management for all generators.
@@ -104,6 +109,8 @@ graph TB
 *   **Testing**:
     *   `test_asset_utils.py`: ✅ Unit tests for asset utilities (13 tests, all passing).
     *   `test_integration.py`: ✅ End-to-end integration tests for the complete workflow.
+    *   `test_3d_generator.py`: ✅ **NEW** - Unit tests for 3D generator (10 tests, all passing).
+    *   `test_3d_optimizer.py`: ✅ **NEW** - Unit tests for 3D optimizer (13 tests, all passing).
 
 **Structure**:
 Each batch script typically follows a standard pattern:

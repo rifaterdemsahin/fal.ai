@@ -32,6 +32,7 @@ DEFAULT_MODELS = {
     "image_fast": "fal-ai/flux/schnell",
     "video": "fal-ai/minimax/video-01",
     "music": "fal-ai/stable-audio",
+    "3d": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
 }
 
 # Common image sizes
@@ -56,4 +57,5 @@ OUTPUT_FORMATS = {
     "video": "mp4",           # Video format
     "music": "mp3",           # Audio format
     "audio": "mp3",           # Audio format
+    "3d": "glb",              # 3D models in GLB format (glTF binary)
 }
