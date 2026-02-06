@@ -31,27 +31,62 @@ def validate_configuration():
         print(f"\n📝 Track {i}: {track.get('name', 'UNNAMED')}")
         print(f"   Priority: {track.get('priority', 'NOT SET')}")
         print(f"   Model: {track.get('model', 'NOT SET')}")
-        print(f"   Duration: {track.get('seconds_total', 'NOT SET')}s")
         
-        # Check required fields
-        required_fields = ['id', 'name', 'prompt', 'model', 'seconds_total']
+        # Support both 'duration' (Beatoven) and 'seconds_total' (legacy)
+        duration = track.get('duration', track.get('seconds_total', 'NOT SET'))
+        print(f"   Duration: {duration}s")
+        
+        # Check required fields (updated for Beatoven)
+        required_fields = ['id', 'name', 'prompt', 'model']
         for field in required_fields:
             if field not in track:
                 issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Missing required field '{field}'")
         
-        # Check duration limit
-        duration = track.get('seconds_total', 0)
-        if duration > 47:
-            issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration {duration}s exceeds API limit of 47s")
-        elif duration <= 0:
-            issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration must be greater than 0")
-        else:
-            print(f"   ✅ Duration {duration}s is within API limit (≤47s)")
+        # Check that duration is provided (either format)
+        if 'duration' not in track and 'seconds_total' not in track:
+            issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Missing required field 'duration' or 'seconds_total'")
         
-        # Check model
+        # Check duration limits based on model
+        duration_value = track.get('duration', track.get('seconds_total', 0))
         model = track.get('model', '')
-        if 'stable-audio' not in model:
-            warnings.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Model '{model}' may not be compatible")
+        
+        if 'beatoven' in model.lower():
+            # Beatoven supports 5-150 seconds
+            if duration_value < 5:
+                issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration {duration_value}s is below Beatoven minimum of 5s")
+            elif duration_value > 150:
+                issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration {duration_value}s exceeds Beatoven limit of 150s")
+            else:
+                print(f"   ✅ Duration {duration_value}s is within Beatoven range (5-150s)")
+        elif 'stable-audio' in model.lower():
+            # Stable-audio has 47s limit
+            if duration_value > 47:
+                issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration {duration_value}s exceeds stable-audio limit of 47s")
+            elif duration_value <= 0:
+                issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration must be greater than 0")
+            else:
+                print(f"   ✅ Duration {duration_value}s is within stable-audio limit (≤47s)")
+        else:
+            # Unknown model, check for positive duration
+            if duration_value <= 0:
+                issues.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Duration must be greater than 0")
+            else:
+                print(f"   ⚠️  Duration {duration_value}s (unknown model limits)")
+        
+        # Check model (update to recognize Beatoven)
+        if 'beatoven' in model.lower():
+            print(f"   ✅ Using Beatoven music generation model")
+            # Check for optional Beatoven parameters
+            if 'creativity' in track:
+                print(f"   • Creativity: {track['creativity']}")
+            if 'refinement' in track:
+                print(f"   • Refinement: {track['refinement']}")
+            if 'negative_prompt' in track:
+                print(f"   • Negative prompt: {track['negative_prompt'][:50]}...")
+        elif 'stable-audio' in model.lower():
+            print(f"   ℹ️  Using stable-audio model (legacy)")
+        else:
+            warnings.append(f"Track {i} ({track.get('name', 'UNNAMED')}): Unknown model '{model}'")
         
         # Check prompt length
         prompt = track.get('prompt', '')
