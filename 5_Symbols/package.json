@@ -1,0 +1,9 @@
+{
+  "name": "mermaid-diagram-generator",
+  "version": "1.0.0",
+  "description": "Node dependencies for Mermaid diagram generation",
+  "private": true,
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.1"
+  }
+}

@@ -12,6 +12,9 @@ env/
 ENV/
 .venv
 
+# Node.js
+node_modules/
+package-lock.json
 
 # IDEs
 .vscode/
