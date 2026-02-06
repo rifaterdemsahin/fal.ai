@@ -1,28 +1,34 @@
 {
   "total": 3,
-  "successful": 0,
-  "failed": 3,
+  "successful": 3,
+  "failed": 0,
   "results": [
     {
       "asset_id": "music_01",
       "name": "tech_innovation_background",
       "priority": "HIGH",
-      "success": false,
-      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 180, 'ctx': {'le': 47}}]"
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6d0e/WyfI0OsJADwbGcB4Xfu_u_tmph6v4mo72.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_tech_innovation_background_v1.wav",
+      "filename": "000_music_tech_innovation_background_v1.wav"
     },
     {
       "asset_id": "music_02",
       "name": "cta_energy_build",
       "priority": "HIGH",
-      "success": false,
-      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 60, 'ctx': {'le': 47}}]"
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6d15/J0_Q87wM7CGGLsytd7ykp_tmphvzec4lm.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_cta_energy_build_v1.wav",
+      "filename": "000_music_cta_energy_build_v1.wav"
     },
     {
       "asset_id": "music_03",
       "name": "screen_recording_bed",
       "priority": "MEDIUM",
-      "success": false,
-      "error": "[{'type': 'less_than_equal', 'loc': ['body', 'seconds_total'], 'msg': 'Input should be less than or equal to 47', 'input': 180, 'ctx': {'le': 47}}]"
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6d22/gS04qffy6pN61kUMomoGP_tmpsfklv7qr.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_screen_recording_bed_v1.wav",
+      "filename": "000_music_screen_recording_bed_v1.wav"
     }
   ]
 }
