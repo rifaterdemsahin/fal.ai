@@ -16,6 +16,8 @@ The 3D Asset Generator uses fal.ai's Hunyuan-3D API to generate high-quality 3D 
 2. Set up your fal.ai API key:
    ```bash
    export FAL_KEY='your-api-key-here'
+   # Or use FAL_API_KEY (GitHub Actions/CI environments)
+   export FAL_API_KEY='your-api-key-here'
    ```
 
 ### Generate 3D Models
@@ -230,9 +232,15 @@ Proceed with generation? (yes/no):
 
 ### API Key Not Found
 ```
-❌ ERROR: FAL_KEY environment variable not set
+❌ ERROR: FAL_KEY or FAL_API_KEY environment variable not set
 ```
-**Solution**: Set your API key with `export FAL_KEY='your-api-key-here'`
+**Solution**: Set your API key with `export FAL_KEY='your-api-key-here'` or `export FAL_API_KEY='your-api-key-here'`
+
+For GitHub Actions, add `FAL_API_KEY` to repository secrets and use it in workflows:
+```yaml
+env:
+  FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
+```
 
 ### No GLB URL in Result
 ```
