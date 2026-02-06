@@ -36,7 +36,11 @@ def test_jpeg_conversion():
                 background = Image.new('RGB', img.size, (255, 255, 255))
                 if img.mode == 'P':
                     img = img.convert('RGBA')
-                background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
+                # Extract alpha channel for mask (handles both RGBA and LA modes)
+                if img.mode in ('RGBA', 'LA'):
+                    background.paste(img, mask=img.split()[-1])
+                else:
+                    background.paste(img)
                 img = background
             elif img.mode != 'RGB':
                 img = img.convert('RGB')
@@ -68,7 +72,11 @@ def test_jpeg_conversion():
                 background = Image.new('RGB', img.size, (255, 255, 255))
                 if img.mode == 'P':
                     img = img.convert('RGBA')
-                background.paste(img, mask=img.split()[-1] if img.mode == 'RGBA' else None)
+                # Extract alpha channel for mask (handles both RGBA and LA modes)
+                if img.mode in ('RGBA', 'LA'):
+                    background.paste(img, mask=img.split()[-1])
+                else:
+                    background.paste(img)
                 img = background
             elif img.mode != 'RGB':
                 img = img.convert('RGB')
