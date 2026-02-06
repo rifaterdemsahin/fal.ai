@@ -1,159 +1,52 @@
-# 🔑 fal.ai API Key Setup Guide
+# 🔑 fal.ai API Key Setup Formula
 
-This guide explains how to obtain, save, and use your fal.ai API key for the weekly video creation pipeline.
+This guide explains how to obtain, save, and use your fal.ai API key.
 
----
+## 💾 Saving Your API Key (Recommended Method)
 
-## 📋 Table of Contents
+The standard way to manage keys in this project is using a **local `.env` file**.
 
-1. [Getting Your API Key](#getting-your-api-key)
-2. [Saving Your API Key](#saving-your-api-key)
-3. [Using the API Key](#using-the-api-key)
-4. [Verification](#verification)
-5. [Troubleshooting](#troubleshooting)
+### 📝 Step 1: Create .env File
 
----
+1. Create a file named `.env` in the root of the project (folder `fal.ai`).
+2. Add your key to it:
 
-## 🎯 Getting Your API Key
+    ```env
+    FAL_KEY=your-api-key-here
+    ```
 
-### Step 1: Create a fal.ai Account
+### 🛑 Step 2: Security Check
 
-1. Visit [fal.ai](https://fal.ai) in your web browser
-2. Click **"Sign Up"** or **"Get Started"** 
-3. Create an account using:
-   - GitHub account (recommended)
-   - Google account
-   - Email and password
+**NEVER PUSH THIS FILE TO GITHUB.**
 
-### Step 2: Access Your Dashboard
+Ensure `.env` is listed in your `.gitignore` file.
 
-1. Once logged in, navigate to your **Dashboard**
-2. Look for the **API Keys** or **Keys** section in the navigation menu
-3. You should see your existing API keys or an option to create a new one
+1. Open `.gitignore`.
+2. Make sure it contains a line with `.env`.
 
-### Step 3: Generate an API Key
+### 🔄 How It Works
 
-1. Click **"Create New API Key"** or **"Generate Key"**
-2. Give your key a descriptive name (e.g., "Weekly Video Pipeline")
-3. Set permissions if prompted (typically "Full Access" for this project)
-4. Click **"Create"** or **"Generate"**
-5. **Important**: Copy the key immediately - it will only be shown once!
-
-```
-Example API Key Format:
-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-```
-
-### 🚨 Security Best Practices
-
-- **Never share** your API key publicly
-- **Never commit** your API key to version control (GitHub, GitLab, etc.)
-- **Use environment variables** instead of hardcoding keys in scripts
-- **Rotate keys regularly** for enhanced security
-- **Use separate keys** for development and production environments
+The project uses `python-dotenv` to automatically load this file when you run scripts locally.
 
 ---
 
-## 💾 Saving Your API Key
+### Alternative: Temporary Session
 
-You have three options to save your API key. Choose the method that works best for your workflow:
+For a single session, you can export it:
 
-### Option 1: Environment Variable (Recommended for Quick Sessions)
-
-Set the API key as an environment variable in your terminal session.
-
-#### On macOS/Linux/GitHub Codespaces:
 ```bash
-export FAL_KEY="your-api-key-here"
+export FAL_KEY="your-key"
 ```
 
-#### On Windows (PowerShell):
-```powershell
-$env:FAL_KEY="your-api-key-here"
-```
+#### For zsh users (~/.zshrc)
 
-#### On Windows (Command Prompt):
-```cmd
-set FAL_KEY=your-api-key-here
-```
-
-**Note**: This method requires setting the key each time you open a new terminal session.
-
----
-
-### Option 2: .env File (Recommended for Development)
-
-Create a `.env` file in the project root directory to persist your API key across sessions.
-
-#### Steps:
-
-1. **Create the .env file** in the project root:
-   ```bash
-   cd /home/runner/work/fal.ai/fal.ai
-   touch .env
-   ```
-
-2. **Add your API key** to the file:
-   ```bash
-   echo 'FAL_KEY=your-api-key-here' > .env
-   ```
-
-   Or manually edit `.env`:
-   ```env
-   FAL_KEY=your-api-key-here
-   ```
-
-3. **Verify .gitignore** includes `.env` to prevent accidental commits:
-   ```bash
-   grep ".env" .gitignore
-   ```
-
-   If not present, add it:
-   ```bash
-   echo ".env" >> .gitignore
-   ```
-
-#### Using .env with Python scripts:
-
-If your scripts use `python-dotenv`, the key will be loaded automatically:
-
-```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv()  # Load .env file
-api_key = os.environ.get("FAL_KEY")
-```
-
-**Note**: Check if `python-dotenv` is installed:
-```bash
-pip list | grep python-dotenv
-```
-
-If not installed:
-```bash
-pip install python-dotenv
-```
-
----
-
-### Option 3: Shell Configuration File (Permanent)
-
-Add the API key to your shell configuration file for permanent availability.
-
-#### For bash users (~/.bashrc or ~/.bash_profile):
-```bash
-echo 'export FAL_KEY="your-api-key-here"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### For zsh users (~/.zshrc):
 ```bash
 echo 'export FAL_KEY="your-api-key-here"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-#### For fish shell users (~/.config/fish/config.fish):
+#### For fish shell users (~/.config/fish/config.fish)
+
 ```bash
 echo 'set -gx FAL_KEY "your-api-key-here"' >> ~/.config/fish/config.fish
 source ~/.config/fish/config.fish
@@ -261,6 +154,7 @@ python3 5_Symbols/BatchAssetGeneratorImages.py
 ```
 
 **If the key is set correctly**, you'll see:
+
 ```
 🎨 Batch Image Generator
 =========================
@@ -269,6 +163,7 @@ API Key: ✓ Found
 ```
 
 **If the key is NOT set**, you'll see:
+
 ```
 ❌ ERROR: FAL_KEY environment variable not set
    Set it with: export FAL_KEY='your-api-key-here'
@@ -285,11 +180,13 @@ API Key: ✓ Found
 **Solutions**:
 
 1. **Check if the key is set**:
+
    ```bash
    echo $FAL_KEY
    ```
 
 2. **Set the key in your current session**:
+
    ```bash
    export FAL_KEY="your-actual-key-here"
    ```
@@ -312,11 +209,13 @@ API Key: ✓ Found
 **Solutions**:
 
 1. **Verify key format**: fal.ai keys are typically UUID format
+
    ```
    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
    ```
 
 2. **Check for extra spaces or quotes**:
+
    ```bash
    # Wrong:
    export FAL_KEY=" your-key-here "  # Has spaces
@@ -339,17 +238,20 @@ API Key: ✓ Found
 **Solutions**:
 
 1. **Check subprocess environment**: If running scripts with `python3`, ensure the key is exported:
+
    ```bash
    export FAL_KEY="your-key"  # Not just 'FAL_KEY="your-key"'
    ```
 
 2. **Use absolute path for .env**:
+
    ```python
    from dotenv import load_dotenv
    load_dotenv('/absolute/path/to/.env')
    ```
 
 3. **Check virtual environment**: Ensure you're using the correct Python interpreter:
+
    ```bash
    which python3  # Should point to .venv/bin/python3 if using venv
    ```
@@ -377,6 +279,7 @@ API Key: ✓ Found
 1. **Revoke the key immediately** on fal.ai dashboard
 2. **Generate a new key**
 3. **Remove from Git history**:
+
    ```bash
    # Remove the file from Git history
    git filter-branch --force --index-filter \
@@ -388,6 +291,7 @@ API Key: ✓ Found
    ```
 
 4. **Add to .gitignore** to prevent future accidents:
+
    ```bash
    echo ".env" >> .gitignore
    echo "*.key" >> .gitignore

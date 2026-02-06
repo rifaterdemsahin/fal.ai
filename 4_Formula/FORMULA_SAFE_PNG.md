@@ -1,3 +1,5 @@
+# 🛡️ Safe PNG Formula
+
 Yes, you absolutely can. If you want to convert a JPEG (or any problematic file) into a **"Safe PNG"** that is guaranteed to work in DaVinci Resolve, you just need to ensure the file settings match what Resolve expects.
 
 DaVinci Resolve is strictly a **video** editor, so it expects images to behave like video frames (Red, Green, Blue pixels). It hates "print" data (CMYK) or web-optimization data (indexing).
@@ -22,12 +24,12 @@ Since you already have Paint.NET, this is the easiest way to visually confirm th
 2. Go to **File > Save As**.
 3. Select **PNG** as the file type.
 4. **The Critical Step:** When the "Save Configuration" window appears, look at the settings on the left.
+
 * **Select "32-bit"**. (This forces standard 8-bit per channel RGB + Alpha).
 * **Bit Depth:** Ensure it is **not** set to "Auto-detect" or "8-bit" (which creates indexed colors that Resolve hates).
 * **Metadata:** Uncheck "Save metadata" if you want to be extra safe (removes hidden data that might confuse Resolve).
 
-
-5. Save the file. This file will now open in DaVinci Resolve 100% of the time.
+1. Save the file. This file will now open in DaVinci Resolve 100% of the time.
 
 ---
 
