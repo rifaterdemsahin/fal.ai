@@ -7,7 +7,7 @@ Common functionality for all asset generators
 import os
 import json
 import urllib.request
-import time
+import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from abc import ABC, abstractmethod
@@ -173,6 +173,12 @@ class BaseAssetGenerator(ABC):
         """
         Convert a PNG image to JPEG format.
         
+        Transparency handling:
+        - RGBA (RGB with alpha): Alpha channel is used as mask, transparent areas become white
+        - LA (grayscale with alpha): Alpha channel is used as mask, transparent areas become white
+        - P (palette mode): Converted to RGBA first, then transparency becomes white
+        - RGB: Direct conversion to JPEG (no transparency handling needed)
+        
         Args:
             png_path: Path to the source PNG file
             jpeg_path: Path to save the JPEG file
@@ -281,9 +287,9 @@ class BaseAssetGenerator(ABC):
             print(f"💾 Metadata saved: {metadata_path}")
             
             # Download asset from fal.ai (always downloads as PNG for images)
-            # Use timestamp to ensure unique temporary filename for thread safety
-            timestamp = int(time.time() * 1000)  # milliseconds
-            temp_path = self.output_dir / f"{base_filename}_temp_{timestamp}.png"
+            # Use UUID to ensure unique temporary filename for guaranteed thread safety
+            unique_id = uuid.uuid4().hex[:8]  # Use first 8 chars of UUID for brevity
+            temp_path = self.output_dir / f"{base_filename}_temp_{unique_id}.png"
             asset_path = self.output_dir / filename_asset
             
             # Determine if we need conversion
