@@ -301,6 +301,18 @@ cat 3_Simulation/Feb1Youtube/weekly/cost_report_YYYY-MM-DD.md
 
 The project includes automated workflows that can generate assets via GitHub Actions, perfect for scheduled generation or manual triggers.
 
+### 🔑 Setup: Configure FAL_API_KEY Secret
+
+**Before running any workflows**, you must add your fal.ai API key as a repository secret:
+
+1. Go to your repository's **Settings** → **Secrets and variables** → **Actions**
+2. Click **"New repository secret"**
+3. Name: `FAL_API_KEY`
+4. Value: Your fal.ai API key (get it from [fal.ai/dashboard/keys](https://fal.ai/dashboard/keys))
+5. Click **"Add secret"**
+
+This secret is automatically passed to all asset generation workflows that require it. Workflows using only SVG or Mermaid generators (which don't use the fal.ai API) don't require this secret.
+
 ### 🚀 Available Workflows
 
 | Workflow | Description | Trigger |
