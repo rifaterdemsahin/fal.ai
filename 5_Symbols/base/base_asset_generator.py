@@ -56,6 +56,7 @@ class BaseAssetGenerator(ABC):
         'video': 'mp4',
         'music': 'mp3',
         'audio': 'mp3',
+        '3d': 'glb',
     }
     
     def __init__(
@@ -94,13 +95,20 @@ class BaseAssetGenerator(ABC):
         pass
     
     def check_api_key(self) -> str:
-        """Check and return FAL_KEY from environment."""
+        """Check and return FAL_KEY or FAL_API_KEY from environment."""
+        # Check for FAL_KEY first (existing convention)
         api_key = os.environ.get("FAL_KEY")
+        
+        # Fall back to FAL_API_KEY (repository secrets convention)
         if not api_key:
-            print("\n❌ ERROR: FAL_KEY environment variable not set")
+            api_key = os.environ.get("FAL_API_KEY")
+        
+        if not api_key:
+            print("\n❌ ERROR: FAL_KEY or FAL_API_KEY environment variable not set")
             print("   Set it in your shell with: export FAL_KEY='your-api-key-here'  (bash/zsh)")
             print("   Or for Windows: set FAL_KEY=your-api-key-here  (cmd)")
-            raise ValueError("FAL_KEY not set")
+            print("   Or use FAL_API_KEY in GitHub Actions secrets")
+            raise ValueError("FAL_KEY or FAL_API_KEY not set")
         return api_key
     
     def prepare_arguments(self, asset_config: Dict) -> Dict[str, Any]:

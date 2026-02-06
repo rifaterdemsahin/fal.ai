@@ -106,6 +106,14 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | 🏛️ **`BatchAssetGeneratorMemoryPalace.py`** | Memory palace visualizations | Image generation models |
 | 📺 **`BatchAssetGeneratorLowerThirds.py`** | Text overlay graphics for video | Image generation models |
 
+### 🎲 3D Assets
+
+| Generator | Description | Models Used |
+|-----------|-------------|-------------|
+| 🎲 **`BatchAssetGenerator3D.py`** | **NEW** - 3D models from text descriptions | `fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d` |
+| 🎲 **`ThreeDGenerator.py`** | 3D asset generator with base class architecture | Hunyuan-3D text-to-3D |
+| 🔧 **`Batch3DModelOptimizer.py`** | **NEW** - Validates and optimizes 3D models for DaVinci Resolve Fusion | Supports FBX, OBJ, DAE, GLB |
+
 ### 🛠️ Utilities & Testing
 
 | File | Purpose |
@@ -226,6 +234,9 @@ pip install fal-client
 
 ### 2️⃣ Configure API Key
 
+**📖 For detailed instructions**, see the **[API Key Setup Guide](./4_Formula/api_key_setup.md)**.
+
+**Quick Setup:**
 ```bash
 # Set your fal.ai API key
 export FAL_KEY="your-api-key-here"
@@ -233,6 +244,12 @@ export FAL_KEY="your-api-key-here"
 # Or add to .env file:
 echo 'FAL_KEY=your-api-key-here' > .env
 ```
+
+The guide covers:
+- How to get your API key from fal.ai dashboard
+- Multiple configuration methods (environment variable, .env file, shell config)
+- Verification and troubleshooting steps
+- Security best practices
 
 ### 3️⃣ Run Generators
 
@@ -246,6 +263,9 @@ python3 5_Symbols/BatchAssetGeneratorImages.py
 
 # Generate music tracks
 python3 5_Symbols/BatchAssetGeneratorMusic.py
+
+# Generate 3D models (NEW)
+python3 5_Symbols/BatchAssetGenerator3D.py
 ```
 
 **Run Master Controller (All Generators):**
@@ -291,6 +311,18 @@ cat 3_Simulation/Feb1Youtube/weekly/cost_report_YYYY-MM-DD.md
 ## 🤖 GitHub Actions Workflows
 
 The project includes automated workflows that can generate assets via GitHub Actions, perfect for scheduled generation or manual triggers.
+
+### 🔑 Setup: Configure FAL_API_KEY Secret
+
+**Before running any workflows**, you must add your fal.ai API key as a repository secret:
+
+1. Go to your repository's **Settings** → **Secrets and variables** → **Actions**
+2. Click **"New repository secret"**
+3. Name: `FAL_API_KEY`
+4. Value: Your fal.ai API key (get it from [fal.ai/dashboard/keys](https://fal.ai/dashboard/keys))
+5. Click **"Add secret"**
+
+This secret is automatically passed to all asset generation workflows that require it. Workflows using only SVG or Mermaid generators (which don't use the fal.ai API) don't require this secret.
 
 ### 🚀 Available Workflows
 
@@ -377,6 +409,7 @@ flowchart LR
 
 ## 📖 Detailed Documentation
 
+- **[🔑 API Key Setup](./4_Formula/api_key_setup.md)** - Comprehensive guide to getting, saving, and using your fal.ai API key
 - **[Setup & Best Practices](./4_Formula/README.md)** - Installation, configuration, and usage tips
 - **[Versioning System](./5_Symbols/VERSIONING_AND_MANIFEST.md)** - Complete guide to asset naming and manifest
 - **[Implementation Summary](./IMPLEMENTATION_SUMMARY.md)** - Technical details of recent improvements
@@ -393,6 +426,7 @@ flowchart LR
 - 🖼️ Images (photorealistic, stylized)
 - 🧩 Icons & graphics (vector-style)
 - 📺 Video elements (lower thirds, chapter markers)
+- 🎲 3D models (text-to-3D using Hunyuan-3D) **NEW**
 
 🎯 **Smart Asset Management**
 - 🏷️ Standardized naming with scene numbers
