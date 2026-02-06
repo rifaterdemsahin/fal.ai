@@ -213,6 +213,19 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
     
+    # Load environment variables
+    env_path = Path(r"C:\projects\fal.ai\5_Symbols\.env")
+    if env_path.exists():
+        print(f"Loading environment from {env_path}")
+        with open(env_path, "r") as f:
+            for line in f:
+                if line.strip() and not line.startswith("#"):
+                    try:
+                        key, value = line.strip().split("=", 1)
+                        os.environ[key] = value.strip('"').strip("'")
+                    except ValueError:
+                        pass
+
     # Check API key
     api_key = os.environ.get("FAL_KEY")
     if not api_key:
@@ -292,12 +305,9 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
 
 def main():
     """Main execution"""
-    # Confirm before proceeding
+    # Auto-proceed without prompt for automation
     print("\n" + "="*60)
-    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
-    if response not in ['yes', 'y']:
-        print("❌ Cancelled by user")
-        return
+    print("🚀 Auto-starting generation...")
         
     process_queue(GENERATION_QUEUE, OUTPUT_DIR)
 

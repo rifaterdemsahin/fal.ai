@@ -1,0 +1,17 @@
+{
+  "id": "D1.1",
+  "name": "agentic_workflow_architecture",
+  "priority": "HIGH",
+  "scene": "Scene 1",
+  "seed_key": "SEED_001",
+  "prompt": "High-level technical architecture diagram of an Agentic Workflow system, showing 'User Intent' box -> 'Orchestrator Agent' (central hub) -> connected to multiple specialized Sub-Agents (Research, Coding, Testing, Deployment), connected by data pipelines, clean modern aesthetic, dark background separate distinct nodes, professional software diagram style, 16:9",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6f8f/T-poYZnnnfNeFPJ9zrb34.jpg",
+  "seed_value": 555123,
+  "filename": "000_diagram_agentic_workflow_architecture_v1.png"
+}

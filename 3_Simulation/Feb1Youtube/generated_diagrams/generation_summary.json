@@ -1,0 +1,34 @@
+{
+  "total": 3,
+  "successful": 3,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "D1.1",
+      "name": "agentic_workflow_architecture",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6f8f/T-poYZnnnfNeFPJ9zrb34.jpg",
+      "local_path": "C:\\projects\\fal.ai\\3_Simulation\\Feb1Youtube\\generated_diagrams\\000_diagram_agentic_workflow_architecture_v1.png",
+      "filename": "000_diagram_agentic_workflow_architecture_v1.png"
+    },
+    {
+      "asset_id": "D2.1",
+      "name": "data_flow_process",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6f90/2CicRuykII8DmmoEOAvUf.jpg",
+      "local_path": "C:\\projects\\fal.ai\\3_Simulation\\Feb1Youtube\\generated_diagrams\\000_diagram_data_flow_process_v1.png",
+      "filename": "000_diagram_data_flow_process_v1.png"
+    },
+    {
+      "asset_id": "D3.1",
+      "name": "neural_network_concept",
+      "priority": "LOW",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d6f90/XtQYj0qVY6BlQgp8gPIrZ.jpg",
+      "local_path": "C:\\projects\\fal.ai\\3_Simulation\\Feb1Youtube\\generated_diagrams\\000_diagram_neural_network_concept_v1.png",
+      "filename": "000_diagram_neural_network_concept_v1.png"
+    }
+  ]
+}

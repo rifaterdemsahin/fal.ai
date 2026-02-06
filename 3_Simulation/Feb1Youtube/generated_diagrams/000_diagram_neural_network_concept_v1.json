@@ -1,0 +1,17 @@
+{
+  "id": "D3.1",
+  "name": "neural_network_concept",
+  "priority": "LOW",
+  "scene": "Scene 3",
+  "seed_key": "SEED_003",
+  "prompt": "Abstract concept map of a neural network, nodes connecting in a mesh, glowing connections, highlighting the concept of 'Learning' and 'Adaptation', futuristic tech style, deep blue background, cyber security aesthetic, 16:9",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6f90/XtQYj0qVY6BlQgp8gPIrZ.jpg",
+  "seed_value": 555789,
+  "filename": "000_diagram_neural_network_concept_v1.png"
+}

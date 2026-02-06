@@ -1,0 +1,17 @@
+{
+  "id": "D2.1",
+  "name": "data_flow_process",
+  "priority": "MEDIUM",
+  "scene": "Scene 2",
+  "seed_key": "SEED_002",
+  "prompt": "Horizontal process flowchart 'Raw Data' -> 'Processing Node' -> 'Structured Output', interconnected with directional arrows, gradients indicating flow, distinct steps, n8n style nodes, modern smooth vector graphics, dark mode UI, blue and purple neon accents, 16:9",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6f90/2CicRuykII8DmmoEOAvUf.jpg",
+  "seed_value": 555456,
+  "filename": "000_diagram_data_flow_process_v1.png"
+}
