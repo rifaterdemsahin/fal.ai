@@ -304,8 +304,8 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
             return jpeg_path
             
         except ImportError:
-            print(f"⚠️  Pillow not installed. PNG created but JPEG conversion skipped.\n"
-                  f"⚠️  Install Pillow to enable JPEG export: pip install Pillow")
+            print("⚠️  Pillow not installed. PNG created but JPEG conversion skipped.\n"
+                  "⚠️  Install Pillow to enable JPEG export: pip install Pillow")
             # Keep the PNG file since we can't convert to JPEG
             return actual_png_path
             
