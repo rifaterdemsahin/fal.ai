@@ -116,6 +116,15 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | ✅ **`test_asset_utils.py`** | Unit tests for asset utilities (13 tests) |
 | ✅ **`test_integration.py`** | End-to-end integration tests |
 
+### 🏗️ Base Architecture
+
+| Directory/File | Purpose |
+|----------------|---------|
+| 📁 **`base/`** | Base classes for refactored generator architecture |
+| 🧩 **`base/base_asset_generator.py`** | Abstract base class with shared generator logic |
+| ⚙️ **`base/generator_config.py`** | Centralized configuration management |
+| 📦 **`base/__init__.py`** | Package initialization and exports |
+
 ---
 
 ## 📋 Asset Versioning & Manifest System
@@ -459,6 +468,8 @@ For more troubleshooting help, see **[6_Semblance/README.md](./6_Semblance/READM
 | 🧩 Icon Generation | ✅ Complete | Passing |
 | 📝 Manifest System | ✅ Complete | Passing |
 | 🏷️ Versioning System | ✅ Complete | Passing |
+| 🏗️ Base Class Architecture | ✅ Complete | Passing |
+| 🤖 GitHub Actions (14 workflows) | ✅ Complete | Operational |
 | 🧪 Test Suite | ✅ Complete | 13/13 Passing |
 | 📚 Documentation | ✅ Complete | N/A |
 
