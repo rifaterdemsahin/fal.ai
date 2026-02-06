@@ -222,6 +222,9 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
     Returns:
         Path to the generated JPEG file or None if conversion failed
     """
+    # Maximum number of suffix attempts when mmdc adds -N to output files
+    MAX_SUFFIX_ATTEMPTS = 10
+    
     try:
         # Get the base path without extension
         base_path = Path(md_filepath).with_suffix('')
@@ -259,8 +262,8 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
         # mmdc might add a suffix like -1.png, check for that
         actual_png_path = png_path
         if not Path(png_path).exists():
-            # Look for files with -1, -2, etc. suffix (up to -10)
-            for i in range(1, 11):
+            # Look for files with -1, -2, etc. suffix
+            for i in range(1, MAX_SUFFIX_ATTEMPTS + 1):
                 candidate = f"{base_path}-{i}.png"
                 if Path(candidate).exists():
                     actual_png_path = candidate
@@ -277,8 +280,10 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
             
             # Open PNG and convert to RGB (JPEG doesn't support transparency)
             img = Image.open(actual_png_path)
+            
+            # Handle images with alpha channel (RGBA, LA) or palette mode (P)
             if img.mode in ('RGBA', 'LA', 'P'):
-                # Convert palette mode to RGBA first
+                # Palette mode needs conversion to RGBA first
                 if img.mode == 'P':
                     img = img.convert('RGBA')
                 
@@ -287,6 +292,7 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
                 background.paste(img, mask=img.split()[-1])
                 img = background
             else:
+                # Simple RGB conversion for other modes
                 img = img.convert('RGB')
             
             # Save as JPEG
@@ -298,8 +304,8 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
             return jpeg_path
             
         except ImportError:
-            print(f"⚠️  Pillow not installed. PNG created but JPEG conversion skipped.")
-            print(f"⚠️  Install Pillow to enable JPEG export: pip install Pillow")
+            print(f"⚠️  Pillow not installed. PNG created but JPEG conversion skipped.\n"
+                  f"⚠️  Install Pillow to enable JPEG export: pip install Pillow")
             # Keep the PNG file since we can't convert to JPEG
             return actual_png_path
             
