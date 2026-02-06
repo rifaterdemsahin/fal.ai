@@ -77,6 +77,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'audio' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorAudio ==="
@@ -87,6 +89,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'chapter-markers' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorChapterMarkers ==="
@@ -97,6 +101,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'diagrams' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorDiagrams ==="
@@ -107,6 +113,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'graphics' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorGraphics ==="
@@ -117,6 +125,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'icons' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorIcons ==="
@@ -127,6 +137,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'images' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorImages ==="
@@ -137,6 +149,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'lower-thirds' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorLowerThirds ==="
@@ -147,6 +161,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'memory-palace' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorMemoryPalace ==="
@@ -157,6 +173,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'music' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorMusic ==="
@@ -167,6 +185,8 @@ jobs:
         if: >-
           ${{ github.event.inputs.generators == 'all' ||
           github.event.inputs.generators == 'video' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running BatchAssetGeneratorVideo ==="
@@ -176,6 +196,8 @@ jobs:
       - name: Run MasterAssetGenerator
         if: >-
           ${{ github.event.inputs.generators == 'master' }}
+        env:
+          FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           cd 5_Symbols
           echo "=== Running MasterAssetGenerator ==="
