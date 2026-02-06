@@ -1,0 +1,33 @@
+{
+  "total": 3,
+  "successful": 3,
+  "failed": 0,
+  "simulated": true,
+  "timestamp": "2026-02-06T18:42:35.736624",
+  "results": [
+    {
+      "success": true,
+      "asset_id": "music_01",
+      "name": "tech_innovation_background",
+      "priority": "HIGH",
+      "url": "https://fal.ai/files/mock/music_01.mp3",
+      "simulated": true
+    },
+    {
+      "success": true,
+      "asset_id": "music_02",
+      "name": "cta_energy_build",
+      "priority": "HIGH",
+      "url": "https://fal.ai/files/mock/music_02.mp3",
+      "simulated": true
+    },
+    {
+      "success": true,
+      "asset_id": "music_03",
+      "name": "screen_recording_bed",
+      "priority": "MEDIUM",
+      "url": "https://fal.ai/files/mock/music_03.mp3",
+      "simulated": true
+    }
+  ]
+}

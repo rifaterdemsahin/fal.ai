@@ -1,0 +1,12 @@
+{
+  "id": "music_03",
+  "name": "screen_recording_bed",
+  "priority": "MEDIUM",
+  "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 47,
+  "result_url": "https://fal.ai/files/mock/music_03.mp3",
+  "filename": "screen_recording_bed.mp3",
+  "simulated": true,
+  "timestamp": "2026-02-06T18:42:35.736337"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "music_01",
+  "name": "tech_innovation_background",
+  "priority": "HIGH",
+  "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 47,
+  "result_url": "https://fal.ai/files/mock/music_01.mp3",
+  "filename": "tech_innovation_background.mp3",
+  "simulated": true,
+  "timestamp": "2026-02-06T18:42:35.735763"
+}
