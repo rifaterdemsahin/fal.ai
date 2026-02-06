@@ -1,0 +1,10 @@
+{
+  "id": "music_01",
+  "name": "tech_innovation_stable",
+  "priority": "HIGH",
+  "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation",
+  "model": "fal-ai/stable-audio",
+  "duration": 47,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6df9/85WAtqjqE4w9DGQXcX9FI_tmp8g1j30p0.wav",
+  "filename": "000_music_tech_innovation_stable_v1.mp3"
+}
