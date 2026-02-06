@@ -32,6 +32,10 @@ def main():
         print("   Get your key from: https://fal.ai/dashboard/keys")
         return 1
     
+    # Ensure FAL_KEY is also set for fal_client library compatibility
+    if not os.environ.get("FAL_KEY"):
+        os.environ["FAL_KEY"] = api_key
+    
     print(f"\n✅ API Key found")
     print(f"📁 Output directory: {OUTPUT_DIR.absolute()}")
     
