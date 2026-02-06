@@ -34,8 +34,8 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_diagrams")
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\generated_diagrams")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Consistency seeds for different diagram styles
 SEEDS = {
@@ -161,6 +161,20 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             image_path = output_dir / filename_png
             urllib.request.urlretrieve(image_url, image_path)
             print(f"💾 Image saved: {image_path}")
+
+            # Create JPEG version
+            try:
+                from PIL import Image
+                with Image.open(image_path) as img:
+                    rgb_im = img.convert('RGB')
+                    filename_jpg = image_path.stem + ".jpg"
+                    jpg_path = output_dir / filename_jpg
+                    rgb_im.save(jpg_path, 'JPEG', quality=95)
+                    print(f"💾 JPEG saved: {jpg_path}")
+            except ImportError:
+                 print("⚠️ PIL not installed, skipping JPEG conversion")
+            except Exception as e:
+                 print(f"⚠️ Failed to convert to JPEG: {e}")
             
             # Add to manifest if provided
             if manifest:
