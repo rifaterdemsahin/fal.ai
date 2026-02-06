@@ -194,13 +194,12 @@ class BaseAssetGenerator(ABC):
                 if img.mode in ('RGBA', 'LA', 'P'):
                     # Create a white background
                     background = Image.new('RGB', img.size, (255, 255, 255))
+                    # Convert palette mode to RGBA first
                     if img.mode == 'P':
                         img = img.convert('RGBA')
                     # Extract alpha channel for mask (handles both RGBA and LA modes)
-                    if img.mode in ('RGBA', 'LA'):
-                        background.paste(img, mask=img.split()[-1])
-                    else:
-                        background.paste(img)
+                    # After P->RGBA conversion, img.mode will be 'RGBA', 'LA', or original mode
+                    background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
                     img = background
                 elif img.mode != 'RGB':
                     img = img.convert('RGB')
@@ -288,7 +287,7 @@ class BaseAssetGenerator(ABC):
             
             # Download asset from fal.ai (always downloads as PNG for images)
             # Use UUID to ensure unique temporary filename for guaranteed thread safety
-            unique_id = uuid.uuid4().hex[:8]  # Use first 8 chars of UUID for brevity
+            unique_id = uuid.uuid4().hex[:8]  # First 8 hexadecimal characters (4 bytes)
             temp_path = self.output_dir / f"{base_filename}_temp_{unique_id}.png"
             asset_path = self.output_dir / filename_asset
             
