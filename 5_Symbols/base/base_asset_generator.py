@@ -28,6 +28,9 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from asset_utils import generate_filename, extract_scene_number, ManifestTracker
 
+# Import configuration (relative import from same package)
+from .generator_config import OUTPUT_FORMATS
+
 
 class BaseAssetGenerator(ABC):
     """
@@ -273,14 +276,18 @@ class BaseAssetGenerator(ABC):
             print(f"💾 Metadata saved: {metadata_path}")
             
             # Download asset from fal.ai (always downloads as PNG for images)
-            temp_path = self.output_dir / (base_filename + '_temp.png')
+            temp_path = self.output_dir / f"{base_filename}_temp.png"
             asset_path = self.output_dir / filename_asset
             
             # Determine if we need conversion
+            # Only convert to JPEG if:
+            # 1. The output format is 'jpeg'
+            # 2. The asset type is one that supports conversion (image-based assets)
+            image_asset_types = [k for k, v in OUTPUT_FORMATS.items() 
+                                if v in ('jpeg', 'png') and k != 'svg']
             needs_conversion = (
                 extension == 'jpeg' and 
-                self.asset_type in ['image', 'graphic', 'icon', 'lower_third', 'diagram', 
-                                   'memory_palace', 'chapter_marker']
+                self.asset_type in image_asset_types
             )
             
             if needs_conversion:
