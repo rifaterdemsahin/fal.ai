@@ -56,6 +56,7 @@ class BaseAssetGenerator(ABC):
         'video': 'mp4',
         'music': 'mp3',
         'audio': 'mp3',
+        '3d': 'glb',
     }
     
     def __init__(

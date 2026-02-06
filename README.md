@@ -106,6 +106,13 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | 🏛️ **`BatchAssetGeneratorMemoryPalace.py`** | Memory palace visualizations | Image generation models |
 | 📺 **`BatchAssetGeneratorLowerThirds.py`** | Text overlay graphics for video | Image generation models |
 
+### 🎲 3D Assets
+
+| Generator | Description | Models Used |
+|-----------|-------------|-------------|
+| 🎲 **`BatchAssetGenerator3D.py`** | **NEW** - 3D models from text descriptions | `fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d` |
+| 🎲 **`ThreeDGenerator.py`** | 3D asset generator with base class architecture | Hunyuan-3D text-to-3D |
+
 ### 🛠️ Utilities & Testing
 
 | File | Purpose |
