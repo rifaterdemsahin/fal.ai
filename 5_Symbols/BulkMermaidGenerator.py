@@ -278,11 +278,19 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
             # Open PNG and convert to RGB (JPEG doesn't support transparency)
             img = Image.open(actual_png_path)
             if img.mode in ('RGBA', 'LA', 'P'):
-                # Create a white background
-                background = Image.new('RGB', img.size, (255, 255, 255))
+                # Convert palette mode to RGBA first
                 if img.mode == 'P':
                     img = img.convert('RGBA')
-                background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                
+                # Create a white background
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                
+                # Paste with alpha channel as mask if available
+                if img.mode in ('RGBA', 'LA'):
+                    background.paste(img, mask=img.split()[-1])
+                else:
+                    background.paste(img)
+                
                 img = background
             else:
                 img = img.convert('RGB')
