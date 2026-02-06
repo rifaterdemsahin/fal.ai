@@ -40,7 +40,7 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 180,
+        "seconds_total": 47,
     },
     {
         "id": "music_02",
@@ -48,7 +48,7 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 60,
+        "seconds_total": 47,
     },
     {
         "id": "music_03",
@@ -56,7 +56,7 @@ GENERATION_QUEUE = [
         "priority": "MEDIUM",
         "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
         "model": "fal-ai/stable-audio",
-        "seconds_total": 180,
+        "seconds_total": 47,
     }
 ]
 
@@ -178,13 +178,18 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
     
-    # Check API key
-    api_key = os.environ.get("FAL_KEY")
+    # Check API key (supports both FAL_API_KEY and FAL_KEY for backwards compatibility)
+    api_key = os.environ.get("FAL_API_KEY") or os.environ.get("FAL_KEY")
     if not api_key:
-        print("\n❌ ERROR: FAL_KEY environment variable not set")
-        print("   Set it with: export FAL_KEY='your-api-key-here'")
+        print("\n❌ ERROR: FAL_API_KEY environment variable not set")
+        print("   Set it with: export FAL_API_KEY='your-api-key-here'")
+        print("   Or use: export FAL_KEY='your-api-key-here' (legacy)")
         print("   Get your key from: https://fal.ai/dashboard/keys")
         return []
+    
+    # Ensure FAL_KEY is also set for fal_client library compatibility
+    if not os.environ.get("FAL_KEY"):
+        os.environ["FAL_KEY"] = api_key
     
     print(f"\n✅ API Key found")
     print(f"📁 Output directory: {output_dir.absolute()}")
@@ -257,12 +262,28 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
 
 def main():
     """Main execution"""
-    # Confirm before proceeding
-    print("\n" + "="*60)
-    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
-    if response not in ['yes', 'y']:
-        print("❌ Cancelled by user")
-        return
+    import sys
+    
+    # Check if running in CI or with --yes flag
+    auto_confirm = (
+        os.environ.get('CI') == 'true' or 
+        os.environ.get('GITHUB_ACTIONS') == 'true' or
+        '--yes' in sys.argv or
+        '--auto-yes' in sys.argv or
+        '-y' in sys.argv
+    )
+    
+    if not auto_confirm:
+        # Confirm before proceeding (interactive mode)
+        print("\n" + "="*60)
+        response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
+        if response not in ['yes', 'y']:
+            print("❌ Cancelled by user")
+            return
+    else:
+        print("\n" + "="*60)
+        print("🤖 Running in automated mode (CI detected)")
+        print("="*60)
         
     process_queue(GENERATION_QUEUE, OUTPUT_DIR)
 

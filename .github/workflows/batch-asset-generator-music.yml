@@ -39,37 +39,42 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run BatchAssetGeneratorMusic
+      - name: Run Music Generator for Feb1Youtube
         env:
+          FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
           FAL_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
-          cd 5_Symbols
-          python BatchAssetGeneratorMusic.py
+          python3 run_music_generator_feb1.py
 
       - name: Display generation summary
         run: |
-          SUMMARY_FILE="5_Symbols/generated_music/generation_summary.json"
+          SUMMARY_FILE="3_Simulation/Feb1Youtube/generated_music/generation_summary.json"
           if [ -f "${SUMMARY_FILE}" ]; then
             echo "=== Generation Summary ==="
             cat "${SUMMARY_FILE}"
           fi
+
+      - name: List generated MP3 files
+        run: |
+          echo "=== Generated MP3 Files ==="
+          ls -lh 3_Simulation/Feb1Youtube/generated_music/*.mp3 2>/dev/null || echo "No MP3 files found"
 
       - name: Commit and push generated files
         if: ${{ github.event.inputs.commit_and_push != 'false' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add 5_Symbols/generated_music/
+          git add 3_Simulation/Feb1Youtube/generated_music/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Generated music assets via GitHub Actions"
+            git commit -m "Generated music assets for Feb1Youtube via GitHub Actions"
             git push
           fi
 
       - name: Upload generated assets as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: generated-music
-          path: 5_Symbols/generated_music/
+          name: generated-music-feb1youtube
+          path: 3_Simulation/Feb1Youtube/generated_music/
           retention-days: 30

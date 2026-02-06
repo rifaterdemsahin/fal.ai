@@ -1,0 +1,12 @@
+{
+  "id": "music_02",
+  "name": "cta_energy_build",
+  "priority": "HIGH",
+  "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
+  "model": "fal-ai/stable-audio",
+  "seconds_total": 47,
+  "result_url": "https://fal.ai/files/mock/music_02.mp3",
+  "filename": "cta_energy_build.mp3",
+  "simulated": true,
+  "timestamp": "2026-02-06T18:42:35.736069"
+}
