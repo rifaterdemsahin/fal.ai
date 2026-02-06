@@ -5,30 +5,30 @@
   "results": [
     {
       "asset_id": "music_01",
-      "name": "tech_innovation_background",
+      "name": "tech_innovation_stable",
       "priority": "HIGH",
       "success": true,
-      "url": "https://v3b.fal.media/files/b/0a8d6db3/Oir3vc1-Dagp4KUgeK34i_music_FWaKGm.wav",
-      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_tech_innovation_background_v1.wav",
-      "filename": "000_music_tech_innovation_background_v1.wav"
+      "url": "https://v3b.fal.media/files/b/0a8d6df9/85WAtqjqE4w9DGQXcX9FI_tmp8g1j30p0.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_tech_innovation_stable_v1.mp3",
+      "filename": "000_music_tech_innovation_stable_v1.mp3"
     },
     {
       "asset_id": "music_02",
-      "name": "cta_energy_build",
+      "name": "cta_energy_beatoven",
       "priority": "HIGH",
       "success": true,
-      "url": "https://v3b.fal.media/files/b/0a8d6db6/lTmWKPAHhJZlTE65oAAGg_music_kOWgS9.wav",
-      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_cta_energy_build_v1.wav",
-      "filename": "000_music_cta_energy_build_v1.wav"
+      "url": "https://v3b.fal.media/files/b/0a8d6e02/5Nkb8HB3YgWr42ExauzrJ_music_EAQUgj.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_cta_energy_beatoven_v1.wav",
+      "filename": "000_music_cta_energy_beatoven_v1.wav"
     },
     {
       "asset_id": "music_03",
-      "name": "screen_recording_bed",
+      "name": "screen_recording_stable",
       "priority": "MEDIUM",
       "success": true,
-      "url": "https://v3b.fal.media/files/b/0a8d6db8/GOD-vUfU3cWSd_O8rVeEg_music_77FkUK.wav",
-      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_screen_recording_bed_v1.wav",
-      "filename": "000_music_screen_recording_bed_v1.wav"
+      "url": "https://v3b.fal.media/files/b/0a8d6e0d/Na5ojWNp3XVjbCNRe9Y6O_tmp044j1r0c.wav",
+      "local_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_music/000_music_screen_recording_stable_v1.mp3",
+      "filename": "000_music_screen_recording_stable_v1.mp3"
     }
   ]
 }
