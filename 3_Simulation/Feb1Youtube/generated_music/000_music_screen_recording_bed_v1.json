@@ -3,8 +3,10 @@
   "name": "screen_recording_bed",
   "priority": "MEDIUM",
   "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
-  "model": "fal-ai/stable-audio",
-  "seconds_total": 47,
-  "result_url": "https://v3b.fal.media/files/b/0a8d6d22/gS04qffy6pN61kUMomoGP_tmpsfklv7qr.wav",
+  "model": "beatoven/music-generation",
+  "duration": 120,
+  "creativity": 12,
+  "refinement": 100,
+  "result_url": "https://v3b.fal.media/files/b/0a8d6db8/GOD-vUfU3cWSd_O8rVeEg_music_77FkUK.wav",
   "filename": "000_music_screen_recording_bed_v1.wav"
 }
