@@ -104,19 +104,24 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                      scene_num = extract_scene_number(asset_config.get('id', '0.0'))
                 except:
                      scene_num = 0
-                     
+                
+                # Use name from config which already includes var2 suffix if applicable
+                base_name = asset_config['name']
+                
                 base_filename = generate_filename(
                     scene_num,
                     'chaptermarker',
-                    asset_config['name'],
+                    base_name,
                     version
                 )
                 filename_json = base_filename + '.json'
                 filename_png = base_filename + '.png'
+                filename_jpg = base_filename + '.jpg'
             else:
                 # Fallback to legacy naming
                 filename_json = f"{asset_config['name']}.json"
                 filename_png = f"{asset_config['name']}.png"
+                filename_jpg = f"{asset_config['name']}.jpg"
             
             # Save metadata
             output_path = output_dir / filename_json
@@ -137,6 +142,21 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             image_path = output_dir / filename_png
             urllib.request.urlretrieve(image_url, image_path)
             print(f"💾 Image saved: {image_path}")
+
+            # Convert to JPG because DaVinci Resolve sometimes prefers it or user requested it
+            # Also user specifically asked for _v1.jpg for the variation
+            try:
+                from PIL import Image
+                with Image.open(image_path) as img:
+                    rgb_im = img.convert('RGB')
+                    jpg_path = output_dir / filename_jpg
+                    rgb_im.save(jpg_path, quality=95)
+                    print(f"💾 JPG converted: {jpg_path}")
+            except ImportError:
+                 print("⚠️ PIL not installed. Skipping JPG conversion.")
+            except Exception as e:
+                 print(f"⚠️ Error converting to JPG: {e}")
+
             
             # Add to manifest if provided
             if manifest:
