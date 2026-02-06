@@ -27,6 +27,7 @@ Thumbs.db
 
 # Generated assets
 5_Symbols/generated_svgs/
+5_Symbols/generated_svg/
 5_Symbols/generated_assets/
 5_Symbols/generated_diagrams/
 5_Symbols/generated_mermaid_diagrams/
