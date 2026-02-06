@@ -262,6 +262,9 @@ python3 5_Symbols/BatchAssetGeneratorImages.py
 
 # Generate music tracks
 python3 5_Symbols/BatchAssetGeneratorMusic.py
+
+# Generate 3D models (NEW)
+python3 5_Symbols/BatchAssetGenerator3D.py
 ```
 
 **Run Master Controller (All Generators):**
@@ -410,6 +413,7 @@ flowchart LR
 - 🖼️ Images (photorealistic, stylized)
 - 🧩 Icons & graphics (vector-style)
 - 📺 Video elements (lower thirds, chapter markers)
+- 🎲 3D models (text-to-3D using Hunyuan-3D) **NEW**
 
 🎯 **Smart Asset Management**
 - 🏷️ Standardized naming with scene numbers
