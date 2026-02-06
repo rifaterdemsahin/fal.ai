@@ -1,39 +1,39 @@
 {
-  "total": 4,
-  "successful": 4,
+  "timestamp": "2026-02-06T18:06:04.589132",
+  "total": 5,
+  "successful": 5,
   "failed": 0,
+  "output_directory": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs",
   "results": [
     {
-      "svg_id": "SVG1.1",
-      "name": "agentic_era_transition",
-      "priority": "HIGH",
-      "success": true,
-      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/001_svg_agentic_era_transition_v1.svg",
-      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/001_svg_agentic_era_transition_v1.json"
+      "asset_id": "1.1",
+      "filename": "001_svg_pipeline_overview_v1.svg",
+      "filepath": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs/001_svg_pipeline_overview_v1.svg",
+      "status": "success"
     },
     {
-      "svg_id": "SVG2.1",
-      "name": "workflow_process",
-      "priority": "HIGH",
-      "success": true,
-      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/002_svg_workflow_process_v1.svg",
-      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/002_svg_workflow_process_v1.json"
+      "asset_id": "2.1",
+      "filename": "002_svg_agentic_era_transition_v1.svg",
+      "filepath": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs/002_svg_agentic_era_transition_v1.svg",
+      "status": "success"
     },
     {
-      "svg_id": "SVG3.1",
-      "name": "data_collection_understanding_notification",
-      "priority": "MEDIUM",
-      "success": true,
-      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/003_svg_data_collection_understanding_notification_v1.svg",
-      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/003_svg_data_collection_understanding_notification_v1.json"
+      "asset_id": "3.1",
+      "filename": "003_svg_workflow_process_flow_v1.svg",
+      "filepath": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs/003_svg_workflow_process_flow_v1.svg",
+      "status": "success"
     },
     {
-      "svg_id": "SVG4.1",
-      "name": "traditional_vs_agentic",
-      "priority": "MEDIUM",
-      "success": true,
-      "svg_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/004_svg_traditional_vs_agentic_v1.svg",
-      "metadata_path": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/generated_svgs/004_svg_traditional_vs_agentic_v1.json"
+      "asset_id": "4.1",
+      "filename": "004_svg_data_collection_understanding_notification_v1.svg",
+      "filepath": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs/004_svg_data_collection_understanding_notification_v1.svg",
+      "status": "success"
+    },
+    {
+      "asset_id": "5.1",
+      "filename": "005_svg_traditional_vs_agentic_v1.svg",
+      "filepath": "/home/runner/work/fal.ai/fal.ai/3_Simulation/Feb1Youtube/weekly/generated_svgs/005_svg_traditional_vs_agentic_v1.svg",
+      "status": "success"
     }
   ]
 }
