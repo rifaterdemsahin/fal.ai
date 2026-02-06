@@ -7,6 +7,7 @@ Common functionality for all asset generators
 import os
 import json
 import urllib.request
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from abc import ABC, abstractmethod
@@ -30,6 +31,10 @@ from asset_utils import generate_filename, extract_scene_number, ManifestTracker
 
 # Import configuration (relative import from same package)
 from .generator_config import OUTPUT_FORMATS
+
+# Pre-compute image asset types that support conversion (computed once at module level)
+IMAGE_ASSET_TYPES = [k for k, v in OUTPUT_FORMATS.items() 
+                     if v in ('jpeg', 'png') and k != 'svg']
 
 
 class BaseAssetGenerator(ABC):
@@ -276,18 +281,18 @@ class BaseAssetGenerator(ABC):
             print(f"💾 Metadata saved: {metadata_path}")
             
             # Download asset from fal.ai (always downloads as PNG for images)
-            temp_path = self.output_dir / f"{base_filename}_temp.png"
+            # Use timestamp to ensure unique temporary filename for thread safety
+            timestamp = int(time.time() * 1000)  # milliseconds
+            temp_path = self.output_dir / f"{base_filename}_temp_{timestamp}.png"
             asset_path = self.output_dir / filename_asset
             
             # Determine if we need conversion
             # Only convert to JPEG if:
             # 1. The output format is 'jpeg'
             # 2. The asset type is one that supports conversion (image-based assets)
-            image_asset_types = [k for k, v in OUTPUT_FORMATS.items() 
-                                if v in ('jpeg', 'png') and k != 'svg']
             needs_conversion = (
                 extension == 'jpeg' and 
-                self.asset_type in image_asset_types
+                self.asset_type in IMAGE_ASSET_TYPES
             )
             
             if needs_conversion:
