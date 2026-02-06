@@ -39,24 +39,30 @@ GENERATION_QUEUE = [
         "name": "tech_innovation_background",
         "priority": "HIGH",
         "prompt": "Upbeat, tech-focused background track, modern synthesizer, rhythmic, innovation, energetic but not distracting, suitable for technology tutorial video, high quality audio",
-        "model": "fal-ai/stable-audio",
-        "seconds_total": 47,
+        "model": "beatoven/music-generation",
+        "duration": 90,
+        "creativity": 14,
+        "refinement": 100,
     },
     {
         "id": "music_02",
         "name": "cta_energy_build",
         "priority": "HIGH",
         "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid, inspiring, driving rhythm, building tension and release, suitable for call to action, high quality",
-        "model": "fal-ai/stable-audio",
-        "seconds_total": 47,
+        "model": "beatoven/music-generation",
+        "duration": 60,
+        "creativity": 16,
+        "refinement": 100,
     },
     {
         "id": "music_03",
         "name": "screen_recording_bed",
         "priority": "MEDIUM",
         "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle, non-intrusive, suitable for concentration and screen recording demonstration, high quality",
-        "model": "fal-ai/stable-audio",
-        "seconds_total": 47,
+        "model": "beatoven/music-generation",
+        "duration": 120,
+        "creativity": 12,
+        "refinement": 100,
     }
 ]
 
@@ -67,15 +73,33 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     print(f"🎵 Generating: {asset_config['name']}")
     print(f"   Priority: {asset_config.get('priority', 'MEDIUM')}")
     print(f"   Model: {asset_config['model']}")
-    print(f"   Duration: {asset_config['seconds_total']}s")
+    print(f"   Duration: {asset_config.get('duration', asset_config.get('seconds_total', 'N/A'))}s")
     print(f"{'='*60}")
     
     try:
-        # Prepare arguments
+        # Prepare arguments for Beatoven model
         arguments = {
             "prompt": asset_config["prompt"],
-            "seconds_total": asset_config["seconds_total"],
         }
+        
+        # Add duration (support both 'duration' and legacy 'seconds_total')
+        if "duration" in asset_config:
+            arguments["duration"] = asset_config["duration"]
+        elif "seconds_total" in asset_config:
+            arguments["duration"] = asset_config["seconds_total"]
+        
+        # Add optional Beatoven parameters
+        if "negative_prompt" in asset_config:
+            arguments["negative_prompt"] = asset_config["negative_prompt"]
+        
+        if "refinement" in asset_config:
+            arguments["refinement"] = asset_config["refinement"]
+        
+        if "creativity" in asset_config:
+            arguments["creativity"] = asset_config["creativity"]
+        
+        if "seed" in asset_config:
+            arguments["seed"] = asset_config["seed"]
         
         # Generate audio
         print("⏳ Sending request to fal.ai...")
@@ -85,12 +109,12 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         )
         
         # Download and save
-        # Stable Audio usually returns 'audio_file' or similar dict
-        # We need to inspect the result structure. 
-        # Typically: {'audio_file': {'url': '...', 'content_type': 'audio/mpeg', ...}}
+        # Beatoven returns: {"audio": {"url": "...", "content_type": "audio/wav", ...}, "prompt": "...", "metadata": {...}}
         
         audio_url = None
-        if result and "audio_file" in result:
+        if result and "audio" in result and "url" in result["audio"]:
+            audio_url = result["audio"]["url"]
+        elif result and "audio_file" in result:
             audio_url = result["audio_file"]["url"]
         elif result and "url" in result:
              audio_url = result["url"]
@@ -99,9 +123,12 @@ def generate_audio(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             print(f"✅ Generated successfully!")
             print(f"   URL: {audio_url}")
             
-            # Determine extension
-            ext = ".mp3" # Defaulting to mp3
-            if "wav" in audio_url.lower():
+            # Determine extension - Beatoven outputs WAV
+            ext = ".wav"
+            if "mp3" in audio_url.lower():
+                ext = ".mp3"
+            elif "wav" not in audio_url.lower():
+                # Default to wav for Beatoven
                 ext = ".wav"
             
             # Generate filename using new convention if available

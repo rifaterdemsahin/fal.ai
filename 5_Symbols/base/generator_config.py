@@ -31,7 +31,7 @@ DEFAULT_MODELS = {
     "image": "fal-ai/flux/dev",
     "image_fast": "fal-ai/flux/schnell",
     "video": "fal-ai/minimax/video-01",
-    "music": "fal-ai/stable-audio",
+    "music": "beatoven/music-generation",
     "3d": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
 }
 
@@ -55,7 +55,7 @@ OUTPUT_FORMATS = {
     "memory_palace": "jpeg",  # Memory palace images have solid backgrounds
     "chapter_marker": "jpeg", # Chapter markers have solid backgrounds
     "video": "mp4",           # Video format
-    "music": "mp3",           # Audio format
+    "music": "wav",           # Audio format (Beatoven outputs WAV)
     "audio": "mp3",           # Audio format
     "3d": "glb",              # 3D models in GLB format (glTF binary)
 }

@@ -54,7 +54,7 @@ class BaseAssetGenerator(ABC):
         'memory_palace': 'png',
         'chapter_marker': 'png',
         'video': 'mp4',
-        'music': 'mp3',
+        'music': 'wav',
         'audio': 'mp3',
         '3d': 'glb',
     }
