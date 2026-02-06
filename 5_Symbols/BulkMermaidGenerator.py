@@ -7,6 +7,7 @@ Generates Mermaid diagrams for documentation, workflows, and visual explanations
 
 import os
 import json
+import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
@@ -211,8 +212,99 @@ def generate_mermaid_diagram(
             "type": diagram_type
         }
 
+def convert_to_jpeg(md_filepath: str) -> Optional[str]:
+    """
+    Convert Mermaid markdown file to JPEG using mermaid-cli (via PNG intermediate)
+    
+    Args:
+        md_filepath: Path to the markdown file
+    
+    Returns:
+        Path to the generated JPEG file or None if conversion failed
+    """
+    try:
+        # Get the base path without extension
+        base_path = Path(md_filepath).with_suffix('')
+        png_path = f"{base_path}.png"
+        jpeg_path = f"{base_path}.jpeg"
+        
+        # Check if mmdc (mermaid-cli) is available
+        mmdc_path = Path(__file__).parent / "node_modules" / ".bin" / "mmdc"
+        puppeteer_config = Path(__file__).parent / "puppeteer-config.json"
+        
+        # Remove existing PNG if it exists (to avoid -1 suffix)
+        if Path(png_path).exists():
+            Path(png_path).unlink()
+        
+        # Step 1: Convert to PNG using mermaid-cli
+        cmd = [
+            str(mmdc_path) if mmdc_path.exists() else "mmdc",
+            "-i", md_filepath,
+            "-o", png_path,
+            "-b", "white",  # White background
+            "-t", "default"  # Default theme
+        ]
+        
+        # Add puppeteer config if it exists
+        if puppeteer_config.exists():
+            cmd.extend(["-p", str(puppeteer_config)])
+        
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        # mmdc might add a suffix like -1.png, check for that
+        actual_png_path = png_path
+        if not Path(png_path).exists():
+            # Look for files with -1, -2, etc. suffix
+            for suffix in ["-1", "-2", "-3"]:
+                candidate = f"{base_path}{suffix}.png"
+                if Path(candidate).exists():
+                    actual_png_path = candidate
+                    break
+        
+        if result.returncode != 0 or not Path(actual_png_path).exists():
+            if result.stderr:
+                print(f"⚠️  PNG conversion warning: {result.stderr}")
+            return None
+        
+        # Step 2: Convert PNG to JPEG using Pillow
+        try:
+            from PIL import Image
+            
+            # Open PNG and convert to RGB (JPEG doesn't support transparency)
+            img = Image.open(actual_png_path)
+            if img.mode in ('RGBA', 'LA', 'P'):
+                # Create a white background
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                if img.mode == 'P':
+                    img = img.convert('RGBA')
+                background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                img = background
+            else:
+                img = img.convert('RGB')
+            
+            # Save as JPEG
+            img.save(jpeg_path, 'JPEG', quality=95)
+            
+            # Clean up the intermediate PNG file
+            Path(actual_png_path).unlink()
+            
+            return jpeg_path
+            
+        except ImportError:
+            print(f"⚠️  Pillow not available. Keeping PNG file instead of JPEG.")
+            return actual_png_path
+            
+    except Exception as e:
+        print(f"⚠️  JPEG conversion failed: {str(e)}")
+        return None
+
 def save_diagram_to_file(diagram: Dict, asset_id: str, filename: str) -> str:
-    """Save diagram to markdown file"""
+    """Save diagram to markdown file and optionally to JPEG"""
     filepath = OUTPUT_DIR / filename
     
     with open(filepath, 'w', encoding='utf-8') as f:
@@ -221,6 +313,11 @@ def save_diagram_to_file(diagram: Dict, asset_id: str, filename: str) -> str:
         f.write(f"**Generated:** {diagram['timestamp']}\n\n")
         f.write(diagram['diagram_text'])
         f.write("\n")
+    
+    # Also generate JPEG version
+    jpeg_path = convert_to_jpeg(str(filepath))
+    if jpeg_path:
+        print(f"   📸 JPEG: {Path(jpeg_path).name}")
     
     return str(filepath)
 
