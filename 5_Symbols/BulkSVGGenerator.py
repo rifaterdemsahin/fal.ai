@@ -16,12 +16,13 @@ from xml.dom import minidom
 
 # Import asset utilities for naming and manifest tracking
 try:
-    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from asset_utils import generate_filename, extract_scene_number, ManifestTracker, convert_svg_to_jpeg
 except ImportError:
     print("⚠️  asset_utils not found. Using legacy naming convention.")
     generate_filename = None
     extract_scene_number = None
     ManifestTracker = None
+    convert_svg_to_jpeg = None
 
 # Configuration
 # Default to weekly folder for GitHub Actions workflow
@@ -583,11 +584,17 @@ def generate_svg(config: Dict, metadata: Optional[Dict] = None) -> Dict:
 
 
 def save_svg_to_file(svg_result: Dict, asset_id: str, filename: str) -> str:
-    """Save SVG to file"""
+    """Save SVG to file and also create a JPEG version"""
     filepath = OUTPUT_DIR / filename
     
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(svg_result['svg_text'])
+    
+    # Also save JPEG version
+    if convert_svg_to_jpeg:
+        jpeg_path = convert_svg_to_jpeg(filepath)
+        if jpeg_path:
+            print(f"📸 JPEG version saved: {jpeg_path.name}")
     
     return str(filepath)
 

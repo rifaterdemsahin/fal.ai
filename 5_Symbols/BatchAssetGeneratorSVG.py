@@ -18,13 +18,14 @@ current_dir = Path(__file__).parent
 project_root = current_dir.parent
 
 try:
-    from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from asset_utils import generate_filename, extract_scene_number, ManifestTracker, convert_svg_to_jpeg
 except ImportError:
     # Fallback if running standalone
     print("⚠️  asset_utils not found. Using legacy naming convention.")
     generate_filename = None
     extract_scene_number = None
     ManifestTracker = None
+    convert_svg_to_jpeg = None
 
 # Configuration - output to 3_Simulation/Feb1Youtube/generated_svgs
 OUTPUT_DIR = project_root / "3_Simulation" / "Feb1Youtube" / "generated_svgs"
@@ -527,6 +528,12 @@ def generate_svg(config: Dict, output_dir: Path, manifest: Optional[object] = No
         
         print(f"✅ SVG generated successfully!")
         print(f"💾 Saved to: {svg_path}")
+        
+        # Also save JPEG version
+        if convert_svg_to_jpeg:
+            jpeg_path = convert_svg_to_jpeg(svg_path)
+            if jpeg_path:
+                print(f"📸 JPEG version saved: {jpeg_path.name}")
         
         # Create prompt description for manifest
         prompt_description = f"{config.get('scene', 'Scene')}: {config['diagram_type']} diagram showing {config['name']}"
