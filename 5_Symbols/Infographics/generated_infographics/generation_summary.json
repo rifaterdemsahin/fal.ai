@@ -1,16 +1,14 @@
 {
   "total": 1,
-  "successful": 1,
-  "failed": 0,
+  "successful": 0,
+  "failed": 1,
   "results": [
     {
       "asset_id": "INFO_01",
       "name": "ai_adoption_stats",
       "priority": "HIGH",
-      "success": true,
-      "url": "https://v3b.fal.media/files/b/0a8d78f3/h3h3GzgNJmAsb25vrWQrx.jpg",
-      "local_path": "generated_infographics\\000_infographic_ai_adoption_stats_v1.png",
-      "filename": "000_infographic_ai_adoption_stats_v1.png"
+      "success": false,
+      "error": "cannot access local variable 'image_url' where it is not associated with a value"
     }
   ]
 }

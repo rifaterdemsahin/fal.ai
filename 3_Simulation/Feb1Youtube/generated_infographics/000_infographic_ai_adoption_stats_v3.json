@@ -1,0 +1,19 @@
+{
+  "id": "INFO_01",
+  "name": "ai_adoption_stats",
+  "priority": "HIGH",
+  "scene": "Scene 1: Introduction",
+  "seed_key": "SEED_002",
+  "prompt": "Clean, modern bar chart infographic showing 'AI Adoption Rate' rising from 10% in 2020 to 85% in 2026. Data visualization style with sleek bars in gradient blue (#00d4ff) to purple (#7b2cbf). Dark background (#1a1a2e). Text labels in white sans-serif font. Professional business aesthetic, 16:9 aspect ratio, High resolution, 8k, sharp vector graphics, clear text.",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8d799c/F9XJ7hw6hMtMk7-VrH1up.jpg",
+  "seed_value": 123456,
+  "filename": "000_infographic_ai_adoption_stats_v3.png",
+  "upscaled": true,
+  "upscale_model": "fal-ai/aura-sr"
+}

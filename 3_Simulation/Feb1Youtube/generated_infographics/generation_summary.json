@@ -1,0 +1,16 @@
+{
+  "total": 1,
+  "successful": 1,
+  "failed": 0,
+  "results": [
+    {
+      "asset_id": "INFO_01",
+      "name": "ai_adoption_stats",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8d799c/F9XJ7hw6hMtMk7-VrH1up.jpg",
+      "local_path": "C:\\projects\\fal.ai\\3_Simulation\\Feb1Youtube\\generated_infographics\\000_infographic_ai_adoption_stats_v3.png",
+      "filename": "000_infographic_ai_adoption_stats_v3.png"
+    }
+  ]
+}

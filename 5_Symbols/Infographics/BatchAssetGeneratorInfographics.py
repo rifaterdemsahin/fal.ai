@@ -34,8 +34,8 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_infographics")
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\generated_infographics")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Consistency seeds
 SEEDS = {
@@ -93,12 +93,31 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             arguments=arguments,
         )
         
-        # Download and save
         if result and "images" in result and len(result["images"]) > 0:
             image_url = result["images"][0]["url"]
             print(f"✅ Generated successfully!")
             print(f"   URL: {image_url}")
             
+            # Upscaling with AuraSR for V3 (Sharpness)
+            print("✨ Upscaling with AuraSR for maximum sharpness...")
+            try:
+                upscale_arguments = {
+                    "image_url": image_url
+                }
+                upscale_result = fal_client.subscribe(
+                    "fal-ai/aura-sr",
+                    arguments=upscale_arguments,
+                )
+                if upscale_result and "images" in upscale_result and len(upscale_result["images"]) > 0:
+                    image_url = upscale_result["images"][0]["url"]
+                    print(f"✅ Upscaled successfully!")
+                    print(f"   Upscaled URL: {image_url}")
+                else:
+                    print("⚠️ Upscaling returned no images, using original.")
+            except Exception as e:
+                 print(f"⚠️ Upscaling failed: {e}, using original.")
+
+            # Download and save
             # Generate filename
             if generate_filename and extract_scene_number:
                 # Attempt to extract a number if possible, or use a default
@@ -127,6 +146,8 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 "result_url": image_url,
                 "seed_value": SEEDS.get(asset_config["seed_key"], 0),
                 "filename": filename_png,
+                "upscaled": True,
+                "upscale_model": "fal-ai/aura-sr"
             }
             
             with open(output_path, 'w') as f:
@@ -153,6 +174,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                         "scene": asset_config.get("scene", ""),
                         "priority": asset_config.get("priority", ""),
                         "model": asset_config.get("model", ""),
+                        "upscaled": True
                     }
                 )
             
@@ -209,7 +231,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
         print(f"# Asset {i}/{len(queue)}")
         print(f"{'#'*60}")
         
-        result = generate_asset(asset, output_dir, manifest)
+        result = generate_asset(asset, output_dir, manifest, version=3)
         results.append({
             "asset_id": asset["id"],
             "name": asset["name"],
