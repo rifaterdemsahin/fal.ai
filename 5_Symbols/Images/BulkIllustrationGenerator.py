@@ -29,8 +29,11 @@ if "FAL_KEY" not in os.environ:
     pass
 
 # Configuration
-OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\generated_illustrations")
-DATA_PATH = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml")
+# Use relative paths from the script location
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent.parent
+OUTPUT_DIR = REPO_ROOT / "3_Simulation" / "Feb1Youtube" / "generated_illustrations"
+DATA_PATH = REPO_ROOT / "3_Simulation" / "Feb1Youtube" / "_source" / "batch_generation_data.yaml"
 
 def load_config() -> list:
     """Load the images section from the batch generation data YAML."""
