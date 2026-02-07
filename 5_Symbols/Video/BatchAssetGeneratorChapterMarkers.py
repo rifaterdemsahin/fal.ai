@@ -64,7 +64,7 @@ def load_queue():
         print(f"❌ Error loading configuration: {e}")
         return []
 
-GENERATION_QUEUE = load_queue()
+GENERATION_QUEUE = [item for item in load_queue() if item.get('id') == 'CH_12']
 
 def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single asset using fal.ai"""

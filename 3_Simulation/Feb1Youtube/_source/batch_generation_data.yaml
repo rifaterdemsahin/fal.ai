@@ -703,6 +703,19 @@ chapters:
       height: 1080
     num_inference_steps: 4
 
+  - id: "CH_12"
+    name: "chapter_12_mcp_secret_sauce"
+    priority: "HIGH"
+    scene: "Chapter 12: MCP Secret Sauce"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "13:30"
+    prompt: "Cinematic video chapter title card with text 'How do you build this many workflows?\\nThe MCP Secret Sauce' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
 infographics:
   - id: "INFO_01"
     name: "ai_adoption_stats"
