@@ -150,12 +150,14 @@ def save_image(url: str, filename: str):
         jpg_filepath = filepath.with_suffix(".jpg")
         print(f"💾 Converting and saving to {jpg_filepath}...")
         img = Image.open(filepath)
-        # Convert RGBA to RGB if necessary (JPG doesn't support transparency)
+        # Convert to RGB if necessary (JPG doesn't support transparency)
         if img.mode in ('RGBA', 'LA', 'P'):
-            rgb_img = Image.new('RGB', img.size, (255, 255, 255))
-            if img.mode == 'P':
+            # Convert all non-RGB modes to RGBA first for consistent handling
+            if img.mode != 'RGBA':
                 img = img.convert('RGBA')
-            rgb_img.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+            # Create RGB image with white background
+            rgb_img = Image.new('RGB', img.size, (255, 255, 255))
+            rgb_img.paste(img, mask=img.split()[-1])
             rgb_img.save(jpg_filepath, 'JPEG', quality=95)
         else:
             img.save(jpg_filepath, 'JPEG', quality=95)
