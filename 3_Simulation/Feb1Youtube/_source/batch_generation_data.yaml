@@ -68,6 +68,7 @@ images:
     scene: "Scene 1: Hook"
     seed_key: "SEED_003"
     prompt: "Sleek red Ferrari sports car icon smoothly morphing into simple shopping cart icon, clean vector style, white/transparent background, particle effects during transformation, professional tech presentation aesthetic, minimalist flat design, modern motion graphics style, 16:9 aspect ratio, high quality, sharp details"
+    search_query: "red ferrari 488 side view white background"
     model: "fal-ai/flux/schnell"
     image_size:
       width: 1920
@@ -164,6 +165,7 @@ images:
     scene: "Scene 4: Skills Gap"
     seed_key: "SEED_001"
     prompt: "Cinematic shot of empty UK high street on Sunday evening, closed shop fronts with metal shutters down, dim streetlights beginning to illuminate, deserted pedestrian area, typical British town center architecture, moody atmospheric lighting, golden hour or early dusk, realistic urban photography style, slight film grain, 16:9 cinematic aspect ratio, melancholic mood"
+    search_query: "empty uk high street shops closed evening"
     model: "fal-ai/flux/dev"
     image_size:
       width: 1920
@@ -723,6 +725,19 @@ chapters:
     seed_key: "SEED_CHAPTERS"
     timestamp: "13:30"
     prompt: "Cinematic video chapter title card with text 'How do you build this many workflows?\\nThe MCP Secret Sauce' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+  - id: "CH_13"
+    name: "chapter_13_monitoring_agents"
+    priority: "HIGH"
+    scene: "Chapter 13: Monitoring Agents"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "14:15"
+    prompt: "Cinematic video chapter title card with text 'Monitoring Agents is Part of Your Job' written in large, bold, futuristic sans-serif font centered. Background is a sleek, modern tech abstract design with deep dark blue (#1a1a2e) and glowing accents in cyan (#00d4ff) and purple (#7b2cbf). High contrast, professional motion graphics style, 8k resolution, highly detailed, digital interface elements, subtle grid patterns, glassmorphism effects. Text must be clearly legible and the focal point."
     model: "fal-ai/flux/dev"
     image_size:
       width: 1920
