@@ -219,6 +219,19 @@ images:
       height: 1080
     num_inference_steps: 28
 
+
+  - id: "12.1"
+    name: "no_magic_agents"
+    priority: "HIGH"
+    scene: "Scene 12"
+    seed_key: "SEED_002"
+    prompt: "Futuristic digital background with abstract agent network nodes connecting. In the center foreground, clear bold text reading 'No magic ! Use agent to build agents'. The text is glowing white or cyan against the dark blue tech background (#1a1a2e). Professional typography, high quality render, 16:9 aspect ratio."
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
 video:
   - id: "4.1"
     name: "uk_streets_sunday"
