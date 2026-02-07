@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 from typing import Optional, Dict, Any
 from dotenv import load_dotenv
+from PIL import Image
 
 # Load environment variables from ../.env
 env_path = Path(__file__).resolve().parent.parent / '.env'
@@ -131,7 +132,7 @@ def generate_text_to_image(prompt: str, model: str = "fal-ai/flux/dev") -> Optio
         return None
 
 def save_image(url: str, filename: str):
-    """Download and save the image."""
+    """Download and save the image in both PNG and JPG formats."""
     try:
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         filepath = OUTPUT_DIR / filename
@@ -143,7 +144,22 @@ def save_image(url: str, filename: str):
         print(f"💾 Saving to {filepath}...")
         import urllib.request
         urllib.request.urlretrieve(url, filepath)
-        print("   ✓ Saved.")
+        print("   ✓ Saved PNG.")
+        
+        # Also save as JPG
+        jpg_filepath = filepath.with_suffix(".jpg")
+        print(f"💾 Converting and saving to {jpg_filepath}...")
+        img = Image.open(filepath)
+        # Convert RGBA to RGB if necessary (JPG doesn't support transparency)
+        if img.mode in ('RGBA', 'LA', 'P'):
+            rgb_img = Image.new('RGB', img.size, (255, 255, 255))
+            if img.mode == 'P':
+                img = img.convert('RGBA')
+            rgb_img.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+            rgb_img.save(jpg_filepath, 'JPEG', quality=95)
+        else:
+            img.save(jpg_filepath, 'JPEG', quality=95)
+        print("   ✓ Saved JPG.")
     except Exception as e:
         print(f"   ✗ Error saving image: {e}")
 
