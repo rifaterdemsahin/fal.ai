@@ -14,6 +14,8 @@ from typing import Dict, List, Tuple, Optional
 # Install: pip install fal-client
 try:
     import fal_client
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent.parent / ".env")
 except ImportError:
     print("❌ fal_client not installed. Run: pip install fal-client")
     exit(1)

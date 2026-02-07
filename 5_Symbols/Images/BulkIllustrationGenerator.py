@@ -11,6 +11,11 @@ import json
 import time
 from pathlib import Path
 from typing import Optional, Dict, Any
+from dotenv import load_dotenv
+
+# Load environment variables from ../.env
+env_path = Path(__file__).resolve().parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # 1. Setup Keys
 # Keys should be set in environment variables or .env file
@@ -23,7 +28,7 @@ if "FAL_KEY" not in os.environ:
     pass
 
 # Configuration
-OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube")
+OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\generated_illustrations")
 DATA_PATH = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml")
 
 def load_config() -> list:
