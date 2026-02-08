@@ -25,7 +25,6 @@ try:
 except ImportError:
     # Fallback if running standalone
     import sys
-    from pathlib import Path
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     try:
         from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
@@ -158,12 +157,13 @@ def generate_anime_scene(
         
         # Add model-specific parameters
         if "minimax" in model_id:
-            # Minimax video generation
-            pass  # Usually just takes prompt
+            # Minimax video generation - uses prompt only
+            # Future parameters can be added here when supported
+            pass
         elif "kling" in model_id:
             # Kling video generation
             arguments["aspect_ratio"] = scene_config.get("aspect_ratio", "16:9")
-            arguments["duration"] = str(scene_config.get("duration_seconds", 5)) + "s"
+            arguments["duration"] = f"{scene_config.get('duration_seconds', 5)}s"
         elif "flux" in model_id:
             # Flux image generation (for anime stills)
             arguments["image_size"] = scene_config.get("image_size", {"width": 1920, "height": 1080})

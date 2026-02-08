@@ -274,13 +274,15 @@ export FAL_KEY='your-api-key-here'
 
 ## Cost Estimation
 
-Anime generation costs vary by model:
+Anime generation costs vary by model (pricing as of February 2026, subject to change):
 
 - **Minimax Video**: ~$0.10-0.20 per 5-second clip
 - **Kling Video**: ~$0.15-0.30 per 5-second clip  
 - **Flux Image**: ~$0.01-0.05 per image
 
 **Example**: A 22-scene storyline with Minimax would cost approximately $2.20-4.40
+
+**Note**: Please verify current pricing at [fal.ai/pricing](https://fal.ai/pricing) as rates may change.
 
 Use the cost estimator:
 ```bash

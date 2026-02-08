@@ -129,7 +129,7 @@ See [ANIME_GENERATOR_GUIDE.md](./ANIME_GENERATOR_GUIDE.md) for complete document
 ## Example Storylines
 
 1. **Simple Demo** (5 scenes) - Built-in default
-2. **Full Adventure** (22 scenes) - `/3_Simulation/Feb1Youtube/anime_storyline.json`
+2. **Full Adventure** (22 scenes) - `3_Simulation/Feb1Youtube/anime_storyline.json`
 
 ## Troubleshooting
 
