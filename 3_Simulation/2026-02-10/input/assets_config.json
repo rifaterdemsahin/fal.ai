@@ -1,0 +1,10 @@
+{
+  "images": [
+    {
+      "id": "test_image_001",
+      "prompt": "A futuristic cityscape at sunset",
+      "model": "fal-ai/flux/schnell",
+      "seed": 42
+    }
+  ]
+}
