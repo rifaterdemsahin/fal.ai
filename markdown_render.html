@@ -291,14 +291,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📄 Markdown Documentation Viewer</h1>
+            <h1 aria-label="Markdown Documentation Viewer">📄 Markdown Documentation Viewer</h1>
             <p>Browse and view all markdown documentation files for the fal.ai Video Creation Pipeline</p>
             <a href="index.html" class="home-button">🏠 Back to Home</a>
         </div>
         
         <div class="main-content">
             <aside class="sidebar">
-                <h2>📚 Documentation</h2>
+                <h2 aria-label="Documentation">📚 Documentation</h2>
                 <ul class="doc-list">
                     <li class="doc-category">
                         <h3>🎯 Main Docs</h3>
@@ -380,7 +380,7 @@
             breaks: true,
             gfm: true,
             headerIds: true,
-            mangle: false
+            mangle: true  // Enable email obfuscation for security
         });
         
         // Get all document links
@@ -399,7 +399,15 @@
                 }
                 
                 const markdownText = await response.text();
-                const htmlContent = marked.parse(markdownText);
+                let htmlContent = marked.parse(markdownText);
+                
+                // Basic XSS protection: Remove dangerous script tags and event handlers
+                // For a production environment, consider using DOMPurify library
+                htmlContent = htmlContent
+                    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                    .replace(/on\w+="[^"]*"/g, '')
+                    .replace(/on\w+='[^']*'/g, '');
+                
                 contentArea.innerHTML = htmlContent;
                 
                 // Scroll to top
