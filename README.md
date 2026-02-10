@@ -1,4 +1,6 @@
 # 🎬 Weekly Video Creation Pipeline with Gemini Agent
+> https://rifaterdemsahin.github.io/fal.ai/
+
 
 > 🤖 **Automated multimedia asset generation pipeline using fal.ai and Gemini AI for weekly video production**
 
