@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📄 Markdown Documentation Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .sidebar h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .doc-list {
+            list-style: none;
+        }
+        
+        .doc-category {
+            margin-bottom: 25px;
+        }
+        
+        .doc-category h3 {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .doc-link {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #555;
+            background: #f8f9ff;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .doc-link:hover {
+            background: #667eea;
+            color: white;
+            border-left-color: #764ba2;
+            transform: translateX(5px);
+        }
+        
+        .doc-link.active {
+            background: #667eea;
+            color: white;
+            border-left-color: #764ba2;
+        }
+        
+        .content-area {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 600px;
+        }
+        
+        .markdown-body {
+            color: #333;
+        }
+        
+        .markdown-body h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .markdown-body h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e4ff;
+        }
+        
+        .markdown-body h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+        
+        .markdown-body h4 {
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .markdown-body p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .markdown-body ul, .markdown-body ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .markdown-body li {
+            margin-bottom: 8px;
+        }
+        
+        .markdown-body code {
+            background: #f8f9ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+        
+        .markdown-body pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .markdown-body pre code {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+        
+        .markdown-body blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+            background: #f8f9ff;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+        
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .markdown-body th, .markdown-body td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .markdown-body th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .markdown-body tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+        
+        .markdown-body a {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .markdown-body a:hover {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        
+        .error {
+            background: #fee;
+            border: 2px solid #f44;
+            color: #c00;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .home-button {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .home-button:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 Markdown Documentation Viewer</h1>
+            <p>Browse and view all markdown documentation files for the fal.ai Video Creation Pipeline</p>
+            <a href="index.html" class="home-button">🏠 Back to Home</a>
+        </div>
+        
+        <div class="main-content">
+            <aside class="sidebar">
+                <h2>📚 Documentation</h2>
+                <ul class="doc-list">
+                    <li class="doc-category">
+                        <h3>🎯 Main Docs</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file="README.md">Main README</a></li>
+                            <li><a href="#" class="doc-link" data-file="antigravity.md">Antigravity Overview</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="doc-category">
+                        <h3>📖 Setup & Formula</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/README.md">Formula Guide</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/QUICK_START_GUIDE.md">Quick Start</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/SETUP_API_Key.md">API Key Setup</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/SETUP_GitHub_Secrets.md">GitHub Secrets</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/prerequisites_README.md">Prerequisites</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="doc-category">
+                        <h3>🎬 Asset Generators</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/ANIME_GENERATOR_GUIDE.md">Anime Generator</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/ANIME_QUICK_REFERENCE.md">Anime Quick Ref</a></li>
+                            <li><a href="#" class="doc-link" data-file="5_Symbols/Images/THUMBNAIL_GENERATOR.md">Thumbnail Generator</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/README_3D_GENERATOR.md">3D Generator</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/README_SVG_GENERATOR.md">SVG Generator</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="doc-category">
+                        <h3>📋 Workflows</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file=".github/workflows/README.md">Workflows Guide</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/WORKFLOW_Safe_PNG.md">Safe PNG Workflow</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/WORKFLOW_Download_MP3.md">Download MP3</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/WORKFLOW_Run_Music_Generator.md">Run Music Gen</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="doc-category">
+                        <h3>📊 Project Structure</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file="1_RealUnknown/README.md">Objectives (OKRs)</a></li>
+                            <li><a href="#" class="doc-link" data-file="2_Environment/README.md">Environment</a></li>
+                            <li><a href="#" class="doc-link" data-file="5_Symbols/README.md">Core Symbols</a></li>
+                            <li><a href="#" class="doc-link" data-file="7_TestingKnown/README.md">Testing</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="doc-category">
+                        <h3>📝 References</h3>
+                        <ul>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/VERSIONING_AND_MANIFEST.md">Versioning System</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/OUTPUT_FORMAT_DOCUMENTATION.md">Output Formats</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/WEEKLY_STRUCTURE.md">Weekly Structure</a></li>
+                            <li><a href="#" class="doc-link" data-file="4_Formula/WEEKLY_VIDEO_INPUTS_FORMULA.md">Video Inputs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+            
+            <main class="content-area">
+                <div id="markdown-content" class="markdown-body">
+                    <div class="loading">
+                        <h2>👈 Select a document from the sidebar to view</h2>
+                        <p>All markdown documentation files are available for browsing</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Initialize marked for markdown parsing
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+        
+        // Get all document links
+        const docLinks = document.querySelectorAll('.doc-link');
+        const contentArea = document.getElementById('markdown-content');
+        
+        // Function to load and display markdown file
+        async function loadMarkdown(filePath) {
+            contentArea.innerHTML = '<div class="loading">⏳ Loading document...</div>';
+            
+            try {
+                const response = await fetch(filePath);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load file: ${response.statusText}`);
+                }
+                
+                const markdownText = await response.text();
+                const htmlContent = marked.parse(markdownText);
+                contentArea.innerHTML = htmlContent;
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Error Loading Document</h3>
+                        <p><strong>File:</strong> ${filePath}</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>This file may not exist in the current branch or may be inaccessible.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Add click handlers to all doc links
+        docLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                docLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Get file path from data attribute
+                const filePath = link.getAttribute('data-file');
+                
+                // Load the markdown file
+                loadMarkdown(filePath);
+            });
+        });
+        
+        // Load default document (README.md) on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const defaultLink = document.querySelector('.doc-link[data-file="README.md"]');
+            if (defaultLink) {
+                defaultLink.click();
+            }
+        });
+    </script>
+</body>
+</html>
