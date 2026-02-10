@@ -10,7 +10,7 @@ def collect_feedback_yaml():
     for root, dirs, files in os.walk('.'):
         dirs[:] = [d for d in dirs if d not in IGNORE_LIST]
         for file in files:
-            if file not in IGNORE_LIST and not file.endswith(('.txt', '.yaml', '.py')):
+            if file not in IGNORE_LIST and not file.endswith(('.yaml', '.pyc', '.png', '.jpg', '.jpeg', '.gif', '.svg')):
                 files_to_process.append(os.path.join(root, file))
 
     if not files_to_process:
