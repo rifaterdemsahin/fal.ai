@@ -32,9 +32,11 @@ pip install -r requirements.txt
 
 ### 🔑 Environment Variables
 - **[`4_Formula/.env.sample`](../4_Formula/.env.sample)** - Template for local environment configuration
-  - `FAL_KEY` - fal.ai API key for model generation
+  - `FAL_KEY` - fal.ai API key for model generation (local development)
   - `GOOGLE_API_KEY` - Google Custom Search API key
   - `GOOGLE_CSE_ID` - Google Custom Search Engine ID
+
+**Note**: For GitHub Actions, the secret is named `FAL_API_KEY` but is automatically mapped to the `FAL_KEY` environment variable in workflows.
 
 ### 🎯 Generator Configuration
 - **[`5_Symbols/base/generator_config.py`](../5_Symbols/base/generator_config.py)** - Centralized generator settings
@@ -74,8 +76,8 @@ pip install -r requirements.txt
 | 🚀 **All Bulk Generators** | Run multiple generators at once | [`all-bulk-generators.yml`](../.github/workflows/all-bulk-generators.yml) |
 
 **Secrets Configuration**:
-- `FAL_API_KEY` - Repository secret for fal.ai API access
-- Automatically injected into workflow environments
+- `FAL_API_KEY` - Repository secret for fal.ai API access (set in GitHub, automatically injected as `FAL_KEY` environment variable in workflows)
+- See [`.env.sample`](../4_Formula/.env.sample) for required environment variables
 
 **Detailed Documentation**: [`.github/workflows/README.md`](../.github/workflows/README.md)
 
