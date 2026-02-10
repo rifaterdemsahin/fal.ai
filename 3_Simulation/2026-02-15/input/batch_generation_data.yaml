@@ -82,3 +82,18 @@ infographics:
       width: 
       height: 
     num_inference_steps:
+
+memory_palace:
+  - id: ""
+    name: ""
+    priority: ""  # HIGH, MEDIUM, LOW
+    scene: ""
+    seed_key: ""
+    prompt: ""
+    model: ""  # e.g., fal-ai/flux/dev
+    image_size:
+      width: 
+      height: 
+    num_inference_steps:
+    memory_location: ""  # e.g., entrance, hallway, chamber
+    concept: ""  # The concept this location represents

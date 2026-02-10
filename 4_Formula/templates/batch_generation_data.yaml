@@ -1,0 +1,129 @@
+# Master Batch Generation Data Template
+# This file contains all asset types in one configuration
+# You can also create separate files for each type (see templates/ folder)
+
+diagrams:
+  - id: "D1.1"
+    name: "workflow_diagram"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_DIAGRAMS"
+    mermaid_content: |
+      graph TD
+          A[Start] --> B[Process]
+          B --> C[End]
+    prompt: "Professional technical diagram, modern design, dark background, glowing nodes"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+images:
+  - id: "I1.1"
+    name: "hero_image"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Professional hero image description here"
+    search_query: ""
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+video:
+  - id: "V1.1"
+    name: "intro_broll"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Cinematic B-roll footage description here"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: ""
+
+memory_palace:
+  - id: "MP.1"
+    name: "memory_palace_entrance"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_MEMORY"
+    prompt: "Grand entrance to a futuristic palace of knowledge"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "entrance"
+    concept: "Introduction"
+
+graphics:
+  - id: "G1.1"
+    name: "lower_third"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_GRAPHICS"
+    prompt: "Clean lower third graphic for video"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+chapters:
+  - id: "CH_1"
+    name: "chapter_1_intro"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "00:00"
+    prompt: "Chapter title card: 'Chapter 1: Introduction'"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+audio:
+  - id: "A1.1"
+    name: "transition_sound"
+    priority: "HIGH"
+    scene: "Scene 1"
+    prompt: "Modern tech transition sound effect"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 3
+
+music:
+  - id: "M1.1"
+    name: "intro_music"
+    priority: "HIGH"
+    scene: "Scene 1"
+    prompt: "Upbeat electronic background music for tech video"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 15
+
+# Seed Key Definitions:
+# SEED_001: 555123 (Primary visual style)
+# SEED_002: 555456 (Secondary visual style)
+# SEED_CHAPTERS: 777001 (Chapter markers)
+# SEED_MEMORY: 888001 (Memory palace locations)
+# SEED_DIAGRAMS: 999001 (Technical diagrams)
+# SEED_GRAPHICS: 666001 (Graphics and overlays)
+
+# Priority Levels:
+# - HIGH: Essential, cannot be omitted
+# - MEDIUM: Enhances the video, nice to have
+# - LOW: Optional, can skip if time/budget limited
+
+# For detailed templates and guidelines for each asset type,
+# see the individual template files in the templates/ folder:
+# - video_inputs.yaml
+# - memory_palace_inputs.yaml
+# - images_inputs.yaml
+# - diagrams_inputs.yaml
+# - graphics_inputs.yaml
+# - chapters_inputs.yaml
+# - audio_inputs.yaml

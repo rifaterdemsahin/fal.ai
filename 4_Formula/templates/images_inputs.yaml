@@ -1,0 +1,88 @@
+# Images Inputs Template
+# Use this template to define image generation requirements
+
+images:
+  - id: "I1.1"
+    name: "hero_image"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Professional hero image of a modern tech workspace, MacBook Pro on minimalist desk, natural lighting from large windows, plants in background, warm and inviting atmosphere, 8k resolution, highly detailed"
+    search_query: "tech workspace minimalist"
+    model: "fal-ai/flux/dev"  # Use 'dev' for high quality
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30  # 28-50 for flux/dev
+    
+  - id: "I1.2"
+    name: "concept_illustration"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Abstract illustration of AI neural network, interconnected nodes glowing in blue and purple, dark background, futuristic style, digital art, clean and modern"
+    search_query: "neural network illustration"
+    model: "fal-ai/flux/schnell"  # Use 'schnell' for faster generation
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 4  # 4 for flux/schnell
+    
+  - id: "I2.1"
+    name: "supporting_visual"
+    priority: "MEDIUM"
+    scene: "Scene 2"
+    seed_key: "SEED_002"
+    prompt: "Clean infographic-style illustration showing data flow, arrows and icons, flat design, corporate blue color scheme, vector art style"
+    search_query: ""
+    model: "fal-ai/flux/schnell"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 4
+    note: "This will be used as B-roll overlay"
+    
+  - id: "I3.1"
+    name: "thumbnail_candidate"
+    priority: "HIGH"
+    scene: "Scene 3"
+    seed_key: "SEED_003"
+    prompt: "Eye-catching YouTube thumbnail style image, bold text 'AI REVOLUTION', dynamic composition, high contrast, vibrant colors, attention-grabbing design"
+    search_query: "youtube thumbnail design"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+# Image Generation Guidelines:
+#
+# Model Selection:
+# - fal-ai/flux/schnell: Fast (4 steps), good for iterations and drafts
+# - fal-ai/flux/dev: High quality (28-50 steps), use for final outputs
+#
+# Image Sizes (16:9 ratio):
+# - HD: 1280 x 720
+# - Full HD: 1920 x 1080
+# - 4K: 3840 x 2160
+#
+# Image Sizes (other ratios):
+# - Square: 1024 x 1024
+# - Portrait: 1080 x 1920
+# - Wide: 2560 x 1440
+#
+# Inference Steps:
+# - flux/schnell: 4 (fixed, fast)
+# - flux/dev: 28 (balanced), 40 (high quality), 50 (maximum quality)
+#
+# Prompt Tips:
+# - Be specific about style (photorealistic, illustration, vector art)
+# - Include quality markers (8k, highly detailed, professional)
+# - Describe composition (centered, rule of thirds, symmetrical)
+# - Add mood/atmosphere descriptors
+# - Mention color palette if important
+#
+# Priority Levels:
+# - HIGH: Essential images, cannot be omitted
+# - MEDIUM: Enhances the video, nice to have
+# - LOW: Optional, can skip if budget/time limited

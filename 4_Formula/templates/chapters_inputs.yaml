@@ -1,0 +1,105 @@
+# Chapter Markers Inputs Template
+# Use this template to create chapter title cards for videos
+
+chapters:
+  - id: "CH_1"
+    name: "chapter_1_introduction"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "00:00"
+    prompt: "Cinematic chapter title card with text 'Chapter 1: Introduction' in large bold futuristic sans-serif font, centered, dark blue background with glowing cyan and purple accents, high contrast, professional motion graphics style, 8k resolution"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+    
+  - id: "CH_2"
+    name: "chapter_2_background"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "02:30"
+    prompt: "Cinematic chapter title card with text 'Chapter 2: Background' in large bold futuristic sans-serif font, centered, consistent design with chapter 1 but slightly different accent colors, purple dominant"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+    
+  - id: "CH_3"
+    name: "chapter_3_core_concepts"
+    priority: "HIGH"
+    scene: "Scene 3"
+    seed_key: "SEED_CHAPTERS"
+    timestamp: "05:00"
+    prompt: "Cinematic chapter title card with text 'Chapter 3: Core Concepts' in large bold futuristic sans-serif font, centered, dark tech abstract background, glowing elements"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 28
+
+# Alternative style - Simple text on black:
+#
+#   - id: "CH_4_VAR2"
+#     name: "chapter_4_simple"
+#     priority: "MEDIUM"
+#     scene: "Scene 4"
+#     seed_key: "SEED_CHAPTERS"
+#     timestamp: "07:30"
+#     prompt: "Centered white text on pure black background. Text reads: 'Chapter 4: Advanced Topics'. Clean, modern sans-serif font (Arial or Helvetica). Bold weight. Simple professional design. No decorative elements. High contrast."
+#     model: "fal-ai/flux/schnell"
+#     image_size:
+#       width: 1920
+#       height: 1080
+#     num_inference_steps: 4
+
+# Chapter Marker Guidelines:
+#
+# Timestamp Format:
+# - Use MM:SS format (e.g., "00:00", "02:30", "10:45")
+# - For longer videos: HH:MM:SS (e.g., "01:23:45")
+# - Match the actual video timeline
+#
+# Naming Convention:
+# - Pattern: chapter_{number}_{topic_name}
+# - Keep topic names concise
+# - Use underscores for spaces
+#
+# Design Styles:
+#
+# Style 1: Cinematic (Recommended for main chapters)
+# - Bold, large text
+# - Decorative background
+# - Glowing effects
+# - High production value
+# - Use flux/dev with 28-30 steps
+#
+# Style 2: Simple (Good for alternatives/variants)
+# - Text on solid color
+# - Minimal design
+# - Fast to generate
+# - Use flux/schnell with 4 steps
+#
+# Consistency Tips:
+# - Use same seed_key (SEED_CHAPTERS) for all chapters
+# - Keep font style consistent
+# - Maintain similar background style
+# - Use color progression if desired
+#
+# Text Recommendations:
+# - Keep chapter titles short (2-5 words)
+# - Use title case: "Chapter 1: Introduction"
+# - Avoid overly complex text
+# - Ensure readability at thumbnail size
+#
+# Priority Levels:
+# - HIGH: Main chapter breaks (every 2-3 minutes)
+# - MEDIUM: Sub-chapters or optional breaks
+# - LOW: Experimental or alternative versions
+#
+# Model Selection:
+# - fal-ai/flux/dev: High quality, detailed backgrounds
+# - fal-ai/flux/schnell: Fast, simple text cards

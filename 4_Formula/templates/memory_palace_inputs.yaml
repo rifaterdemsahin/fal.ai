@@ -1,0 +1,131 @@
+# Memory Palace Inputs Template
+# Use this template to create a visual memory palace for complex topics
+
+memory_palace:
+  - id: "MP.1"
+    name: "memory_palace_entrance"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_MEMORY"
+    prompt: "Grand entrance gate to a futuristic palace of knowledge, towering pillars with holographic inscriptions, glowing pathway leading inside, twilight sky, ethereal atmosphere, architectural photography style, 8k, highly detailed"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "entrance"
+    concept: "Introduction - The Gateway to Understanding"
+    
+  - id: "MP.2"
+    name: "memory_palace_hallway"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_MEMORY"
+    prompt: "Long hallway with floating holographic displays showing historical timeline, marble floors reflecting soft blue light, ancient meets future design, symmetrical composition, museum quality lighting"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "hallway"
+    concept: "History and Evolution"
+    
+  - id: "MP.3"
+    name: "memory_palace_main_chamber"
+    priority: "HIGH"
+    scene: "Scene 3"
+    seed_key: "SEED_MEMORY"
+    prompt: "Circular chamber with domed ceiling, floating mathematical equations and diagrams in mid-air, central pedestal with glowing orb, dramatic uplighting, sacred geometry patterns, Renaissance meets cyberpunk"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "main_chamber"
+    concept: "Core Concepts and Principles"
+    
+  - id: "MP.4"
+    name: "memory_palace_library"
+    priority: "MEDIUM"
+    scene: "Scene 4"
+    seed_key: "SEED_MEMORY"
+    prompt: "Vast library with infinite shelves of glowing books, spiral staircases, floating books with turning pages, warm ambient lighting, cozy yet vast, Hogwarts meets modern architecture"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "library"
+    concept: "Knowledge Repository and Resources"
+    
+  - id: "MP.5"
+    name: "memory_palace_garden"
+    priority: "MEDIUM"
+    scene: "Scene 5"
+    seed_key: "SEED_MEMORY"
+    prompt: "Zen garden with floating islands, bonsai trees made of circuitry, water flowing upward in impossible ways, peaceful atmosphere, nature and technology harmonized, Studio Ghibli style with photorealistic quality"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "garden"
+    concept: "Practical Applications and Real-world Use"
+    
+  - id: "MP.6"
+    name: "memory_palace_observatory"
+    priority: "HIGH"
+    scene: "Scene 6"
+    seed_key: "SEED_MEMORY"
+    prompt: "Glass observatory at the top of the palace, overlooking a futuristic cityscape at sunset, telescope pointing to stars showing future possibilities, panoramic view, inspirational and hopeful atmosphere"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    memory_location: "observatory"
+    concept: "Future Vision and Possibilities"
+
+# Memory Palace Design Principles:
+#
+# 1. Sequential Flow:
+#    - Create a logical path through locations
+#    - Each location builds on the previous
+#    - Start with entrance, end with conclusion/vista
+#
+# 2. Visual Distinctiveness:
+#    - Each location should be immediately recognizable
+#    - Use unique architectural elements
+#    - Employ different color schemes per location
+#
+# 3. Concept Mapping:
+#    - Match location characteristics to concepts
+#    - Use metaphors (e.g., library = knowledge, garden = growth)
+#    - Make connections intuitive
+#
+# 4. Emotional Anchoring:
+#    - Add emotional elements (peace, excitement, wonder)
+#    - Use lighting to set mood
+#    - Create memorable moments
+#
+# 5. Architectural Consistency:
+#    - Maintain the same seed_key across locations
+#    - Keep a unified architectural style
+#    - Ensure visual coherence
+#
+# Common Memory Palace Locations:
+# - entrance: Introduction, gateway
+# - hallway: Timeline, progression
+# - main_chamber: Core concepts, central ideas
+# - library: Knowledge, research, depth
+# - garden: Growth, applications, natural flow
+# - laboratory: Experimentation, practice
+# - observatory: Future vision, big picture
+# - vault: Secrets, advanced topics
+# - courtyard: Community, collaboration
+# - exit: Conclusion, call to action
+#
+# Seed Key Recommendations:
+# - SEED_MEMORY: 888001 (for architectural consistency)
+# - Use same seed across all memory palace locations
+# - This ensures visual coherence of the palace

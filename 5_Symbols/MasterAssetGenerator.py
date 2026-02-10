@@ -12,6 +12,12 @@ import argparse
 from pathlib import Path
 from typing import Dict, List
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+    print("⚠️  PyYAML not installed. YAML support disabled. Run: pip install PyYAML")
+
 # Add the current directory to path so we can import local modules
 sys.path.append(str(Path(__file__).parent))
 
@@ -43,17 +49,59 @@ COST_ESTIMATES = {
 DEFAULT_COST = 0.03
 
 def load_config(config_path: Path) -> Dict:
-    """Load the assets configuration from JSON"""
+    """Load the assets configuration from JSON or YAML"""
     if not config_path.exists():
         print(f"❌ Config file not found: {config_path}")
         return {}
     
     try:
-        with open(config_path, 'r') as f:
-            return json.load(f)
+        with open(config_path, 'r', encoding='utf-8') as f:
+            # Try JSON first
+            if config_path.suffix.lower() == '.json':
+                return json.load(f)
+            # Try YAML
+            elif config_path.suffix.lower() in ['.yaml', '.yml']:
+                if yaml is None:
+                    print(f"❌ Cannot load YAML file. PyYAML not installed.")
+                    return {}
+                return yaml.safe_load(f) or {}
+            else:
+                # Unknown format, try JSON as default
+                return json.load(f)
     except Exception as e:
         print(f"❌ Error reading config: {e}")
         return {}
+
+def merge_configs(config_dir: Path) -> Dict:
+    """Load and merge all YAML and JSON config files from a directory"""
+    merged = {}
+    
+    # Find all YAML and JSON files
+    config_files = list(config_dir.glob('*.yaml')) + \
+                   list(config_dir.glob('*.yml')) + \
+                   list(config_dir.glob('*.json'))
+    
+    if not config_files:
+        return merged
+    
+    print(f"\n📂 Loading configuration files from: {config_dir}")
+    for config_file in sorted(config_files):
+        print(f"   • {config_file.name}")
+        config = load_config(config_file)
+        
+        # Merge the config
+        for key, value in config.items():
+            if key in merged:
+                # If key exists, extend the list if it's a list
+                if isinstance(merged[key], list) and isinstance(value, list):
+                    merged[key].extend(value)
+                else:
+                    # Otherwise, replace with the new value
+                    merged[key] = value
+            else:
+                merged[key] = value
+    
+    return merged
 
 def estimate_cost(config: Dict) -> float:
     """Calculate and print estimated cost"""
@@ -159,21 +207,32 @@ Examples:
         parser.print_help()
         return
     
-    # Check for config - look in input directory first (new structure), then base (legacy)
-    config_file = input_dir / "assets_config.json"
-    if not config_file.exists() and not use_new_structure:
-        # Legacy fallback
-        config_file = week_dir / "assets_config.json"
+    # Load configuration
+    # Try to merge all config files from input directory
+    # First check if there are any YAML/JSON files in the input directory
+    config_files = list(input_dir.glob('*.yaml')) + \
+                   list(input_dir.glob('*.yml')) + \
+                   list(input_dir.glob('*.json'))
     
-    if not config_file.exists():
+    if not use_new_structure and not config_files:
+        # Legacy mode fallback - check week_dir
+        config_files = list(week_dir.glob('*.yaml')) + \
+                       list(week_dir.glob('*.yml')) + \
+                       list(week_dir.glob('*.json'))
+        config_dir = week_dir
+    else:
+        config_dir = input_dir
+    
+    if not config_files:
         location = "input folder" if use_new_structure else "directory"
-        print(f"⚠️  No 'assets_config.json' found in {location}: {config_file.parent}")
-        print(f"   Please create it first.")
+        print(f"⚠️  No configuration files (.yaml/.yml/.json) found in {location}: {config_dir}")
+        print(f"   Please create batch_generation_data.yaml or individual asset YAML files.")
         return
 
-    # Load Config
-    config = load_config(config_file)
+    # Load and merge all configuration files
+    config = merge_configs(config_dir)
     if not config:
+        print(f"❌ No valid configuration loaded")
         return
 
     # Check for text marker file (for chapter markers generator)

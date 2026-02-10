@@ -1,0 +1,89 @@
+# Graphics Inputs Template
+# Use this template to define graphics and visual elements
+
+graphics:
+  - id: "G1.1"
+    name: "lower_third_basic"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_GRAPHICS"
+    prompt: "Clean lower third graphic for video, name and title bar, modern minimalist design, dark blue gradient with cyan accent line, professional broadcast quality, transparent background ready"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    
+  - id: "G1.2"
+    name: "overlay_pattern"
+    priority: "MEDIUM"
+    scene: "Scene 1"
+    seed_key: "SEED_GRAPHICS"
+    prompt: "Subtle tech pattern overlay for video backgrounds, geometric hexagons and lines, very low opacity design, dark with slight blue glow, seamless tileable pattern"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    
+  - id: "G2.1"
+    name: "call_to_action_graphic"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_GRAPHICS"
+    prompt: "Call to action graphic with text 'Subscribe Now', vibrant gradient button style, red and orange colors, glowing effect, YouTube end screen style, modern and attention-grabbing"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    
+  - id: "G3.1"
+    name: "social_media_banner"
+    priority: "MEDIUM"
+    scene: "Scene 3"
+    seed_key: "SEED_GRAPHICS"
+    prompt: "Social media banner graphic showing icons for Instagram, Twitter, LinkedIn, modern flat design with gradients, cohesive brand colors of blue and purple"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+# Graphics Guidelines:
+#
+# Common Graphic Types:
+# - Lower thirds: Name/title overlays for speakers
+# - Overlays: Patterns, textures for background enhancement
+# - Call-to-action: Subscribe, like, comment prompts
+# - Transitions: Visual elements for scene changes
+# - Banners: Social media handles, website info
+# - Icons: Custom icons for specific topics
+# - Badges: Achievement, milestone graphics
+#
+# Design Considerations:
+# - Keep text areas clear for later text insertion
+# - Use transparent backgrounds when possible
+# - Consider video-safe color contrasts
+# - Design for 1920x1080 (Full HD) by default
+# - Leave space for text overlay if applicable
+#
+# Color Schemes:
+# - Tech/Modern: Blues, cyans, purples
+# - Professional: Navy, gray, white
+# - Energetic: Red, orange, yellow
+# - Calm: Green, teal, blue
+# - Luxury: Gold, black, white
+#
+# Prompt Tips:
+# - Specify "transparent background" if needed
+# - Mention "broadcast quality" or "professional"
+# - Describe placement (lower third, corner, center)
+# - Include text layout needs
+# - Add style keywords (minimalist, bold, elegant)
+#
+# Size Recommendations:
+# - Full frame graphics: 1920 x 1080
+# - Lower thirds: 1920 x 300 (but generate at full size)
+# - Icons/badges: 1024 x 1024 (square)
+# - Banners: 1920 x 400

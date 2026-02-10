@@ -1,0 +1,62 @@
+# Video Inputs Template
+# Use this template to define video generation requirements for the week
+
+video:
+  - id: "V1.1"
+    name: "intro_broll"
+    priority: "HIGH"  # HIGH, MEDIUM, LOW
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Cinematic B-roll footage of a modern tech office environment, morning sunlight streaming through large windows, minimalist design, 4k quality, shallow depth of field"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: ""  # Optional: for reference
+    
+  - id: "V1.2"
+    name: "concept_visualization"
+    priority: "MEDIUM"
+    scene: "Scene 1"
+    seed_key: "SEED_001"
+    prompt: "Abstract visualization of data flowing through networks, particles of light, dark background, futuristic style"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: ""
+    
+  - id: "V2.1"
+    name: "transition_scene"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_002"
+    prompt: "Smooth transition animation, geometric patterns morphing, gradient colors from blue to purple, modern motion graphics"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 3
+    aspect_ratio: "16:9"
+    search_query: ""
+
+# Video Generation Guidelines:
+# 
+# Duration Standards:
+# - Intro/Outro: 3-5 seconds
+# - B-roll clips: 5-10 seconds
+# - Concept videos: 10-15 seconds
+# - Long-form content: 30+ seconds
+#
+# Aspect Ratios:
+# - YouTube/Landscape: 16:9
+# - TikTok/Shorts: 9:16
+# - Instagram: 1:1
+# - Cinematic: 21:9
+#
+# Prompt Tips:
+# - Start with shot type (cinematic, aerial, close-up)
+# - Describe the subject clearly
+# - Add style/mood descriptors
+# - Include quality markers (4k, highly detailed)
+# - Specify lighting conditions
+#
+# Seed Keys:
+# - Use same seed_key for visually related videos
+# - Different scenes can use different seeds
+# - Maintain consistency within a narrative flow

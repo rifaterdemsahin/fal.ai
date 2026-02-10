@@ -1,0 +1,90 @@
+# Diagrams Inputs Template
+# Use this template to create technical diagrams with Mermaid
+
+diagrams:
+  - id: "D1.1"
+    name: "workflow_diagram"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_DIAGRAMS"
+    mermaid_content: |
+      graph TD
+          A[Start Process] --> B{Decision Point}
+          B -->|Yes| C[Action 1]
+          B -->|No| D[Action 2]
+          C --> E[End]
+          D --> E
+          style A fill:#7b2cbf,stroke:#fff
+          style E fill:#00bfa5,stroke:#fff
+    prompt: "Professional technical diagram with modern design, dark background, glowing blue and purple nodes, clean lines, tech conference presentation style, 8k resolution, highly detailed"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    
+  - id: "D2.1"
+    name: "architecture_diagram"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_DIAGRAMS"
+    mermaid_content: |
+      graph LR
+          User([User]) --> Frontend[Frontend]
+          Frontend --> API[API Gateway]
+          API --> Backend[Backend Service]
+          Backend --> DB[(Database)]
+          style User fill:#1a1a2e,stroke:#00d4ff
+          style DB fill:#1a1a2e,stroke:#7b2cbf
+    prompt: "Clean software architecture diagram, isometric view, modern tech stack visualization, glowing connections, dark void background, professional style, vector art quality"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+    
+  - id: "D3.1"
+    name: "process_flow"
+    priority: "MEDIUM"
+    scene: "Scene 3"
+    seed_key: "SEED_DIAGRAMS"
+    mermaid_content: |
+      flowchart TB
+          Input[Input Data] -->|Process| Transform[Transform]
+          Transform -->|Validate| Check{Valid?}
+          Check -->|Yes| Output[Output]
+          Check -->|No| Error[Error Handler]
+          Error --> Input
+    prompt: "Flowchart visualization with smooth gradients, teal and purple color scheme, modern infographic style, clean and minimal, professional presentation quality"
+    model: "fal-ai/flux/dev"
+    image_size:
+      width: 1920
+      height: 1080
+    num_inference_steps: 30
+
+# Diagram Guidelines:
+#
+# Mermaid Syntax:
+# - graph TD: Top-Down graph
+# - graph LR: Left-Right graph
+# - flowchart TB: Top-Bottom flowchart
+# - flowchart LR: Left-Right flowchart
+#
+# Common Mermaid Elements:
+# - Nodes: A[Rectangle], B(Rounded), C{Diamond}, D([Stadium]), E[(Database)]
+# - Connections: --> (arrow), --- (line), -.-> (dotted)
+# - Labels: A -->|Label| B
+# - Styling: style NodeID fill:#color,stroke:#color
+#
+# Prompt Tips:
+# - Describe the visual style for AI enhancement
+# - Specify color schemes
+# - Mention quality level (8k, professional, presentation-ready)
+# - Add context (tech conference, whiteboard, modern)
+#
+# Best Practices:
+# - Keep diagrams simple and focused
+# - Use consistent color coding
+# - Add meaningful labels
+# - Style important nodes differently
+# - Use same seed_key for diagram consistency
