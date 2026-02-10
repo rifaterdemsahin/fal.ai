@@ -1,0 +1,19 @@
+## 1. Chapters & Scenes List
+
+This list organizes the video into logical segments based on the narrative flow and visual descriptions provided in the transcript.
+
+|**Scene**|**Timestamp**|**Title**|**Visual Description**|
+|---|---|---|---|
+|**01**|01:00:00|**The Pivot**|Host holding a massive golden microphone.|
+|**02**|01:00:10|**The Delivery Pilot**|People struggling; engineering 240 workflows.<br><br>+1|
+|**03**|01:00:35|**Static vs. Dynamic**|Frozen statues vs. liquid mercury character.<br><br>+1|
+|**04**|01:00:48|**The Clone Lab**|Terminal screen capture: `git clone` demo.<br><br>+2|
+|**05**|01:03:52|**The Evolution**|3D printer making an identical copy of the host.<br><br>+1|
+|**06**|01:05:50|**The Nursery**|Giant GitHub logo acting as a baby's nightlight.|
+|**07**|01:06:36|**The Crystal Ball**|Google/Microsoft logos holding an Alexa speaker.|
+|**08**|01:08:26|**The Engine Room**|Host in front of a clock with hands spinning at 1000x.|
+|**09**|01:09:01|**The Digital Feast**|Kitchen table with 100 tablets served as food.<br><br>+1|
+
+
+
+
