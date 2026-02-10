@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Chapter Markers Asset Generator
 Generates chapter marker title cards using fal.ai with base class architecture
@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Dict, List
 import re
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class ChapterMarkersAssetGenerator(BaseAssetGenerator):
@@ -38,7 +38,7 @@ class ChapterMarkersAssetGenerator(BaseAssetGenerator):
     def read_chapter_markers(self, file_path: Path) -> List[tuple]:
         """Parse the chapter markers file"""
         if not file_path.exists():
-            print(f"❌ Chapter markers file not found: {file_path}")
+            print(f"âŒ Chapter markers file not found: {file_path}")
             return []
 
         markers = []
@@ -53,7 +53,7 @@ class ChapterMarkersAssetGenerator(BaseAssetGenerator):
                     title = match.group(2)
                     markers.append((timestamp, title))
                 else:
-                    print(f"⚠️ Could not parse line: {line}")
+                    print(f"âš ï¸ Could not parse line: {line}")
         return markers
     
     def build_generation_queue_from_markers(self, markers: List[tuple]) -> List[Dict]:
@@ -97,7 +97,7 @@ class ChapterMarkersAssetGenerator(BaseAssetGenerator):
                 return self.build_generation_queue_from_markers(markers)
         
         # Fallback to empty queue if file doesn't exist
-        print(f"⚠️ No chapter markers file found at {self.chapter_markers_file}")
+        print(f"âš ï¸ No chapter markers file found at {self.chapter_markers_file}")
         return []
 
 
@@ -109,3 +109,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

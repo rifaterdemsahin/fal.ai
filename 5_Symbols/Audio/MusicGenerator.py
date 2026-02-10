@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Music Asset Generator
 Generates music assets using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates music assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS
 
 
 class MusicAssetGenerator(BaseAssetGenerator):
@@ -86,7 +86,7 @@ class MusicAssetGenerator(BaseAssetGenerator):
         if output_path.exists():
             return output_path
             
-        print(f"   🔄 Converting to {output_ext}...")
+        print(f"   ðŸ”„ Converting to {output_ext}...")
         try:
             cmd = [
                 "ffmpeg", "-y", "-i", str(input_path),
@@ -95,13 +95,13 @@ class MusicAssetGenerator(BaseAssetGenerator):
             ]
             # Suppress output unless error
             subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-            print(f"   ✅ Converted: {output_path.name}")
+            print(f"   âœ… Converted: {output_path.name}")
             return output_path
         except subprocess.CalledProcessError as e:
-            print(f"   ❌ Conversion failed: {e}")
+            print(f"   âŒ Conversion failed: {e}")
             return None
         except FileNotFoundError:
-            print("   ❌ ffmpeg not found. Skipping conversion.")
+            print("   âŒ ffmpeg not found. Skipping conversion.")
             return None
 
     def generate_asset(self, asset_config: Dict, version: int = 1) -> Dict:
@@ -159,3 +159,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

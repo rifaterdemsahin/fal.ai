@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Diagram Asset Generator
 Generates diagram assets using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates diagram assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class DiagramAssetGenerator(BaseAssetGenerator):
@@ -70,3 +70,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

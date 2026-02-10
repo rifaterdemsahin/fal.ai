@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 SVG Asset Generator
 Generates SVG diagram assets with base class architecture
@@ -14,8 +14,8 @@ from xml.dom import minidom
 # Add parent directory to path to allow imports from base and Utils
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS
 from Utils.asset_utils import generate_filename, extract_scene_number, convert_svg_to_jpeg
 
 
@@ -189,7 +189,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
     ) -> Dict:
         """Generate a single SVG diagram"""
         print(f"\n{'='*60}")
-        print(f"🎨 Generating {self.asset_type}: {asset_config['name']}")
+        print(f"ðŸŽ¨ Generating {self.asset_type}: {asset_config['name']}")
         print(f"   Scene: {asset_config.get('scene', 'Unknown')}")
         print(f"   Priority: {asset_config.get('priority', 'MEDIUM')}")
         print(f"   Type: {asset_config.get('diagram_type', 'flow')}")
@@ -249,13 +249,13 @@ class SVGAssetGenerator(BaseAssetGenerator):
             with open(svg_path, "w") as f:
                 f.write(pretty_xml)
             
-            print(f"✅ Generated successfully!")
-            print(f"💾 Saved to: {svg_path}")
+            print(f"âœ… Generated successfully!")
+            print(f"ðŸ’¾ Saved to: {svg_path}")
             
             # Also save JPEG version
             jpeg_path = convert_svg_to_jpeg(svg_path)
             if jpeg_path:
-                print(f"📸 JPEG version saved: {jpeg_path.name}")
+                print(f"ðŸ“¸ JPEG version saved: {jpeg_path.name}")
             
             prompt_description = f"{asset_config.get('scene', 'Scene')}: {asset_config.get('diagram_type', 'flow')} diagram showing {asset_config['name']}"
             
@@ -270,7 +270,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
             with open(metadata_path, "w") as f:
                 json.dump(metadata, f, indent=2)
             
-            print(f"💾 Metadata saved: {metadata_path}")
+            print(f"ðŸ’¾ Metadata saved: {metadata_path}")
             
             if self.manifest:
                 self.manifest.add_asset(
@@ -294,7 +294,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
             }
             
         except Exception as e:
-            print(f"❌ Error: {str(e)}")
+            print(f"âŒ Error: {str(e)}")
             return {
                 "success": False,
                 "error": str(e),
@@ -551,3 +551,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

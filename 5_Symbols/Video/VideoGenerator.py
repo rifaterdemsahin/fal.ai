@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Video Asset Generator
 Generates video assets using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates video assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS
 
 
 class VideoAssetGenerator(BaseAssetGenerator):
@@ -81,3 +81,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -40,6 +40,15 @@ These scripts are located in `c:\projects\fal.ai\5_Symbols`:
     - Script: `c:\projects\fal.ai\5_Symbols\Infographics\BatchAssetGeneratorInfographics.py`
     - Description: Generates data visualizations and infographics.
 
+## 📂 Naming Conventions
+
+- **Top-Level Directories**: `Number_PascalCase` (e.g., `5_Symbols`)
+- **Sub-Directories**: `PascalCase` (e.g., `Audio`, `Images`)
+- **Python Scripts (Entry Points)**: `PascalCase.py` (e.g., `MasterAssetGenerator.py`)
+- **Python Modules/Utils**: `snake_case.py` (e.g., `paths_config.py`)
+- **Configuration/Data**: `snake_case` (e.g., `batch_generation_data.yaml`)
+- **Documentation**: `snake_case.md` (except `README.md` and `SCREAMING_SNAKE_CASE.md` for major protocols)
+
 ## 📝 Usage Guide
 
 To run a generation cycle:

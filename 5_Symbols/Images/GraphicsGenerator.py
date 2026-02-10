@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Graphics Asset Generator
 Generates graphic assets using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates graphic assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class GraphicsAssetGenerator(BaseAssetGenerator):
@@ -109,7 +109,7 @@ class GraphicsAssetGenerator(BaseAssetGenerator):
                 "priority": "MEDIUM",
                 "scene": "Scene 7",
                 "seed_key": "SEED_002",
-                "prompt": "Horizontal flowchart showing 4 connected stages from left to right: 'UNKNOWN PROBLEM' box with question mark icon → 'SYMBOL/MODEL' box with diagram icon → 'n8n SIMULATION' box with workflow icon → 'TESTING/VALIDATION' box with checkmark icon, connected by right-pointing arrows, each box has distinct color (red, yellow, blue, green gradients), clean process diagram style, dark background (#1a1a2e), modern infographic design, professional methodology visualization, sans-serif labels, 16:9 format",
+                "prompt": "Horizontal flowchart showing 4 connected stages from left to right: 'UNKNOWN PROBLEM' box with question mark icon â†’ 'SYMBOL/MODEL' box with diagram icon â†’ 'n8n SIMULATION' box with workflow icon â†’ 'TESTING/VALIDATION' box with checkmark icon, connected by right-pointing arrows, each box has distinct color (red, yellow, blue, green gradients), clean process diagram style, dark background (#1a1a2e), modern infographic design, professional methodology visualization, sans-serif labels, 16:9 format",
                 "model": "fal-ai/flux/dev",
                 "image_size": {"width": 1920, "height": 1080},
                 "num_inference_steps": 28,
@@ -120,7 +120,7 @@ class GraphicsAssetGenerator(BaseAssetGenerator):
                 "priority": "MEDIUM",
                 "scene": "Scene 8",
                 "seed_key": "SEED_002",
-                "prompt": "Technical diagram showing state management flow in 5 connected boxes: 'PREVIOUS STATE' (database cylinder icon) → 'CURRENT INPUT' (arrow icon) → 'STATE COMPARISON' (equals/not-equals icon) → 'DECISION' (fork/branch icon) → 'UPDATE STATE' (save icon), connected by arrows with data flow indicators, positioned to overlay on workflow nodes, clean technical documentation style, cyan/blue color scheme (#00d4ff, #0096c7), dark transparent background, professional system architecture diagram, 16:9 format",
+                "prompt": "Technical diagram showing state management flow in 5 connected boxes: 'PREVIOUS STATE' (database cylinder icon) â†’ 'CURRENT INPUT' (arrow icon) â†’ 'STATE COMPARISON' (equals/not-equals icon) â†’ 'DECISION' (fork/branch icon) â†’ 'UPDATE STATE' (save icon), connected by arrows with data flow indicators, positioned to overlay on workflow nodes, clean technical documentation style, cyan/blue color scheme (#00d4ff, #0096c7), dark transparent background, professional system architecture diagram, 16:9 format",
                 "model": "fal-ai/flux/dev",
                 "image_size": {"width": 1920, "height": 1080},
                 "num_inference_steps": 28,
@@ -191,3 +191,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

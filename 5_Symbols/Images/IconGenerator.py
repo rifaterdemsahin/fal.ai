@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Icon Asset Generator
 Generates icon assets using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates icon assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class IconAssetGenerator(BaseAssetGenerator):
@@ -194,3 +194,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

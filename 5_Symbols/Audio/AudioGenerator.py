@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Audio Asset Generator
 Generates YouTube chapter markers from EDL
@@ -8,8 +8,8 @@ import re
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
 
 
 class AudioAssetGenerator(BaseAssetGenerator):
@@ -64,7 +64,7 @@ class AudioAssetGenerator(BaseAssetGenerator):
     def generate_chapter_markers(self) -> Dict:
         """Parse EDL and generate YouTube chapter markers"""
         print(f"\n{'='*60}")
-        print("🔖 GENERATING CHAPTER MARKERS")
+        print("ðŸ”– GENERATING CHAPTER MARKERS")
         print(f"   Source: {self.edl_path}")
         print(f"{'='*60}")
 
@@ -96,7 +96,7 @@ class AudioAssetGenerator(BaseAssetGenerator):
                 
                 marker_line = f"{formatted_time} {current_scene_title}"
                 markers.append(marker_line)
-                print(f"   • Found: {marker_line}")
+                print(f"   â€¢ Found: {marker_line}")
                 
                 current_scene_title = None
 
@@ -107,8 +107,8 @@ class AudioAssetGenerator(BaseAssetGenerator):
             self.output_file.write_text(output_content, encoding='utf-8')
             
             print(f"\n{'='*60}")
-            print(f"✅ Generated {len(markers)} markers")
-            print(f"💾 Saved to: {self.output_file}")
+            print(f"âœ… Generated {len(markers)} markers")
+            print(f"ðŸ’¾ Saved to: {self.output_file}")
             print(f"{'='*60}")
             print("\nCHAPTER MARKERS LIST:")
             print("-" * 20)
@@ -134,17 +134,17 @@ class AudioAssetGenerator(BaseAssetGenerator):
         """Main execution method"""
         if confirm:
             print("\n" + "="*60)
-            response = input("🤔 Proceed with chapter marker generation? (yes/no): ").strip().lower()
+            response = input("ðŸ¤” Proceed with chapter marker generation? (yes/no): ").strip().lower()
             if response not in ['yes', 'y']:
-                print("❌ Cancelled by user")
+                print("âŒ Cancelled by user")
                 return
         
         result = self.generate_chapter_markers()
         
         if result["success"]:
-            print("\n✅ Done!")
+            print("\nâœ… Done!")
         else:
-            print(f"\n❌ Failed: {result.get('error', 'Unknown error')}")
+            print(f"\nâŒ Failed: {result.get('error', 'Unknown error')}")
 
 
 def main():
@@ -155,3 +155,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

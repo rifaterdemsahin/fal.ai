@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 3D Asset Generator
 Generates 3D model assets using fal.ai Hunyuan-3D with base class architecture
@@ -7,8 +7,8 @@ Generates 3D model assets using fal.ai Hunyuan-3D with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class ThreeDAssetGenerator(BaseAssetGenerator):
@@ -135,3 +135,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

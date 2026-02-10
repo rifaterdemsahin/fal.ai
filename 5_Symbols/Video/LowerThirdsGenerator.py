@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Lower Thirds Asset Generator
 Generates lower third graphics using fal.ai with base class architecture
@@ -7,8 +7,8 @@ Generates lower third graphics using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from Base.base_asset_generator import BaseAssetGenerator
+from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class LowerThirdsAssetGenerator(BaseAssetGenerator):
@@ -115,7 +115,7 @@ class LowerThirdsAssetGenerator(BaseAssetGenerator):
                 "seed_key": "SEED_004",
                 "prompt": (
                     f"{PROMPT_BASE}, main text 'PARA METHOD' in bold white font, "
-                    "subtext 'Projects • Areas • Resources • Archives' in smaller grey/blue font, "
+                    "subtext 'Projects â€¢ Areas â€¢ Resources â€¢ Archives' in smaller grey/blue font, "
                     "minimalist organized structure, sharp blue accents."
                 ),
                 "model": "fal-ai/flux/dev",
@@ -220,3 +220,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
