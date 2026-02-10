@@ -188,7 +188,9 @@ Examples:
             marker_file = week_dir / "chapter_markers.txt"
 
     # Estimate Cost
-    gen_cost.generate_report(week_dir)
+    # In new structure, config is in input_dir; in legacy mode, it's in week_dir
+    cost_dir = input_dir if use_new_structure else week_dir
+    gen_cost.generate_report(cost_dir)
     
     # Confirm
     print("\n⚠️  You are about to generate assets which will incur costs.")
@@ -208,8 +210,10 @@ Examples:
         selection = [s.strip() for s in selection]
     
     # Initialize Manifest Tracker
-    manifest = ManifestTracker(week_dir)
-    print(f"\n📋 Manifest tracking initialized")
+    # In new structure, save manifest to output folder; in legacy mode, save to week_dir
+    manifest_dir = output_dir if use_new_structure else week_dir
+    manifest = ManifestTracker(manifest_dir)
+    print(f"\n📋 Manifest tracking initialized (will save to: {manifest_dir})")
     
     # Execute Generators
     # 1. Images

@@ -28,15 +28,17 @@ The refactored system uses a standardized weekly folder structure under `3_Simul
 Use the new structure with explicit weekly ID:
 
 ```bash
-# Generate assets for a specific week
+# Generate assets for a specific week (date-based ID)
 python 5_Symbols/MasterAssetGenerator.py --week 2026-02-10
 ```
 
 Or auto-generate weekly ID from today's date:
 
 ```bash
-# Use today's date as weekly ID
+# Use today's date as weekly ID (automatically generates YYYY-MM-DD)
 python 5_Symbols/MasterAssetGenerator.py --week auto
+# This will use today's date, e.g., if run on Feb 10, 2026, it creates:
+# 3_Simulation/2026-02-10/input and 3_Simulation/2026-02-10/output
 ```
 
 ### 2. Legacy Mode (Backward Compatible)
