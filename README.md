@@ -98,6 +98,7 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | Generator | Description | Models Used |
 |-----------|-------------|-------------|
 | 🖼️ **`BatchAssetGeneratorImages.py`** | Photorealistic images | `fal-ai/flux/schnell` |
+| 🎌 **`BatchAssetGeneratorAnime.py`** | **NEW** - Bulk anime generator with storyline support | `fal-ai/minimax/video-01`, Kling, Flux |
 | 🎨 **`BatchAssetGeneratorGraphics.py`** | General graphics and artwork | Image generation models |
 | 🧩 **`BatchAssetGeneratorIcons.py`** | Vector-style minimalist icons | Image generation models |
 | 📊 **`BatchAssetGeneratorDiagrams.py`** | Technical diagrams and charts | Image generation models |
@@ -257,19 +258,25 @@ The guide covers:
 **Run Individual Generators:**
 ```bash
 # Generate video assets
-python3 5_Symbols/BatchAssetGeneratorVideo.py
+python3 5_Symbols/Video/BatchAssetGeneratorVideo.py
+
+# Generate anime with storyline (NEW - located in Images folder)
+python3 5_Symbols/Images/BatchAssetGeneratorAnime.py --create-example
+python3 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline anime_storyline.json
 
 # Generate image assets
-python3 5_Symbols/BatchAssetGeneratorImages.py
+python3 5_Symbols/Images/BatchAssetGeneratorImages.py
 
 # Generate music tracks
-python3 5_Symbols/BatchAssetGeneratorMusic.py
+python3 5_Symbols/Audio/BatchAssetGeneratorMusic.py
 
 # Generate 3D models (NEW)
 python3 5_Symbols/BatchAssetGenerator3D.py
 
 # Generate YouTube thumbnails (NEW)
 python3 5_Symbols/Images/BatchAssetGeneratorThumbnails.py
+# Generate 3D models
+python3 5_Symbols/ThreeD/BatchAssetGenerator3D.py
 ```
 
 **Run Master Controller (All Generators):**
@@ -413,6 +420,7 @@ flowchart LR
 
 ## 📖 Detailed Documentation
 
+- **[🎌 Anime Generator Guide](./5_Symbols/Images/ANIME_GENERATOR_GUIDE.md)** - Complete guide for bulk anime generation with storylines **NEW**
 - **[🔑 API Key Setup](./4_Formula/api_key_setup.md)** - Comprehensive guide to getting, saving, and using your fal.ai API key
 - **[Setup & Best Practices](./4_Formula/README.md)** - Installation, configuration, and usage tips
 - **[Versioning System](./5_Symbols/VERSIONING_AND_MANIFEST.md)** - Complete guide to asset naming and manifest
@@ -426,12 +434,13 @@ flowchart LR
 
 ✨ **Automated Asset Generation**
 - 🎬 Video clips (B-roll, animations)
+- 🎌 Anime scenes (bulk generation with storylines) **NEW**
 - 🎵 Audio tracks (music, sound effects)
 - 🖼️ Images (photorealistic, stylized)
 - 🧩 Icons & graphics (vector-style)
 - 📺 Video elements (lower thirds, chapter markers)
-- 🎲 3D models (text-to-3D using Hunyuan-3D) **NEW**
 - 📸 YouTube thumbnails (3 compelling variations) **NEW**
+- 🎲 3D models (text-to-3D using Hunyuan-3D)
 
 🎯 **Smart Asset Management**
 - 🏷️ Standardized naming with scene numbers
