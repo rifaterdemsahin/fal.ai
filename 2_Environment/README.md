@@ -140,10 +140,10 @@ timeline
 - ✅ Versioning system with standardized naming ([`5_Symbols/base/`](../5_Symbols/base/))
 - ✅ Manifest tracking for asset traceability
 - ✅ Base class architecture for maintainability ([`base_asset_generator.py`](../5_Symbols/base/base_asset_generator.py))
-- ✅ Asset utilities and test suite ([`asset_utils.py`](../5_Symbols/asset_utils.py), [`test_asset_utils.py`](../5_Symbols/test_asset_utils.py))
+- ✅ Asset utilities and test suite ([`asset_utils.py`](../5_Symbols/Utils/asset_utils.py), [`test_asset_utils.py`](../7_TestingKnown/Tests/test_asset_utils.py))
 
 **Documentation**:
-- [`VERSIONING_AND_MANIFEST.md`](../5_Symbols/VERSIONING_AND_MANIFEST.md)
+- [`VERSIONING_AND_MANIFEST.md`](../4_Formula/VERSIONING_AND_MANIFEST.md)
 - [`5_Symbols/README.md`](../5_Symbols/README.md)
 
 ### Phase 2: Integration & Automation 🔄 (In Progress)
@@ -182,7 +182,7 @@ timeline
 | **🎬 B-Roll Generation** | Creating atmospheric video clips to support narratives | [`BatchAssetGeneratorVideo.py`](../5_Symbols/Video/BatchAssetGeneratorVideo.py) | [`README.md`](../5_Symbols/README.md) |
 | **🎵 Audio Synthesis** | Generating background music and sound effects | [`BatchAssetGeneratorMusic.py`](../5_Symbols/Audio/BatchAssetGeneratorMusic.py), [`BatchAssetGeneratorAudio.py`](../5_Symbols/Audio/BatchAssetGeneratorAudio.py) | [`README.md`](../5_Symbols/README.md) |
 | **📊 Visual Documentation** | Diagrams, icons, and visual explanations | [`BulkMermaidGenerator.py`](../5_Symbols/Diagrams/BulkMermaidGenerator.py), [`BulkSVGGenerator.py`](../5_Symbols/Diagrams/BulkSVGGenerator.py) | [Workflows README](../.github/workflows/README.md) |
-| **🎞️ DaVinci Resolve Integration** | Direct import with standardized naming and scene organization | All generators with versioning | [`VERSIONING_AND_MANIFEST.md`](../5_Symbols/VERSIONING_AND_MANIFEST.md) |
+| **🎞️ DaVinci Resolve Integration** | Direct import with standardized naming and scene organization | All generators with versioning | [`VERSIONING_AND_MANIFEST.md`](../4_Formula/VERSIONING_AND_MANIFEST.md) |
 | **🤖 CI/CD Asset Generation** | Automated asset creation via GitHub Actions workflows | All 14 workflows | [`.github/workflows/README.md`](../.github/workflows/README.md) |
 
 ### Detailed Use Cases
@@ -231,7 +231,7 @@ timeline
 ### Development
 - 💻 [Core Generators](../5_Symbols/README.md)
 - 🏗️ [Base Architecture](../5_Symbols/base/)
-- 📝 [Versioning System](../5_Symbols/VERSIONING_AND_MANIFEST.md)
+- 📝 [Versioning System](../4_Formula/VERSIONING_AND_MANIFEST.md)
 
 ### CI/CD & Automation
 - 🤖 [GitHub Actions Workflows](../.github/workflows/README.md)
