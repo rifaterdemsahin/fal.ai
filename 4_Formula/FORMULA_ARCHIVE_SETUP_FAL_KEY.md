@@ -1,4 +1,4 @@
-# Setting Up FAL_API_KEY for Music Generation
+# 🔑 Setting Up FAL_API_KEY for Music Generation
 
 This guide explains how to set up your fal.ai API key to enable actual MP3 music generation.
 
@@ -22,6 +22,7 @@ python3 run_music_generator_feb1.py
 ```
 
 This will:
+
 - ✅ Connect to fal.ai API
 - ✅ Generate 3 music tracks (47 seconds each)
 - ✅ Download MP3 files to `3_Simulation/Feb1Youtube/generated_music/`
@@ -46,6 +47,7 @@ To run music generation automatically via GitHub Actions:
 ### 2. Run the Workflow
 
 #### Option A: Manual Trigger
+
 1. Go to **Actions** tab
 2. Select **"Batch Asset Generator - Music"** workflow
 3. Click **"Run workflow"**
@@ -53,7 +55,9 @@ To run music generation automatically via GitHub Actions:
 5. Click **"Run workflow"**
 
 #### Option B: Automatic Trigger
+
 The workflow runs automatically when you:
+
 - Push changes to `5_Symbols/BatchAssetGeneratorMusic.py`
 - Push changes to `.github/workflows/batch-asset-generator-music.yml`
 
@@ -62,12 +66,14 @@ The workflow runs automatically when you:
 After the workflow completes:
 
 **Option A: From Artifacts**
+
 1. Go to the workflow run page
 2. Scroll to **Artifacts** section
 3. Download **generated-music.zip**
 4. Extract to get your MP3 files
 
 **Option B: From Git (if commit_and_push enabled)**
+
 ```bash
 git pull origin main
 cd 5_Symbols/generated_music/
@@ -94,6 +100,7 @@ Once generated, you'll have:
 ### Error: "FAL_API_KEY environment variable not set"
 
 **Local Execution:**
+
 ```bash
 # Make sure you exported the key
 echo $FAL_API_KEY
@@ -102,6 +109,7 @@ export FAL_API_KEY='your-actual-key-here'
 ```
 
 **GitHub Actions:**
+
 - Verify the secret is set in repository settings
 - Secret name must be exactly `FAL_API_KEY` (case-sensitive)
 - Re-run the workflow after adding the secret
@@ -121,6 +129,7 @@ export FAL_API_KEY='your-actual-key-here'
 ### MP3 Files Not Downloaded
 
 Check that:
+
 1. The generation completed successfully (check `generation_summary.json`)
 2. You have write permissions to the output directory
 3. Your internet connection is stable for downloading
@@ -161,6 +170,7 @@ Total estimated cost: **$0.06 USD**
 After successful generation:
 
 1. **Verify the files:**
+
    ```bash
    ls -lh 3_Simulation/Feb1Youtube/generated_music/*.mp3
    ```
@@ -186,3 +196,12 @@ After successful generation:
 **Status:** Ready to generate with valid FAL_API_KEY
 
 **Note:** The scripts also support `FAL_KEY` for backwards compatibility, but `FAL_API_KEY` is the preferred variable name to match the repository secret.
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula ensures the environment is correctly authenticated to generate assets.
+
+- **Role**: Authentication setup guide.
+- **Input**: User's FAL.AI API key.
+- **Output**: configured `.env` file or environment variable.
+- **Benefit**: Enables all other generators to function; without this, no assets can be created. Required step for any new team member or environment.

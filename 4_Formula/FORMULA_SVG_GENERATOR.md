@@ -1,4 +1,4 @@
-# SVG Batch Asset Generator
+# ✏️ SVG Batch Asset Generator
 
 This tool generates SVG diagrams programmatically to showcase processes in video scripts. Unlike the other batch asset generators that use fal.ai API, this generator creates pure SVG files using Python's XML capabilities.
 
@@ -21,11 +21,13 @@ Generated SVG files follow the standardized naming pattern:
 ```
 
 **Examples:**
+
 - `001_svg_agentic_era_transition_v1.svg`
 - `002_svg_workflow_process_v1.svg`
 - `003_svg_data_collection_understanding_notification_v1.svg`
 
 The naming convention ensures:
+
 - Easy scene-based organization (zero-padded 3-digit scene numbers)
 - Clear asset type identification (`svg`)
 - Version tracking built into filename
@@ -34,6 +36,7 @@ The naming convention ensures:
 ## Manifest System
 
 Every generation run creates a `manifest.json` file that maps:
+
 - Filename → Description
 - Filename → Timestamp
 - Filename → Additional metadata (scene, priority, diagram type, dimensions)
@@ -74,6 +77,7 @@ Edit the `GENERATION_QUEUE` in the script to add or modify diagrams. Each diagra
 ## Element Types
 
 ### Box Element
+
 ```python
 {
     "type": "box",
@@ -89,6 +93,7 @@ Edit the `GENERATION_QUEUE` in the script to add or modify diagrams. Each diagra
 ```
 
 ### Arrow Element
+
 ```python
 {
     "type": "arrow",
@@ -104,6 +109,7 @@ Edit the `GENERATION_QUEUE` in the script to add or modify diagrams. Each diagra
 ## Output
 
 Generated files are saved to `../3_Simulation/Feb1Youtube/generated_svgs/`:
+
 - `.svg` files - The actual SVG diagrams (with new naming convention)
 - `.json` files - Metadata for each diagram
 - `generation_summary.json` - Overall generation report
@@ -171,8 +177,18 @@ Add to `GENERATION_QUEUE`:
 ## Similar Tools
 
 This generator follows the same pattern as other generators in the project:
+
 - `5_Symbols/BatchAssetGeneratorImages.py` - Image generation via fal.ai
 - `5_Symbols/BatchAssetGeneratorDiagrams.py` - Diagram generation via fal.ai
 - `5_Symbols/BatchAssetGeneratorGraphics.py` - Graphics generation via fal.ai
 
 The key difference is that this SVG generator creates vector graphics programmatically without requiring external API calls or credits.
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula generates clean, crisp diagrams for the weekly video.
+
+- **Role**: Diagram and Flowchart Generator.
+- **Input**: Python-defined vector structures (boxes, arrows, text).
+- **Output**: SVG files (and JPEGs).
+- **Benefit**: Creates "perfect" technical diagrams that scale infinitely. Essential for explaining complex "Agentic workflows" or architecture concepts in the weekly video, ensuring text is legible and lines are sharp.

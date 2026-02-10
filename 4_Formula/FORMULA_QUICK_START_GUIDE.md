@@ -1,10 +1,11 @@
-# Weekly Video Inputs - Quick Start Guide
+# 🚀 Weekly Video Inputs - Quick Start Guide
 
 This guide shows you how to use the new weekly video inputs system with YAML templates and memory palace support.
 
 ## Overview
 
 The system now supports:
+
 - ✅ Modular YAML files for each asset type
 - ✅ Memory palace visualizations for complex topics
 - ✅ Automatic merging of multiple input files
@@ -30,6 +31,7 @@ mkdir -p 3_Simulation/${WEEK_ID}/output
 Choose one of these approaches:
 
 #### Option A: Use Master Template (Easiest)
+
 ```bash
 # Copy the all-in-one template
 cp 4_Formula/templates/batch_generation_data.yaml \
@@ -40,6 +42,7 @@ cp 4_Formula/templates/batch_generation_data.yaml \
 ```
 
 #### Option B: Use Modular Templates (Recommended)
+
 ```bash
 # Copy only what you need
 cp 4_Formula/templates/video_inputs.yaml \
@@ -99,6 +102,7 @@ cat ../3_Simulation/${WEEK_ID}/output/manifest.json
 Let's create a video about "Understanding Cloud Computing" with memory palace visualization.
 
 ### Step 1: Create the Folder
+
 ```bash
 WEEK_ID="2026-02-17"
 mkdir -p 3_Simulation/${WEEK_ID}/input
@@ -189,6 +193,7 @@ python MasterAssetGenerator.py --week 2026-02-17
 ```
 
 The generator will:
+
 1. Load both YAML files
 2. Merge them into one configuration
 3. Show cost estimate
@@ -199,6 +204,7 @@ The generator will:
 ### Step 5: Use in Your Video
 
 The generated memory palace images serve as:
+
 - Visual anchors for each concept
 - Transitions between topics
 - Memorable reference points for viewers
@@ -217,9 +223,7 @@ python MasterAssetGenerator.py --week 2026-02-17 --types memory_palace
 python MasterAssetGenerator.py --week 2026-02-17 --types video,images
 ```
 
-### Visual Consistency with Seeds
-
-Use the same seed for related assets:
+### Visual Consistency with See [FORMULA_QUICK_START_GUIDE.md](./FORMULA_QUICK_START_GUIDE.md) for detailed instructions
 
 ```yaml
 # All memory palace locations use SEED_MEMORY
@@ -280,7 +284,8 @@ Here's what a complete weekly setup looks like:
 
 **Error:** `⚠️  No configuration files (.yaml/.yml/.json) found`
 
-**Solution:** 
+**Solution:**
+
 ```bash
 # Make sure you have at least one config file
 ls 3_Simulation/2026-02-17/input/*.yaml
@@ -296,6 +301,7 @@ cp 4_Formula/templates/batch_generation_data.yaml \
 **Error:** `❌ Error reading config: ...`
 
 **Solution:** Validate your YAML syntax
+
 ```bash
 # Test YAML syntax
 python3 -c "import yaml; yaml.safe_load(open('3_Simulation/2026-02-17/input/video_inputs.yaml'))"
@@ -311,6 +317,7 @@ python3 -c "import yaml; yaml.safe_load(open('3_Simulation/2026-02-17/input/vide
 **Error:** `⚠️  PyYAML not installed`
 
 **Solution:**
+
 ```bash
 pip install PyYAML
 # or
@@ -329,7 +336,7 @@ pip install -r requirements.txt
 
 ## Resources
 
-- **Formula Guide**: `4_Formula/WEEKLY_VIDEO_INPUTS_FORMULA.md`
+- **Formula Guide**: `4_Formula/FORMULA_WEEKLY_VIDEO_INPUTS.md`
 - **Template Reference**: `4_Formula/templates/README.md`
 - **All Templates**: `4_Formula/templates/*.yaml`
 
@@ -347,7 +354,17 @@ pip install -r requirements.txt
 **Questions?** Check the documentation in `4_Formula/` or review the template examples.
 
 **Ready to start?** Run this (adjust the path to your project):
+
 ```bash
 cd /path/to/your/fal.ai  # Change this to your actual project root
 cp 4_Formula/templates/batch_generation_data.yaml 3_Simulation/$(date +%Y-%m-%d)/input/
 ```
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This guide is the primary onboarding interface for the weekly production process.
+
+- **Role**: User manual for the weekly "Sprint Start".
+- **Input**: New week's date/topic.
+- **Output**: A fully initialized directory structure and configuration templates ready for creative input.
+- **Benefit**: Reduces the "activation energy" required to start a new weekly cycle, ensuring the project starts on a solid, standardized foundation every week.

@@ -104,3 +104,12 @@ Into a single source of truth:
 `c:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml`
 
 This reduced code size significantly and centralized the "Creative Direction" (prompts/scenes) into one readable document.
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula dictates *how* we define the assets to be generated each week.
+
+- **Role**: Configuration standard for weekly inputs.
+- **Input**: `batch_generation_data.yaml` files.
+- **Output**: Python dictionaries used by generators.
+- **Benefit**: Allows non-coders (or coders in "creative mode") to define weekly assets (prompts, scenes) without touching the Python codebase. It is the bridge between the "Creative Theory" (script) and "Technical Execution" (generator).

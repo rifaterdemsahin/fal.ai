@@ -1,4 +1,4 @@
-# Output Format Configuration
+# 📄 Output Format Configuration
 
 ## Overview
 
@@ -44,16 +44,19 @@ These assets **MUST** use PNG format to preserve transparency:
 This ensures PNG files work seamlessly in DaVinci Resolve without "Media Offline" errors.
 
 ### Lower Thirds (10 assets)
+
 - All lower thirds are broadcast overlays
 - Require transparent backgrounds for video compositing
 - Examples: `lt_agentic_era`, `lt_mcp`, `lt_skills_gap`, etc.
 
 ### Icons (10 assets)
+
 - Generated with "isolated on white background"
 - Need transparency for flexible use in presentations
 - Examples: `ferrari_icon`, `shopping_cart_icon`, `database_cylinder`, etc.
 
 ### Graphics with Transparency (2 assets)
+
 - `ferrari_cart_morph` - Morphing animation requires transparency
 - `state_management_flow` - Overlay graphic with transparent background
 
@@ -62,15 +65,18 @@ This ensures PNG files work seamlessly in DaVinci Resolve without "Media Offline
 These assets use JPEG format for smaller file sizes:
 
 ### Images (11+ assets)
+
 - All have solid dark backgrounds
 - Examples: `sunday_5pm_timeline`, `agent_workflow_diagram`, `20_dollar_pricing`, etc.
 - Typical savings: 40-60% file size reduction
 
 ### Diagrams (3+ assets)
+
 - All have solid backgrounds
 - Examples: `agentic_workflow_architecture`, `data_flow_process`, etc.
 
 ### Memory Palace & Chapter Markers
+
 - Photorealistic or stylized scenes with solid backgrounds
 - No transparency requirements
 
@@ -166,6 +172,7 @@ python3 test_png_optimization.py   # Test PNG optimization for DaVinci Resolve
 | Chapter Markers | JPEG | Quality 95 | Solid backgrounds |
 
 **PNG Optimization Details:**
+
 - All PNG files converted to RGBA (32-bit: 8-bit per channel)
 - Indexed colors (mode 'P') automatically converted to RGBA
 - All metadata stripped for DaVinci Resolve compatibility
@@ -198,3 +205,12 @@ generator.output_format = "png"  # Force PNG if needed
   - Metadata is completely removed to prevent DaVinci Resolve issues
   - Optimization happens automatically for all PNG files
   - No manual intervention or post-processing required
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula acts as the "Standard Operating Procedure" for file formats delivered to the editor.
+
+- **Role**: format standardization.
+- **Input**: Generated assets in memory.
+- **Output**: Files saved with the correct extension (.jpg vs .png) and settings (compression, metadata).
+- **Benefit**: Balances file quality with storage size (using JPEGs where possible) while preserving necessary technical features (transparency in PNGs), optimizing the "Weekly Inputs" folder for both quality and manageability.

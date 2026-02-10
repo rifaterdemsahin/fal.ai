@@ -1,4 +1,4 @@
-# Anime Generator Quick Reference
+# 🎬 Anime Generator Quick Reference
 
 ## Quick Start
 
@@ -75,6 +75,7 @@ python BatchAssetGeneratorAnime.py \
 ## Examples
 
 ### Minimal Scene
+
 ```json
 {
   "id": "1.1",
@@ -86,6 +87,7 @@ python BatchAssetGeneratorAnime.py \
 ```
 
 ### Detailed Scene
+
 ```json
 {
   "id": "1.1",
@@ -124,7 +126,7 @@ python Video/BatchAssetGeneratorAnime.py --help
 
 ## Full Documentation
 
-See [ANIME_GENERATOR_GUIDE.md](./ANIME_GENERATOR_GUIDE.md) for complete documentation.
+See [FORMULA_ANIME_GENERATOR_GUIDE.md](./FORMULA_ANIME_GENERATOR_GUIDE.md) for complete documentation.
 
 ## Example Storylines
 
@@ -134,18 +136,30 @@ See [ANIME_GENERATOR_GUIDE.md](./ANIME_GENERATOR_GUIDE.md) for complete document
 ## Troubleshooting
 
 **No API key:**
+
 ```bash
 export FAL_KEY='your-key-here'
 ```
 
 **Generation fails:**
+
 - Check `generation_summary.json` for errors
 - Try different model with `--model` flag
 - Simplify prompt if too complex
 
 **Import errors:**
+
 ```bash
 pip install fal-client
 ```
 
 For more help, see the [Troubleshooting Guide](../../6_Semblance/README.md).
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This cheat sheet is designed for rapid usage during the weekly "crunch time".
+
+- **Role**: specific command lookup for the weekly operator.
+- **Input**: Quick copy-paste commands.
+- **Output**: Correctly executed generation commands.
+- **Benefit**: Reduces friction and look-up time during the weekly production sprint, ensuring the "weekly artifact" is delivered on time.

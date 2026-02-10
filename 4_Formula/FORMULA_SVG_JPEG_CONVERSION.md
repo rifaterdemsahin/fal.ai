@@ -1,4 +1,4 @@
-# SVG to JPEG Conversion
+# 🖼️ SVG to JPEG Conversion
 
 ## Overview
 
@@ -49,16 +49,19 @@ pip install cairosvg Pillow
 The conversion happens automatically in all SVG generators:
 
 ### BulkSVGGenerator.py
+
 ```python
 python3 BulkSVGGenerator.py
 ```
 
 ### BatchAssetGeneratorSVG.py
+
 ```python
 python3 BatchAssetGeneratorSVG.py
 ```
 
 ### SVGGenerator.py
+
 ```python
 from SVGGenerator import SVGAssetGenerator
 generator = SVGAssetGenerator()
@@ -75,6 +78,7 @@ python3 test_svg_jpeg_conversion.py
 ```
 
 Expected output:
+
 ```
 🧪 Testing SVG to JPEG Conversion
 ============================================================
@@ -150,11 +154,13 @@ This graceful degradation ensures the system works even without the optional con
 ## Benefits
 
 ### For Users
+
 - **Compatibility**: JPEG works everywhere (browsers, editors, viewers)
 - **Preview**: Easier to preview without SVG support
 - **Thumbnails**: Better for thumbnail generation
 
 ### For Developers
+
 - **Vector + Raster**: Best of both worlds - scalable SVG + universal JPEG
 - **Automation**: No manual conversion needed
 - **Consistency**: Same naming convention for both formats
@@ -181,6 +187,7 @@ Both SVG and JPEG files can be tracked in the manifest system. Currently, only t
 **Problem**: Warning message appears, no JPEG created
 
 **Solution**: Install dependencies
+
 ```bash
 pip install cairosvg Pillow
 ```
@@ -190,6 +197,7 @@ pip install cairosvg Pillow
 **Problem**: JPEG files created but won't open
 
 **Solution**: Check cairosvg installation
+
 ```bash
 python3 -c "import cairosvg; print(cairosvg.__version__)"
 ```
@@ -199,6 +207,7 @@ python3 -c "import cairosvg; print(cairosvg.__version__)"
 **Problem**: JPEG files are very large
 
 **Solution**: Adjust quality setting in `asset_utils.py`:
+
 ```python
 convert_svg_to_jpeg(svg_path, quality=85)  # Lower quality = smaller file
 ```
@@ -213,3 +222,12 @@ Potential improvements:
 - [ ] Multiple resolution outputs (thumbnail, standard, high-res)
 - [ ] Add JPEG files to manifest tracking
 - [ ] WebP format support for modern browsers
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula ensures improved compatibility for vector assets.
+
+- **Role**: Compatibility bridge for vector graphics.
+- **Input**: SVG files.
+- **Output**: High-quality JPEG rasters.
+- **Benefit**: Video editors (like DaVinci Resolve) sometimes struggle with complex SVGs or render them slowly. Converting to high-res JPEGs ensures smooth playback and instant "media online" status during editing, preventing technical slowdowns.

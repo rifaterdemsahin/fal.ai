@@ -1,4 +1,4 @@
-# Bulk Anime Generator with Storyline
+# 🎬 Bulk Anime Generator with Storyline
 
 ## Overview
 
@@ -126,6 +126,7 @@ python BatchAssetGeneratorAnime.py --model flux_anime
 ### Action Adventure (Included)
 
 The default storyline `anime_storyline.json` includes:
+
 - **22 scenes** covering a complete hero's journey
 - Character development from ordinary person to hero
 - Training arc with mentor
@@ -239,6 +240,7 @@ You can also define anime scenes directly in your `assets_config.json`:
 ### 4. Story Structure
 
 Follow classic anime narrative beats:
+
 1. **Introduction** (1-2 scenes): Establish world and character
 2. **Inciting Incident** (2-3 scenes): Problem/conflict appears
 3. **Rising Action** (5-8 scenes): Training, preparation, small battles
@@ -285,6 +287,7 @@ Anime generation costs vary by model (pricing as of February 2026, subject to ch
 **Note**: Please verify current pricing at [fal.ai/pricing](https://fal.ai/pricing) as rates may change.
 
 Use the cost estimator:
+
 ```bash
 cd 5_Symbols/Utils
 python EstimateWeeklyVideoCost.py
@@ -333,6 +336,7 @@ done
 ## Examples Gallery
 
 See `/3_Simulation/Feb1Youtube/anime_storyline.json` for a complete example with:
+
 - 22 fully-defined scenes
 - Character development arc
 - Multiple settings and moods
@@ -357,6 +361,20 @@ For issues or questions:
 1. Check the main [README.md](../../README.md)
 2. Review [Troubleshooting Guide](../../6_Semblance/README.md)
 3. Open an issue on GitHub
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula is a key component of the weekly video production pipeline, specifically for creating narrative-driven anime segments.
+
+- **Role**: Generates consistent anime-style scenes from a structured `storyline.json` file.
+- **Input**: `anime_storyline.json` located in the weekly input folder (e.g., `3_Simulation/YYYY-MM-DD/input/`).
+- **Output**: A series of video or image files in the `generated_anime` output folder, ready for editing.
+- **Benefit**: Automates the visualization of complex scripts, ensuring style consistency and reducing manual effort in asset creation.
+- **Weekly Workflow**:
+    1. Draft the anime script/storyline in the weekly planning phase.
+    2. Save as `anime_storyline.json` in the weekly input directory.
+    3. Run the generator as part of the `MasterAssetGenerator` pipeline or independently.
+    4. Import generated assets into DaVinci Resolve using the provided `manifest.json`.
 
 ## License
 

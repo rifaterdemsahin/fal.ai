@@ -1,4 +1,4 @@
-# Refactoring Summary: Weekly Video Production Structure
+# ♻️ Refactoring Summary: Weekly Video Production Structure
 
 ## Overview
 
@@ -9,6 +9,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
 ### 1. New Files Created
 
 #### `5_Symbols/paths_config.py` (125 lines)
+
 - Centralized path management module
 - Functions:
   - `get_weekly_paths(weekly_id)` - Get paths for a weekly structure
@@ -18,6 +19,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
 - Provides consistent path resolution across the codebase
 
 #### `5_Symbols/test_path_config.py` (127 lines)
+
 - Comprehensive unit tests for path configuration
 - Tests:
   - Weekly path generation
@@ -27,6 +29,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
 - All tests passing
 
 #### `5_Symbols/validate_refactoring.py` (247 lines)
+
 - End-to-end validation tests
 - Tests:
   - Path consistency
@@ -35,7 +38,8 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
   - Legacy mode workflow (backward compatibility)
 - All tests passing
 
-#### `5_Symbols/WEEKLY_STRUCTURE.md` (330 lines)
+#### `5_Symbols/FORMULA_WEEKLY_STRUCTURE.md` (330 lines)
+
 - Comprehensive user documentation
 - Includes:
   - Quick start guide
@@ -46,6 +50,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
   - Advanced usage patterns
 
 #### `3_Simulation/2026-02-10/input/assets_config.json`
+
 - Example weekly structure
 - Sample configuration file
 - Demonstrates new folder organization
@@ -53,6 +58,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
 ### 2. Modified Files
 
 #### `5_Symbols/MasterAssetGenerator.py`
+
 - **Added:** Import of `paths_config` module
 - **Added:** `--week` CLI argument for new structure
 - **Added:** Support for `--week auto` (auto-generate from today's date)
@@ -65,6 +71,7 @@ Successfully refactored the `5_Symbols` codebase to support a clean weekly video
 - **Maintained:** Full backward compatibility with legacy `week_dir` argument
 
 Key logic changes:
+
 ```python
 # New mode
 if args.weekly_id:
@@ -127,18 +134,21 @@ python 5_Symbols/MasterAssetGenerator.py ../3_Simulation/Feb1Youtube
 ## Testing & Validation
 
 ### Unit Tests
+
 ✅ Path generation and consistency  
 ✅ Argument parsing  
 ✅ Config file lookup  
 ✅ Directory creation  
 
 ### End-to-End Tests
+
 ✅ Complete new mode workflow  
 ✅ Complete legacy mode workflow  
 ✅ Auto weekly ID generation  
 ✅ Path consistency across calls  
 
 ### Code Quality
+
 ✅ Code review completed (all findings addressed)  
 ✅ Security scan completed (0 vulnerabilities found)  
 ✅ 100% backward compatible  
@@ -189,7 +199,8 @@ The refactoring is **complete and ready for use**. Users can:
 ## Documentation
 
 Full documentation available in:
-- `5_Symbols/WEEKLY_STRUCTURE.md` - Complete user guide
+
+- `5_Symbols/FORMULA_WEEKLY_STRUCTURE.md` - Complete user guide
 - `5_Symbols/paths_config.py` - Module documentation (docstrings)
 - `5_Symbols/MasterAssetGenerator.py` - Updated with usage examples
 
@@ -202,3 +213,12 @@ Full documentation available in:
 ✅ **Ready for production use**
 
 The codebase now supports a clean, scalable weekly video production workflow while maintaining full backward compatibility with existing projects.
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This document captures the "Meta-Formula" of how the project evolved to support the weekly cadence.
+
+- **Role**: Historical record / Change Log.
+- **Input**: Codebase state before and after refactoring.
+- **Output**: Understanding of *why* the folder structure is the way it is.
+- **Benefit**: Helps new developers (or the future self) understand the logic behind the "Weekly Folder" structure, preventing regressions or re-inventing the wheel. It justifies the date-based organization strategy.

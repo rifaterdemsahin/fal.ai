@@ -1,4 +1,4 @@
-# 3D Asset Generator - Usage Guide
+# 🧊 3D Asset Generator - Usage Guide
 
 ## Overview
 
@@ -9,11 +9,13 @@ The 3D Asset Generator uses fal.ai's Hunyuan-3D API to generate high-quality 3D 
 ### Prerequisites
 
 1. Install dependencies:
+
    ```bash
    pip install fal-client Pillow
    ```
 
 2. Set up your fal.ai API key:
+
    ```bash
    export FAL_KEY='your-api-key-here'
    # Or use FAL_API_KEY (GitHub Actions/CI environments)
@@ -23,12 +25,14 @@ The 3D Asset Generator uses fal.ai's Hunyuan-3D API to generate high-quality 3D 
 ### Generate 3D Models
 
 **Using the Batch Generator:**
+
 ```bash
 cd 5_Symbols
 python3 BatchAssetGenerator3D.py
 ```
 
 **Using the Individual Generator:**
+
 ```bash
 cd 5_Symbols
 python3 ThreeDGenerator.py
@@ -39,13 +43,14 @@ python3 ThreeDGenerator.py
 ### Model Information
 
 - **Model Name**: `fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d`
-- **API Documentation**: https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d
+- **API Documentation**: <https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d>
 - **Output Format**: GLB (glTF Binary)
 - **Estimated Cost**: ~$0.10 per 3D model (verify current pricing)
 
 ### Response Format
 
 The API returns the 3D model in the following structure:
+
 ```json
 {
   "model_urls": {
@@ -68,15 +73,18 @@ The API returns the 3D model in the following structure:
 The default generation queue includes:
 
 ### High Priority
+
 1. **Shopping Cart** - Modern metallic shopping cart with detailed wheels
 2. **Ferrari Sports Car** - Sleek red Ferrari with realistic materials
 
 ### Medium Priority
+
 3. **AI Robot Brain** - Futuristic AI brain with neural network connections
-4. **Smartphone** - Modern smartphone with notification badge
-5. **Workflow Node** - Geometric node for technical diagrams
+2. **Smartphone** - Modern smartphone with notification badge
+3. **Workflow Node** - Geometric node for technical diagrams
 
 ### Low Priority
+
 6. **Database Cylinder** - Classic database symbol in 3D
 
 ## Customization
@@ -117,6 +125,7 @@ Generated files follow the standardized naming pattern:
 ```
 
 Examples:
+
 - `001_3d_shopping_cart_v1.glb`
 - `001_3d_ferrari_sports_car_v2.glb`
 - `003_3d_ai_robot_brain_v1.glb`
@@ -132,16 +141,19 @@ Each generation creates:
 ## Using Generated 3D Models
 
 ### In Blender
+
 1. File → Import → glTF 2.0 (.glb/.gltf)
 2. Select your `.glb` file
 3. Model imports with materials and textures
 
 ### In Unity
+
 1. Drag `.glb` file into Assets folder
 2. Unity automatically imports the model
 3. Ready to use in scenes
 
 ### In Three.js (Web)
+
 ```javascript
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -162,12 +174,14 @@ python3 Batch3DModelOptimizer.py
 ```
 
 The optimizer will:
+
 - ✅ Validate 3D model files (GLB, FBX, OBJ, DAE)
 - 🔧 Optimize models for Fusion integration
 - 📊 Generate metadata and analysis reports
 - 💡 Provide Fusion integration tips
 
 **Manual Import in Fusion:**
+
 1. Open DaVinci Resolve → Fusion page
 2. File → Import → 3D Model
 3. Select optimized model file
@@ -175,6 +189,7 @@ The optimizer will:
 5. Use Merge3D to combine with other elements
 
 **Supported Formats:**
+
 - **FBX**: Best compatibility with animations
 - **OBJ**: Basic geometry, limited animation
 - **DAE**: COLLADA format with animation support
@@ -197,6 +212,7 @@ python3 test_3d_optimizer.py
 ```
 
 Expected output:
+
 ```
 # 3D Generator Tests
 Ran 10 tests in 0.003s
@@ -210,12 +226,14 @@ OK
 ## Cost Estimation
 
 Before generation, the batch generator shows:
+
 - Total number of models to generate
 - Breakdown by priority (HIGH/MEDIUM/LOW)
 - Estimated total cost
 - Confirmation prompt
 
 Example:
+
 ```
 📊 Generation Queue Summary:
    Total 3D models to generate: 6
@@ -231,32 +249,40 @@ Proceed with generation? (yes/no):
 ## Troubleshooting
 
 ### API Key Not Found
+
 ```
 ❌ ERROR: FAL_KEY or FAL_API_KEY environment variable not set
 ```
+
 **Solution**: Set your API key with `export FAL_KEY='your-api-key-here'` or `export FAL_API_KEY='your-api-key-here'`
 
 For GitHub Actions, add `FAL_API_KEY` to repository secrets and use it in workflows:
+
 ```yaml
 env:
   FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
 ```
 
 ### No GLB URL in Result
+
 ```
 ❌ Error: No GLB model URL in result
 ```
+
 **Solution**: Check API status and verify your prompt is valid
 
 ### Module Not Found
+
 ```
 ❌ fal_client not installed
 ```
+
 **Solution**: Run `pip install fal-client`
 
 ## Best Practices
 
 ### Writing Prompts
+
 - Be specific about materials (metallic, glass, wood, etc.)
 - Describe the style (realistic, low-poly, stylized)
 - Mention any special features (reflective surfaces, transparency)
@@ -264,12 +290,14 @@ env:
 - Keep prompts focused and clear
 
 ### Model Organization
+
 - Use scene numbers to organize assets
 - Set appropriate priorities for generation order
 - Use consistent seeds for matching asset sets
 - Document custom prompts in comments
 
 ### Performance
+
 - The "rapid" version is optimized for speed
 - Generation typically takes 30-60 seconds per model
 - Process multiple models in batch for efficiency
@@ -277,14 +305,24 @@ env:
 
 ## Additional Resources
 
-- **fal.ai Documentation**: https://fal.ai/docs
-- **Hunyuan-3D Model Page**: https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d
-- **GLB Format Specification**: https://www.khronos.org/gltf/
+- **fal.ai Documentation**: <https://fal.ai/docs>
+- **Hunyuan-3D Model Page**: <https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d>
+- **GLB Format Specification**: <https://www.khronos.org/gltf/>
 - **Project Documentation**: See `README.md` and `5_Symbols/README.md`
 
 ## Support
 
 For issues or questions:
+
 1. Check the [Troubleshooting Guide](../6_Semblance/README.md)
 2. Review [API Key Setup](../4_Formula/api_key_setup.md)
 3. Open an issue on GitHub
+
+## 🎬 Usecase in Weekly Artifact Generation
+
+This formula provides high-quality 3D assets for the weekly video production.
+
+- **Role**: 3D Asset Creator.
+- **Input**: Text prompts describing objects (e.g., "futuristic cyberpunk city block").
+- **Output**: 3D models in GLB format.
+- **Benefit**: Adds depth and production value to the weekly video. These assets can be used in compositing software (like Fusion or Blender) to create unique, high-end visuals that static images cannot achieve.
