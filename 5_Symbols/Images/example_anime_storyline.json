@@ -1,0 +1,74 @@
+{
+  "title": "AI Adventure",
+  "style": "anime",
+  "scenes": [
+    {
+      "id": "1.1",
+      "name": "hero_awakening",
+      "priority": "HIGH",
+      "scene": "Scene 1: The Awakening",
+      "description": "The hero discovers their AI powers",
+      "prompt": "Anime style, young protagonist with glowing eyes discovering AI powers, dramatic lighting, digital particles flowing around hands, futuristic city background, vibrant colors, studio quality animation, detailed character design, 16:9 aspect ratio",
+      "duration_seconds": 5,
+      "characters": [
+        "Hero"
+      ],
+      "setting": "Futuristic City"
+    },
+    {
+      "id": "2.1",
+      "name": "mentor_appears",
+      "priority": "HIGH",
+      "scene": "Scene 2: The Mentor",
+      "description": "A wise mentor appears to guide the hero",
+      "prompt": "Anime style, wise elderly mentor with white hair and glowing staff appearing in mystical light, heroic pose, magical aura, detailed background with ancient technology, cinematic composition, vibrant colors, high quality animation, 16:9 aspect ratio",
+      "duration_seconds": 5,
+      "characters": [
+        "Hero",
+        "Mentor"
+      ],
+      "setting": "Ancient Temple"
+    },
+    {
+      "id": "3.1",
+      "name": "training_montage",
+      "priority": "MEDIUM",
+      "scene": "Scene 3: Training",
+      "description": "Hero trains to master AI abilities",
+      "prompt": "Anime style, dynamic training sequence with hero practicing AI techniques, energy blasts, speed lines, multiple action poses, dramatic camera angles, sunset background, intense colors, action anime aesthetic, 16:9 aspect ratio",
+      "duration_seconds": 5,
+      "characters": [
+        "Hero",
+        "Mentor"
+      ],
+      "setting": "Training Grounds"
+    },
+    {
+      "id": "4.1",
+      "name": "villain_reveal",
+      "priority": "HIGH",
+      "scene": "Scene 4: The Threat",
+      "description": "The main villain is revealed",
+      "prompt": "Anime style, menacing villain with dark aura standing in shadows, glowing red eyes, dramatic lighting from below, cyberpunk city in chaos behind them, ominous atmosphere, detailed character design, cinematic wide shot, 16:9 aspect ratio",
+      "duration_seconds": 5,
+      "characters": [
+        "Villain"
+      ],
+      "setting": "Dark Citadel"
+    },
+    {
+      "id": "5.1",
+      "name": "final_battle",
+      "priority": "HIGH",
+      "scene": "Scene 5: Final Confrontation",
+      "description": "Epic battle between hero and villain",
+      "prompt": "Anime style, epic battle scene with hero and villain clashing, energy explosions, dynamic action poses, speed lines, dramatic lighting, debris flying, intense colors, cinematic wide shot, high-quality animation, 16:9 aspect ratio",
+      "duration_seconds": 5,
+      "characters": [
+        "Hero",
+        "Villain"
+      ],
+      "setting": "Battle Arena"
+    }
+  ]
+}
