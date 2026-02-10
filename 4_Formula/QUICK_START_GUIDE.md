@@ -16,8 +16,8 @@ The system now supports:
 ### 1. Create Your Weekly Folder
 
 ```bash
-# Navigate to the project root
-cd /home/runner/work/fal.ai/fal.ai
+# Navigate to the project root (adjust path to your local clone)
+cd /path/to/your/fal.ai  # Change this to your actual project path
 
 # Create this week's folder
 WEEK_ID=$(date +%Y-%m-%d)
@@ -346,8 +346,8 @@ pip install -r requirements.txt
 
 **Questions?** Check the documentation in `4_Formula/` or review the template examples.
 
-**Ready to start?** Run this:
+**Ready to start?** Run this (adjust the path to your project):
 ```bash
-cd /home/runner/work/fal.ai/fal.ai
+cd /path/to/your/fal.ai  # Change this to your actual project root
 cp 4_Formula/templates/batch_generation_data.yaml 3_Simulation/$(date +%Y-%m-%d)/input/
 ```

@@ -143,6 +143,8 @@ The generator automatically merges multiple YAML files from the input folder:
 # All three files will be processed together
 ```
 
+**Important:** Ensure asset IDs are unique across all files. If the same ID appears in multiple files, both instances will be included in the generation queue. This is useful for adding assets incrementally, but avoid unintended duplicates by using unique IDs (e.g., `V1.1`, `V2.1`, etc.).
+
 ### Separate Weekly Configurations
 
 Organize by topic or team:
@@ -221,7 +223,7 @@ See the `../WEEKLY_VIDEO_INPUTS_FORMULA.md` for detailed examples of:
 **Ready to start?** Copy a template and begin creating your weekly video assets!
 
 ```bash
-# Quick start for this week
+# From the project root (e.g., /path/to/your/fal.ai)
 cp 4_Formula/templates/batch_generation_data.yaml \
    3_Simulation/$(date +%Y-%m-%d)/input/
 ```

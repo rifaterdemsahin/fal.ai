@@ -64,7 +64,8 @@ def load_config(config_path: Path) -> Dict:
                 if yaml is None:
                     print(f"❌ Cannot load YAML file. PyYAML not installed.")
                     return {}
-                return yaml.safe_load(f) or {}
+                result = yaml.safe_load(f)
+                return result if result is not None else {}
             else:
                 # Unknown format, try JSON as default
                 return json.load(f)
@@ -73,7 +74,12 @@ def load_config(config_path: Path) -> Dict:
         return {}
 
 def merge_configs(config_dir: Path) -> Dict:
-    """Load and merge all YAML and JSON config files from a directory"""
+    """Load and merge all YAML and JSON config files from a directory
+    
+    Note: If the same asset ID appears in multiple files, all instances will be included.
+    This allows for incremental additions, but users should ensure IDs are unique across files
+    if duplicates are not desired.
+    """
     merged = {}
     
     # Find all YAML and JSON files
