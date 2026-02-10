@@ -15,6 +15,9 @@ from typing import Dict, List
 # Add the current directory to path so we can import local modules
 sys.path.append(str(Path(__file__).parent))
 
+# Import path configuration for weekly structure
+from paths_config import get_weekly_paths, ensure_weekly_structure
+
 # Import individual generators
 from Images import BatchAssetGeneratorImages as gen_images
 from Video import BatchAssetGeneratorLowerThirds as gen_lower_thirds
@@ -84,24 +87,88 @@ def estimate_cost(config: Dict) -> float:
     return total_cost
 
 def main():
-    parser = argparse.ArgumentParser(description="Master Asset Generator for a video project week")
-    parser.add_argument("week_dir", type=str, help="Path to the weekly video folder (e.g., ../3_Simulation/Feb1Youtube)")
+    parser = argparse.ArgumentParser(
+        description="Master Asset Generator for a video project week",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # New weekly structure (recommended):
+  python MasterAssetGenerator.py --week 2026-02-10
+  
+  # Auto-generate weekly ID from today's date:
+  python MasterAssetGenerator.py --week auto
+  
+  # Legacy mode (backward compatible):
+  python MasterAssetGenerator.py ../3_Simulation/Feb1Youtube
+        """
+    )
+    
+    # Support both legacy and new modes
+    parser.add_argument(
+        "week_dir", 
+        type=str, 
+        nargs='?',  # Make it optional
+        help="[LEGACY] Path to the weekly video folder (e.g., ../3_Simulation/Feb1Youtube)"
+    )
+    parser.add_argument(
+        "--week", 
+        type=str, 
+        dest="weekly_id",
+        help="Weekly ID for new structure (e.g., '2026-02-10' or 'auto' for today's date)"
+    )
+    
     args = parser.parse_args()
 
-    # Resolve paths
-    week_dir = Path(args.week_dir).resolve()
-    if not week_dir.exists():
-        print(f"❌ Directory not found: {week_dir}")
+    # Determine which mode to use
+    use_new_structure = False
+    if args.weekly_id:
+        # New mode: Use weekly structure
+        if args.weekly_id.lower() == 'auto':
+            weekly_id = None  # Will auto-generate from today's date
+        else:
+            weekly_id = args.weekly_id
+        
+        paths = ensure_weekly_structure(weekly_id)
+        week_dir = paths['base']
+        input_dir = paths['input']
+        output_dir = paths['output']
+        use_new_structure = True
+        
+        print(f"\n🎬 MASTER GENERATOR: Weekly Video Production")
+        print(f"   Weekly ID: {paths['weekly_id']}")
+        print(f"   Base: {week_dir}")
+        print(f"   Input: {input_dir}")
+        print(f"   Output: {output_dir}")
+        
+    elif args.week_dir:
+        # Legacy mode: Use provided directory
+        week_dir = Path(args.week_dir).resolve()
+        if not week_dir.exists():
+            print(f"❌ Directory not found: {week_dir}")
+            return
+        
+        # In legacy mode, input and output are the same (week_dir)
+        input_dir = week_dir
+        output_dir = week_dir
+        use_new_structure = False
+        
+        print(f"\n🎬 MASTER GENERATOR: {week_dir.name} [LEGACY MODE]")
+        print(f"   Path: {week_dir}")
+    else:
+        print("❌ Error: Must provide either --week or week_dir argument")
+        parser.print_help()
         return
-
-    print(f"\n🎬 MASTER GENERATOR: {week_dir.name}")
-    print(f"   Path: {week_dir}")
     
-    # Check for config
-    config_file = week_dir / "assets_config.json"
+    # Check for config - look in input directory first (new structure), then base (legacy)
+    config_file = input_dir / "assets_config.json"
+    if not config_file.exists() and not use_new_structure:
+        # Legacy fallback
+        config_file = week_dir / "assets_config.json"
+    
     if not config_file.exists():
-        print(f"⚠️  No 'assets_config.json' found in {week_dir}. Please create it first.")
-        # Optional: could check for source_edl.md and propose to generate config, but let's stick to config
+        location = "input folder" if use_new_structure else "directory"
+        print(f"⚠️  No 'assets_config.json' found in {location}: {config_file.parent}")
+        print(f"   Please create it first.")
         return
 
     # Load Config
@@ -110,10 +177,15 @@ def main():
         return
 
     # Check for text marker file (for chapter markers generator)
-    marker_file = week_dir / "source_chapter_markers.txt"
+    # Look in input directory first (new structure), then base (legacy)
+    marker_file = input_dir / "source_chapter_markers.txt"
     if not marker_file.exists():
-        # fallback
-        marker_file = week_dir / "chapter_markers.txt"
+        marker_file = input_dir / "chapter_markers.txt"
+    if not marker_file.exists() and not use_new_structure:
+        # Legacy fallback
+        marker_file = week_dir / "source_chapter_markers.txt"
+        if not marker_file.exists():
+            marker_file = week_dir / "chapter_markers.txt"
 
     # Estimate Cost
     gen_cost.generate_report(week_dir)
@@ -144,62 +216,66 @@ def main():
     if "images" in config and (not selected_mode or "images" in selection):
         print("\n" + "!"*60)
         print("🖼️  GENERATING IMAGES")
-        gen_images.process_queue(config["images"], week_dir / "generated_assets_Images", manifest)
+        gen_images.process_queue(config["images"], output_dir / "generated_assets_Images", manifest)
 
     # 2. Lower Thirds
     if "lower_thirds" in config and (not selected_mode or "lower_thirds" in selection):
         print("\n" + "!"*60)
         print("📺 GENERATING LOWER THIRDS")
-        gen_lower_thirds.process_queue(config["lower_thirds"], week_dir / "generated_assets_lowerthirds", manifest)
+        gen_lower_thirds.process_queue(config["lower_thirds"], output_dir / "generated_assets_lowerthirds", manifest)
     
     # 3. Icons
     if "icons" in config and (not selected_mode or "icons" in selection):
         print("\n" + "!"*60)
         print("🔹 GENERATING ICONS")
-        gen_icons.process_queue(config["icons"], week_dir / "generated_icons", manifest)
+        gen_icons.process_queue(config["icons"], output_dir / "generated_icons", manifest)
         
     # 4. Video
     if "video" in config and (not selected_mode or "video" in selection):
         print("\n" + "!"*60)
         print("🎥 GENERATING VIDEO CLIPS")
-        gen_video.process_queue(config["video"], week_dir / "generated_video", manifest)
+        gen_video.process_queue(config["video"], output_dir / "generated_video", manifest)
 
     # 5. Music
     if "music" in config and (not selected_mode or "music" in selection):
         print("\n" + "!"*60)
         print("🎵 GENERATING MUSIC")
-        gen_music.process_queue(config["music"], week_dir / "generated_music", manifest)
+        gen_music.process_queue(config["music"], output_dir / "generated_music", manifest)
         
     # 6. Graphics
     if "graphics" in config and (not selected_mode or "graphics" in selection):
         print("\n" + "!"*60)
         print("📊 GENERATING GRAPHICS")
-        gen_graphics.process_queue(config["graphics"], week_dir / "generated_graphics", manifest)
+        gen_graphics.process_queue(config["graphics"], output_dir / "generated_graphics", manifest)
 
     # 7. Diagrams
     if "diagrams" in config and (not selected_mode or "diagrams" in selection):
         print("\n" + "!"*60)
         print("📐 GENERATING DIAGRAMS")
-        gen_diagrams.process_queue(config["diagrams"], week_dir / "generated_diagrams", manifest)
+        gen_diagrams.process_queue(config["diagrams"], output_dir / "generated_diagrams", manifest)
     
     # 7. Chapter Markers (Visuals)
     if marker_file.exists() and (not selected_mode or "chapter_markers" in selection):
         print("\n" + "!"*60)
         print("🔖 GENERATING CHAPTER MARKER IMAGES")
-        gen_chapter_markers.generate_from_file(marker_file, week_dir / "generated_chapter_markers", manifest)
+        gen_chapter_markers.generate_from_file(marker_file, output_dir / "generated_chapter_markers", manifest)
     
     # 8. Audio/Text Markers (from EDL)
-    edl_file = week_dir / "source_edl.md"
+    edl_file = input_dir / "source_edl.md"
+    if not edl_file.exists() and not use_new_structure:
+        # Legacy fallback
+        edl_file = week_dir / "source_edl.md"
+    
     if edl_file.exists() and (not selected_mode or "audio_markers" in selection):
         print("\n" + "!"*60)
         print("📝 GENERATING TEXT MARKERS FROM EDL")
-        gen_audio.generate_chapter_markers(edl_file, week_dir / "generated_audio" / "chapter_markers.txt")
+        gen_audio.generate_chapter_markers(edl_file, output_dir / "generated_audio" / "chapter_markers.txt")
 
     # 9. Memory Palace
     if "memory_palace" in config and (not selected_mode or "memory_palace" in selection):
         print("\n" + "!"*60)
         print("🧠 GENERATING MEMORY PALACE ASSETS")
-        gen_memory_palace.process_queue(config["memory_palace"], week_dir / "generated_memory_palace", manifest)
+        gen_memory_palace.process_queue(config["memory_palace"], output_dir / "generated_memory_palace", manifest)
 
     # Save the unified manifest
     manifest.save_manifest()
