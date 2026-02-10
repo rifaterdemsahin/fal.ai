@@ -36,7 +36,7 @@ pip install -r requirements.txt
   - `GOOGLE_API_KEY` - Google Custom Search API key
   - `GOOGLE_CSE_ID` - Google Custom Search Engine ID
 
-**Note**: For GitHub Actions, the secret is named `FAL_API_KEY` but is automatically mapped to the `FAL_KEY` environment variable in workflows.
+**Note**: For GitHub Actions, the secret is named `FAL_API_KEY` but is mapped to the `FAL_KEY` environment variable via workflow configuration (see workflow files for examples).
 
 ### 🎯 Generator Configuration
 - **[`5_Symbols/base/generator_config.py`](../5_Symbols/base/generator_config.py)** - Centralized generator settings
@@ -76,7 +76,7 @@ pip install -r requirements.txt
 | 🚀 **All Bulk Generators** | Run multiple generators at once | [`all-bulk-generators.yml`](../.github/workflows/all-bulk-generators.yml) |
 
 **Secrets Configuration**:
-- `FAL_API_KEY` - Repository secret for fal.ai API access (set in GitHub, automatically injected as `FAL_KEY` environment variable in workflows)
+- `FAL_API_KEY` - Repository secret for fal.ai API access (mapped to `FAL_KEY` environment variable in workflows)
 - See [`.env.sample`](../4_Formula/.env.sample) for required environment variables
 
 **Detailed Documentation**: [`.github/workflows/README.md`](../.github/workflows/README.md)
