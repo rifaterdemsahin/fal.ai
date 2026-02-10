@@ -4,6 +4,8 @@
 
 This implementation adds a comprehensive bulk anime generator to the fal.ai asset generation pipeline. The generator creates anime-style scenes based on structured storylines with support for multiple AI models, character tracking, and professional video editing workflows.
 
+**Location**: The anime generator is located in `5_Symbols/Images/` to make it more reusable and accessible as a general visual asset generator that supports both video and image outputs.
+
 ## Features Implemented
 
 ### Core Generator (BatchAssetGeneratorAnime.py)
@@ -74,16 +76,16 @@ This implementation adds a comprehensive bulk anime generator to the fal.ai asse
 
 ```bash
 # Create example storyline
-python BatchAssetGeneratorAnime.py --create-example
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --create-example
 
 # Generate with default settings
-python BatchAssetGeneratorAnime.py --storyline anime_storyline.json
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline anime_storyline.json
 
 # Specify model
-python BatchAssetGeneratorAnime.py --storyline anime_storyline.json --model kling
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline anime_storyline.json --model kling
 
 # Custom output directory
-python BatchAssetGeneratorAnime.py --storyline anime_storyline.json --output /path/to/output
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline anime_storyline.json --output /path/to/output
 ```
 
 ## Integration with Existing Pipeline
@@ -271,7 +273,7 @@ All functionality has been tested and validated:
 
 ### Modified Files
 1. `README.md` - Added anime generator to:
-   - Video & Animation section
+   - Visual Assets section (moved from Video & Animation)
    - Documentation section
    - Key Features section
    - Run Generators section

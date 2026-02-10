@@ -10,10 +10,10 @@ pip install fal-client
 export FAL_KEY='your-api-key-here'
 
 # 3. Create example storyline
-python 5_Symbols/Video/BatchAssetGeneratorAnime.py --create-example
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --create-example
 
 # 4. Generate anime scenes
-python 5_Symbols/Video/BatchAssetGeneratorAnime.py --storyline example_anime_storyline.json
+python 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline example_anime_storyline.json
 ```
 
 ## Command Line Options

@@ -84,7 +84,6 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | Generator | Description | Models Used |
 |-----------|-------------|-------------|
 | 🎬 **`BatchAssetGeneratorVideo.py`** | B-roll video clips (1080p/4k) | `fal-ai/minimax/video-01` |
-| 🎌 **`BatchAssetGeneratorAnime.py`** | **NEW** - Bulk anime generator with storyline support | `fal-ai/minimax/video-01`, Kling, Flux |
 | 🎞️ **`BatchAssetGeneratorChapterMarkers.py`** | Chapter title cards | Image generation models |
 
 ### 🎵 Audio Assets
@@ -99,6 +98,7 @@ All generators are located in the `5_Symbols/` directory and follow a consistent
 | Generator | Description | Models Used |
 |-----------|-------------|-------------|
 | 🖼️ **`BatchAssetGeneratorImages.py`** | Photorealistic images | `fal-ai/flux/schnell` |
+| 🎌 **`BatchAssetGeneratorAnime.py`** | **NEW** - Bulk anime generator with storyline support | `fal-ai/minimax/video-01`, Kling, Flux |
 | 🎨 **`BatchAssetGeneratorGraphics.py`** | General graphics and artwork | Image generation models |
 | 🧩 **`BatchAssetGeneratorIcons.py`** | Vector-style minimalist icons | Image generation models |
 | 📊 **`BatchAssetGeneratorDiagrams.py`** | Technical diagrams and charts | Image generation models |
@@ -259,9 +259,9 @@ The guide covers:
 # Generate video assets
 python3 5_Symbols/Video/BatchAssetGeneratorVideo.py
 
-# Generate anime with storyline (NEW)
-python3 5_Symbols/Video/BatchAssetGeneratorAnime.py --create-example
-python3 5_Symbols/Video/BatchAssetGeneratorAnime.py --storyline anime_storyline.json
+# Generate anime with storyline (NEW - located in Images folder)
+python3 5_Symbols/Images/BatchAssetGeneratorAnime.py --create-example
+python3 5_Symbols/Images/BatchAssetGeneratorAnime.py --storyline anime_storyline.json
 
 # Generate image assets
 python3 5_Symbols/Images/BatchAssetGeneratorImages.py
@@ -414,7 +414,7 @@ flowchart LR
 
 ## 📖 Detailed Documentation
 
-- **[🎌 Anime Generator Guide](./5_Symbols/Video/ANIME_GENERATOR_GUIDE.md)** - Complete guide for bulk anime generation with storylines **NEW**
+- **[🎌 Anime Generator Guide](./5_Symbols/Images/ANIME_GENERATOR_GUIDE.md)** - Complete guide for bulk anime generation with storylines **NEW**
 - **[🔑 API Key Setup](./4_Formula/api_key_setup.md)** - Comprehensive guide to getting, saving, and using your fal.ai API key
 - **[Setup & Best Practices](./4_Formula/README.md)** - Installation, configuration, and usage tips
 - **[Versioning System](./5_Symbols/VERSIONING_AND_MANIFEST.md)** - Complete guide to asset naming and manifest

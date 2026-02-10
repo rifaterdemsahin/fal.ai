@@ -30,7 +30,7 @@ export FAL_KEY='your-api-key-here'
 ### 1. Create an Example Storyline
 
 ```bash
-cd 5_Symbols/Video
+cd 5_Symbols/Images
 python BatchAssetGeneratorAnime.py --create-example
 ```
 

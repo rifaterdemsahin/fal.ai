@@ -18,7 +18,7 @@ def test_anime_generator():
     # Test 1: Import the module
     print("\n1️⃣ Testing module import...")
     try:
-        from Video.BatchAssetGeneratorAnime import (
+        from Images.BatchAssetGeneratorAnime import (
             load_storyline_from_file,
             DEFAULT_STORYLINE,
             ANIME_MODELS
@@ -65,7 +65,7 @@ def test_anime_generator():
     print("\n4️⃣ Testing storyline loading...")
     try:
         # Check if example exists
-        example_path = Path("Video/example_anime_storyline.json")
+        example_path = Path("Images/example_anime_storyline.json")
         if not example_path.exists():
             print("   ⚠️  Example storyline not found (this is OK)")
         else:
@@ -140,7 +140,7 @@ def test_anime_generator():
     print("🎌 Anime Generator is ready to use")
     print("\n💡 To generate anime:")
     print("   1. Set your FAL_KEY environment variable")
-    print("   2. Run: python Video/BatchAssetGeneratorAnime.py --storyline path/to/storyline.json")
+    print("   2. Run: python Images/BatchAssetGeneratorAnime.py --storyline path/to/storyline.json")
     return True
 
 
