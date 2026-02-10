@@ -1,0 +1,76 @@
+# Audio and Music Inputs Template
+# Use this template to define audio generation requirements
+
+audio:
+  - id: "A1.1"
+    name: "transition_sound"
+    priority: "HIGH"
+    scene: "Scene 1"
+    prompt: "Modern tech transition sound effect, whoosh with digital glitch elements, clean and professional, suitable for video editing"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 3
+    
+  - id: "A2.1"
+    name: "notification_ping"
+    priority: "MEDIUM"
+    scene: "Scene 2"
+    prompt: "Soft notification sound, subtle ping with slight reverb, not jarring, pleasant tone"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 2
+    
+music:
+  - id: "M1.1"
+    name: "intro_music"
+    priority: "HIGH"
+    scene: "Scene 1"
+    prompt: "Upbeat electronic background music, modern and energetic, suitable for tech video intro, 120 BPM, no vocals, cinematic quality"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 15
+    
+  - id: "M2.1"
+    name: "background_ambient"
+    priority: "HIGH"
+    scene: "Scene 2"
+    prompt: "Calm ambient music for background, subtle and unobtrusive, perfect for voiceover, atmospheric, minimal melody"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 30
+    
+  - id: "M3.1"
+    name: "outro_music"
+    priority: "HIGH"
+    scene: "Scene 3"
+    prompt: "Uplifting outro music, inspiring and hopeful tone, crescendo ending, orchestral with electronic elements, cinematic"
+    model: "fal-ai/stable-audio"
+    duration_seconds: 20
+
+# Audio Generation Guidelines:
+#
+# Audio vs Music:
+# - audio: Sound effects, transitions, notifications
+# - music: Background tracks, intro/outro themes
+#
+# Duration Standards:
+# - Sound effects: 1-5 seconds
+# - Transitions: 2-3 seconds
+# - Intro music: 10-15 seconds
+# - Background music: 30-60 seconds
+# - Outro music: 15-20 seconds
+#
+# Prompt Tips for Sound Effects:
+# - Describe the sound type (whoosh, ping, click)
+# - Mention texture (clean, gritty, smooth)
+# - Specify use case (transition, notification, UI)
+# - Add quality descriptors (professional, cinematic)
+#
+# Prompt Tips for Music:
+# - Start with genre/style (electronic, ambient, orchestral)
+# - Mention mood/energy (upbeat, calm, intense)
+# - Specify tempo if important (120 BPM, slow)
+# - Note "no vocals" if instrumental only
+# - Describe instruments if specific
+# - Add use case (background, intro, outro)
+#
+# Priority Levels:
+# - HIGH: Essential audio, required for video flow
+# - MEDIUM: Enhances experience, nice to have
+# - LOW: Optional polish, can skip if needed

@@ -4,6 +4,13 @@ This directory contains standard procedures, workflows, and configurations for t
 
 ## 📚 Formula References
 
+### 🎬 Weekly Video Production (NEW!)
+
+* [**📋 Weekly Video Inputs Formula**](./WEEKLY_VIDEO_INPUTS_FORMULA.md) - Complete guide to weekly video structure, asset types, and memory palaces
+* [**🚀 Quick Start Guide**](./QUICK_START_GUIDE.md) - 5-minute setup for creating weekly video assets
+* [**📝 YAML Templates**](./templates/README.md) - Ready-to-use templates for all asset types
+* [**📅 Weekly Structure**](./WEEKLY_STRUCTURE.md) - Understanding the date-based folder organization
+
 ### ⚙️ Setup & Configuration
 
 * [**🔑 API Key Setup**](./SETUP_API_Key.md) - Standard method using `.env`.
@@ -25,7 +32,26 @@ This directory contains standard procedures, workflows, and configurations for t
 
 ## 🚀 Quick Start
 
-### 1. Setup Virtual Environment
+### For Weekly Video Production (Recommended)
+
+```bash
+# 1. Copy a template to your weekly folder
+WEEK_ID=$(date +%Y-%m-%d)
+mkdir -p ../3_Simulation/${WEEK_ID}/input
+cp templates/batch_generation_data.yaml ../3_Simulation/${WEEK_ID}/input/
+
+# 2. Edit the YAML file with your content
+
+# 3. Generate assets
+cd ../5_Symbols
+python MasterAssetGenerator.py --week ${WEEK_ID}
+```
+
+See [Quick Start Guide](./QUICK_START_GUIDE.md) for detailed instructions.
+
+### For Individual Generators (Legacy)
+
+#### 1. Setup Virtual Environment
 
 ```bash
 python3 -m venv .venv
@@ -34,7 +60,7 @@ source .venv/bin/activate  # Linux/Mac
 pip install -r ../requirements.txt
 ```
 
-### 2. Configure Environment
+#### 2. Configure Environment
 
 Create a `.env` file in the project root:
 
@@ -42,7 +68,7 @@ Create a `.env` file in the project root:
 FAL_KEY=your_key_here
 ```
 
-### 3. Run a Generator
+#### 3. Run a Generator
 
 ```bash
 python 5_Symbols/BatchAssetGeneratorMusic.py
