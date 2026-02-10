@@ -102,15 +102,26 @@ The project follows a **7-layer architecture** for separation of concerns:
 ## 💻 Platform Support
 
 **Supported Platforms**:
-- ☁️ **GitHub Codespaces** (Recommended for teams) - Pre-configured development environment
-- 🪟 **Windows 10/11** - Full Python 3.8+ support
-- 🍎 **macOS** - Native Python 3.8+ support
-- 🐧 **Linux** - Full Python 3.8+ support
 
-**Environment Setup**:
+| Platform | Setup Guide | Description |
+|----------|-------------|-------------|
+| ☁️ **GitHub Codespaces** | [Setup Guide](./SETUP_GITHUB_CODESPACES.md) | **Recommended for teams** - Pre-configured development environment |
+| 🪟 **Windows 10/11** | [Setup Guide](./SETUP_WINDOWS.md) | Full Python 3.8+ support with PowerShell/CMD |
+| 🍎 **macOS** | [Setup Guide](./SETUP_MACOS.md) | Native Python 3.8+ support with Terminal |
+| 🐧 **Linux** | [Setup Guide](./SETUP_LINUX.md) | Full Python 3.8+ support (Ubuntu, Debian, Fedora, Arch) |
+
+**Environment Setup Methods**:
 1. **Local Development**: `.env` file (loaded via `python-dotenv`)
 2. **GitHub Actions**: Repository Secrets (`FAL_KEY`, etc.)
 3. **Codespaces**: Pre-configured devcontainer with all dependencies
+
+Each platform guide includes:
+- ✅ Prerequisites and installation steps
+- ✅ Python environment setup
+- ✅ API key configuration
+- ✅ Running generators
+- ✅ Platform-specific troubleshooting
+- ✅ Verification checklist
 
 ---
 
@@ -229,6 +240,10 @@ timeline
 - 📦 [Installation Guide](../README.md#-quick-start-guide)
 - 🔑 [API Key Setup](../4_Formula/SETUP_API_Key.md)
 - ⚙️ [Configuration Files](../4_Formula/.env.sample)
+- ☁️ [GitHub Codespaces Setup](./SETUP_GITHUB_CODESPACES.md)
+- 🪟 [Windows Setup](./SETUP_WINDOWS.md)
+- 🍎 [macOS Setup](./SETUP_MACOS.md)
+- 🐧 [Linux Setup](./SETUP_LINUX.md)
 
 ### Development
 - 💻 [Core Generators](../5_Symbols/README.md)
