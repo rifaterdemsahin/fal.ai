@@ -63,6 +63,14 @@ These files serve as the foundation for:
 - **Text (.txt)** - Simple lists and data
 - **SubRip (.srt)** - Standard subtitle format with timestamps
 
+## Timestamp Convention
+
+**Important:** There is a timestamp offset across source files:
+- **Core source files** (subtitle.srt, edl.md, chapter_markers.txt, transcript.md): Use **01:00:00** as the base timestamp
+- **Planning files** (storyboard, shotlist, broll, music, graphics): Use **00:00:00** as the base for easier planning
+
+**Note for Production:** When implementing the planning documents during actual production/post-production, add 1 hour (01:00:00) to all timestamps in the planning files to align with the final video timeline in the core source files. This offset exists because planning documents start from a zero base for simplicity during the pre-production phase.
+
 ## Workflow Integration
 
 1. **Start with transcript** - Core narrative and structure
