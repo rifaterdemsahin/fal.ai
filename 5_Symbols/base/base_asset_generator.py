@@ -35,6 +35,7 @@ except ImportError:
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+from Utils.prompt_enhancer import enhance_prompt
 
 # Import configuration (relative import from same package)
 from .generator_config import OUTPUT_FORMATS
@@ -290,6 +291,26 @@ class BaseAssetGenerator(ABC):
         Returns:
             Dictionary with success status and metadata
         """
+        # Enhance prompt if Gemini key is available
+        original_prompt = asset_config.get("prompt", "")
+        # Only enhance if prompt exists and is not empty
+        if original_prompt and (os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")):
+            # Check if this specific asset has an enhancement context override
+            context = asset_config.get("enhancement_context")
+            
+            print(f"✨ Enhancing prompt with Gemini...")
+            enhanced_prompt = enhance_prompt(original_prompt, context=context, asset_type=self.asset_type)
+            
+            if enhanced_prompt and enhanced_prompt != original_prompt:
+                # Update the prompt in the config for this generation
+                # We store the original for reference if needed, but for generation we use enhanced
+                asset_config["original_prompt"] = original_prompt
+                asset_config["prompt"] = enhanced_prompt
+                print(f"   Original: {original_prompt[:60]}..." if len(original_prompt) > 60 else f"   Original: {original_prompt}")
+                print(f"   Enhanced: {enhanced_prompt[:60]}..." if len(enhanced_prompt) > 60 else f"   Enhanced: {enhanced_prompt}")
+            else:
+                 print(f"   Prompt enhancement skipped or returned same prompt")
+
         print(f"\n{'='*60}")
         print(f"🎨 Generating {self.asset_type}: {asset_config['name']}")
         print(f"   Scene: {asset_config.get('scene', 'Unknown')}")

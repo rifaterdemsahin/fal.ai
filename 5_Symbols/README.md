@@ -1,4 +1,4 @@
-### 5_Symbols - Core Source Code
+# 5_Symbols - Core Source Code
 
 This directory contains the operational source code for the project. The scripts are modular agents designed for specific asset generation tasks.
 
@@ -105,6 +105,7 @@ graph TB
 
 * **Utilities**:
   * `asset_utils.py`: Utilities for standardized naming, versioning, and manifest tracking.
+  * `prompt_enhancer.py`: ✨ **NEW** - Optimizes prompts using Gemini API with asset-specific context.
   * `EstimateWeeklyVideoCost.py`: Calculate API costs for batch generation.
   * `demo_versioning_system.py`: Demonstration of versioning and manifest features.
 
