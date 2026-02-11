@@ -267,6 +267,52 @@
             transform: translateY(-2px);
         }
         
+        .copy-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .copy-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .copy-button:active {
+            transform: translateY(0px);
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+            pointer-events: none;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
+        }
+        
         @media (max-width: 1024px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -373,6 +419,14 @@
         </div>
     </div>
     
+    <!-- Copy to Clipboard Button -->
+    <button class="copy-button" id="copyButton" title="Copy markdown content to clipboard">
+        📋 Copy to Clipboard
+    </button>
+    <div class="copy-notification" id="copyNotification">
+        ✅ Copied to clipboard!
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         // Initialize marked for markdown parsing
@@ -451,6 +505,85 @@
                 defaultLink.click();
             }
         });
+        
+        // Copy to Clipboard functionality
+        const copyButton = document.getElementById('copyButton');
+        const copyNotification = document.getElementById('copyNotification');
+        let currentMarkdownText = '';
+        
+        // Store markdown text when loading
+        async function loadMarkdownWithCopy(filePath) {
+            contentArea.innerHTML = '<div class="loading">⏳ Loading document...</div>';
+            
+            try {
+                const response = await fetch(filePath);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load file: ${response.statusText}`);
+                }
+                
+                const markdownText = await response.text();
+                currentMarkdownText = markdownText; // Store for copying
+                let htmlContent = marked.parse(markdownText);
+                
+                // Basic XSS protection
+                htmlContent = htmlContent
+                    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                    .replace(/on\w+="[^"]*"/g, '')
+                    .replace(/on\w+='[^']*'/g, '');
+                
+                contentArea.innerHTML = htmlContent;
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Error Loading Document</h3>
+                        <p><strong>File:</strong> ${filePath}</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>This file may not exist in the current branch or may be inaccessible.</p>
+                    </div>
+                `;
+                currentMarkdownText = ''; // Clear markdown text on error
+            }
+        }
+        
+        // Handle copy button click
+        copyButton.addEventListener('click', async () => {
+            if (!currentMarkdownText) {
+                // If no markdown loaded, copy the current HTML content as text
+                const textContent = contentArea.innerText;
+                try {
+                    await navigator.clipboard.writeText(textContent);
+                    showCopyNotification();
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy content. Please try again.');
+                }
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(currentMarkdownText);
+                showCopyNotification();
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy content. Please try again.');
+            }
+        });
+        
+        // Show copy notification
+        function showCopyNotification() {
+            copyNotification.classList.add('show');
+            setTimeout(() => {
+                copyNotification.classList.remove('show');
+            }, 2000);
+        }
+        
+        // Update loadMarkdown to use new function with copy support
+        window.loadMarkdown = loadMarkdownWithCopy;
     </script>
 </body>
 </html>

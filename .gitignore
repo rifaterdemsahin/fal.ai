@@ -1,4 +1,6 @@
 # Environment variables
+# .env files contain sensitive API keys and should never be committed
+# See 4_Formula/.env.sample for the template
 .env
 
 # Python
@@ -29,4 +31,9 @@ Thumbs.db
 .env.example
 
 # Allow generated_svgs in weekly folder
+# 4_Formula folder logic:
+# - Contains all setup guides, documentation, and best practices
+# - FORMULA_*.md files document specific workflows and implementations
+# - .env.sample provides template for environment configuration
+# - All formula documents should be committed to git for reference
 !3_Simulation/*/weekly/

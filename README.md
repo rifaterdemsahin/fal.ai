@@ -14,8 +14,8 @@ This project is a comprehensive **weekly video creation pipeline** that leverage
 graph TB
     A[📝 Weekly Video Script] --> B[🤖 Gemini Agent Analysis]
     B --> C[📋 Asset Requirements]
-    C --> D[🎨 Batch Generators]
-    D --> E1[🎬 Video Assets]
+    C --> D[🎨 Batch Generators in 5_Symbols]
+    D --> E1[🎬 Video Assets 1080p]
     D --> E2[🎵 Audio Assets]
     D --> E3[🖼️ Visual Assets]
     D --> E4[📊 Diagrams & Graphics]
@@ -23,14 +23,31 @@ graph TB
     E2 --> F
     E3 --> F
     E4 --> F
-    F --> G[🎞️ DaVinci Resolve Timeline]
-    G --> H[✅ Final Video Output]
+    F --> G[📁 3_Simulation/2026-02-15]
+    G --> H[🎞️ DaVinci Resolve Timeline]
+    H --> I[✅ Final Video Output]
+    
+    J[📖 4_Formula] -.Setup & Docs.-> D
+    K[🔧 6_Semblance] -.Troubleshooting.-> D
+    L[✅ 7_TestingKnown] -.Validation.-> F
     
     style A fill:#e1f5ff
     style B fill:#fff3cd
-    style G fill:#d4edda
-    style H fill:#d1ecf1
+    style D fill:#f0e6ff
+    style F fill:#ffe6e6
+    style G fill:#e6ffe6
+    style H fill:#d4edda
+    style I fill:#d1ecf1
 ```
+
+**7-Layer Architecture Integration**:
+- **1_RealUnknown**: Defines objectives and requirements
+- **2_Environment**: Provides technical setup and configuration
+- **3_Simulation**: Stores generated assets (e.g., `2026-02-15/`)
+- **4_Formula**: Documents setup guides and workflows
+- **5_Symbols**: Contains all generator source code
+- **6_Semblance**: Offers troubleshooting and error solutions
+- **7_TestingKnown**: Validates quality and correctness
 
 ### 🎯 Core Objectives
 
@@ -63,7 +80,7 @@ The project follows a 7-layer architecture for clear separation of concerns:
 |-----------|---------|-----------|
 | **[1_Real_Unknown](./1_Real_Unknown/README.md)** | 🎯 Objectives and Key Results | `README.md` - Project goals and KPIs |
 | **[2_Environment](./2_Environment/README.md)** | 🌍 Technical Environment | `README.md` - Roadmap, tech stack, Python 3.x |
-| **[3_Simulation](./3_Simulation/README.md)** | 🎨 Asset Workspace | `Feb1Youtube/` - Generated assets output |
+| **[3_Simulation](./3_Simulation/README.md)** | 🎨 Asset Workspace | `2026-02-15/` - Current week generated assets output |
 | **[4_Formula](./4_Formula/README.md)** | 📖 Setup & Best Practices | `formula.md`, `README.md` - Usage guides |
 | **[5_Symbols](./5_Symbols/README.md)** | 💻 **Core Generators** | All `.py` scripts - Main codebase |
 | **[6_Semblance](./6_Semblance/README.md)** | 🔧 Troubleshooting | `README.md` - Common errors and fixes |
@@ -287,7 +304,7 @@ python3 5_Symbols/ThreeD/BatchAssetGenerator3D.py
 cd 5_Symbols
 
 # Run master generator with project directory
-python MasterAssetGenerator.py ../3_Simulation/Feb1Youtube
+python MasterAssetGenerator.py ../3_Simulation/2026-02-15
 ```
 
 The Master Controller will:
@@ -305,10 +322,10 @@ After every run, the pipeline generates comprehensive reports:
 
 ```bash
 # View the latest generation report
-cat 3_Simulation/Feb1Youtube/weekly/generation_report_YYYY-MM-DD.md
+cat 3_Simulation/2026-02-15/weekly/generation_report_YYYY-MM-DD.md
 
 # View cost analysis
-cat 3_Simulation/Feb1Youtube/weekly/cost_report_YYYY-MM-DD.md
+cat 3_Simulation/2026-02-15/weekly/cost_report_YYYY-MM-DD.md
 ```
 
 **Report Contents:**
@@ -373,7 +390,7 @@ gh workflow run bulk-svg-generator.yml -f commit_and_push=false
 
 ### 🎨 What Gets Generated
 
-- **SVG files**: Professional diagrams in `3_Simulation/Feb1Youtube/weekly/generated_svgs/`
+- **SVG files**: Professional diagrams in `3_Simulation/2026-02-15/weekly/generated_svgs/`
 - **Mermaid diagrams**: Documentation in `5_Symbols/generated_mermaid_diagrams/`
 - **Manifest files**: `manifest.json` with complete asset tracking
 - **Summary reports**: `generation_summary.json` with metrics
@@ -407,7 +424,7 @@ flowchart LR
 
 1. **Open DaVinci Resolve** and create a new project
 2. **Navigate to Media Pool** → Right-click → Import Media
-3. **Select generated assets folder**: `3_Simulation/Feb1Youtube/generated_assets_*`
+3. **Select generated assets folder**: `3_Simulation/2026-02-15/generated_assets_*`
 4. Assets will be organized by scene number (001, 002, 003...)
 5. **Drag and drop** to timeline in sequential order
 6. Use the manifest.json for prompt reference and metadata
