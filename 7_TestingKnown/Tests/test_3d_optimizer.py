@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 
 # Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols" / "ThreeD"))
 
 from Batch3DModelOptimizer import (
     Model3DConfig,

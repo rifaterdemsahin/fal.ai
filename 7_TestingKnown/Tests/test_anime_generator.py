@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 
 # Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 def test_anime_generator():
     """Test the anime generator without making API calls"""

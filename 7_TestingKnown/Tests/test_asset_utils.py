@@ -10,7 +10,8 @@ import sys
 from pathlib import Path
 
 # Add symbol root to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 from Utils.asset_utils import (
     clean_description,
@@ -91,8 +92,10 @@ class TestManifestTracker(unittest.TestCase):
     
     def setUp(self):
         """Set up test fixtures"""
-        self.temp_dir = tempfile.mkdtemp()
-        self.project_dir = Path(self.temp_dir)
+        self.project_dir = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets" / "utils_test"
+        if not self.project_dir.exists():
+            self.project_dir.mkdir(parents=True, exist_ok=True)
+            
         self.tracker = ManifestTracker(self.project_dir)
         
     def test_add_asset(self):

@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 # Add symbol root to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 from ThreeD.ThreeDGenerator import ThreeDAssetGenerator
 from base.generator_config import OUTPUT_FORMATS, DEFAULT_MODELS

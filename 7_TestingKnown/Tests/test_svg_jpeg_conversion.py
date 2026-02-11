@@ -7,7 +7,8 @@ import sys
 from pathlib import Path
 
 # Add symbol root to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+# Add symbol root to path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 from Utils.asset_utils import convert_svg_to_jpeg, SVG_CONVERSION_AVAILABLE
 
@@ -26,8 +27,9 @@ def test_conversion():
     print()
     
     # Look for existing SVG files
+    project_7_root = Path(__file__).resolve().parent.parent
     test_dirs = [
-        Path("../3_Simulation/Feb1Youtube/weekly/generated_svgs"),
+        project_7_root / "TestOutput" / "generated_assets" / "svg_test",
         Path("./generated_svg"),
         Path("../3_Simulation/Feb1Youtube/generated_svgs"),
     ]
