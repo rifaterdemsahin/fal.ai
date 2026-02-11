@@ -399,6 +399,50 @@ sudo yum install python3 python3-pip
 
 ---
 
+## 🤖 GitHub Actions Integration
+
+This Linux setup is also used by **GitHub Actions workflows** for automated asset generation in CI/CD pipelines.
+
+### How GitHub Actions Uses This Setup
+
+GitHub Actions workflows use a similar approach to set up the Python environment:
+
+```yaml
+# Example from .github/workflows/*.yml
+- name: Set up Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: '3.x'
+
+- name: Install dependencies
+  run: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+
+- name: Set environment variables
+  env:
+    FAL_KEY: ${{ secrets.FAL_API_KEY }}
+```
+
+### Key Differences from Local Setup
+
+1. **Virtual Environment**: GitHub Actions doesn't require explicit venv activation
+2. **API Keys**: Uses GitHub Secrets instead of .env files
+3. **Python Command**: Uses `python` instead of `python3`
+4. **Automated**: Runs on push/workflow_dispatch triggers
+
+### Related Workflows
+
+See `.github/workflows/` directory for 14+ automated workflows that use this setup:
+- Video generation: `batch-asset-generator-video.yml`
+- Image generation: `batch-asset-generator-images.yml`
+- Audio generation: `batch-asset-generator-music.yml`
+- Master orchestration: `master-asset-generator.yml`
+
+For detailed workflow documentation, see: [.github/workflows/README.md](../.github/workflows/README.md)
+
+---
+
 ## 🎯 Running as a Service (Optional)
 
 For automated generation, you can set up a systemd service:

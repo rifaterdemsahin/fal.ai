@@ -1,4 +1,15 @@
 # Python dependencies for BatchAssetGenerator.py
+# 
+# How to use this file:
+# 1. Install dependencies: pip install -r requirements.txt
+# 2. For detailed setup instructions, see the 4_Formula folder:
+#    - 4_Formula/FORMULA_QUICK_START_GUIDE.md - Quick start guide
+#    - 4_Formula/README.md - Complete documentation
+#    - 4_Formula/SETUP_API_Key.md - API key configuration
+#    - 4_Formula/VERSIONING_AND_MANIFEST.md - Asset versioning system
+# 3. The 4_Formula folder contains all setup guides, best practices, and workflow documentation
+#
+# Core dependencies:
 fal-client>=0.13.0,<1.0.0
 Pillow>=10.0.0  # For JPEG conversion
 cairosvg>=2.7.0  # For SVG to PNG/JPEG conversion

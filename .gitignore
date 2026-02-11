@@ -1,4 +1,6 @@
 # Environment variables
+# .env files contain sensitive API keys and should never be committed
+# See 4_Formula/.env.sample for the template
 .env
 
 # Python
@@ -27,5 +29,3 @@ package-lock.json
 .DS_Store
 Thumbs.db
 .env.example
-
-

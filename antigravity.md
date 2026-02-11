@@ -15,12 +15,12 @@ The project relies on a `.env` file located at `c:\projects\fal.ai\5_Symbols\.en
 ## 📂 Key Directories
 
 - **Root**: `c:\projects\fal.ai`
-- **Simulation Source**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube\_source` (Contains YAML configs)
-- **Output Directory**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube`
+- **Simulation Source**: `c:\projects\fal.ai\3_Simulation\2026-02-15\_source` (Contains YAML configs)
+- **Output Directory**: `c:\projects\fal.ai\3_Simulation\2026-02-15\output` (Latest exact date folder)
 
 ## ⚙️ Configuration Files
 
-- **Master Config**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml`
+- **Master Config**: `c:\projects\fal.ai\3_Simulation\2026-02-15\input\batch_generation_data.yaml`
   - Defines `images`, `chapters`, `infographics`, etc.
 
 ## 🚀 Generation Scripts
@@ -78,3 +78,51 @@ python BulkIllustrationGenerator.py
 ├── 💻 5_Symbols/              Core source code - All batch generators live here
 ├── 🔧 6_Semblance/            Troubleshooting guides and error solutions
 └── ✅ 7_Testing_known/        QA validation plans and acceptance criteria
+
+## Delivery Pilot Folder Structure Rationale
+
+The 7-layer architecture provides clear separation of concerns:
+
+### 1_Real_Unknown (🎯 Objectives)
+- **Purpose**: Defines the problem space and project objectives
+- **Why**: Captures the "unknown" requirements we're solving for
+- **Path Example**: `c:\projects\fal.ai\1_RealUnknown\README.md`
+- **Usage**: Start here to understand project goals and KPIs
+
+### 2_Environment (🌍 Technical Stack)
+- **Purpose**: Documents technical environment, setup procedures, and roadmap
+- **Why**: Central hub for all environment configurations and platform-specific setup
+- **Path Example**: `c:\projects\fal.ai\2_Environment\SETUP_LINUX.md`
+- **Usage**: Reference when setting up development environments
+
+### 3_Simulation (🎨 Workspace)
+- **Purpose**: Active workspace for asset generation and outputs
+- **Why**: Isolates generated content from source code
+- **Path Example**: `c:\projects\fal.ai\3_Simulation\2026-02-15\output`
+- **Usage**: All generated assets are stored here with date-based folders
+
+### 4_Formula (📖 Documentation)
+- **Purpose**: Complete documentation of workflows, formulas, and best practices
+- **Why**: Single source of truth for how to use the system
+- **Path Example**: `c:\projects\fal.ai\4_Formula\FORMULA_QUICK_START_GUIDE.md`
+- **Usage**: Read before implementing new features or workflows
+
+### 5_Symbols (💻 Core Code)
+- **Purpose**: All executable source code and generators
+- **Why**: Separates implementation from documentation and data
+- **Path Example**: `c:\projects\fal.ai\5_Symbols\MasterAssetGenerator.py`
+- **Usage**: Main codebase - all Python generators live here
+
+### 6_Semblance (🔧 Troubleshooting)
+- **Purpose**: Error solutions, debugging guides, and known issues
+- **Why**: Captures tribal knowledge about common problems
+- **Path Example**: `c:\projects\fal.ai\6_Semblance\README.md`
+- **Usage**: First stop when encountering errors or unexpected behavior
+
+### 7_Testing_Known (✅ QA)
+- **Purpose**: Test suites, validation scripts, and acceptance criteria
+- **Why**: Ensures quality and validates that known requirements work
+- **Path Example**: `c:\projects\fal.ai\7_TestingKnown\Tests\test_asset_utils.py`
+- **Usage**: Run tests before committing changes
+
+This structure mirrors the software development lifecycle: Unknown → Environment → Simulation → Formula → Symbols (Code) → Semblance (Debug) → Testing (Validate)

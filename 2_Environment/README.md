@@ -206,7 +206,8 @@ timeline
   - Cost tracking and reporting
 
 - **B-Roll Generation**: Creating atmospheric video clips to support narratives
-  - 1080p/4K video generation
+  - **1080p Full HD video generation** (standard footage resolution)
+  - 4K video generation available for premium content
   - Consistent scene numbering
   - Metadata tracking for prompts
 
