@@ -37,3 +37,7 @@ Thumbs.db
 3_Simulation/*/generated_svgs/
 # Allow generated_svgs in weekly folder
 !3_Simulation/*/weekly/generated_svgs/
+
+# Generated YAML batches
+watcher_batch_*.yaml
+repo_fix_batch_*.yaml
