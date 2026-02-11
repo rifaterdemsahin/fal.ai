@@ -14,9 +14,9 @@ from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 class ThreeDAssetGenerator(BaseAssetGenerator):
     """Generator for 3D model assets using Hunyuan-3D text-to-3D"""
     
-    def __init__(self):
+    def __init__(self, output_dir: Path = Path("./generated_assets")):
         super().__init__(
-            output_dir=Path("./generated_assets"),
+            output_dir=output_dir,
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
             asset_type="3d",

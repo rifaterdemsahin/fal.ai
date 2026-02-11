@@ -34,8 +34,9 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_icons")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Configuration
+DEFAULT_OUTPUT_DIR = Path("./generated_icons")
+# Directory creation moved to execution time to avoid side effects on import
 
 # Consistency seeds for different asset categories
 SEEDS = {
@@ -404,7 +405,7 @@ def main():
         print("❌ Cancelled by user")
         return
         
-    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
+    process_queue(GENERATION_QUEUE, DEFAULT_OUTPUT_DIR)
 
 
 if __name__ == "__main__":

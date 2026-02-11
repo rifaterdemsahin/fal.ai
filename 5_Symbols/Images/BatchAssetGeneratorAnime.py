@@ -35,8 +35,9 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_anime")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Configuration
+DEFAULT_OUTPUT_DIR = Path("./generated_anime")
+# Directory creation moved to execution time to avoid side effects on import
 
 # Default anime storyline structure
 DEFAULT_STORYLINE = {

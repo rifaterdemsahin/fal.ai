@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 """
-Test script to run a SMALL BATCH of image generations.
-Output is saved to 7_TestingKnown/TestOutput.
-
+Comprehensive Batch Generation Test
+Tests multiple asset generators ensuring they output to the correct test directory.
 Usage:
     python 7_TestingKnown/Tests/test_batch_generation.py
-
-This script:
-1. Imports BatchAssetGeneratorImages
-2. Defines a small set of test assets (batch size = 2)
-3. Generates them using FAL.AI API
-4. Saves output to 7_TestingKnown/TestOutput
 """
 import sys
 import os
-import json
+import shutil
 from pathlib import Path
 
 # Add 5_Symbols to path so we can import generators
@@ -22,81 +15,171 @@ project_root = Path(__file__).resolve().parent.parent.parent
 symbols_path = project_root / "5_Symbols"
 sys.path.append(str(symbols_path))
 
+# Import generators (after sys.path update)
 try:
     from Images import BatchAssetGeneratorImages
+    from Images import BatchAssetGeneratorIcons
+    from Images import BatchAssetGeneratorAnime
+    from Video import BatchAssetGeneratorLowerThirds
+    from ThreeD.ThreeDGenerator import ThreeDAssetGenerator
 except ImportError as e:
-    print(f"❌ Failed to import BatchAssetGeneratorImages from {symbols_path}: {e}")
+    print(f"❌ Failed to import generators: {e}")
     sys.exit(1)
 
-def test_batch_generation():
-    # Setup paths
-    output_dir = project_root / "7_TestingKnown" / "TestOutput" / "generated_assets"
-    output_dir.mkdir(parents=True, exist_ok=True)
+def test_all_generators():
+    # Setup test output directory
+    test_output_root = project_root / "7_TestingKnown" / "TestOutput" / "generated_assets"
+    test_output_root.mkdir(parents=True, exist_ok=True)
     
-    print(f"📂 Output directory: {output_dir}")
-    print("🧪 Starting Batch Generation Test...")
-
-    # Define a small batch of test assets
-    # Using 'flux/schnell' for speed and cost efficiency during testing
-    test_batch = [
-        {
-            "id": "TEST_001",
-            "name": "test_batch_image_1",
-            "priority": "HIGH",
-            "scene": "Test Validation",
-            "seed_key": "SEED_001", 
-            "prompt": "A futuristic digital workspace with glowing blue holographic interfaces, high quality, 4k",
-            "model": "fal-ai/flux/schnell", 
-            "image_size": {
-                "width": 1024,
-                "height": 576
-            },
-            "num_inference_steps": 4
-        },
-        {
-            "id": "TEST_002",
-            "name": "test_batch_image_2",
-            "priority": "MEDIUM",
-            "scene": "Test Validation",
-            "seed_key": "SEED_002",
-            "prompt": "Abstract geometric shapes in vibrant orange and teal colors, clean background, 4k",
-            "model": "fal-ai/flux/schnell",
-            "image_size": {
-                "width": 1024,
-                "height": 576
-            },
-            "num_inference_steps": 4
-        }
-    ]
+    print(f"📂 Test Output Directory: {test_output_root}")
+    print("🧪 Starting Comprehensive Generator Test...")
     
-    print(f"📊 Batch size: {len(test_batch)}")
-    
-    # Check if FAL_KEY is set
+    # Check for API key
     if not os.environ.get("FAL_KEY"):
         print("❌ FAL_KEY environment variable not set. Skipping generation.")
         print("   Please set export FAL_KEY='your_key' and try again.")
         return
 
-    # Run the generator
-    # We call process_queue directly, passing our test batch and output directory
+    # 1. Test Image Generator
+    print("\n" + "-"*40)
+    print("🧪 Testing Image Generator...")
+    image_output = test_output_root / "images"
+    image_output.mkdir(exist_ok=True)
+    test_image_batch = [
+        {
+            "id": "TEST_IMG_01",
+            "name": "test_image_1",
+            "priority": "HIGH",
+            "scene": "Test",
+            "seed_key": "SEED_001",
+            "prompt": "A simple red cube, 3d render, white background",
+            "model": "fal-ai/flux/schnell", # Fast/cheap model
+            "image_size": {"width": 512, "height": 512},
+            "num_inference_steps": 4
+        }
+    ]
     try:
-        results = BatchAssetGeneratorImages.process_queue(test_batch, output_dir)
-        
-        print("\n" + "="*60)
-        print("✅ Test Batch Complete")
-        print(f"📂 Check results in: {output_dir}")
-        print("="*60)
-        
-        # Verify if files were created
-        files_created = list(output_dir.glob("*.png")) + list(output_dir.glob("*.json"))
-        print(f"📄 Files generated: {len(files_created)}")
-        for f in files_created:
-            print(f"   - {f.name}")
-            
+        BatchAssetGeneratorImages.process_queue(test_image_batch, image_output)
     except Exception as e:
-        print(f"❌ Error running batch generation: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"❌ Image Generator Failed: {e}")
+
+    # 2. Test Icon Generator
+    print("\n" + "-"*40)
+    print("🧪 Testing Icon Generator...")
+    icon_output = test_output_root / "icons"
+    icon_output.mkdir(exist_ok=True)
+    test_icon_batch = [
+        {
+            "id": "TEST_ICON_01",
+            "name": "test_icon_1",
+            "priority": "HIGH",
+            "scene": "Test",
+            "seed_key": "SEED_001",
+            "prompt": "A simple blue circle icon, flat design",
+            "model": "fal-ai/flux/schnell",
+            "image_size": {"width": 512, "height": 512},
+            "num_inference_steps": 4
+        }
+    ]
+    try:
+        BatchAssetGeneratorIcons.process_queue(test_icon_batch, icon_output)
+    except Exception as e:
+        print(f"❌ Icon Generator Failed: {e}")
+
+    # 3. Test Lower Thirds Generator
+    print("\n" + "-"*40)
+    print("🧪 Testing Lower Thirds Generator...")
+    lt_output = test_output_root / "lower_thirds"
+    lt_output.mkdir(exist_ok=True)
+    test_lt_batch = [
+        {
+            "id": "TEST_LT_01",
+            "name": "test_lt_1",
+            "priority": "HIGH",
+            "text": "Test Title",
+            "subtext": "Test Subtitle",
+            "color_theme": "accent_blue",
+            "seed_key": "SEED_004",
+            "prompt": "Lower third graphic, blue accent, transparent background",
+            # prompt is required by generate_asset
+        }
+    ]
+    try:
+        BatchAssetGeneratorLowerThirds.process_queue(test_lt_batch, lt_output)
+    except Exception as e:
+        print(f"❌ Lower Thirds Generator Failed: {e}")
+        
+    # 4. Test 3D Generator
+    print("\n" + "-"*40)
+    print("🧪 Testing 3D Generator...")
+    threed_output = test_output_root / "3d"
+    threed_output.mkdir(exist_ok=True)
+    
+    try:
+        # Instantiate with custom output dir
+        generator = ThreeDAssetGenerator(output_dir=threed_output)
+        
+        test_3d_batch = [
+            {
+                "id": "TEST_3D_01",
+                "name": "test_3d_cube",
+                "priority": "HIGH",
+                "scene": "Test",
+                "seed_key": "SEED_001",
+                "prompt": "A simple cube",
+                "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d"
+            }
+        ]
+        
+        generator.process_queue(test_3d_batch)
+    except Exception as e:
+        print(f"❌ 3D Generator Failed: {e}")
+        
+    # 5. Test Anime Generator (Video)
+    print("\n" + "-"*40)
+    print("🧪 Testing Anime Generator...")
+    anime_output = test_output_root / "anime"
+    anime_output.mkdir(exist_ok=True)
+    
+    test_anime_storyline = {
+        "title": "Test Story",
+        "style": "anime",
+        "scenes": [
+            {
+                "id": "TEST_ANIME_01",
+                "name": "test_anime_scene",
+                "priority": "HIGH",
+                "scene": "Test Scene",
+                "description": "A test scene",
+                "prompt": "Anime character smiling, still image",
+                "characters": ["TestChar"],
+                "setting": "White Void"
+            }
+        ]
+    }
+    
+    # We use "flux_anime" (image) instead of video to save cost/time for test
+    try:
+        BatchAssetGeneratorAnime.process_storyline(
+            test_anime_storyline, 
+            anime_output,
+            model="flux_anime" 
+        )
+    except Exception as e:
+         print(f"❌ Anime Generator Failed: {e}")
+
+    print("\n" + "="*60)
+    print("✅ Genertion Logic Finished")
+    print(f"📂 Verify results in: {test_output_root}")
+    
+    # Final Verification
+    total_files = sum(1 for _ in test_output_root.rglob("*") if _.is_file())
+    print(f"📄 Total files generated (including json metadata): {total_files}")
+    
+    if total_files > 0:
+        print("✅ SUCCESS: Artifacts were created.")
+    else:
+        print("❌ FAILURE: No artifacts were created.")
 
 if __name__ == "__main__":
-    test_batch_generation()
+    test_all_generators()
