@@ -79,13 +79,17 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     
     try:
         # Prepare arguments
+        # Prepare arguments
         arguments = {
             "prompt": asset_config["prompt"],
             "image_size": asset_config["image_size"],
-            "num_inference_steps": asset_config["num_inference_steps"],
             "seed": SEEDS.get(asset_config["seed_key"], 0),
             "num_images": 1,
         }
+        
+        # Add steps if provided (optional for some models)
+        if "num_inference_steps" in asset_config:
+            arguments["num_inference_steps"] = asset_config["num_inference_steps"]
         
         # Generate image
         print("⏳ Sending request to fal.ai...")

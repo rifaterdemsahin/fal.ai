@@ -56,8 +56,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_01",
             "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         },
         {
             "id": "K8S_CONTAINERS_01",
@@ -67,8 +66,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_02",
             "prompt": "Infographic showing Kubernetes Containers: Lightweight, standalone, executable packages of software that include everything needed to run an application.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         },
         {
             "id": "K8S_ROUTES_01",
@@ -78,8 +76,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_03",
             "prompt": "Infographic illustrating Kubernetes Routes and Ingress: Managing external access to the services in a cluster, typically HTTP.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         },
         {
             "id": "K8S_SERVICES_01",
@@ -89,8 +86,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_04",
             "prompt": "Infographic defining Kubernetes Services: An abstract way to expose an application running on a set of Pods as a network service.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         },
         {
             "id": "K8S_CONFIGMAP_01",
@@ -100,8 +96,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_05",
             "prompt": "Infographic about Kubernetes ConfigMaps: An API object used to store non-confidential data in key-value pairs.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         },
         {
             "id": "K8S_SECRETS_01",
@@ -111,8 +106,7 @@ def create_test_batch() -> List[Dict[str, Any]]:
             "seed_key": "SEED_K8S_06",
             "prompt": "Infographic explaining Kubernetes Secrets: An object that contains a small amount of sensitive data such as a password, a token, or a key.",
             "image_size": {"width": 1920, "height": 1080},
-            "num_inference_steps": 28,
-            "model": "fal-ai/flux/dev"
+            "model": "fal-ai/flux-pro/v1.1"
         }
     ]
 
