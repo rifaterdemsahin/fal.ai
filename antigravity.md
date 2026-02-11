@@ -28,17 +28,18 @@ The project relies on a `.env` file located at `c:\projects\fal.ai\5_Symbols\.en
 These scripts are located in `c:\projects\fal.ai\5_Symbols`:
 
 1. **Images (Illustrations)**:
-    - Script: `c:\projects\fal.ai\5_Symbols\Images\BulkIllustrationGenerator.py`
-    - Description: Generates illustrations using Google Search -> Image-to-Image (fal-ai/flux/dev), with fallback to Text-to-Image.
-    - Output: `c:\projects\fal.ai\3_Simulation\Feb1Youtube`
 
+   - Script: `c:\projects\fal.ai\5_Symbols\Images\BulkIllustrationGenerator.py`
+   - Description: Generates illustrations using Google Search -> Image-to-Image (fal-ai/flux/dev), with fallback to Text-to-Image.
+   - Output: `c:\projects\fal.ai\3_Simulation\Feb1Youtube`
 2. **Chapter Markers**:
-    - Script: `c:\projects\fal.ai\5_Symbols\Video\BatchAssetGeneratorChapterMarkers.py`
-    - Description: Generates video chapter title cards.
 
+   - Script: `c:\projects\fal.ai\5_Symbols\Video\BatchAssetGeneratorChapterMarkers.py`
+   - Description: Generates video chapter title cards.
 3. **Infographics**:
-    - Script: `c:\projects\fal.ai\5_Symbols\Infographics\BatchAssetGeneratorInfographics.py`
-    - Description: Generates data visualizations and infographics.
+
+   - Script: `c:\projects\fal.ai\5_Symbols\Infographics\BatchAssetGeneratorInfographics.py`
+   - Description: Generates data visualizations and infographics.
 
 ## 📂 Naming Conventions
 
@@ -63,3 +64,17 @@ Example for Illustrations:
 cd c:\projects\fal.ai\5_Symbols\Images
 python BulkIllustrationGenerator.py
 ```
+
+
+---
+
+# Deliver Pilot Structure
+
+📁 fal.ai/
+├── 🎯 1_Real_Unknown/        Objectives (OKRs) and problem definitions
+├── 🌍 2_Environment/          Roadmap, tech stack, and use cases
+├── 🎨 3_Simulation/           Workspace for generated assets and CLI interactions
+├── 📖 4_Formula/              Setup guides, best practices, and documentation
+├── 💻 5_Symbols/              Core source code - All batch generators live here
+├── 🔧 6_Semblance/            Troubleshooting guides and error solutions
+└── ✅ 7_Testing_known/        QA validation plans and acceptance criteria
