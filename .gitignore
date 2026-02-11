@@ -28,5 +28,4 @@ package-lock.json
 Thumbs.db
 .env.example
 
-# Allow generated_svgs in weekly folder
-!3_Simulation/*/weekly/
+
