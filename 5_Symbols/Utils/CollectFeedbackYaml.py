@@ -1,5 +1,6 @@
 import os
 import yaml
+import re
 from datetime import datetime
 
 def collect_feedback_watcher():
@@ -19,9 +20,13 @@ def collect_feedback_watcher():
     BATCH_SIZE = 5
 
     def get_priority(path):
-        path_lower = path.lower().replace('_', '')
+        # Extract and normalize path components for accurate matching
+        # Remove underscores and leading digits from each component
+        path_components = [re.sub(r'^\d+', '', p.lower().replace('_', '')) 
+                          for p in os.path.normpath(path).split(os.sep)]
         for i, folder in enumerate(FOLDER_ORDER):
-            if folder in path_lower:
+            # Check if the folder key matches a complete path component (not substring)
+            if folder in path_components:
                 return i
         return 999
 
@@ -31,7 +36,7 @@ def collect_feedback_watcher():
         dirs[:] = [d for d in dirs if d not in IGNORE_LIST]
         for file in files:
             # Exclude existing batches and script files
-            if not file.endswith(('.yaml', '.pyc', '.txt')) and file != 'CollectFeedbackYaml.py':
+            if not file.endswith(('.yaml', '.pyc', '.txt')) and file != os.path.basename(__file__):
                 all_files.append(os.path.join(root, file))
 
     all_files.sort(key=get_priority)
@@ -42,7 +47,11 @@ def collect_feedback_watcher():
     # 2. Interactive Feedback Loop
     print(f"--- WATCHER MODE START ({len(all_files)} files) ---")
     for i, file_path in enumerate(all_files):
-        folder_key = next((f for f in FOLDER_ORDER if f in file_path.lower().replace('_', '')), 'unknown')
+        # Extract and normalize path components for accurate matching
+        # Remove underscores and leading digits from each component
+        path_components = [re.sub(r'^\d+', '', p.lower().replace('_', '')) 
+                          for p in os.path.normpath(file_path).split(os.sep)]
+        folder_key = next((f for f in FOLDER_ORDER if f in path_components), 'unknown')
         role = DOMAIN_MAP.get(folder_key, 'General Context')
 
         print(f"\n[{folder_key.upper()}] {file_path}")

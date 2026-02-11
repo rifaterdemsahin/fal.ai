@@ -7,6 +7,9 @@ from unittest.mock import patch, MagicMock
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import CollectFeedbackYaml
 
+# Constants
+EXPECTED_OUTPUT_PATTERN = "watcher_batch_{}.yaml"
+
 def test_collect_feedback():
     # Create a dummy file for testing
     test_file = "test_dummy.js" 
@@ -26,7 +29,7 @@ def test_collect_feedback():
                 CollectFeedbackYaml.collect_feedback_yaml()
                 
         # Check if YAML was created (new filename format)
-        expected_output = "watcher_batch_1.yaml"
+        expected_output = EXPECTED_OUTPUT_PATTERN.format(1)
         if os.path.exists(expected_output):
             print(f"SUCCESS: {expected_output} created.")
             with open(expected_output, 'r') as f:
