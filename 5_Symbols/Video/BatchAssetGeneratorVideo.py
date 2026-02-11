@@ -35,8 +35,9 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_video")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Configuration
+DEFAULT_OUTPUT_DIR = Path("./generated_video")
+# OUTPUT_DIR.mkdir(exist_ok=True) # Moved to execution time
 
 # Video Generation Queue
 # Based on EDL B-roll requirements of "Empty UK Streets", "Corporate Meeting"
@@ -85,7 +86,7 @@ def generate_video(asset_config: Dict, output_dir: Path, manifest: Optional[obje
              pass
         elif "kling" in asset_config["model"]:
             arguments["aspect_ratio"] = asset_config.get("aspect_ratio", "16:9")
-            arguments["duration"] = str(asset_config.get("duration_seconds", 5)) + "s"
+            arguments["duration"] = str(asset_config.get("duration_seconds", 5))
 
         
         # Generate video
@@ -280,7 +281,7 @@ def main():
         print("❌ Cancelled by user")
         return
         
-    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
+    process_queue(GENERATION_QUEUE, DEFAULT_OUTPUT_DIR)
 
 
 if __name__ == "__main__":

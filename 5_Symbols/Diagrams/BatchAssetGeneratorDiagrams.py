@@ -34,8 +34,9 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\generated_diagrams")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+# Configuration
+DEFAULT_OUTPUT_DIR = Path("./generated_diagrams")
+# OUTPUT_DIR.mkdir(parents=True, exist_ok=True) # Moved to execution time
 
 # Consistency seeds for different diagram styles
 SEEDS = {
@@ -306,7 +307,7 @@ def main():
     print("\n" + "="*60)
     print("🚀 Auto-starting generation...")
         
-    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
+    process_queue(GENERATION_QUEUE, DEFAULT_OUTPUT_DIR)
 
 
 if __name__ == "__main__":

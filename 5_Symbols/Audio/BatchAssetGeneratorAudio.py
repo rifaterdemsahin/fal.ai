@@ -10,10 +10,10 @@ import re
 from pathlib import Path
 
 # Configuration
+# Configuration
 EDL_PATH = Path("../3_Simulation/Feb1Youtube/source_edl.md") # Default path
-OUTPUT_DIR = Path("./generated_audio")
-OUTPUT_DIR.mkdir(exist_ok=True)
-OUTPUT_FILE = OUTPUT_DIR / "chapter_markers.txt"
+DEFAULT_OUTPUT_DIR = Path("./generated_audio")
+DEFAULT_OUTPUT_FILE = DEFAULT_OUTPUT_DIR / "chapter_markers.txt"
 
 def parse_timecode(time_str):
     """Normalize timecode (e.g., 0:00 -> 00:00)"""
@@ -110,7 +110,7 @@ def generate_chapter_markers(edl_path: Path, output_file: Path):
         print("\n❌ No markers found. Check EDL format.")
 
 def main():
-    generate_chapter_markers(EDL_PATH, OUTPUT_FILE)
+    generate_chapter_markers(EDL_PATH, DEFAULT_OUTPUT_FILE)
 
 if __name__ == "__main__":
     main()

@@ -34,8 +34,9 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_music")
-OUTPUT_DIR.mkdir(exist_ok=True)
+# Configuration
+DEFAULT_OUTPUT_DIR = Path("./generated_music")
+# OUTPUT_DIR.mkdir(exist_ok=True) # Moved to execution time
 
 # Asset generation queue
 # Derived from "Music Suggestions" in EDL
@@ -354,7 +355,7 @@ def main():
         print("🤖 Running in automated mode (CI detected)")
         print("="*60)
         
-    process_queue(GENERATION_QUEUE, OUTPUT_DIR)
+    process_queue(GENERATION_QUEUE, DEFAULT_OUTPUT_DIR)
 
 
 if __name__ == "__main__":
