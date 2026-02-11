@@ -1,68 +1,141 @@
 #!/usr/bin/env python3
 """
-Test script for Diagram Generator
+Test script for Diagram Generator with fal.ai integration.
+
+This script validates the BatchAssetGeneratorDiagrams module by running
+a small test batch and verifying the output.
 """
 import sys
 import os
 from pathlib import Path
+from typing import Dict, List, Any
+import traceback
 
-# Add project root to path
-project_root = Path(__file__).resolve().parent.parent.parent
-symbols_path = project_root / "5_Symbols"
-sys.path.append(str(symbols_path))
 
-try:
-    from Diagrams import BatchAssetGeneratorDiagrams
-except ImportError as e:
-    print(f"❌ Failed to import BatchAssetGeneratorDiagrams: {e}")
-    sys.exit(1)
+def setup_paths() -> tuple[Path, Path]:
+    """Configure project paths and add to sys.path."""
+    project_root = Path(__file__).resolve().parent.parent.parent
+    symbols_path = project_root / "5_Symbols"
+    sys.path.append(str(symbols_path))
+    return project_root, symbols_path
 
-def test_diagram_generation():
-    # Setup paths
-    output_dir = project_root / "7_TestingKnown" / "TestOutput" / "generated_assets" / "diagrams"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    print(f"📂 Output directory: {output_dir}")
-    print("🧪 Starting Diagram Generator Test...")
 
-    # Define a small test batch
-    test_batch = [
+def import_generator():
+    """Import the BatchAssetGeneratorDiagrams module with error handling."""
+    try:
+        from Diagrams import BatchAssetGeneratorDiagrams
+        return BatchAssetGeneratorDiagrams
+    except ImportError as e:
+        print(f"❌ Import Error: Failed to load BatchAssetGeneratorDiagrams")
+        print(f"   Details: {e}")
+        print(f"\n💡 Troubleshooting:")
+        print(f"   - Verify the module exists in 5_Symbols/Diagrams/")
+        print(f"   - Check for missing dependencies")
+        sys.exit(1)
+
+
+def verify_environment() -> bool:
+    """Check required environment variables."""
+    if not os.environ.get("FAL_KEY"):
+        print("❌ Environment Error: FAL_KEY not set")
+        print("\n💡 Setup Instructions:")
+        print("   export FAL_KEY='your-api-key-here'")
+        print("   Or add to your .env file")
+        return False
+    return True
+
+
+def create_test_batch() -> List[Dict[str, Any]]:
+    """Define test diagram configurations."""
+    return [
         {
             "id": "TEST_DIAGRAM_01",
             "name": "test_diagram",
             "priority": "HIGH",
             "scene": "Test Validation",
             "seed_key": "SEED_001",
-            "prompt": "Simple flowchart of a process A to B",
+            "prompt": "Simple flowchart of a process A to B, white background",
             "image_size": {"width": 1024, "height": 1024},
             "num_inference_steps": 4,
             "model": "fal-ai/flux/schnell"
         }
     ]
-    
-    # Check if FAL_KEY is set
-    if not os.environ.get("FAL_KEY"):
-        print("❌ FAL_KEY environment variable not set. Skipping generation.")
-        return
 
-    # Run the generator
+
+def print_results(output_dir: Path) -> None:
+    """Display generation results and file listing."""
+    print("\n" + "=" * 70)
+    print("✅ TEST COMPLETE")
+    print("=" * 70)
+    
+    # Count generated files
+    image_files = list(output_dir.glob("*.png")) + list(output_dir.glob("*.jpg"))
+    json_files = list(output_dir.glob("*.json"))
+    
+    print(f"\n📊 Results Summary:")
+    print(f"   Images:   {len(image_files)}")
+    print(f"   Metadata: {len(json_files)}")
+    print(f"   Total:    {len(image_files) + len(json_files)}")
+    
+    if image_files or json_files:
+        print(f"\n📂 Output Location:")
+        print(f"   {output_dir}")
+        print(f"\n📄 Generated Files:")
+        for f in sorted(image_files + json_files):
+            size_kb = f.stat().st_size / 1024
+            print(f"   • {f.name:<40} ({size_kb:>8.1f} KB)")
+    else:
+        print("\n⚠️  No files were generated")
+    
+    print("=" * 70)
+
+
+def test_diagram_generation() -> None:
+    """Main test execution function."""
+    print("🚀 Diagram Generator Test Suite")
+    print("=" * 70)
+    
+    # Setup
+    project_root, _ = setup_paths()
+    output_dir = (
+        project_root / "7_TestingKnown" / "TestOutput" / 
+        "generated_assets" / "diagrams"
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    print(f"📂 Output: {output_dir}")
+    
+    # Verify environment
+    if not verify_environment():
+        sys.exit(1)
+    
+    # Import module
+    generator = import_generator()
+    
+    # Prepare test data
+    test_batch = create_test_batch()
+    
+    # Add timestamp to filenames to prevent overwriting
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    for item in test_batch:
+        item["name"] = f"{item['name']}_{timestamp}"
+
+    print(f"\n🧪 Test Batch: {len(test_batch)} diagram(s)")
+    
+    # Execute generation
     try:
-        BatchAssetGeneratorDiagrams.process_queue(test_batch, output_dir)
+        print("\n⏳ Generating assets...")
+        generator.process_queue(test_batch, output_dir)
+        print_results(output_dir)
         
-        print("\n" + "="*60)
-        print("✅ Test Batch Complete")
-        print(f"📂 Check results in: {output_dir}")
-        print("="*60)
-        
-        files_created = list(output_dir.glob("*.png")) + list(output_dir.glob("*.json")) + list(output_dir.glob("*.jpg"))
-        print(f"📄 Files generated: {len(files_created)}")
-        for f in files_created:
-            print(f"   - {f.name}")
-            
     except Exception as e:
-        print(f"❌ Error running batch generation: {e}")
-        import traceback
+        print(f"\n❌ Generation Failed")
+        print(f"   Error: {e}")
+        print(f"\n🔍 Full Traceback:")
         traceback.print_exc()
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     test_diagram_generation()
