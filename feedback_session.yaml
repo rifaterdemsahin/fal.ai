@@ -8,3 +8,27 @@ file_path: ./requirements.txt
 instructions: mention how to use this the formulas folder and mention the formula
   document as a comment in here
 timestamp: '2026-02-11T11:26:51Z'
+---
+file_path: ./antigravity.md
+instructions: 'this is wrong - **Output Directory**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube`
+  take the latest path which has the exact date , place exact date folder paths >
+  - **Master Config**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml`
+  >ADD  the delivery pilot folder strucutre and rational why they are used. update
+  with the correct paths'
+timestamp: '2026-02-11T11:32:48Z'
+---
+file_path: ./markdown_render.html
+instructions: add a copy to clipboard button in here
+timestamp: '2026-02-11T11:33:25Z'
+---
+file_path: ./README.md
+instructions: update the references and the mermaids
+timestamp: '2026-02-11T11:35:08Z'
+---
+file_path: ./.gitignore
+instructions: scan and sanity check and mention the logic in the formula folder
+timestamp: '2026-02-11T11:37:50Z'
+---
+file_path: ./.env
+instructions: in the comments make sure this is git ignored
+timestamp: '2026-02-11T11:38:16Z'
