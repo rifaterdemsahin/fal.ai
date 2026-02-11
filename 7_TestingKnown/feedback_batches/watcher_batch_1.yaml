@@ -1,0 +1,44 @@
+metadata:
+  batch_number: 1
+  timestamp: "2026-02-11T20:25:00Z"
+  hierarchy_rules: Changes in SYMBOLS must be justified by objectives in REAL.
+  generated_by: manual_conversion_from_feedback_session
+  files_count: 9
+watcher_validation_prompt: Before writing any code, explain how these changes align with the 'real' objectives and how they will be verified in 'testing'.
+files:
+  - layer: root
+    role: PROJECT ROOT
+    path: ./index.html
+    instruction: add links to the related places in the code base in the github repo
+  - layer: root
+    role: PROJECT ROOT
+    path: ./requirements.txt
+    instruction: mention how to use this the formulas folder and mention the formula document as a comment in here
+  - layer: root
+    role: PROJECT ROOT
+    path: ./antigravity.md
+    instruction: 'this is wrong - **Output Directory**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube` take the latest path which has the exact date , place exact date folder paths > - **Master Config**: `c:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml` >ADD  the delivery pilot folder strucutre and rational why they are used. update with the correct paths'
+  - layer: root
+    role: PROJECT ROOT
+    path: ./markdown_render.html
+    instruction: add a copy to clipboard button in here
+  - layer: root
+    role: PROJECT ROOT
+    path: ./README.md
+    instruction: update the references and the mermaids
+  - layer: root
+    role: PROJECT ROOT
+    path: ./.gitignore
+    instruction: scan and sanity check and mention the logic in the formula folder
+  - layer: root
+    role: PROJECT ROOT
+    path: ./.env
+    instruction: in the comments make sure this is git ignored
+  - layer: environment
+    role: CONTEXT & CONFIG (The Where)
+    path: ./2_Environment/SETUP_LINUX.md
+    instruction: also mention github actions are using this similar way
+  - layer: environment
+    role: CONTEXT & CONFIG (The Where)
+    path: ./2_Environment/README.md
+    instruction: mention the footage is 1080p and create a file kanban.md in all folders and check the tasks that are done relating to that folder

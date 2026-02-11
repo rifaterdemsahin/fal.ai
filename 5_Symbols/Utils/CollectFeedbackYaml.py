@@ -6,7 +6,9 @@ from datetime import datetime
 # --- CONFIGURATION & CONSTANTS ---
 BATCH_SIZE = 5
 IGNORE_LIST = {'.git', '.venv', '__pycache__', '.DS_Store', 'feedback_output.txt', 'feedback_batches'}
-OUTPUT_DIR = "."
+OUTPUT_DIR = "7_TestingKnown/feedback_batches"
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
 WATCHER_FILENAME_PREFIX = "watcher_batch_"
 
 # Maps normalized folder names to architectural roles
