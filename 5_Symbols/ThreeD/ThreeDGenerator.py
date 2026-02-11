@@ -119,7 +119,7 @@ class ThreeDAssetGenerator(BaseAssetGenerator):
             URL of the generated GLB model, or None if not found
         """
         # Hunyuan-3D returns model_urls with glb and obj formats
-        if result and "model_urls" in result:
+        if result and "model_urls" in result and result["model_urls"]:
             if "glb" in result["model_urls"]:
                 return result["model_urls"]["glb"]["url"]
         

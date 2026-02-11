@@ -22,7 +22,8 @@ except ImportError:
 sys.path.append(str(Path(__file__).parent))
 
 # Import path configuration for weekly structure
-from paths_config import get_weekly_paths, ensure_weekly_structure
+# Import path configuration for weekly structure
+from paths_config import get_weekly_paths, ensure_weekly_structure, get_latest_weekly_id
 
 # Import individual generators
 from Images import BatchAssetGeneratorImages as gen_images
@@ -149,11 +150,14 @@ Examples:
   # New weekly structure (recommended):
   python MasterAssetGenerator.py --week 2026-02-10
   
-  # Auto-generate weekly ID from today's date:
-  python MasterAssetGenerator.py --week auto
+  # specific week:
+  python MasterAssetGenerator.py --week 2026-02-10
+
+  # Latest week (most recent folder):
+  python MasterAssetGenerator.py --week latest
   
-  # Legacy mode (backward compatible):
-  python MasterAssetGenerator.py ../3_Simulation/Feb1Youtube
+  # Auto-generate from today's date:
+  python MasterAssetGenerator.py --week auto
         """
     )
     
@@ -168,17 +172,28 @@ Examples:
         "--week", 
         type=str, 
         dest="weekly_id",
-        help="Weekly ID for new structure (e.g., '2026-02-10' or 'auto' for today's date)"
+        help="Weekly ID for new structure (e.g., '2026-02-10', 'latest', or 'auto')"
     )
     
     args = parser.parse_args()
 
     # Determine which mode to use
     use_new_structure = False
+    
+    # Default to "latest" if no arguments provided
+    if not args.weekly_id and not args.week_dir:
+        args.weekly_id = "latest"
+
     if args.weekly_id:
         # New mode: Use weekly structure
         if args.weekly_id.lower() == 'auto':
             weekly_id = None  # Will auto-generate from today's date
+        elif args.weekly_id.lower() == 'latest':
+            weekly_id = get_latest_weekly_id()
+            if not weekly_id:
+                print("❌ No existing weekly directories found in 3_Simulation.")
+                return
+            print(f"📅 Found latest week: {weekly_id}")
         else:
             weekly_id = args.weekly_id
         
@@ -208,10 +223,6 @@ Examples:
         
         print(f"\n🎬 MASTER GENERATOR: {week_dir.name} [LEGACY MODE]")
         print(f"   Path: {week_dir}")
-    else:
-        print("❌ Error: Must provide either --week or week_dir argument")
-        parser.print_help()
-        return
     
     # Load configuration
     # Try to merge all config files from input directory

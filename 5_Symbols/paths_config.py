@@ -22,6 +22,9 @@ def get_simulations_base() -> Path:
     return get_repo_root() / "3_Simulation"
 
 
+import re
+import os
+
 def generate_weekly_id(week_date: Optional[date] = None) -> str:
     """
     Generate a weekly ID string based on date.
@@ -39,6 +42,32 @@ def generate_weekly_id(week_date: Optional[date] = None) -> str:
     if week_date is None:
         week_date = date.today()
     return week_date.strftime("%Y-%m-%d")
+
+
+def get_latest_weekly_id() -> Optional[str]:
+    """
+    Find the latest weekly ID from existing directories in 3_Simulation.
+    
+    Returns:
+        The latest weekly ID string (e.g., '2026-02-15') or None if no valid directories found.
+    """
+    base_dir = get_simulations_base()
+    if not base_dir.exists():
+        return None
+        
+    # Regex for YYYY-MM-DD
+    date_pattern = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+    
+    weekly_ids = []
+    for item in os.listdir(base_dir):
+        if date_pattern.match(item) and (base_dir / item).is_dir():
+            weekly_ids.append(item)
+            
+    if not weekly_ids:
+        return None
+        
+    # Sort and return the latest
+    return sorted(weekly_ids)[-1]
 
 
 def get_weekly_paths(weekly_id: Optional[str] = None) -> Dict[str, Path]:
