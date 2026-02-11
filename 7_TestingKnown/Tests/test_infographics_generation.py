@@ -46,67 +46,37 @@ def verify_environment() -> bool:
 
 
 def create_test_batch() -> List[Dict[str, Any]]:
-    """Define test infographic configurations for Kubernetes concepts."""
+    """Define test infographic configurations."""
     return [
         {
-            "id": "K8S_PODS_01",
-            "name": "kubernetes_pods",
+            "id": "K8S_PODS_VAR1",
+            "name": "kubernetes_pods_var1",
             "priority": "HIGH",
             "scene": "Kubernetes Architecture",
             "seed_key": "SEED_K8S_01",
-            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container.",
+            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
             "image_size": {"width": 1920, "height": 1080},
             "model": "fal-ai/flux-pro/v1.1"
         },
         {
-            "id": "K8S_CONTAINERS_01",
-            "name": "kubernetes_containers",
+            "id": "K8S_PODS_VAR2",
+            "name": "kubernetes_pods_var2",
             "priority": "HIGH",
             "scene": "Kubernetes Architecture",
             "seed_key": "SEED_K8S_02",
-            "prompt": "Infographic showing Kubernetes Containers: Lightweight, standalone, executable packages of software that include everything needed to run an application.",
+            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
             "image_size": {"width": 1920, "height": 1080},
             "model": "fal-ai/flux-pro/v1.1"
         },
         {
-            "id": "K8S_ROUTES_01",
-            "name": "kubernetes_routes",
+            "id": "K8S_PODS_VAR3",
+            "name": "kubernetes_pods_var3",
             "priority": "HIGH",
             "scene": "Kubernetes Architecture",
             "seed_key": "SEED_K8S_03",
-            "prompt": "Infographic illustrating Kubernetes Routes and Ingress: Managing external access to the services in a cluster, typically HTTP.",
+            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
             "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
-        },
-        {
-            "id": "K8S_SERVICES_01",
-            "name": "kubernetes_services",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_04",
-            "prompt": "Infographic defining Kubernetes Services: An abstract way to expose an application running on a set of Pods as a network service.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
-        },
-        {
-            "id": "K8S_CONFIGMAP_01",
-            "name": "kubernetes_configmaps",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_05",
-            "prompt": "Infographic about Kubernetes ConfigMaps: An API object used to store non-confidential data in key-value pairs.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
-        },
-        {
-            "id": "K8S_SECRETS_01",
-            "name": "kubernetes_secrets",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_06",
-            "prompt": "Infographic explaining Kubernetes Secrets: An object that contains a small amount of sensitive data such as a password, a token, or a key.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
+            "model": "fal-ai/nano-banana-pro"
         }
     ]
 
