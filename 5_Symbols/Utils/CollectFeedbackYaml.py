@@ -70,9 +70,11 @@ def collect_feedback_yaml():
             
             # Append immediately to the file
             with open(OUTPUT_FILE, 'a', encoding='utf-8') as yfile:
-                # Use explicit document separator to allow multiple entries
+                # Add a visual separator for readability, but keep it valid YAML (as a comment)
+                yfile.write("\n###############################\n")
                 yfile.write("---\n")
                 yaml.dump(file_entry, yfile, sort_keys=False, default_flow_style=False)
+                yfile.write("###############################\n")
             
             print(f">>> SAVED feedback for {os.path.basename(file_path)} to {OUTPUT_FILE} <<<")
 

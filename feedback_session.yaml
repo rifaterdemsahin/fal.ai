@@ -1,44 +1,10 @@
+
 ---
 file_path: ./index.html
-instructions: original_code
-timestamp: '2026-02-11T11:02:14Z'
+instructions: add links to the related places in the code base in the github repo
+timestamp: '2026-02-11T11:26:14Z'
 ---
 file_path: ./requirements.txt
-instructions: xxx
-timestamp: '2026-02-11T11:02:21Z'
----
-file_path: ./antigravity.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:44Z'
----
-file_path: ./markdown_render.html
-instructions: xxx
-timestamp: '2026-02-11T11:03:47Z'
----
-file_path: ./README.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:49Z'
----
-file_path: ./.gitignore
-instructions: xxx
-timestamp: '2026-02-11T11:03:50Z'
----
-file_path: ./.env
-instructions: xxx
-timestamp: '2026-02-11T11:03:52Z'
----
-file_path: ./2_Environment/SETUP_LINUX.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:53Z'
----
-file_path: ./2_Environment/README.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:55Z'
----
-file_path: ./2_Environment/SETUP_GITHUB_CODESPACES.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:56Z'
----
-file_path: ./2_Environment/SETUP_WINDOWS.md
-instructions: xxx
-timestamp: '2026-02-11T11:03:58Z'
+instructions: mention how to use this the formulas folder and mention the formula
+  document as a comment in here
+timestamp: '2026-02-11T11:26:51Z'
