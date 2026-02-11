@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 
 # Add symbol root to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 from Utils.asset_utils import ManifestTracker, generate_filename, extract_scene_number
 
@@ -22,10 +22,19 @@ def test_integration():
     print("INTEGRATION TEST: Manifest and Versioning System")
     print("=" * 60)
     
-    # Create temporary project directory
-    with tempfile.TemporaryDirectory() as temp_dir:
-        project_dir = Path(temp_dir)
-        print(f"\n📁 Test project directory: {project_dir}")
+    # Use fixed project directory
+    project_dir = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets"
+    # Ensure directory exists
+    if not project_dir.exists():
+        project_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Create generated folder if it doesn't exist (as the test expects it)
+    (project_dir / "generated").mkdir(parents=True, exist_ok=True)
+        
+    print(f"\n📁 Test project directory: {project_dir}")
+    
+    # Use the directory directly (no context manager needed for persistent dir)
+    if True:
         
         # Initialize manifest tracker
         manifest = ManifestTracker(project_dir)

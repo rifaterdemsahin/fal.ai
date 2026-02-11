@@ -34,7 +34,7 @@ except ImportError:
 # Import from parent directory
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from asset_utils import generate_filename, extract_scene_number, ManifestTracker
+from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
 
 # Import configuration (relative import from same package)
 from .generator_config import OUTPUT_FORMATS

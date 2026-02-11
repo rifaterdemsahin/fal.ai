@@ -84,6 +84,8 @@ def get_next_batch_number():
 def collect_feedback_watcher():
     print("Starting Watcher Feedback Collector...")
     
+    create_sample = input("Create a sample copy only? (y/N): ").strip().lower() == 'y'
+    
     # 1. Identify processed files
     processed_files = set()
     pattern = re.compile(rf"{WATCHER_FILENAME_PREFIX}(\d+)\.yaml")
@@ -92,7 +94,7 @@ def collect_feedback_watcher():
     for filename in os.listdir(OUTPUT_DIR):
         if pattern.match(filename) or filename == 'feedback_session.yaml':
             try:
-                with open(filename, 'r', encoding='utf-8') as f:
+                with open(os.path.join(OUTPUT_DIR, filename), 'r', encoding='utf-8') as f:
                     content = f.read()
                     # Try safe_load (new format)
                     try:
@@ -170,7 +172,11 @@ def collect_feedback_watcher():
         print(f"Hierarchy Rule: Changes in {layer.upper()} must align with {role}.")
         
         try:
-            feedback = input(f"Feedback/Justification for {os.path.basename(file_path)} (Enter to skip): ").strip()
+            if create_sample:
+                feedback = f"Sample feedback for {os.path.basename(file_path)}"
+                print(f"Sample Mode: Using '{feedback}'")
+            else:
+                feedback = input(f"Feedback/Justification for {os.path.basename(file_path)} (Enter to skip): ").strip()
         except EOFError:
             break
 
@@ -185,12 +191,15 @@ def collect_feedback_watcher():
             print(f">>> Added to batch. Current batch size: {len(current_batch_files)}")
 
         # Check for batch completion
-        if len(current_batch_files) >= BATCH_SIZE or (i == len(files_to_process) - 1 and current_batch_files):
+        # Check for batch completion
+        effective_batch_size = 1 if create_sample else BATCH_SIZE
+        if len(current_batch_files) >= effective_batch_size or (i == len(files_to_process) - 1 and current_batch_files):
             if not current_batch_files:
                 continue
                 
             batch_num = get_next_batch_number()
             output_filename = f"{WATCHER_FILENAME_PREFIX}{batch_num}.yaml"
+            output_path = os.path.join(OUTPUT_DIR, output_filename)
             
             output_data = {
                 'metadata': {
@@ -204,12 +213,16 @@ def collect_feedback_watcher():
                 'files': current_batch_files
             }
             
-            with open(output_filename, 'w', encoding='utf-8') as f:
+            with open(output_path, 'w', encoding='utf-8') as f:
                 yaml.dump(output_data, f, sort_keys=False, default_flow_style=False)
             
-            print(f"\n>>> BATCH SAVED: {output_filename} <<<")
+            print(f"\n>>> BATCH SAVED: {output_path} <<<")
             current_batch_files = [] 
             
+            if create_sample:
+                print("Sample created. Exiting.")
+                break
+
             if i < len(files_to_process) - 1:
                 cont = input("Batch saved. Continue to next batch? (Y/n): ").strip().lower()
                 if cont == 'n':

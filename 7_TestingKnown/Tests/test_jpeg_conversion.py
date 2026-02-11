@@ -16,9 +16,15 @@ def test_jpeg_conversion():
     print("Testing JPEG Conversion Functionality")
     print("="*60)
     
-    # Create a temporary directory
-    with tempfile.TemporaryDirectory() as temp_dir:
-        temp_path = Path(temp_dir)
+    # Use fixed directory
+    temp_path = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets" / "jpeg_conversion_test"
+    if not temp_path.exists():
+        temp_path.mkdir(parents=True, exist_ok=True)
+        
+    print(f"\n📁 Test directory: {temp_path}")
+
+    # Use the directory directly
+    if True:
         
         # Test 1: Create a simple PNG with solid background
         print("\n📋 Test 1: PNG with solid background")

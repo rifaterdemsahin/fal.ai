@@ -17,7 +17,7 @@ class MockFalClient:
 sys.modules['fal_client'] = MockFalClient()
 
 # Add symbol root to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 from base.base_asset_generator import BaseAssetGenerator
 
 
@@ -47,9 +47,15 @@ def test_png_optimization():
     print("Testing PNG Optimization for DaVinci Resolve")
     print("="*60)
     
-    # Create a temporary directory
-    with tempfile.TemporaryDirectory() as temp_dir:
-        temp_path = Path(temp_dir)
+    # Use fixed directory
+    temp_path = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets" / "png_optimization_test"
+    if not temp_path.exists():
+        temp_path.mkdir(parents=True, exist_ok=True)
+        
+    print(f"\n📁 Test directory: {temp_path}")
+
+    # Use the directory directly
+    if True:
         generator = TestPNGGenerator(temp_path)
         
         # Test 1: Indexed color PNG (mode 'P') - problematic for Resolve
