@@ -32,6 +32,9 @@ This guide covers setting up the fal.ai pipeline on Windows 10 or Windows 11 usi
    # Should show pip version
    ```
 
+   **Note**: On Windows, the Python installer sets up `python` (not `python3`) as the command. This is different from Linux/macOS which use `python3`. All commands in this guide use `python` to match Windows conventions.
+
+
 ### Install Git (if not already installed)
 
 1. Download from: https://git-scm.com/download/win
@@ -80,12 +83,15 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ```powershell
 # Make sure virtual environment is activated
-# Install all dependencies
+# Install all dependencies (within venv, 'pip' is sufficient)
 pip install -r requirements.txt
 
 # Verify installation
 pip list
 ```
+
+**Note**: Windows uses `python` and `pip` commands (not `python3`/`pip3`), which is standard for Windows Python installations.
+
 
 ---
 
@@ -225,8 +231,10 @@ $env:Path -split ";" | Select-String -Pattern "Python"
 ### pip Not Working
 
 ```powershell
-# Use python -m pip instead
+# Use python -m pip instead (works reliably on all systems)
 python -m pip install -r requirements.txt
+
+# Note: Within an activated virtual environment, 'pip' is sufficient
 ```
 
 ### Virtual Environment Won't Activate

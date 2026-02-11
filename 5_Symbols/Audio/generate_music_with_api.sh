@@ -91,7 +91,7 @@ echo "📦 Checking dependencies..."
 if ! python3 -c "import fal_client" 2>/dev/null; then
     echo "⚠️  fal_client not installed"
     echo "Installing dependencies..."
-    pip install -q -r requirements.txt
+    python3 -m pip install -q -r ../../requirements.txt
     echo "✅ Dependencies installed"
 else
     echo "✅ Dependencies already installed"
