@@ -30,7 +30,7 @@ except ImportError as e:
 
 def test_batch_generation():
     # Setup paths
-    output_dir = project_root / "7_TestingKnown" / "TestOutput"
+    output_dir = project_root / "7_TestingKnown" / "TestOutput" / "generated_assets"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     print(f"📂 Output directory: {output_dir}")

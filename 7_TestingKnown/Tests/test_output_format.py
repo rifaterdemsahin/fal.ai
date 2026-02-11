@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 # Add symbol root to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
 
 from base.generator_config import OUTPUT_FORMATS
 from Images.ImageGenerator import ImageAssetGenerator

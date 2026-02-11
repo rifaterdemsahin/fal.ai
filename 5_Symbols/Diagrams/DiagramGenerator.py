@@ -7,8 +7,8 @@ Generates diagram assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List
 
-from Base.base_asset_generator import BaseAssetGenerator
-from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from base.base_asset_generator import BaseAssetGenerator
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class DiagramAssetGenerator(BaseAssetGenerator):
