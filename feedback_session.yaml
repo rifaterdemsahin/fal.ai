@@ -32,3 +32,12 @@ timestamp: '2026-02-11T11:37:50Z'
 file_path: ./.env
 instructions: in the comments make sure this is git ignored
 timestamp: '2026-02-11T11:38:16Z'
+---
+file_path: ./2_Environment/SETUP_LINUX.md
+instructions: also mention github actions are using this similar way
+timestamp: '2026-02-11T15:40:59Z'
+---
+file_path: ./2_Environment/README.md
+instructions: mention the footage is 1080p and create a file kanban.md in all folders
+  and check the tasks that are done relating to that folder
+timestamp: '2026-02-11T15:44:31Z'

@@ -49,7 +49,10 @@ def collect_feedback_yaml():
         else:
             os.system('clear')
         
-        print(f"\n[{i+1}/{len(files_to_process)}] FILE: {file_path}")
+        print(f"\n###########################################################")
+        print(f"REVIEWING: {file_path}")
+        print(f"###########################################################\n")
+        print(f"[{i+1}/{len(files_to_process)}] - Reading content...\n")
         
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
