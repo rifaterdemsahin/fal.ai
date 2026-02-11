@@ -14,6 +14,16 @@ This directory documents the complete technical environment for the **fal.ai Wee
 
 **Language**: Python 3.8+
 
+**Virtual Environment**: All platforms use `.venv` directory with platform-specific activation:
+- Linux/macOS: `source .venv/bin/activate`
+- Windows: `.venv\Scripts\activate`
+- GitHub Codespaces: Pre-configured
+
+**Python Command Usage**:
+- Linux/macOS/Codespaces: `python3` and `pip` (within venv)
+- Windows: `python` and `pip` (Windows convention)
+- See platform-specific setup guides below for details
+
 **Core Dependencies** ([`requirements.txt`](../requirements.txt)):
 - **`fal-client>=0.13.0,<1.0.0`** - Official fal.ai API client for AI model generation
 - **`Pillow>=10.0.0`** - Image processing and JPEG conversion
@@ -23,7 +33,12 @@ This directory documents the complete technical environment for the **fal.ai Wee
 
 **Installation**:
 ```bash
+# Within activated virtual environment
 pip install -r requirements.txt
+
+# Or for reliability across all systems
+python3 -m pip install -r requirements.txt  # Linux/macOS
+python -m pip install -r requirements.txt   # Windows
 ```
 
 ---
