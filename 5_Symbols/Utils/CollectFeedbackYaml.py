@@ -3,8 +3,12 @@ import yaml
 
 def collect_feedback_yaml():
     # --- CONFIGURATION ---
-    IGNORE_LIST = {'.git', '.venv', '__pycache__', '.DS_Store', 'feedback_output.txt'}
-    BATCH_SIZE = 5 
+    IGNORE_LIST = {'.git', '.venv', '__pycache__', '.DS_Store', 'feedback_output.txt', 'feedback_batches'}
+    BATCH_SIZE = 5
+    OUTPUT_DIR = "feedback_batches"
+
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
     
     files_to_process = []
     for root, dirs, files in os.walk('.'):
@@ -26,10 +30,14 @@ def collect_feedback_yaml():
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-        except:
-            content = "[Unreadable/Binary File]"
+        except Exception as e:
+            content = f"[Unreadable/Binary File: {e}]"
 
-        feedback = input(f"Feedback for {os.path.basename(file_path)} (Enter to skip): ").strip()
+        try:
+            feedback = input(f"Feedback for {os.path.basename(file_path)} (Enter to skip): ").strip()
+        except EOFError:
+            print("\nInput stream closed, stopping.")
+            break
         
         if feedback:
             # Create a dictionary for the YAML structure
@@ -42,7 +50,7 @@ def collect_feedback_yaml():
 
         # Save batch when size reached or at the very end
         if len(current_batch_data) == BATCH_SIZE or (i == len(files_to_process) - 1 and current_batch_data):
-            output_name = f"repo_fix_batch_{batch_count}.yaml"
+            output_name = os.path.join(OUTPUT_DIR, f"repo_fix_batch_{batch_count}.yaml")
             
             payload = {
                 'batch_info': {
