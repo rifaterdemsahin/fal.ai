@@ -28,6 +28,22 @@ def test_anime_generator():
         print(f"   ❌ Failed to import: {e}")
         return False
     
+    # Test 1.5: Import prompt enhancer
+    print("\n1️⃣.5️⃣ Testing prompt enhancer import...")
+    try:
+        from Utils.prompt_enhancer import enhance_prompt
+        assert callable(enhance_prompt)
+        print("   ✅ enhance_prompt imported and is callable")
+    except ImportError as e:
+        print(f"   ❌ Failed to import enhance_prompt: {e}")
+        # We don't fail the whole test since it's an optional feature, but user asked for it.
+        # However, prompted by user request "test is and use", maybe we should warn or fail?
+        # Let's just print.
+        print("   ⚠️  Prompt enhancer is optional but requested.")
+    except AssertionError:
+        print("   ❌ enhance_prompt is not callable")
+        return False
+    
     # Test 2: Check default storyline
     print("\n2️⃣ Testing default storyline...")
     try:

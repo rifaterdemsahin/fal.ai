@@ -25,7 +25,9 @@ except ImportError:
     # Fallback if running standalone
     import sys
     from pathlib import Path
+    # Add parent directory (5_Symbols) to path
     sys.path.append(str(Path(__file__).resolve().parent.parent))
+    
     try:
         from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
     except ImportError:
@@ -33,6 +35,12 @@ except ImportError:
         generate_filename = None
         extract_scene_number = None
         ManifestTracker = None
+
+    try:
+        from Utils.prompt_enhancer import enhance_prompt
+    except ImportError:
+        print("⚠️  prompt_enhancer not found. Skipping prompt enhancement.")
+        enhance_prompt = None
 
 # Configuration
 # Configuration
@@ -81,7 +89,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     try:
         # Enhance prompt
         original_prompt = asset_config["prompt"]
-        if os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY"):
+        if enhance_prompt and (os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")):
              print(f"✨ Enhancing prompt with Gemini...")
              # Use 'infographic' as asset_type since this is the infographics generator
              enhanced_prompt = enhance_prompt(original_prompt, asset_type="diagram") # Using diagram context for infographics as it fits best

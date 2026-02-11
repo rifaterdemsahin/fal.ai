@@ -1,0 +1,14 @@
+{
+  "title": "Single Image Test",
+  "style": "anime",
+  "scenes": [
+    {
+      "id": "1",
+      "name": "test_anime_girl",
+      "priority": "HIGH",
+      "scene": "Test Generation",
+      "description": "Testing prompt enhancement and generation",
+      "prompt": "Anime style, a cyberpunk girl sitting on a neon rooftop, raining, melancholic atmosphere"
+    }
+  ]
+}

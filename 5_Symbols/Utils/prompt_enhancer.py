@@ -80,8 +80,8 @@ def enhance_prompt(prompt: str, context: Optional[str] = None, asset_type: Optio
         context += " Output ONLY the enhanced prompt, no other text."
     
     # Construct the request payload
-    # Using gemini-1.5-flash for speed and cost effectiveness for this task
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    # Using gemini-2.0-flash as it is available in the environment
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     
     headers = {
         "Content-Type": "application/json"
@@ -118,7 +118,10 @@ def enhance_prompt(prompt: str, context: Optional[str] = None, asset_type: Optio
             
     except urllib.error.HTTPError as e:
         print(f"⚠️  Gemini API error: {e.code} {e.reason}")
-        # print(e.read().decode('utf-8')) # specific error details if needed
+        try:
+            print(e.read().decode('utf-8')) # specific error details
+        except:
+            pass
         return prompt
     except Exception as e:
         print(f"⚠️  Error enhancing prompt: {str(e)}")

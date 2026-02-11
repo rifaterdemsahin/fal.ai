@@ -12,6 +12,8 @@ import urllib.request
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from datetime import datetime
+
 # Install: pip install fal-client
 try:
     import fal_client
@@ -22,17 +24,20 @@ except ImportError:
 # Import asset utilities
 try:
     from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.prompt_enhancer import enhance_prompt
 except ImportError:
     # Fallback if running standalone
     import sys
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     try:
         from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+        from Utils.prompt_enhancer import enhance_prompt
     except ImportError:
-        print("⚠️  asset_utils not found. Using legacy naming convention.")
+        print("⚠️  asset_utils or prompt_enhancer not found. Using legacy naming and no enhancement.")
         generate_filename = None
         extract_scene_number = None
         ManifestTracker = None
+        enhance_prompt = lambda p, **kwargs: p  # no-op fallback
 
 # Configuration
 # Configuration
@@ -151,9 +156,22 @@ def generate_anime_scene(
         # Select the appropriate model
         model_id = ANIME_MODELS.get(model, ANIME_MODELS['minimax'])
         
+        # Determine asset type for enhancement
+        asset_type = 'video' if 'video' in model_id.lower() or 'minimax' in model_id.lower() else 'image'
+        
+        # Enhance prompt if function is available
+        prompt_text = scene_config["prompt"]
+        if enhance_prompt:
+            print(f"✨ Enhancing prompt with Gemini ({asset_type})...")
+            enhanced_prompt = enhance_prompt(prompt_text, asset_type=asset_type)
+            if enhanced_prompt != prompt_text:
+                print(f"   Original: {prompt_text[:50]}...")
+                print(f"   Enhanced: {enhanced_prompt[:50]}...")
+                prompt_text = enhanced_prompt
+        
         # Prepare arguments based on model type
         arguments = {
-            "prompt": scene_config["prompt"],
+            "prompt": prompt_text,
         }
         
         # Add model-specific parameters
@@ -212,10 +230,14 @@ def generate_anime_scene(
             # Generate filename using new convention if available
             if generate_filename and extract_scene_number:
                 scene_num = extract_scene_number(scene_config.get('id', '0.0'))
+                # Add date to filename for organization
+                date_str = datetime.now().strftime("%Y%m%d")
+                name_with_date = f"{scene_config['name']}_{date_str}"
+                
                 base_filename = generate_filename(
                     scene_num,
                     'anime',
-                    scene_config['name'],
+                    name_with_date,
                     version
                 )
                 filename_json = base_filename + '.json'
@@ -452,9 +474,7 @@ def main():
     
     # Save manifest
     if manifest:
-        manifest_path = output_dir / "manifest.json"
-        manifest.save(manifest_path)
-        print(f"\n📝 Manifest saved: {manifest_path}")
+        manifest.save_manifest("manifest.json")
     
     print("\n✨ Anime generation complete!")
     print(f"📁 Check your generated scenes in: {output_dir.absolute()}")
