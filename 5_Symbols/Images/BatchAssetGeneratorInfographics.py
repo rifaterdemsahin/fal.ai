@@ -20,6 +20,7 @@ except ImportError:
 # Import asset utilities
 try:
     from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.prompt_enhancer import enhance_prompt
 except ImportError:
     # Fallback if running standalone
     import sys
@@ -78,6 +79,17 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     print(f"{'='*60}")
     
     try:
+        # Enhance prompt
+        original_prompt = asset_config["prompt"]
+        if os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY"):
+             print(f"✨ Enhancing prompt with Gemini...")
+             # Use 'infographic' as asset_type since this is the infographics generator
+             enhanced_prompt = enhance_prompt(original_prompt, asset_type="diagram") # Using diagram context for infographics as it fits best
+             if enhanced_prompt and enhanced_prompt != original_prompt:
+                 asset_config["prompt"] = enhanced_prompt
+                 print(f"   Original: {original_prompt[:60]}...")
+                 print(f"   Enhanced: {enhanced_prompt[:60]}...")
+        
         # Prepare arguments
         # Prepare arguments
         arguments = {
