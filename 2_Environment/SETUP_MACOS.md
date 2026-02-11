@@ -83,7 +83,7 @@ source .venv/bin/activate
 
 ```bash
 # Make sure virtual environment is activated
-# Install all dependencies
+# Install all dependencies (within venv, 'pip' is sufficient)
 pip install -r requirements.txt
 
 # Verify installation
@@ -244,8 +244,10 @@ source ~/.zshrc
 ### pip Not Working
 
 ```bash
-# Use python3 -m pip instead
+# Use python3 -m pip instead (works reliably across all systems)
 python3 -m pip install -r requirements.txt
+
+# Note: Within an activated virtual environment, 'pip' and 'pip3' are equivalent
 ```
 
 ### Virtual Environment Issues

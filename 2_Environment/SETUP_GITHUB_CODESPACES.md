@@ -73,6 +73,9 @@ pip list | grep fal-client
 python3 -c "import os; print('FAL_KEY is set:', bool(os.getenv('FAL_KEY')))"
 ```
 
+**Note**: GitHub Codespaces automatically configures the Python environment. The `python3` command is used for consistency with Linux environments.
+
+
 ---
 
 ## 🎬 Running Generators
@@ -144,8 +147,8 @@ If you run a web server or API:
 ### Dependencies Not Installed
 
 ```bash
-# Reinstall dependencies manually
-pip install -r requirements.txt
+# Reinstall dependencies manually (using python3 -m pip for reliability)
+python3 -m pip install -r requirements.txt
 ```
 
 ### Environment Variables Not Loading

@@ -105,7 +105,7 @@ source .venv/bin/activate
 
 ```bash
 # Make sure virtual environment is activated
-# Install all dependencies
+# Install all dependencies (within venv, 'pip' is sufficient)
 pip install -r requirements.txt
 
 # Verify installation
@@ -269,12 +269,14 @@ source ~/.bashrc
 ### pip3 Not Working
 
 ```bash
-# Use python3 -m pip instead
+# Use python3 -m pip instead (works reliably across all distributions)
 python3 -m pip install -r requirements.txt
 
 # Or install pip separately
 sudo apt install python3-pip  # Ubuntu/Debian
 sudo dnf install python3-pip  # Fedora
+
+# Note: Within an activated virtual environment, 'pip' and 'pip3' are equivalent
 ```
 
 ### Virtual Environment Issues
@@ -360,7 +362,8 @@ sudo dnf install libjpeg-turbo-devel libpng-devel cairo-devel  # Fedora
 ### Arch Linux
 
 - Uses `pacman` package manager
-- Python 3 is the default (command is just `python`)
+- Python 3 is the default (command is just `python`, not `python3`)
+- When following the setup steps above, use `python` instead of `python3` on Arch
 - AUR has additional Python packages
 
 ### openSUSE
