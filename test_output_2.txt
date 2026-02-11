@@ -1,0 +1,22 @@
+test_default_model_configuration (__main__.Test3DGenerator.test_default_model_configuration)
+Test that 3D default model is configured ... ok
+test_extract_result_url (__main__.Test3DGenerator.test_extract_result_url)
+Test URL extraction from Hunyuan-3D response format ... ok
+test_generation_queue_exists (__main__.Test3DGenerator.test_generation_queue_exists)
+Test that generation queue is properly defined ... ok
+test_generator_initialization (__main__.Test3DGenerator.test_generator_initialization)
+Test that the generator initializes correctly ... ok
+test_model_configuration (__main__.Test3DGenerator.test_model_configuration)
+Test that the correct model is configured ... ok
+test_output_format_configuration (__main__.Test3DGenerator.test_output_format_configuration)
+Test that 3D output format is configured correctly ... ok
+test_priority_levels (__main__.Test3DGenerator.test_priority_levels)
+Test that assets have valid priority levels ... ok
+test_generation_queue (__main__.TestBatchAssetGenerator3D.test_generation_queue)
+Test that GENERATION_QUEUE is properly configured ... ok
+test_module_imports (__main__.TestBatchAssetGenerator3D.test_module_imports)
+Test that the module can be imported ... ok
+test_seeds_configuration (__main__.TestBatchAssetGenerator3D.test_seeds_configuration)
+Test that SEEDS are configured in the batch generator ... ok
+test_run_generation (__main__.TestIntegrationGeneration.test_run_generation)
+Test actual generation of a 3D asset ... 

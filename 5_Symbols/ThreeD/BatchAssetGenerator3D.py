@@ -9,6 +9,7 @@ import os
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
+from datetime import datetime
 
 # Install: pip install fal-client
 try:
@@ -20,6 +21,7 @@ except ImportError:
 # Import asset utilities
 try:
     from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.prompt_enhancer import enhance_prompt
 except ImportError:
     # Fallback if running standalone
     import sys
@@ -27,11 +29,13 @@ except ImportError:
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     try:
         from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+        from Utils.prompt_enhancer import enhance_prompt
     except ImportError:
-        print("⚠️  asset_utils not found. Using legacy naming convention.")
+        print("⚠️  Utils not found. Using legacy naming and no enhancement.")
         generate_filename = None
         extract_scene_number = None
         ManifestTracker = None
+        enhance_prompt = None
 
 # Configuration
 OUTPUT_DIR = Path("./generated_assets")
@@ -166,6 +170,27 @@ def generate_3d_asset(
     Returns:
         Dictionary with success status and metadata
     """
+    # 1. Enhance Prompt using Gemini
+    original_prompt = asset_config["prompt"]
+    if enhance_prompt:
+        print(f"✨ Enhancing prompt for {asset_config['name']}...")
+        # Hunyuan-3D has a strict 200 char limit
+        context = (
+            "Enhance this prompt for a 3D model generator. "
+            "Focus on 3D geometry, spatial structure, and material properties. "
+            "CRITICAL: The output MUST be under 180 characters. Keep it concise."
+        )
+        enhanced_prompt = enhance_prompt(original_prompt, context=context)
+        
+        # Enforce hard limit
+        if len(enhanced_prompt) > 195:
+            enhanced_prompt = enhanced_prompt[:195]
+            
+        if enhanced_prompt != original_prompt:
+            print(f"   Original: {original_prompt[:50]}...")
+            print(f"   Enhanced: {enhanced_prompt[:50]}...")
+            asset_config["prompt"] = enhanced_prompt
+    
     print(f"\n{'='*60}")
     print(f"🎨 Generating 3D Model: {asset_config['name']}")
     print(f"   Scene: {asset_config.get('scene', 'Unknown')}")
@@ -206,24 +231,38 @@ def generate_3d_asset(
         print(f"✅ Generated successfully!")
         print(f"   GLB URL: {result_url}")
         
+        # Automatic date stamp
+        date_str = datetime.now().strftime("%Y%m%d")
+        
         # Generate filename with proper naming convention
         scene_num = extract_scene_number(asset_config.get('id', '0.0')) if extract_scene_number else 0
+        
+        # Add date to name for uniqueness
+        name_with_date = f"{asset_config['name']}_{date_str}"
+        
         base_filename = generate_filename(
             scene_num,
             "3d",
-            asset_config['name'],
+            name_with_date,
             version
-        ) if generate_filename else f"{asset_config['name']}_v{version}"
+        ) if generate_filename else f"{name_with_date}_v{version}"
         
         filename_json = base_filename + '.json'
         filename_glb = base_filename + '.glb'
         
+        # Define output path - use OUTPUT_DIR provided global or default
+        # Ideally this function should take output_dir as arg, but it relies on global OUTPUT_DIR
+        # We will fix this in process_queue
+        # For now, we assume generated_assets is correct or updated
+        
         # Save metadata
         metadata = {
             **asset_config,
+            "original_prompt": original_prompt, # Store original
             "result_url": result_url,
             "filename": filename_glb,
             "format": "glb",
+            "date": date_str
         }
         if 'seed_key' in asset_config:
             metadata["seed_value"] = SEEDS.get(asset_config["seed_key"])
@@ -240,19 +279,21 @@ def generate_3d_asset(
         urllib.request.urlretrieve(result_url, glb_path)
         print(f"✅ 3D model saved successfully!")
         
-        # Track in manifest if available
         if manifest_tracker and ManifestTracker:
             manifest_tracker.add_asset(
                 filename=filename_glb,
                 asset_type="3d",
                 prompt=asset_config["prompt"],
+                asset_id=asset_config.get("id", ""),
                 result_url=result_url,
-                scene_info={
+                local_path=glb_path,
+                metadata={
                     "scene": asset_config.get("scene", "Unknown"),
                     "priority": asset_config.get("priority", "MEDIUM"),
-                    "id": asset_config.get("id", ""),
-                },
-                model_used=asset_config["model"]
+                    "model": asset_config["model"],
+                    "seed_key": asset_config.get("seed_key"),
+                    "format": "glb"
+                }
             )
         
         return {
@@ -268,6 +309,50 @@ def generate_3d_asset(
             "success": False,
             "error": str(e),
         }
+
+
+
+def process_queue(queue: List[Dict], output_dir: Path) -> Dict[str, List]:
+    """
+    Process a queue of assets to generate.
+    
+    Args:
+        queue: List of asset configurations
+        output_dir: Directory to save assets
+        
+    Returns:
+        Dictionary with success/failed lists
+    """
+    global OUTPUT_DIR
+    OUTPUT_DIR = output_dir
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Initialize manifest tracker if available
+    manifest_tracker = ManifestTracker(output_dir) if ManifestTracker else None
+    
+    results = {
+        "success": [],
+        "failed": [],
+    }
+    
+    print(f"📂 Output directory: {OUTPUT_DIR}")
+    
+    for asset_config in queue:
+        result = generate_3d_asset(asset_config, version=1, manifest_tracker=manifest_tracker)
+        
+        if result["success"]:
+            results["success"].append(asset_config["name"])
+        else:
+            results["failed"].append({
+                "name": asset_config["name"],
+                "error": result.get("error", "Unknown error")
+            })
+            
+    # Save manifest if available
+    if manifest_tracker and ManifestTracker:
+        manifest_tracker.save_manifest("manifest_3d.json")
+        
+    return results
 
 
 def main():
@@ -310,28 +395,8 @@ def main():
         print("❌ Generation cancelled by user.")
         return
     
-    # Generate all assets
-    results = {
-        "success": [],
-        "failed": [],
-    }
-    
-    for asset_config in GENERATION_QUEUE:
-        result = generate_3d_asset(asset_config, version=1, manifest_tracker=manifest_tracker)
-        
-        if result["success"]:
-            results["success"].append(asset_config["name"])
-        else:
-            results["failed"].append({
-                "name": asset_config["name"],
-                "error": result.get("error", "Unknown error")
-            })
-    
-    # Save manifest if available
-    if manifest_tracker and ManifestTracker:
-        manifest_path = OUTPUT_DIR / "manifest_3d.json"
-        manifest_tracker.save(manifest_path)
-        print(f"\n📝 Manifest saved: {manifest_path}")
+    # Process the queue
+    results = process_queue(GENERATION_QUEUE, OUTPUT_DIR)
     
     # Print summary
     print("\n" + "="*60)

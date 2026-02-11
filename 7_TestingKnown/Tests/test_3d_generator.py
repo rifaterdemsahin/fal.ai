@@ -5,6 +5,7 @@ Unit tests for 3D asset generator
 
 import unittest
 import sys
+import os
 from pathlib import Path
 
 # Add symbol root to path
@@ -130,6 +131,52 @@ class TestBatchAssetGenerator3D(unittest.TestCase):
             self.assertIn("model", item)
 
 
+class TestIntegrationGeneration(unittest.TestCase):
+    """Integration tests that actually run generation"""
+    
+    def setUp(self):
+        self.test_output_dir = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets" / "3d"
+        self.test_output_dir.mkdir(parents=True, exist_ok=True)
+        
+    def test_run_generation(self):
+        """Test actual generation of a 3D asset"""
+        from ThreeD import BatchAssetGenerator3D
+        
+        # Create a single test item to avoid high costs
+        test_queue = [
+            {
+                "id": "TEST_3D_001",
+                "name": "test_cube",
+                "priority": "HIGH",
+                "scene": "Test Scene",
+                "seed_key": "SEED_001",
+                "prompt": "A simple white cube, 3d, minimalistic",
+                "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d"
+            }
+        ]
+        
+        print(f"\n🚀 Running integration test generation to {self.test_output_dir}...")
+        
+        # Run generation
+        if not os.environ.get("FAL_KEY"):
+            print("⚠️ FAL_KEY not set, skipping integration test")
+            return
+            
+        results = BatchAssetGenerator3D.process_queue(test_queue, self.test_output_dir)
+        
+        # Verify success
+        self.assertGreater(len(results["success"]), 0, "Should have generated at least one asset")
+        self.assertEqual(len(results["failed"]), 0, "Should have zero failures")
+        
+        # Verify files exist
+        glb_files = list(self.test_output_dir.glob("*.glb"))
+        json_files = list(self.test_output_dir.glob("*.json"))
+        
+        self.assertGreater(len(glb_files), 0, "Should have created .glb files")
+        self.assertGreater(len(json_files), 0, "Should have created .json files")
+        
+        print(f"✅ Generated {len(glb_files)} GLB files and {len(json_files)} JSON files")
+
 def run_tests():
     """Run all tests"""
     # Create test suite
@@ -139,6 +186,7 @@ def run_tests():
     # Add tests
     suite.addTests(loader.loadTestsFromTestCase(Test3DGenerator))
     suite.addTests(loader.loadTestsFromTestCase(TestBatchAssetGenerator3D))
+    suite.addTests(loader.loadTestsFromTestCase(TestIntegrationGeneration))
     
     # Run tests
     runner = unittest.TextTestRunner(verbosity=2)
