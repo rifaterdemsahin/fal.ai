@@ -29,11 +29,3 @@ package-lock.json
 .DS_Store
 Thumbs.db
 .env.example
-
-# Allow generated_svgs in weekly folder
-# 4_Formula folder logic:
-# - Contains all setup guides, documentation, and best practices
-# - FORMULA_*.md files document specific workflows and implementations
-# - .env.sample provides template for environment configuration
-# - All formula documents should be committed to git for reference
-!3_Simulation/*/weekly/

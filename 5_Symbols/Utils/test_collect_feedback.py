@@ -7,6 +7,9 @@ from unittest.mock import patch, MagicMock
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import CollectFeedbackYaml
 
+# Constants
+EXPECTED_OUTPUT_PATTERN = "watcher_batch_{}.yaml"
+
 def test_collect_feedback():
     # Create a dummy file for testing
     test_file = "test_dummy.js" 
@@ -22,17 +25,35 @@ def test_collect_feedback():
                 yield ('.', [], [test_file])
             
             with patch('os.walk', side_effect=mock_walk):
-                # Run the function
+                # Run the function (now calls collect_feedback_watcher)
                 CollectFeedbackYaml.collect_feedback_yaml()
                 
-        # Check if YAML was created
-        expected_output = "repo_fix_batch_1.yaml"
+        # Check if YAML was created (new filename format)
+        expected_output = EXPECTED_OUTPUT_PATTERN.format(1)
         if os.path.exists(expected_output):
             print(f"SUCCESS: {expected_output} created.")
             with open(expected_output, 'r') as f:
                 data = yaml.safe_load(f)
                 print("YAML Content:")
                 print(yaml.dump(data, sort_keys=False))
+                
+                # Verify new structure
+                assert 'metadata' in data, "Missing 'metadata' field"
+                assert 'architecture_rules' in data, "Missing 'architecture_rules' field"
+                assert 'watcher_validation_prompt' in data, "Missing 'watcher_validation_prompt' field"
+                assert 'files' in data, "Missing 'files' field"
+                
+                # Verify file structure
+                if data['files']:
+                    file_entry = data['files'][0]
+                    assert 'layer' in file_entry, "Missing 'layer' field in file entry"
+                    assert 'role' in file_entry, "Missing 'role' field in file entry"
+                    assert 'path' in file_entry, "Missing 'path' field in file entry"
+                    assert 'source' in file_entry, "Missing 'source' field in file entry"
+                    assert 'instruction' in file_entry, "Missing 'instruction' field in file entry"
+                    
+                print("\nAll structure validations passed!")
+                
             # Clean up YAML
             os.remove(expected_output)
         else:
