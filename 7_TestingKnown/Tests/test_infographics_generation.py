@@ -6,155 +6,97 @@ This script validates the BatchAssetGeneratorInfographics module by running
 a small test batch and verifying the output.
 """
 import sys
-import os
+import unittest
 from pathlib import Path
 from typing import Dict, List, Any
-import traceback
+import datetime
 
+try:
+    from base_test import BaseAssetGeneratorTest
+except ImportError:
+    sys.path.append(str(Path(__file__).resolve().parent))
+    from base_test import BaseAssetGeneratorTest
 
-def setup_paths() -> tuple[Path, Path]:
-    """Configure project paths and add to sys.path."""
-    project_root = Path(__file__).resolve().parent.parent.parent
-    symbols_path = project_root / "5_Symbols"
-    sys.path.append(str(symbols_path))
-    return project_root, symbols_path
-
-
-def import_generator():
-    """Import the BatchAssetGeneratorInfographics module with error handling."""
-    try:
-        from Images import BatchAssetGeneratorInfographics
-        return BatchAssetGeneratorInfographics
-    except ImportError as e:
-        print(f"❌ Import Error: Failed to load BatchAssetGeneratorInfographics")
-        print(f"   Details: {e}")
-        print(f"\n💡 Troubleshooting:")
-        print(f"   - Verify the module exists in 5_Symbols/Images/")
-        print(f"   - Check for missing dependencies")
-        sys.exit(1)
-
-
-def verify_environment() -> bool:
-    """Check required environment variables."""
-    if not os.environ.get("FAL_KEY"):
-        print("❌ Environment Error: FAL_KEY not set")
-        print("\n💡 Setup Instructions:")
-        print("   export FAL_KEY='your-api-key-here'")
-        print("   Or add to your .env file")
-        return False
-    return True
-
-
-def create_test_batch() -> List[Dict[str, Any]]:
-    """Define test infographic configurations."""
-    return [
-        {
-            "id": "K8S_PODS_VAR1",
-            "name": "kubernetes_pods_var1",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_01",
-            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
-        },
-        {
-            "id": "K8S_PODS_VAR2",
-            "name": "kubernetes_pods_var2",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_02",
-            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/flux-pro/v1.1"
-        },
-        {
-            "id": "K8S_PODS_VAR3",
-            "name": "kubernetes_pods_var3",
-            "priority": "HIGH",
-            "scene": "Kubernetes Architecture",
-            "seed_key": "SEED_K8S_03",
-            "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
-            "image_size": {"width": 1920, "height": 1080},
-            "model": "fal-ai/nano-banana-pro"
-        }
-    ]
-
-
-def print_results(output_dir: Path) -> None:
-    """Display generation results and file listing."""
-    print("\n" + "=" * 70)
-    print("✅ TEST COMPLETE")
-    print("=" * 70)
+class TestInfographicsGeneration(BaseAssetGeneratorTest):
     
-    # Count generated files
-    png_files = list(output_dir.glob("*.png"))
-    json_files = list(output_dir.glob("*.json"))
-    
-    print(f"\n📊 Results Summary:")
-    print(f"   Images:   {len(png_files)}")
-    print(f"   Metadata: {len(json_files)}")
-    print(f"   Total:    {len(png_files) + len(json_files)}")
-    
-    if png_files or json_files:
-        print(f"\n📂 Output Location:")
-        print(f"   {output_dir}")
-        print(f"\n📄 Generated Files:")
-        for f in sorted(png_files + json_files):
-            size_kb = f.stat().st_size / 1024
-            print(f"   • {f.name:<40} ({size_kb:>8.1f} KB)")
-    else:
-        print("\n⚠️  No files were generated")
-    
-    print("=" * 70)
-
-
-def test_infographics_generation() -> None:
-    """Main test execution function."""
-    print("🚀 Infographics Generator Test Suite")
-    print("=" * 70)
-    
-    # Setup
-    project_root, _ = setup_paths()
-    output_dir = (
-        project_root / "7_TestingKnown" / "TestOutput" / 
-        "generated_assets" / "infographics"
-    )
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    print(f"📂 Output: {output_dir}")
-    
-    # Verify environment
-    if not verify_environment():
-        sys.exit(1)
-    
-    # Import module
-    generator = import_generator()
-    
-    # Prepare test data
-    test_batch = create_test_batch()
-    
-    # Add timestamp to filenames to prevent overwriting
-    from datetime import datetime
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    for item in test_batch:
-        item["name"] = f"{item['name']}_{timestamp}"
-
-    print(f"\n🧪 Test Batch: {len(test_batch)} infographic(s)")
-    
-    # Execute generation
-    try:
-        print("\n⏳ Generating assets...")
-        generator.process_queue(test_batch, output_dir)
-        print_results(output_dir)
+    def setUp(self):
+        super().setUp()
+        self.output_dir = self.test_output_root / "infographics"
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         
-    except Exception as e:
-        print(f"\n❌ Generation Failed")
-        print(f"   Error: {e}")
-        print(f"\n🔍 Full Traceback:")
-        traceback.print_exc()
-        sys.exit(1)
+    def import_generator(self):
+        try:
+            from Images import BatchAssetGeneratorInfographics
+            return BatchAssetGeneratorInfographics
+        except ImportError as e:
+            self.fail(f"Failed to load BatchAssetGeneratorInfographics: {e}\nVerify module exists in 5_Symbols/Images/")
 
+    def create_test_batch(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                "id": "K8S_PODS_VAR1",
+                "name": "kubernetes_pods_var1",
+                "priority": "HIGH",
+                "scene": "Kubernetes Architecture",
+                "seed_key": "SEED_K8S_01",
+                "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
+                "image_size": {"width": 1920, "height": 1080},
+                "model": "fal-ai/flux-pro/v1.1"
+            },
+            {
+                "id": "K8S_PODS_VAR2",
+                "name": "kubernetes_pods_var2",
+                "priority": "HIGH",
+                "scene": "Kubernetes Architecture",
+                "seed_key": "SEED_K8S_02",
+                "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
+                "image_size": {"width": 1920, "height": 1080},
+                "model": "fal-ai/flux-pro/v1.1"
+            },
+            {
+                "id": "K8S_PODS_VAR3",
+                "name": "kubernetes_pods_var3",
+                "priority": "HIGH",
+                "scene": "Kubernetes Architecture",
+                "seed_key": "SEED_K8S_03",
+                "prompt": "Infographic explaining Kubernetes Pods: The smallest deployable units of computing that you can create and manage in Kubernetes. Visualizing a pod wrapping a container. Include nano banana 3 in the design.",
+                "image_size": {"width": 1920, "height": 1080},
+                "model": "fal-ai/nano-banana-pro"
+            }
+        ]
+
+    def test_infographics_generation(self):
+        print(f"\n🚀 Infographics Generator Test Suite")
+        
+        if not self.verify_environment():
+            return
+        
+        generator = self.import_generator()
+        test_batch = self.create_test_batch()
+        
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        for item in test_batch:
+            item["name"] = f"{item['name']}_{timestamp}"
+
+        print(f"🧪 Test Batch: {len(test_batch)} infographic(s)")
+        print(f"📂 Output: {self.output_dir}")
+        
+        try:
+            print("⏳ Generating assets...")
+            generator.process_queue(test_batch, self.output_dir)
+            
+            generated = self.assertFilesGenerated(self.output_dir, [".png", ".jpg", ".jpeg"], min_count=1)
+            
+            print("\n" + "=" * 70)
+            print("✅ TEST COMPLETE")
+            print("=" * 70)
+            print(f"\n📄 Generated Files:")
+            for f in generated:
+                size_kb = f.stat().st_size / 1024
+                print(f"   • {f.name:<40} ({size_kb:>8.1f} KB)")
+                
+        except Exception as e:
+            self.fail(f"Generation Failed: {e}")
 
 if __name__ == "__main__":
-    test_infographics_generation()
+    unittest.main()

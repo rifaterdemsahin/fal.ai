@@ -3,18 +3,22 @@
 ## QA and Testing Tracking
 
 ### ✅ Completed Tasks
-- [x] Create test infrastructure
-- [x] Implement test_asset_utils.py
-- [x] Establish testing documentation in README.md
-- [x] Create TestOutput directory structure
-- [x] Define acceptance criteria framework
-- [x] Document validation strategies
+
+- [X] Create test infrastructure
+- [X] Implement test_asset_utils.py
+- [X] Establish testing documentation in README.md
+- [X] Create TestOutput directory structure
+- [X] Define acceptance criteria framework
+- [X] Document validation strategies
 
 ### 🔄 In Progress
+
 - [ ] Expand test coverage
+- [ ] make all test classes use the base_test and one liner for the maintest result
 - [ ] Add integration tests for generators
 
 ### 📋 Planned
+
 - [ ] Automated CI/CD test runs
 - [ ] Performance benchmarking tests
 - [ ] Security testing integration
@@ -23,4 +27,5 @@
 - [ ] Load testing for batch operations
 
 ### 🎯 Notes
+
 Ensures quality and validates that known requirements work. Run tests before committing changes.
