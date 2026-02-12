@@ -14,9 +14,12 @@ from datetime import datetime
 # Install: pip install fal-client
 try:
     import fal_client
-    from dotenv import load_dotenv
-    # Load .env from project root (3 levels up: Images -> 5_Symbols -> root)
-    load_dotenv(Path(__file__).parent.parent.parent / ".env")
+    try:
+        from dotenv import load_dotenv
+        # Load .env from project root (3 levels up: Images -> 5_Symbols -> root)
+        load_dotenv(Path(__file__).parent.parent.parent / ".env")
+    except ImportError:
+        pass # dotenv is optional if env vars are set
 except ImportError:
     print("❌ fal_client not installed. Run: pip install fal-client")
     exit(1)
