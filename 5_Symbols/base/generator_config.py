@@ -59,3 +59,20 @@ OUTPUT_FORMATS = {
     "audio": "mp3",           # Audio format
     "3d": "glb",              # 3D models in GLB format (glTF binary)
 }
+
+# Estimated pricing per generation (in USD)
+# Used for cost warnings
+MODEL_PRICING = {
+    # Video
+    "fal-ai/minimax/video-01": 0.50,
+    
+    # 3D
+    "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d": 0.45, # Conservative estimate
+    
+    # Images (approximate cost per output)
+    "fal-ai/flux/dev": 0.05,        # Approx for standard HD/Square
+    "fal-ai/flux/schnell": 0.01,    # Cheaper variant
+    
+    # Audio
+    "beatoven/music-generation": 0.05, 
+}

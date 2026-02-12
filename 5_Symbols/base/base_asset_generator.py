@@ -38,7 +38,7 @@ from Utils.asset_utils import generate_filename, extract_scene_number, ManifestT
 from Utils.prompt_enhancer import enhance_prompt
 
 # Import configuration (relative import from same package)
-from .generator_config import OUTPUT_FORMATS
+from .generator_config import OUTPUT_FORMATS, MODEL_PRICING
 
 # Pre-compute image asset types that support conversion (computed once at module level)
 IMAGE_ASSET_TYPES = [k for k, v in OUTPUT_FORMATS.items() 
@@ -275,6 +275,33 @@ class BaseAssetGenerator(ABC):
             print(f"⚠️  Warning: Failed to optimize PNG for Resolve: {e}")
             return False
     
+    def check_cost(self, asset_config: Dict) -> bool:
+        """
+        Check if the estimated cost exceeds the threshold ($0.20) and ask for confirmation.
+        
+        Args:
+            asset_config: Configuration for the asset
+            
+        Returns:
+            True to proceed, False to cancel
+        """
+        model = asset_config.get("model")
+        # Default to 0.0 if model not found in pricing dict
+        estimated_cost = MODEL_PRICING.get(model, 0.0)
+        
+        # If cost > $0.20, ask for confirmation
+        if estimated_cost > 0.20:
+            print(f"\n⚠️  HIGH COST WARNING: Estimated cost for this generation is ${estimated_cost:.2f}")
+            print(f"   Model: {model}")
+            # Use distinct visual separator for important financial decision
+            print(f"   {'-'*40}")
+            response = input("   💸 Do you want to proceed with this generation? (yes/no): ").strip().lower()
+            if response not in ['yes', 'y']:
+                print("❌ Generation cancelled by user due to cost.")
+                return False
+                
+        return True
+    
     def generate_asset(
         self,
         asset_config: Dict,
@@ -322,6 +349,13 @@ class BaseAssetGenerator(ABC):
         print(f"{'='*60}")
         
         try:
+            # Check cost before generating (added per user request for >$0.20 generations)
+            if not self.check_cost(asset_config):
+                return {
+                    "success": False,
+                    "error": "Cancelled by user due to cost",
+                }
+
             # Prepare arguments
             arguments = self.prepare_arguments(asset_config)
             
