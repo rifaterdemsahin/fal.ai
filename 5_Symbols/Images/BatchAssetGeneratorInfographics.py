@@ -42,7 +42,15 @@ except ImportError:
         print("⚠️  prompt_enhancer not found. Skipping prompt enhancement.")
         enhance_prompt = None
 
-# Configuration
+# Import cost check function
+try:
+    from base.generator_config import check_generation_cost
+except ImportError:
+    # Fallback if running standalone
+    import sys
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+    from base.generator_config import check_generation_cost
+
 # Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_infographics")
 # OUTPUT_DIR.mkdir(parents=True, exist_ok=True) # Moved to execution time
@@ -87,6 +95,13 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     print(f"{'='*60}")
     
     try:
+        # Check cost before generating (for generations > $0.20)
+        if not check_generation_cost(asset_config["model"]):
+            return {
+                "success": False,
+                "error": "Skipped due to cost exceeding threshold",
+            }
+        
         # Enhance prompt
         original_prompt = asset_config["prompt"]
         if enhance_prompt and (os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")):
@@ -128,19 +143,23 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             # Upscaling with AuraSR for V3 (Sharpness)
             print("✨ Upscaling with AuraSR for maximum sharpness...")
             try:
-                upscale_arguments = {
-                    "image_url": image_url
-                }
-                upscale_result = fal_client.subscribe(
-                    "fal-ai/aura-sr",
-                    arguments=upscale_arguments,
-                )
-                if upscale_result and "images" in upscale_result and len(upscale_result["images"]) > 0:
-                    image_url = upscale_result["images"][0]["url"]
-                    print(f"✅ Upscaled successfully!")
-                    print(f"   Upscaled URL: {image_url}")
+                # Check cost before upscaling (for generations > $0.20)
+                if not check_generation_cost("fal-ai/aura-sr"):
+                    print("⚠️ Upscaling skipped due to cost, using original.")
                 else:
-                    print("⚠️ Upscaling returned no images, using original.")
+                    upscale_arguments = {
+                        "image_url": image_url
+                    }
+                    upscale_result = fal_client.subscribe(
+                        "fal-ai/aura-sr",
+                        arguments=upscale_arguments,
+                    )
+                    if upscale_result and "images" in upscale_result and len(upscale_result["images"]) > 0:
+                        image_url = upscale_result["images"][0]["url"]
+                        print(f"✅ Upscaled successfully!")
+                        print(f"   Upscaled URL: {image_url}")
+                    else:
+                        print("⚠️ Upscaling returned no images, using original.")
             except Exception as e:
                  print(f"⚠️ Upscaling failed: {e}, using original.")
 

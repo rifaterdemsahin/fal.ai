@@ -74,5 +74,32 @@ MODEL_PRICING = {
     "fal-ai/flux/schnell": 0.01,    # Cheaper variant
     
     # Audio
-    "beatoven/music-generation": 0.05, 
+    "beatoven/music-generation": 0.05,
+    
+    # Upscaling
+    "fal-ai/aura-sr": 0.02,         # Upscaling cost
 }
+
+# Cost threshold for automatic skipping (in USD)
+COST_THRESHOLD = 0.20
+
+def check_generation_cost(model: str) -> bool:
+    """
+    Check if the estimated cost exceeds the threshold ($0.20) and skip automatically.
+    
+    Args:
+        model: The model identifier (e.g., "fal-ai/flux/dev")
+        
+    Returns:
+        True to proceed with generation, False to skip
+    """
+    # Default to 0.0 if model not found in pricing dict
+    estimated_cost = MODEL_PRICING.get(model, 0.0)
+    
+    # If cost > threshold, skip and log
+    if estimated_cost > COST_THRESHOLD:
+        print(f"⚠️  SKIPPED: Generation cost ${estimated_cost:.2f} exceeds threshold ${COST_THRESHOLD:.2f}")
+        print(f"   Model: {model}")
+        return False
+            
+    return True

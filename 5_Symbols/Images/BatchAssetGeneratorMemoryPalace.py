@@ -33,6 +33,15 @@ except ImportError:
         extract_scene_number = None
         ManifestTracker = None
 
+# Import cost check function
+try:
+    from base.generator_config import check_generation_cost
+except ImportError:
+    # Fallback if running standalone
+    import sys
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+    from base.generator_config import check_generation_cost
+
 # Configuration
 OUTPUT_DIR = Path("./generated_memory_palace")
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -79,6 +88,13 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
     print(f"{'='*60}")
     
     try:
+        # Check cost before generating (for generations > $0.20)
+        if not check_generation_cost(asset_config["model"]):
+            return {
+                "success": False,
+                "error": "Skipped due to cost exceeding threshold",
+            }
+        
         # Prepare arguments
         seed_value = SEEDS.get(asset_config["seed_key"], 0)
         arguments = {
