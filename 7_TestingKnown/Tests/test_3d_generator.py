@@ -170,12 +170,13 @@ class TestIntegrationGeneration(unittest.TestCase):
         
         # Verify files exist
         glb_files = list(self.test_output_dir.glob("*.glb"))
+        obj_files = list(self.test_output_dir.glob("*.obj"))
         json_files = list(self.test_output_dir.glob("*.json"))
         
-        self.assertGreater(len(glb_files), 0, "Should have created .glb files")
+        self.assertTrue(len(glb_files) > 0 or len(obj_files) > 0, "Should have created .glb or .obj files")
         self.assertGreater(len(json_files), 0, "Should have created .json files")
         
-        print(f"✅ Generated {len(glb_files)} GLB files and {len(json_files)} JSON files")
+        print(f"✅ Generated {len(glb_files)} GLB files, {len(obj_files)} OBJ files and {len(json_files)} JSON files")
 
 def run_tests():
     """Run all tests"""

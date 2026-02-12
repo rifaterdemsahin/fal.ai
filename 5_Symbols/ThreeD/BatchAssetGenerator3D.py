@@ -216,20 +216,33 @@ def generate_3d_asset(
             arguments=arguments,
         )
         
-        # Extract GLB model URL from result
+        # Debug result
+        # print(f"DEBUG: API Result: {result}")
+        
+        # Extract Model URL from result (GLB preferred, then OBJ)
         result_url = None
-        if result and "model_urls" in result:
-            if "glb" in result["model_urls"]:
-                result_url = result["model_urls"]["glb"]["url"]
+        extension = "glb"
+        
+        if result and isinstance(result, dict) and "model_urls" in result:
+            model_urls = result["model_urls"]
+            if model_urls and isinstance(model_urls, dict):
+                # Try GLB first
+                if "glb" in model_urls and model_urls["glb"]:
+                    result_url = model_urls["glb"].get("url")
+                    extension = "glb"
+                # Fallback to OBJ
+                elif "obj" in model_urls and model_urls["obj"]:
+                    result_url = model_urls["obj"].get("url")
+                    extension = "obj"
         
         if not result_url:
             return {
                 "success": False,
-                "error": "No GLB model URL in result",
+                "error": "No GLB or OBJ model URL in result",
             }
         
         print(f"✅ Generated successfully!")
-        print(f"   GLB URL: {result_url}")
+        print(f"   {extension.upper()} URL: {result_url}")
         
         # Automatic date stamp
         date_str = datetime.now().strftime("%Y%m%d")
@@ -248,20 +261,16 @@ def generate_3d_asset(
         ) if generate_filename else f"{name_with_date}_v{version}"
         
         filename_json = base_filename + '.json'
-        filename_glb = base_filename + '.glb'
-        
-        # Define output path - use OUTPUT_DIR provided global or default
-        # Ideally this function should take output_dir as arg, but it relies on global OUTPUT_DIR
-        # We will fix this in process_queue
-        # For now, we assume generated_assets is correct or updated
+        # Filename needs correct extension
+        filename_model = base_filename + f'.{extension}'
         
         # Save metadata
         metadata = {
             **asset_config,
             "original_prompt": original_prompt, # Store original
             "result_url": result_url,
-            "filename": filename_glb,
-            "format": "glb",
+            "filename": filename_model,
+            "format": extension,
             "date": date_str
         }
         if 'seed_key' in asset_config:
@@ -272,33 +281,43 @@ def generate_3d_asset(
             json.dump(metadata, f, indent=2)
         print(f"💾 Metadata saved: {metadata_path}")
         
-        # Download GLB model
+        # Download model
         import urllib.request
-        glb_path = OUTPUT_DIR / filename_glb
-        print(f"⏳ Downloading GLB model to {glb_path}...")
-        urllib.request.urlretrieve(result_url, glb_path)
+        model_path = OUTPUT_DIR / filename_model
+        print(f"⏳ Downloading {extension.upper()} model to {model_path}...")
+        urllib.request.urlretrieve(result_url, model_path)
         print(f"✅ 3D model saved successfully!")
         
+        # Download texture if available and OBJ format
+        if extension == "obj" and "model_urls" in result and "texture" in result["model_urls"] and result["model_urls"]["texture"]:
+            texture_url = result["model_urls"]["texture"].get("url")
+            if texture_url:
+                texture_filename = base_filename + '_texture.png'
+                texture_path = OUTPUT_DIR / texture_filename
+                print(f"⏳ Downloading texture to {texture_path}...")
+                urllib.request.urlretrieve(texture_url, texture_path)
+        
+        # Track in manifest if available
         if manifest_tracker and ManifestTracker:
             manifest_tracker.add_asset(
-                filename=filename_glb,
+                filename=filename_model,
                 asset_type="3d",
                 prompt=asset_config["prompt"],
                 asset_id=asset_config.get("id", ""),
                 result_url=result_url,
-                local_path=glb_path,
+                local_path=model_path,
                 metadata={
                     "scene": asset_config.get("scene", "Unknown"),
                     "priority": asset_config.get("priority", "MEDIUM"),
                     "model": asset_config["model"],
                     "seed_key": asset_config.get("seed_key"),
-                    "format": "glb"
+                    "format": extension
                 }
             )
         
         return {
             "success": True,
-            "filename": filename_glb,
+            "filename": filename_model,
             "metadata_file": filename_json,
             "result_url": result_url,
         }

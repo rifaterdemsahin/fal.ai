@@ -1,0 +1,55 @@
+test_default_model_configuration (__main__.Test3DGenerator.test_default_model_configuration)
+Test that 3D default model is configured ... ok
+test_extract_result_url (__main__.Test3DGenerator.test_extract_result_url)
+Test URL extraction from Hunyuan-3D response format ... ok
+test_generation_queue_exists (__main__.Test3DGenerator.test_generation_queue_exists)
+Test that generation queue is properly defined ... ok
+test_generator_initialization (__main__.Test3DGenerator.test_generator_initialization)
+Test that the generator initializes correctly ... ok
+test_model_configuration (__main__.Test3DGenerator.test_model_configuration)
+Test that the correct model is configured ... ok
+test_output_format_configuration (__main__.Test3DGenerator.test_output_format_configuration)
+Test that 3D output format is configured correctly ... ok
+test_priority_levels (__main__.Test3DGenerator.test_priority_levels)
+Test that assets have valid priority levels ... ok
+test_generation_queue (__main__.TestBatchAssetGenerator3D.test_generation_queue)
+Test that GENERATION_QUEUE is properly configured ... ok
+test_module_imports (__main__.TestBatchAssetGenerator3D.test_module_imports)
+Test that the module can be imported ... ok
+test_seeds_configuration (__main__.TestBatchAssetGenerator3D.test_seeds_configuration)
+Test that SEEDS are configured in the batch generator ... ok
+test_run_generation (__main__.TestIntegrationGeneration.test_run_generation)
+Test actual generation of a 3D asset ... FAIL
+
+======================================================================
+FAIL: test_run_generation (__main__.TestIntegrationGeneration.test_run_generation)
+Test actual generation of a 3D asset
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/Tests/test_3d_generator.py", line 168, in test_run_generation
+    self.assertGreater(len(results["success"]), 0, "Should have generated at least one asset")
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0 : Should have generated at least one asset
+
+----------------------------------------------------------------------
+Ran 11 tests in 135.747s
+
+FAILED (failures=1)
+
+🚀 Running integration test generation to /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d...
+📂 Output directory: /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d
+✨ Enhancing prompt for test_cube...
+   Original: A simple white cube, 3d, minimalistic...
+   Enhanced: Complex Voronoi cube. White ceramic, gold veins. S...
+
+============================================================
+🎨 Generating 3D Model: test_cube
+   Scene: Test Scene
+   Priority: HIGH
+   Seed: SEED_001 (42)
+============================================================
+⏳ Sending request to fal.ai Hunyuan-3D...
+DEBUG: API Result: {'model_obj': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/QkAQ6ifXfVuVZEREKsHkf_9c4430b2f7ce8d0c3c53966c4b0bc871.obj', 'content_type': 'model/obj', 'file_name': '9c4430b2f7ce8d0c3c53966c4b0bc871.obj', 'file_size': 5351826}, 'material_mtl': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/meETkFxkE7JZCeV55SvBN_material.mtl', 'content_type': 'text/plain', 'file_name': 'material.mtl', 'file_size': 157}, 'texture': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/5lpu86jWczv7WGLjRrAcJ_material.png', 'content_type': 'image/png', 'file_name': 'material.png', 'file_size': 3838554}, 'thumbnail': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/ooRVFohZviBgUwH2cM8YG_preview.png', 'content_type': 'image/png', 'file_name': 'preview.png', 'file_size': 263288}, 'model_urls': {'glb': None, 'fbx': None, 'obj': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/QkAQ6ifXfVuVZEREKsHkf_9c4430b2f7ce8d0c3c53966c4b0bc871.obj', 'content_type': 'model/obj', 'file_name': '9c4430b2f7ce8d0c3c53966c4b0bc871.obj', 'file_size': 5351826}, 'mtl': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/meETkFxkE7JZCeV55SvBN_material.mtl', 'content_type': 'text/plain', 'file_name': 'material.mtl', 'file_size': 157}, 'texture': {'url': 'https://v3b.fal.media/files/b/0a8e24d0/5lpu86jWczv7WGLjRrAcJ_material.png', 'content_type': 'image/png', 'file_name': 'material.png', 'file_size': 3838554}, 'usdz': None}}
+
+📋 Manifest saved: /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d/manifest_3d.json
+   Total assets tracked: 0
