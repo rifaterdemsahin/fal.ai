@@ -73,7 +73,8 @@ class BaseAssetGenerator(ABC):
         seeds: Dict[str, int],
         brand_colors: Dict[str, str],
         asset_type: str,
-        output_format: Optional[str] = None
+        output_format: Optional[str] = None,
+        dry_run: bool = False
     ):
         """
         Initialize the base generator.
@@ -85,6 +86,7 @@ class BaseAssetGenerator(ABC):
             asset_type: Type of asset (e.g., 'image', 'video', 'music')
             output_format: Override output format (e.g., 'jpeg', 'png'). 
                           If None, uses OUTPUT_FORMATS from config
+            dry_run: If True, only generate and display prompts without making API calls
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -93,6 +95,8 @@ class BaseAssetGenerator(ABC):
         self.asset_type = asset_type
         self.manifest = None
         self.output_format = output_format  # Store the desired output format
+        self.dry_run = dry_run  # Dry-run mode for prompt generation without API calls
+        self.credits_exhausted = False  # Track if credits have been exhausted
         
     @abstractmethod
     def get_generation_queue(self) -> List[Dict]:
@@ -118,6 +122,28 @@ class BaseAssetGenerator(ABC):
             print("   Or use FAL_API_KEY in GitHub Actions secrets")
             raise ValueError("FAL_KEY or FAL_API_KEY not set")
         return api_key
+    
+    def is_credit_error(self, error_message: str) -> bool:
+        """
+        Check if an error message indicates insufficient credits.
+        
+        Args:
+            error_message: The error message from the API
+            
+        Returns:
+            True if the error is due to insufficient credits
+        """
+        credit_indicators = [
+            "exhausted balance",
+            "insufficient credits",
+            "insufficient balance",
+            "user is locked",
+            "top up your balance",
+            "no credits remaining",
+            "credit limit exceeded"
+        ]
+        error_lower = str(error_message).lower()
+        return any(indicator in error_lower for indicator in credit_indicators)
     
     def prepare_arguments(self, asset_config: Dict) -> Dict[str, Any]:
         """
@@ -335,12 +361,41 @@ class BaseAssetGenerator(ABC):
             print(f"   Seed: {asset_config['seed_key']} ({self.seeds.get(asset_config['seed_key'], 'N/A')})")
         print(f"{'='*60}")
         
+        # Get estimated cost
+        model = asset_config.get("model", "unknown")
+        estimated_cost = MODEL_PRICING.get(model, 0.0)
+        
+        # Display prompt and cost information
+        print(f"\n📝 Prompt: {asset_config['prompt']}")
+        print(f"💰 Estimated Cost: ${estimated_cost:.2f}")
+        print(f"🔧 Model: {model}")
+        
+        # If in dry-run mode or credits exhausted, just display info and return
+        if self.dry_run or self.credits_exhausted:
+            if self.credits_exhausted:
+                print(f"\n💳 NO CREDITS AVAILABLE - Displaying prompt and cost only")
+                print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
+            else:
+                print(f"\n🔍 DRY-RUN MODE - Skipping actual generation")
+            
+            return {
+                "success": False,
+                "error": "Dry-run mode" if self.dry_run else "No credits available",
+                "prompt": asset_config['prompt'],
+                "estimated_cost": estimated_cost,
+                "model": model,
+                "dry_run": True
+            }
+        
         try:
             # Check cost before generating (added per user request for >$0.20 generations)
             if not self.check_cost(asset_config):
                 return {
                     "success": False,
                     "error": "Skipped due to cost exceeding threshold",
+                    "prompt": asset_config['prompt'],
+                    "estimated_cost": estimated_cost,
+                    "model": model,
                 }
 
             # Prepare arguments
@@ -461,10 +516,29 @@ class BaseAssetGenerator(ABC):
             }
             
         except Exception as e:
-            print(f"❌ Error: {str(e)}")
+            error_msg = str(e)
+            print(f"❌ Error: {error_msg}")
+            
+            # Check if this is a credit error
+            if self.is_credit_error(error_msg):
+                print(f"\n💳 CREDIT ERROR DETECTED!")
+                print(f"   Switching to dry-run mode for remaining assets...")
+                print(f"   You can view prompts and costs without making API calls.")
+                print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
+                self.credits_exhausted = True
+                
+                return {
+                    "success": False,
+                    "error": error_msg,
+                    "credit_error": True,
+                    "prompt": asset_config['prompt'],
+                    "estimated_cost": MODEL_PRICING.get(asset_config.get("model", "unknown"), 0.0),
+                    "model": asset_config.get("model", "unknown"),
+                }
+            
             return {
                 "success": False,
-                "error": str(e),
+                "error": error_msg,
             }
     
     def process_queue(
@@ -542,19 +616,41 @@ class BaseAssetGenerator(ABC):
             for r in successful:
                 print(f"   • {r['asset_id']}: {r['name']} ({r['priority']})")
         
-        if failed:
+        # Separate dry-run and actual failures
+        dry_run_items = [r for r in failed if r.get('dry_run', False)]
+        actual_failures = [r for r in failed if not r.get('dry_run', False)]
+        
+        if dry_run_items:
+            print("\n📝 DRY-RUN / NO CREDITS (Prompt & Cost Displayed):")
+            for r in dry_run_items:
+                cost = r.get('estimated_cost', 0.0)
+                print(f"   • {r['asset_id']}: {r['name']} - ${cost:.2f}")
+                if r.get('prompt'):
+                    prompt_preview = r['prompt'][:80] + "..." if len(r['prompt']) > 80 else r['prompt']
+                    print(f"     Prompt: {prompt_preview}")
+        
+        if actual_failures:
             print("\n❌ FAILED GENERATIONS:")
-            for r in failed:
-                print(f"   • {r['asset_id']}: {r['name']} - {r.get('error', 'Unknown error')}")
+            for r in actual_failures:
+                error_msg = r.get('error', 'Unknown error')
+                if r.get('credit_error'):
+                    print(f"   • {r['asset_id']}: {r['name']} - CREDIT ERROR: {error_msg}")
+                else:
+                    print(f"   • {r['asset_id']}: {r['name']} - {error_msg}")
         
         # Save summary
         summary_path = self.output_dir / "generation_summary.json"
+        dry_run_count = len([r for r in results if r.get('dry_run', False)])
+        credit_error_count = len([r for r in results if r.get('credit_error', False)])
+        
         with open(summary_path, 'w') as f:
             json.dump({
                 "asset_type": self.asset_type,
                 "total": len(results),
                 "successful": len(successful),
                 "failed": len(failed),
+                "dry_run": dry_run_count,
+                "credit_errors": credit_error_count,
                 "results": results,
             }, f, indent=2)
         
