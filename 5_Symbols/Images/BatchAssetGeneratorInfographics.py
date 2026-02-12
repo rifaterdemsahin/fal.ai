@@ -52,7 +52,6 @@ except ImportError:
     from base.generator_config import check_generation_cost
 
 # Configuration
-# Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_infographics")
 # OUTPUT_DIR.mkdir(parents=True, exist_ok=True) # Moved to execution time
 

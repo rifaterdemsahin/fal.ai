@@ -43,7 +43,6 @@ except ImportError:
     from base.generator_config import check_generation_cost
 
 # Configuration
-# Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_icons")
 # Directory creation moved to execution time to avoid side effects on import
 
