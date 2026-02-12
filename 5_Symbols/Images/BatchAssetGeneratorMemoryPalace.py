@@ -92,7 +92,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         if not check_generation_cost(asset_config["model"]):
             return {
                 "success": False,
-                "error": "Cancelled by user due to cost",
+                "error": "Skipped due to cost exceeding threshold",
             }
         
         # Prepare arguments

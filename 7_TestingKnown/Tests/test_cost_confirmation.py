@@ -1,7 +1,6 @@
 import unittest
 import sys
 from pathlib import Path
-from unittest.mock import patch
 
 # Add base path
 project_root = Path(__file__).resolve().parent.parent.parent
@@ -14,8 +13,8 @@ from generator_config import check_generation_cost, MODEL_PRICING, COST_THRESHOL
 
 class TestCostConfirmation(unittest.TestCase):
     """
-    Test the cost confirmation feature for fal.ai API calls.
-    Ensures that generations over $0.20 require user confirmation.
+    Test the automatic cost skipping feature for fal.ai API calls.
+    Ensures that generations over $0.20 are automatically skipped.
     """
     
     def test_cost_threshold_is_configured(self):
@@ -40,63 +39,38 @@ class TestCostConfirmation(unittest.TestCase):
                           "3D generation should be over threshold")
     
     def test_cheap_models_auto_proceed(self):
-        """Test that cheap models (<=$0.20) proceed without prompting"""
+        """Test that cheap models (<=$0.20) proceed automatically"""
         # These should return True without any user input
         self.assertTrue(check_generation_cost("fal-ai/flux/schnell"), 
                        "Cheap model should auto-proceed")
         self.assertTrue(check_generation_cost("unknown-model"), 
                        "Unknown model (defaults to $0) should auto-proceed")
     
-    @patch('builtins.input', return_value='yes')
-    def test_expensive_model_user_accepts(self, mock_input):
-        """Test that expensive model proceeds when user accepts"""
+    def test_expensive_model_auto_skipped(self):
+        """Test that expensive models are automatically skipped"""
         result = check_generation_cost("fal-ai/minimax/video-01")
-        self.assertTrue(result, "Should proceed when user says 'yes'")
-        mock_input.assert_called_once()
+        self.assertFalse(result, "Expensive model should be automatically skipped")
     
-    @patch('builtins.input', return_value='y')
-    def test_expensive_model_user_accepts_short(self, mock_input):
-        """Test that expensive model proceeds when user accepts with 'y'"""
-        result = check_generation_cost("fal-ai/minimax/video-01")
-        self.assertTrue(result, "Should proceed when user says 'y'")
-        mock_input.assert_called_once()
-    
-    @patch('builtins.input', return_value='no')
-    def test_expensive_model_user_declines(self, mock_input):
-        """Test that expensive model is cancelled when user declines"""
-        result = check_generation_cost("fal-ai/minimax/video-01")
-        self.assertFalse(result, "Should cancel when user says 'no'")
-        mock_input.assert_called_once()
-    
-    @patch('builtins.input', return_value='n')
-    def test_expensive_model_user_declines_short(self, mock_input):
-        """Test that expensive model is cancelled when user declines with 'n'"""
-        result = check_generation_cost("fal-ai/minimax/video-01")
-        self.assertFalse(result, "Should cancel when user says 'n'")
-        mock_input.assert_called_once()
-    
-    @patch('builtins.input', return_value='maybe')
-    def test_expensive_model_invalid_input_cancels(self, mock_input):
-        """Test that expensive model is cancelled on invalid input"""
-        result = check_generation_cost("fal-ai/minimax/video-01")
-        self.assertFalse(result, "Should cancel on invalid input (not yes/y)")
-        mock_input.assert_called_once()
+    def test_3d_model_auto_skipped(self):
+        """Test that 3D models are automatically skipped"""
+        result = check_generation_cost("fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d")
+        self.assertFalse(result, "3D model should be automatically skipped")
     
     def test_all_expensive_models(self):
-        """Test that all models over threshold are identified"""
+        """Test that all models over threshold are automatically skipped"""
         expensive_count = 0
         cheap_count = 0
         
         for model, price in MODEL_PRICING.items():
             if price > COST_THRESHOLD:
                 expensive_count += 1
-                print(f"  ⚠️  {model}: ${price:.2f} (requires confirmation)")
+                print(f"  ⚠️  {model}: ${price:.2f} (automatically skipped)")
             else:
                 cheap_count += 1
                 print(f"  ✅ {model}: ${price:.2f} (auto-proceeds)")
         
         print(f"\nSummary:")
-        print(f"  - {expensive_count} models require confirmation")
+        print(f"  - {expensive_count} models automatically skipped")
         print(f"  - {cheap_count} models auto-proceed")
         
         self.assertGreater(expensive_count, 0, "Should have expensive models")

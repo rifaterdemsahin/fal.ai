@@ -99,7 +99,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         if not check_generation_cost(asset_config["model"]):
             return {
                 "success": False,
-                "error": "Cancelled by user due to cost",
+                "error": "Skipped due to cost exceeding threshold",
             }
         
         # Enhance prompt
@@ -145,7 +145,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
             try:
                 # Check cost before upscaling (for generations > $0.20)
                 if not check_generation_cost("fal-ai/aura-sr"):
-                    print("⚠️ Upscaling cancelled by user, using original.")
+                    print("⚠️ Upscaling skipped due to cost, using original.")
                 else:
                     upscale_arguments = {
                         "image_url": image_url

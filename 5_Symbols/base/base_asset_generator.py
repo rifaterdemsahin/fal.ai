@@ -340,7 +340,7 @@ class BaseAssetGenerator(ABC):
             if not self.check_cost(asset_config):
                 return {
                     "success": False,
-                    "error": "Cancelled by user due to cost",
+                    "error": "Skipped due to cost exceeding threshold",
                 }
 
             # Prepare arguments

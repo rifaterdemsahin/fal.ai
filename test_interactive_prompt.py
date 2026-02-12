@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Manual Test: Demonstrates the interactive cost confirmation prompt
-Run this to see how the prompt appears for expensive generations
+Test: Demonstrates automatic cost skipping
+Run this to see how expensive generations are automatically skipped
 """
 
 import sys
@@ -12,13 +12,12 @@ sys.path.insert(0, str(Path(__file__).parent / "5_Symbols" / "base"))
 
 from generator_config import check_generation_cost
 
-def test_interactive_prompt():
-    """Test the interactive cost confirmation prompt"""
+def test_auto_skip():
+    """Test the automatic cost skipping behavior"""
     print("=" * 70)
-    print("INTERACTIVE COST CONFIRMATION TEST")
+    print("AUTOMATIC COST SKIPPING TEST")
     print("=" * 70)
-    print("\nThis test will show you the actual prompt that users see")
-    print("when attempting to generate expensive assets (>$0.20).\n")
+    print("\nThis test demonstrates automatic skipping of expensive assets (>$0.20).\n")
     
     # Test with an expensive model
     print("Testing with: fal-ai/minimax/video-01 ($0.50)")
@@ -28,13 +27,13 @@ def test_interactive_prompt():
     
     print("-" * 70)
     if result:
-        print("\n✅ User confirmed - generation would proceed")
+        print("\n✅ Generation would proceed")
     else:
-        print("\n❌ User cancelled - generation was stopped")
+        print("\n❌ Generation automatically skipped")
     
     print("\n" + "=" * 70)
     print("TEST COMPLETE")
     print("=" * 70)
 
 if __name__ == "__main__":
-    test_interactive_prompt()
+    test_auto_skip()

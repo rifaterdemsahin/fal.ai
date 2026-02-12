@@ -80,30 +80,26 @@ MODEL_PRICING = {
     "fal-ai/aura-sr": 0.02,         # Upscaling cost
 }
 
-# Cost threshold for user confirmation (in USD)
+# Cost threshold for automatic skipping (in USD)
 COST_THRESHOLD = 0.20
 
 def check_generation_cost(model: str) -> bool:
     """
-    Check if the estimated cost exceeds the threshold ($0.20) and ask for confirmation.
+    Check if the estimated cost exceeds the threshold ($0.20) and skip automatically.
     
     Args:
         model: The model identifier (e.g., "fal-ai/flux/dev")
         
     Returns:
-        True to proceed with generation, False to cancel
+        True to proceed with generation, False to skip
     """
     # Default to 0.0 if model not found in pricing dict
     estimated_cost = MODEL_PRICING.get(model, 0.0)
     
-    # If cost > threshold, ask for confirmation
+    # If cost > threshold, skip and log
     if estimated_cost > COST_THRESHOLD:
-        print(f"\n⚠️  HIGH COST WARNING: Estimated cost for this generation is ${estimated_cost:.2f}")
+        print(f"⚠️  SKIPPED: Generation cost ${estimated_cost:.2f} exceeds threshold ${COST_THRESHOLD:.2f}")
         print(f"   Model: {model}")
-        print(f"   {'-'*40}")
-        response = input("   💸 Do you want to proceed with this generation? (yes/no): ").strip().lower()
-        if response not in ['yes', 'y']:
-            print("❌ Generation cancelled by user due to cost.")
-            return False
+        return False
             
     return True
