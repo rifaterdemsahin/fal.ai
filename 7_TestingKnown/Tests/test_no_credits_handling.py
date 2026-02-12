@@ -103,7 +103,7 @@ class TestNoCreditsHandling(unittest.TestCase):
         })
         
         # Verify result
-        self.assertFalse(result["success"], "Dry-run should not succeed")
+        self.assertFalse(result["success"], "Dry-run mode should return success=False")
         self.assertEqual(result["error"], "Dry-run mode")
         self.assertTrue(result["dry_run"])
         self.assertIn("prompt", result)

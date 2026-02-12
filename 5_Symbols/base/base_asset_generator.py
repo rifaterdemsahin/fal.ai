@@ -371,16 +371,24 @@ class BaseAssetGenerator(ABC):
         print(f"🔧 Model: {model}")
         
         # If in dry-run mode or credits exhausted, just display info and return
-        if self.dry_run or self.credits_exhausted:
-            if self.credits_exhausted:
-                print(f"\n💳 NO CREDITS AVAILABLE - Displaying prompt and cost only")
-                print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
-            else:
-                print(f"\n🔍 DRY-RUN MODE - Skipping actual generation")
+        if self.credits_exhausted:
+            print(f"\n💳 NO CREDITS AVAILABLE - Displaying prompt and cost only")
+            print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
             
             return {
                 "success": False,
-                "error": "Dry-run mode" if self.dry_run else "No credits available",
+                "error": "No credits available",
+                "prompt": asset_config['prompt'],
+                "estimated_cost": estimated_cost,
+                "model": model,
+                "dry_run": True
+            }
+        elif self.dry_run:
+            print(f"\n🔍 DRY-RUN MODE - Skipping actual generation")
+            
+            return {
+                "success": False,
+                "error": "Dry-run mode",
                 "prompt": asset_config['prompt'],
                 "estimated_cost": estimated_cost,
                 "model": model,

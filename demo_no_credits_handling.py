@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 # Add 5_Symbols to path
-project_root = Path(__file__).resolve().parent
-symbols_path = project_root / "5_Symbols"
+repo_root = Path(__file__).resolve().parent
+symbols_path = repo_root / "5_Symbols"
 sys.path.insert(0, str(symbols_path))
 
 from base.base_asset_generator import BaseAssetGenerator
@@ -61,7 +61,7 @@ def demo_dry_run_mode():
     print("  • Reviewing enhanced prompts")
     print()
     
-    output_dir = project_root / "7_TestingKnown" / "TestOutput" / "demo_dry_run"
+    output_dir = repo_root / "7_TestingKnown" / "TestOutput" / "demo_dry_run"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     generator = DemoImageGenerator(
@@ -115,7 +115,7 @@ def demo_credits_exhausted():
     print("  • Provide a link to top up balance")
     print()
     
-    output_dir = project_root / "7_TestingKnown" / "TestOutput" / "demo_no_credits"
+    output_dir = repo_root / "7_TestingKnown" / "TestOutput" / "demo_no_credits"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     generator = DemoImageGenerator(
