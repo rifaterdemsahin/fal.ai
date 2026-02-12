@@ -3,38 +3,36 @@
 Integration test for manifest and versioning system
 Tests the complete flow without calling the actual API
 """
-
-import json
-import tempfile
-from pathlib import Path
 import sys
+import unittest
+import json
+from pathlib import Path
+import datetime
 
-# Add symbol root to path
+try:
+    from base_test import BaseAssetGeneratorTest
+except ImportError:
+    sys.path.append(str(Path(__file__).resolve().parent))
+    from base_test import BaseAssetGeneratorTest
+
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
-
 from Utils.asset_utils import ManifestTracker, generate_filename, extract_scene_number
 
-
-def test_integration():
-    """Test the complete manifest and versioning flow"""
+class TestIntegration(BaseAssetGeneratorTest):
     
-    print("=" * 60)
-    print("INTEGRATION TEST: Manifest and Versioning System")
-    print("=" * 60)
-    
-    # Use fixed project directory
-    project_dir = Path(__file__).resolve().parent.parent / "TestOutput" / "generated_assets"
-    # Ensure directory exists
-    if not project_dir.exists():
-        project_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Create generated folder if it doesn't exist (as the test expects it)
-    (project_dir / "generated").mkdir(parents=True, exist_ok=True)
+    def test_integration(self):
+        """Test the complete manifest and versioning flow"""
+        print(f"\n🚀 INTEGRATION TEST: Manifest and Versioning System")
         
-    print(f"\n📁 Test project directory: {project_dir}")
-    
-    # Use the directory directly (no context manager needed for persistent dir)
-    if True:
+        # Use fixed project directory within the test output root
+        project_dir = self.test_output_root / "manifest_test"
+        if not project_dir.exists():
+            project_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create generated folder if it doesn't exist
+        (project_dir / "generated").mkdir(parents=True, exist_ok=True)
+            
+        print(f"📁 Test project directory: {project_dir}")
         
         # Initialize manifest tracker
         manifest = ManifestTracker(project_dir)
@@ -111,28 +109,22 @@ def test_integration():
         
         # Verify manifest file
         print(f"\n✅ Manifest file created: {manifest_path}")
+        self.assertTrue(manifest_path.exists())
         print(f"   File size: {manifest_path.stat().st_size} bytes")
         
-        # Load and display manifest contents
+        # Load and verify manifest contents
         with open(manifest_path, 'r') as f:
             manifest_data = json.load(f)
         
         print(f"\n📋 Manifest contents:")
         print(f"   Total assets: {manifest_data['total_assets']}")
-        print(f"   Generation timestamp: {manifest_data['generation_timestamp']}")
-        print(f"   Completion timestamp: {manifest_data['completion_timestamp']}")
+        self.assertEqual(manifest_data['total_assets'], 4)
         
         print(f"\n📝 Asset details:")
+        actual_filenames = []
         for i, asset in enumerate(manifest_data['assets'], 1):
             print(f"   {i}. {asset['filename']}")
-            print(f"      - Asset ID: {asset['asset_id']}")
-            print(f"      - Type: {asset['asset_type']}")
-            print(f"      - Prompt: {asset['prompt'][:60]}...")
-            print(f"      - Timestamp: {asset['timestamp']}")
-        
-        print("\n" + "=" * 60)
-        print("✅ INTEGRATION TEST PASSED")
-        print("=" * 60)
+            actual_filenames.append(asset['filename'])
         
         # Verify expected filenames
         expected_filenames = [
@@ -142,26 +134,12 @@ def test_integration():
             "011_graphic_ai_job_message_v1.png",
         ]
         
-        actual_filenames = [asset['filename'] for asset in manifest_data['assets']]
-        
         print("\n🔍 Filename verification:")
-        all_match = True
         for expected, actual in zip(expected_filenames, actual_filenames):
             match = "✅" if expected == actual else "❌"
             print(f"   {match} Expected: {expected}")
             print(f"      Actual:   {actual}")
-            if expected != actual:
-                all_match = False
-        
-        if all_match:
-            print("\n✅ All filenames match expected format!")
-        else:
-            print("\n❌ Some filenames don't match expected format!")
-            return False
-        
-        return True
-
+            self.assertEqual(expected, actual)
 
 if __name__ == "__main__":
-    success = test_integration()
-    exit(0 if success else 1)
+    unittest.main()
