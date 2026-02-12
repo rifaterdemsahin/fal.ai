@@ -360,7 +360,7 @@ def generate_anime_scene(
 def process_storyline(
     storyline: Dict,
     output_dir: Path,
-    model: str = "minimax",
+    model: str = "flux_anime",
     manifest: Optional[object] = None
 ) -> List[Dict]:
     """Process an entire anime storyline and generate all scenes"""
@@ -484,9 +484,9 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default="minimax",
-        choices=["minimax", "kling", "flux_anime", "flux_dev"],
-        help="Model to use for generation (default: minimax)"
+        default="flux_anime",
+        choices=["flux_anime", "flux_dev", "flux_pro"],
+        help="Model to use for generation (default: flux_anime)"
     )
     parser.add_argument(
         "--create-example",

@@ -48,7 +48,7 @@ class TestAnimeGenerator(BaseAssetGeneratorTest):
             self.assertIn(field, scene, f"Missing required field: {field}")
             
         # Test 3: Check anime models
-        expected_models = ["minimax", "kling", "flux_anime", "flux_dev"]
+        expected_models = ["flux_anime", "flux_dev", "flux_pro"]
         for model in expected_models:
             self.assertIn(model, ANIME_MODELS, f"Missing model: {model}")
             self.assertTrue(ANIME_MODELS[model].startswith("fal-ai/"), f"Invalid model ID: {ANIME_MODELS[model]}")
