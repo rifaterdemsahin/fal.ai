@@ -74,5 +74,36 @@ MODEL_PRICING = {
     "fal-ai/flux/schnell": 0.01,    # Cheaper variant
     
     # Audio
-    "beatoven/music-generation": 0.05, 
+    "beatoven/music-generation": 0.05,
+    
+    # Upscaling
+    "fal-ai/aura-sr": 0.02,         # Upscaling cost
 }
+
+# Cost threshold for user confirmation (in USD)
+COST_THRESHOLD = 0.20
+
+def check_generation_cost(model: str) -> bool:
+    """
+    Check if the estimated cost exceeds the threshold ($0.20) and ask for confirmation.
+    
+    Args:
+        model: The model identifier (e.g., "fal-ai/flux/dev")
+        
+    Returns:
+        True to proceed with generation, False to cancel
+    """
+    # Default to 0.0 if model not found in pricing dict
+    estimated_cost = MODEL_PRICING.get(model, 0.0)
+    
+    # If cost > threshold, ask for confirmation
+    if estimated_cost > COST_THRESHOLD:
+        print(f"\n⚠️  HIGH COST WARNING: Estimated cost for this generation is ${estimated_cost:.2f}")
+        print(f"   Model: {model}")
+        print(f"   {'-'*40}")
+        response = input("   💸 Do you want to proceed with this generation? (yes/no): ").strip().lower()
+        if response not in ['yes', 'y']:
+            print("❌ Generation cancelled by user due to cost.")
+            return False
+            
+    return True
