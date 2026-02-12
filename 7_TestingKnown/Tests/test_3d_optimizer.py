@@ -9,27 +9,30 @@ import os
 from pathlib import Path
 import sys
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols" / "ThreeD"))
+try:
+    from base_test import BaseAssetGeneratorTest
+except ImportError:
+    sys.path.append(str(Path(__file__).resolve().parent))
+    from base_test import BaseAssetGeneratorTest
 
-from Batch3DModelOptimizer import (
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "5_Symbols"))
+from ThreeD.Batch3DModelOptimizer import (
     Model3DConfig,
     Model3DMetadata,
     Model3DValidator,
     Model3DOptimizer
 )
 
-
-class TestModel3DValidator(unittest.TestCase):
+class TestModel3DValidator(BaseAssetGeneratorTest):
     """Test the Model3DValidator class"""
     
     def setUp(self):
-        """Set up test fixtures"""
+        super().setUp()
         self.validator = Model3DValidator()
-        self.temp_dir = tempfile.mkdtemp()
-    
+        self.temp_dir = tempfile.mkdtemp() # Keep using tempfile for isolated tests or use self.test_output_root
+        
     def tearDown(self):
-        """Clean up test files"""
+        super().tearDown()
         import shutil
         if os.path.exists(self.temp_dir):
             shutil.rmtree(self.temp_dir)
@@ -108,7 +111,7 @@ f 1 2 3
         self.assertTrue(result)
 
 
-class TestModel3DConfig(unittest.TestCase):
+class TestModel3DConfig(BaseAssetGeneratorTest):
     """Test the Model3DConfig dataclass"""
     
     def test_config_defaults(self):
@@ -139,15 +142,15 @@ class TestModel3DConfig(unittest.TestCase):
         self.assertFalse(config.embed_textures)
 
 
-class TestModel3DOptimizer(unittest.TestCase):
+class TestModel3DOptimizer(BaseAssetGeneratorTest):
     """Test the Model3DOptimizer class"""
     
     def setUp(self):
-        """Set up test fixtures"""
+        super().setUp()
         self.temp_dir = tempfile.mkdtemp()
     
     def tearDown(self):
-        """Clean up test files"""
+        super().tearDown()
         import shutil
         if os.path.exists(self.temp_dir):
             shutil.rmtree(self.temp_dir)
@@ -206,25 +209,5 @@ f 1 2 3
         self.assertEqual(metadata['vertex_count'], 3)
         self.assertEqual(metadata['face_count'], 1)
 
-
-def run_tests():
-    """Run all tests"""
-    # Create test suite
-    loader = unittest.TestLoader()
-    suite = unittest.TestSuite()
-    
-    # Add tests
-    suite.addTests(loader.loadTestsFromTestCase(TestModel3DValidator))
-    suite.addTests(loader.loadTestsFromTestCase(TestModel3DConfig))
-    suite.addTests(loader.loadTestsFromTestCase(TestModel3DOptimizer))
-    
-    # Run tests
-    runner = unittest.TextTestRunner(verbosity=2)
-    result = runner.run(suite)
-    
-    # Return exit code
-    return 0 if result.wasSuccessful() else 1
-
-
 if __name__ == "__main__":
-    exit(run_tests())
+    unittest.main()

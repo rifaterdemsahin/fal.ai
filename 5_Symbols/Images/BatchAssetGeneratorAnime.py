@@ -10,7 +10,8 @@ import json
 import time
 import urllib.request
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
+import re
 
 from datetime import datetime
 
@@ -131,6 +132,75 @@ def load_storyline_from_file(file_path: Path) -> Dict:
     except Exception as e:
         print(f"❌ Error loading storyline: {e}")
         print("📝 Using default storyline...")
+        return DEFAULT_STORYLINE
+
+
+def parse_storyboard_markdown(file_path: Path) -> Dict:
+    """Parse a markdown storyboard file into a storyline dictionary"""
+    if not file_path.exists():
+        print(f"⚠️  Storyboard file not found: {file_path}")
+        return DEFAULT_STORYLINE
+
+    print(f"📖 Parsing storyboard: {file_path}")
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        storyline = {
+            "title": "Storyboard Animation",
+            "style": "anime",
+            "scenes": []
+        }
+        
+        # Regex for frames
+        # ### Frame 1: Title (Time)
+        frame_pattern = re.compile(r'### Frame (\d+): (.*?)(?:\s*\(.*?\))?\n(.*?)(?=### Frame|\Z)', re.DOTALL)
+        
+        matches = frame_pattern.findall(content)
+        
+        for i, (frame_num, title, body) in enumerate(matches, 1):
+            # Extract details
+            shot_type = re.search(r'\*\*Shot Type:\*\* (.*)', body)
+            visuals = re.search(r'\*\*Visual Elements:\*\* (.*)', body)
+            mood = re.search(r'\*\*Mood:\*\* (.*)', body)
+            camera = re.search(r'\*\*Camera Movement:\*\* (.*)', body)
+            
+            shot_type_str = shot_type.group(1).strip() if shot_type else ""
+            visuals_str = visuals.group(1).strip() if visuals else ""
+            mood_str = mood.group(1).strip() if mood else ""
+            camera_str = camera.group(1).strip() if camera else ""
+            
+            # Construct prompt
+            # Anime style, [Visuals], [Mood], [Shot Type], [Camera]
+            prompt_parts = ["Anime style"]
+            if visuals_str: prompt_parts.append(visuals_str)
+            if mood_str: prompt_parts.append(mood_str)
+            if shot_type_str: prompt_parts.append(shot_type_str)
+            if camera_str: prompt_parts.append(camera_str)
+            prompt_parts.append("high quality animation, 16:9 aspect ratio")
+            
+            prompt = ", ".join(prompt_parts)
+            
+            scene = {
+                "id": f"{frame_num}",
+                "name": f"frame_{frame_num}_{title.strip().lower().replace(' ', '_')}",
+                "priority": "MEDIUM",
+                "scene": f"Frame {frame_num}: {title.strip()}",
+                "description": f"{visuals_str}. Mood: {mood_str}",
+                "prompt": prompt,
+                "duration_seconds": 5, # Default
+                "characters": [],
+                "setting": "Unknown"
+            }
+            
+            storyline["scenes"].append(scene)
+            
+        print(f"✅ Parsed {len(storyline['scenes'])} scenes from storyboard")
+        return storyline
+        
+    except Exception as e:
+        print(f"❌ Error parsing storyboard: {e}")
         return DEFAULT_STORYLINE
 
 
@@ -454,8 +524,28 @@ def main():
     
     # Load storyline
     if args.storyline:
-        storyline_path = Path(args.storyline)
-        storyline = load_storyline_from_file(storyline_path)
+        input_path = Path(args.storyline)
+        if input_path.is_dir():
+            # Check for source_storyboard.md
+            storyboard_path = input_path / "source_storyboard.md"
+            if storyboard_path.exists():
+                storyline = parse_storyboard_markdown(storyboard_path)
+            else:
+                # Check for storyline.json
+                json_path = input_path / "storyline.json"
+                if json_path.exists():
+                    storyline = load_storyline_from_file(json_path)
+                else:
+                    print(f"⚠️  No source_storyboard.md or storyline.json found in {input_path}")
+                    storyline = DEFAULT_STORYLINE
+        else:
+            if input_path.suffix.lower() == '.json':
+                storyline = load_storyline_from_file(input_path)
+            elif input_path.suffix.lower() == '.md':
+                storyline = parse_storyboard_markdown(input_path)
+            else:
+                print(f"⚠️  Unsupported file format: {input_path.suffix}")
+                storyline = DEFAULT_STORYLINE
     else:
         print("📝 No storyline file specified, using default storyline...")
         print("💡 TIP: Use --create-example to generate a template storyline file")
