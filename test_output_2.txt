@@ -19,4 +19,37 @@ Test that the module can be imported ... ok
 test_seeds_configuration (__main__.TestBatchAssetGenerator3D.test_seeds_configuration)
 Test that SEEDS are configured in the batch generator ... ok
 test_run_generation (__main__.TestIntegrationGeneration.test_run_generation)
-Test actual generation of a 3D asset ... 
+Test actual generation of a 3D asset ... FAIL
+
+======================================================================
+FAIL: test_run_generation (__main__.TestIntegrationGeneration.test_run_generation)
+Test actual generation of a 3D asset
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/Tests/test_3d_generator.py", line 168, in test_run_generation
+    self.assertGreater(len(results["success"]), 0, "Should have generated at least one asset")
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0 : Should have generated at least one asset
+
+----------------------------------------------------------------------
+Ran 11 tests in 117.683s
+
+FAILED (failures=1)
+
+🚀 Running integration test generation to /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d...
+📂 Output directory: /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d
+✨ Enhancing prompt for test_cube...
+   Original: A simple white cube, 3d, minimalistic...
+   Enhanced: Complex cube. Nested geometries, translucent acryl...
+
+============================================================
+🎨 Generating 3D Model: test_cube
+   Scene: Test Scene
+   Priority: HIGH
+   Seed: SEED_001 (42)
+============================================================
+⏳ Sending request to fal.ai Hunyuan-3D...
+❌ Error generating 3D model: 'NoneType' object is not subscriptable
+
+📋 Manifest saved: /Users/rifaterdemsahin/projects/fal.ai/7_TestingKnown/TestOutput/generated_assets/3d/manifest_3d.json
+   Total assets tracked: 0
