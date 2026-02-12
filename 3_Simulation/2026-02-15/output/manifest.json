@@ -1,0 +1,41 @@
+{
+  "generation_timestamp": "2026-02-12T08:51:04.444833",
+  "completion_timestamp": "2026-02-12T08:58:25.021522",
+  "total_assets": 2,
+  "assets": [
+    {
+      "filename": "001_anime_frame_1_opening_the_heavy_mic_20260212_v1.mp4",
+      "prompt": "Anime style, Host holding massive golden microphone, Dramatic, symbolic, Wide shot, Static establishing shot, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-12T08:53:58.396969",
+      "asset_type": "anime",
+      "asset_id": "1",
+      "result_url": "https://v3b.fal.media/files/b/0a8e2883/5ueFFQquS9cV0uaNRl_Ct_output.mp4",
+      "local_path": "3_Simulation/2026-02-15/output/001_anime_frame_1_opening_the_heavy_mic_20260212_v1.mp4",
+      "metadata": {
+        "scene": "Frame 1: Opening - The Heavy Mic",
+        "description": "Host holding massive golden microphone. Mood: Dramatic, symbolic",
+        "priority": "MEDIUM",
+        "model": "fal-ai/minimax/video-01",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "002_anime_frame_2_the_pivot_20260212_v1.mp4",
+      "prompt": "Anime style, Host speaking directly to camera, people struggling in background, Empathetic, determined, Medium close-up, Slight push-in, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-12T08:57:11.629361",
+      "asset_type": "anime",
+      "asset_id": "2",
+      "result_url": "https://v3b.fal.media/files/b/0a8e2896/jFYnyXX4uCUHIqtePOgJD_output.mp4",
+      "local_path": "3_Simulation/2026-02-15/output/002_anime_frame_2_the_pivot_20260212_v1.mp4",
+      "metadata": {
+        "scene": "Frame 2: The Pivot",
+        "description": "Host speaking directly to camera, people struggling in background. Mood: Empathetic, determined",
+        "priority": "MEDIUM",
+        "model": "fal-ai/minimax/video-01",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    }
+  ]
+}

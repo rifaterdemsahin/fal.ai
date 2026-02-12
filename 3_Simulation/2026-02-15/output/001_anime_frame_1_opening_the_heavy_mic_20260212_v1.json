@@ -1,0 +1,16 @@
+{
+  "id": "1",
+  "name": "frame_1_opening_-_the_heavy_mic",
+  "priority": "MEDIUM",
+  "scene": "Frame 1: Opening - The Heavy Mic",
+  "description": "Host holding massive golden microphone. Mood: Dramatic, symbolic",
+  "prompt": "Anime style, Host holding massive golden microphone, Dramatic, symbolic, Wide shot, Static establishing shot, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e2883/5ueFFQquS9cV0uaNRl_Ct_output.mp4",
+  "generated_at": 1770886436.481099,
+  "filename": "001_anime_frame_1_opening_the_heavy_mic_20260212_v1.mp4",
+  "file_extension": "mp4",
+  "model_used": "fal-ai/minimax/video-01"
+}

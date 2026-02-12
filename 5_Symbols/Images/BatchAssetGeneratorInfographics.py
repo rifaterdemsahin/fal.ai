@@ -91,8 +91,10 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         original_prompt = asset_config["prompt"]
         if enhance_prompt and (os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")):
              print(f"✨ Enhancing prompt with Gemini...")
+             # Create a log file for prompt enhancements in the output directory
+             log_path = output_dir / "prompt_enhancements_log.txt"
              # Use 'infographic' as asset_type since this is the infographics generator
-             enhanced_prompt = enhance_prompt(original_prompt, asset_type="diagram") # Using diagram context for infographics as it fits best
+             enhanced_prompt = enhance_prompt(original_prompt, asset_type="diagram", log_path=str(log_path)) # Using diagram context for infographics as it fits best
              if enhanced_prompt and enhanced_prompt != original_prompt:
                  asset_config["prompt"] = enhanced_prompt
                  print(f"   Original: {original_prompt[:60]}...")

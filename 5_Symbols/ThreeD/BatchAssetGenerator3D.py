@@ -176,11 +176,11 @@ def generate_3d_asset(
         print(f"✨ Enhancing prompt for {asset_config['name']}...")
         # Hunyuan-3D has a strict 200 char limit
         context = (
-            "Enhance this prompt for a 3D model generator. "
-            "Focus on 3D geometry, spatial structure, and material properties. "
             "CRITICAL: The output MUST be under 180 characters. Keep it concise."
         )
-        enhanced_prompt = enhance_prompt(original_prompt, context=context)
+        # Create a log file for prompt enhancements in the output directory
+        log_path = OUTPUT_DIR / "prompt_enhancements_log.txt"
+        enhanced_prompt = enhance_prompt(original_prompt, context=context, log_path=str(log_path))
         
         # Enforce hard limit
         if len(enhanced_prompt) > 195:

@@ -50,5 +50,44 @@ class TestPromptEnhancer(unittest.TestCase):
         # Verify call args (would verify context if we could inspect payload easily)
         # For now just verify it ran without error
 
+    @patch('urllib.request.urlopen')
+    def test_enhance_prompt_with_logging(self, mock_urlopen):
+        # Setup mock response
+        mock_response = MagicMock()
+        mock_response.read.return_value = json.dumps({
+            "candidates": [{
+                "content": {
+                    "parts": [{"text": "Logged Enhanced Prompt"}]
+                }
+            }]
+        }).encode('utf-8')
+        mock_response.__enter__.return_value = mock_response
+        mock_urlopen.return_value = mock_response
+        
+        # Setup env
+        os.environ["GEMINIKEY"] = "fake_key"
+        
+        # Temporary log file
+        log_file = "test_prompt_log.txt"
+        if os.path.exists(log_file):
+            os.remove(log_file)
+            
+        try:
+            # Test with logging
+            result = enhance_prompt("Original Log Prompt", asset_type="video", log_path=log_file)
+            self.assertEqual(result, "Logged Enhanced Prompt")
+            
+            # Verify file exists and content
+            self.assertTrue(os.path.exists(log_file))
+            with open(log_file, 'r') as f:
+                content = f.read()
+                self.assertIn("Original: Original Log Prompt", content)
+                self.assertIn("Enhanced: Logged Enhanced Prompt", content)
+                
+        finally:
+            # Cleanup
+            if os.path.exists(log_file):
+                os.remove(log_file)
+
 if __name__ == '__main__':
     unittest.main()

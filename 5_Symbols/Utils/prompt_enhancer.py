@@ -3,6 +3,7 @@ import json
 import urllib.request
 import urllib.error
 from typing import Optional
+from datetime import datetime
 
 def get_gemini_key() -> Optional[str]:
     """Retrieve the Gemini API key from environment variables."""
@@ -38,7 +39,7 @@ def get_enhancement_context(asset_type: str) -> str:
     
     return contexts.get(asset_type, default_context)
 
-def enhance_prompt(prompt: str, context: Optional[str] = None, asset_type: Optional[str] = None) -> str:
+def enhance_prompt(prompt: str, context: Optional[str] = None, asset_type: Optional[str] = None, log_path: Optional[str] = None) -> str:
     """
     Enhance a prompt using Google Gemini API.
     
@@ -111,6 +112,14 @@ def enhance_prompt(prompt: str, context: Optional[str] = None, asset_type: Optio
                 candidate = result["candidates"][0]
                 if "content" in candidate and "parts" in candidate["content"]:
                     enhanced_text = candidate["content"]["parts"][0]["text"].strip()
+                    
+                    if log_path:
+                        with open(log_path, 'a', encoding='utf-8') as f:
+                            f.write(f"\n--- Prompt Enhancement ({datetime.now().isoformat()}) ---\n")
+                            f.write(f"Original: {prompt}\n")
+                            f.write(f"Enhanced: {enhanced_text}\n")
+                            f.write("-" * 50 + "\n")
+                            
                     return enhanced_text
             
             print(f"⚠️  Gemini response format unexpected: {result}")

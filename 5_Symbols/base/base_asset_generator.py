@@ -299,7 +299,9 @@ class BaseAssetGenerator(ABC):
             context = asset_config.get("enhancement_context")
             
             print(f"✨ Enhancing prompt with Gemini...")
-            enhanced_prompt = enhance_prompt(original_prompt, context=context, asset_type=self.asset_type)
+            # Create a log file for prompt enhancements in the output directory
+            log_path = self.output_dir / "prompt_enhancements_log.txt"
+            enhanced_prompt = enhance_prompt(original_prompt, context=context, asset_type=self.asset_type, log_path=str(log_path))
             
             if enhanced_prompt and enhanced_prompt != original_prompt:
                 # Update the prompt in the config for this generation

@@ -110,10 +110,9 @@ DEFAULT_STORYLINE = {
 
 # Available anime models from fal.ai
 ANIME_MODELS = {
-    "minimax": "fal-ai/minimax/video-01",  # Text-to-video
-    "kling": "fal-ai/kling-video/v1/standard/text-to-video",  # Text-to-video with anime support
-    "flux_anime": "fal-ai/flux/schnell",  # Fast image generation (can be styled for anime)
-    "flux_dev": "fal-ai/flux/dev",  # Higher quality image generation
+    "flux_anime": "fal-ai/flux/schnell",  # Fast anime image generation
+    "flux_dev": "fal-ai/flux/dev",  # High quality anime image generation
+    "flux_pro": "fal-ai/flux-pro/v1.1",  # Professional grade image generation
 }
 
 
@@ -207,33 +206,35 @@ def parse_storyboard_markdown(file_path: Path) -> Dict:
 def generate_anime_scene(
     scene_config: Dict,
     output_dir: Path,
-    model: str = "minimax",
+    model: str = "flux_anime",
     manifest: Optional[object] = None,
     version: int = 1
 ) -> Dict:
-    """Generate a single anime scene using fal.ai"""
+    """Generate a single anime scene using fal.ai (Image Only)"""
     print(f"\n{'='*60}")
     print(f"🎬 Generating Anime Scene: {scene_config['name']}")
     print(f"   Scene: {scene_config['scene']}")
     print(f"   Description: {scene_config['description']}")
     print(f"   Priority: {scene_config.get('priority', 'MEDIUM')}")
-    print(f"   Model: {ANIME_MODELS.get(model, ANIME_MODELS['minimax'])}")
+    print(f"   Model: {ANIME_MODELS.get(model, ANIME_MODELS['flux_anime'])}")
     print(f"   Characters: {', '.join(scene_config.get('characters', []))}")
     print(f"   Setting: {scene_config.get('setting', 'Unknown')}")
     print(f"{'='*60}")
     
     try:
         # Select the appropriate model
-        model_id = ANIME_MODELS.get(model, ANIME_MODELS['minimax'])
+        model_id = ANIME_MODELS.get(model, ANIME_MODELS['flux_anime'])
         
         # Determine asset type for enhancement
-        asset_type = 'video' if 'video' in model_id.lower() or 'minimax' in model_id.lower() else 'image'
+        asset_type = 'image'
         
         # Enhance prompt if function is available
         prompt_text = scene_config["prompt"]
         if enhance_prompt:
             print(f"✨ Enhancing prompt with Gemini ({asset_type})...")
-            enhanced_prompt = enhance_prompt(prompt_text, asset_type=asset_type)
+            # Create a log file for prompt enhancements in the output directory
+            log_path = output_dir / "prompt_enhancements_log.txt"
+            enhanced_prompt = enhance_prompt(prompt_text, asset_type=asset_type, log_path=str(log_path))
             if enhanced_prompt != prompt_text:
                 print(f"   Original: {prompt_text[:50]}...")
                 print(f"   Enhanced: {enhanced_prompt[:50]}...")
@@ -244,20 +245,14 @@ def generate_anime_scene(
             "prompt": prompt_text,
         }
         
-        # Add model-specific parameters
-        if "minimax" in model_id:
-            # Minimax video generation - uses prompt only
-            # Future parameters can be added here when supported
-            pass
-        elif "kling" in model_id:
-            # Kling video generation
-            arguments["aspect_ratio"] = scene_config.get("aspect_ratio", "16:9")
-            arguments["duration"] = f"{scene_config.get('duration_seconds', 5)}s"
-        elif "flux" in model_id:
-            # Flux image generation (for anime stills)
-            arguments["image_size"] = scene_config.get("image_size", {"width": 1920, "height": 1080})
-            arguments["num_inference_steps"] = scene_config.get("num_inference_steps", 4)
-            arguments["num_images"] = 1
+        # Add model-specific parameters for image generation
+        arguments["image_size"] = scene_config.get("image_size", {"width": 1920, "height": 1080})
+        arguments["num_inference_steps"] = scene_config.get("num_inference_steps", 4)
+        arguments["num_images"] = 1
+        
+        # Add seed if consistent generation is desired
+        if "seed" in scene_config:
+            arguments["seed"] = scene_config["seed"]
         
         # Generate scene
         print("⏳ Generating anime scene (this may take 2-3 minutes)...")
@@ -266,23 +261,12 @@ def generate_anime_scene(
             arguments=arguments,
         )
         
-        # Extract result URL based on model type
+        # Extract result URL
         result_url = None
-        file_extension = "mp4"  # Default for video models
+        file_extension = "png"  # Default for image models
         
         if result:
-            # Video models
-            if "video" in result and "url" in result["video"]:
-                result_url = result["video"]["url"]
-                file_extension = "mp4"
-            elif "video_url" in result:
-                result_url = result["video_url"]
-                file_extension = "mp4"
-            elif "videos" in result and len(result["videos"]) > 0:
-                result_url = result["videos"][0]["url"]
-                file_extension = "mp4"
-            # Image models
-            elif "images" in result and len(result["images"]) > 0:
+            if "images" in result and len(result["images"]) > 0:
                 result_url = result["images"][0]["url"]
                 file_extension = "png"
             elif "url" in result:
