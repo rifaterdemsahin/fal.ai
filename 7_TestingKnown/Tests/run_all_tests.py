@@ -96,7 +96,7 @@ def run_all_tests():
     
     for res in results:
         # Escape pipes in summary to avoid breaking table
-        summary_clean = res['summary'].replace("|", "\|").replace("\n", " ")
+        summary_clean = res['summary'].replace("|", "\\|").replace("\n", " ")
         # Truncate summary if too long
         if len(summary_clean) > 100:
             summary_clean = summary_clean[:97] + "..."
