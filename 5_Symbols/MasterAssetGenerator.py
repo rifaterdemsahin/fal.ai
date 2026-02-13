@@ -63,7 +63,7 @@ def load_config(config_path: Path) -> Dict:
             # Try YAML
             elif config_path.suffix.lower() in ['.yaml', '.yml']:
                 if yaml is None:
-                    print(f"❌ Cannot load YAML file. PyYAML not installed.")
+                    print("❌ Cannot load YAML file. PyYAML not installed.")
                     return {}
                 result = yaml.safe_load(f)
                 return result if result is not None else {}
@@ -203,7 +203,7 @@ Examples:
         output_dir = paths['output']
         use_new_structure = True
         
-        print(f"\n🎬 MASTER GENERATOR: Weekly Video Production")
+        print("\n🎬 MASTER GENERATOR: Weekly Video Production")
         print(f"   Weekly ID: {paths['weekly_id']}")
         print(f"   Base: {week_dir}")
         print(f"   Input: {input_dir}")
@@ -243,13 +243,13 @@ Examples:
     if not config_files:
         location = "input folder" if use_new_structure else "directory"
         print(f"⚠️  No configuration files (.yaml/.yml/.json) found in {location}: {config_dir}")
-        print(f"   Please create batch_generation_data.yaml or individual asset YAML files.")
+        print("   Please create batch_generation_data.yaml or individual asset YAML files.")
         return
 
     # Load and merge all configuration files
     config = merge_configs(config_dir)
     if not config:
-        print(f"❌ No valid configuration loaded")
+        print("❌ No valid configuration loaded")
         return
 
     # Check for text marker file (for chapter markers generator)

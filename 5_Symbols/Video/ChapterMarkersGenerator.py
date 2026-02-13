@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Dict, List
 import re
 
-from Base.base_asset_generator import BaseAssetGenerator
-from Base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+from base.base_asset_generator import BaseAssetGenerator
+from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
 
 class ChapterMarkersAssetGenerator(BaseAssetGenerator):

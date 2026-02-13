@@ -205,7 +205,7 @@ def convert_svg_to_jpeg(svg_path: Path, jpeg_path: Optional[Path] = None, qualit
         Path to the saved JPEG file if successful, None otherwise
     """
     if not SVG_CONVERSION_AVAILABLE:
-        print(f"⚠️  Warning: SVG to JPEG conversion not available. Install cairosvg and Pillow.")
+        print("⚠️  Warning: SVG to JPEG conversion not available. Install cairosvg and Pillow.")
         return None
     
     try:

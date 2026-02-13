@@ -7,8 +7,8 @@ Generates music assets using fal.ai with base class architecture
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
-from Base.base_asset_generator import BaseAssetGenerator
-from Base.generator_config import SEEDS, BRAND_COLORS
+from base.base_asset_generator import BaseAssetGenerator
+from base.generator_config import SEEDS, BRAND_COLORS
 
 
 class MusicAssetGenerator(BaseAssetGenerator):

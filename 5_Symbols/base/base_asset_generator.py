@@ -69,6 +69,9 @@ class BaseAssetGenerator(ABC):
         '3d': 'glb',
     }
     
+    # Message constants
+    MSG_OPTIMIZING_PNG = "🔧 Optimizing PNG for DaVinci Resolve..."
+    
     def __init__(
         self,
         output_dir: Path,
@@ -330,7 +333,7 @@ class BaseAssetGenerator(ABC):
             print("❌ No GEMINI_API_KEY found for fallback.")
             return {"success": False, "error": "No Gemini API Key"}
 
-        print(f"✨ Generating with Gemini (Imagen 3)...")
+        print("✨ Generating with Gemini (Imagen 3)...")
         
         # Endpoint for Imagen 3 on Generative Language API
         url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key={api_key}"
@@ -415,7 +418,7 @@ class BaseAssetGenerator(ABC):
                 
                 # Optimize PNG if needed
                 if extension == 'png':
-                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    print(self.MSG_OPTIMIZING_PNG)
                     self.optimize_png_for_resolve(asset_path)
                     
                 # Add to manifest if available
@@ -446,7 +449,8 @@ class BaseAssetGenerator(ABC):
             if hasattr(e, 'read'): # Handle HTTPError
                 try:
                     print(f"   Response: {e.read().decode('utf-8')}")
-                except: pass
+                except Exception:
+                    pass
             return {"success": False, "error": str(e)}
     
     def generate_asset(
@@ -472,7 +476,7 @@ class BaseAssetGenerator(ABC):
             # Check if this specific asset has an enhancement context override
             context = asset_config.get("enhancement_context")
             
-            print(f"✨ Enhancing prompt with Gemini...")
+            print("✨ Enhancing prompt with Gemini...")
             # Create a log file for prompt enhancements in the output directory
             log_path = self.output_dir / "prompt_enhancements_log.txt"
             enhanced_prompt = enhance_prompt(original_prompt, context=context, asset_type=self.asset_type, log_path=str(log_path))
@@ -485,7 +489,7 @@ class BaseAssetGenerator(ABC):
                 print(f"   Original: {original_prompt[:60]}..." if len(original_prompt) > 60 else f"   Original: {original_prompt}")
                 print(f"   Enhanced: {enhanced_prompt[:60]}..." if len(enhanced_prompt) > 60 else f"   Enhanced: {enhanced_prompt}")
             else:
-                 print(f"   Prompt enhancement skipped or returned same prompt")
+                 print("   Prompt enhancement skipped or returned same prompt")
 
         print(f"\n{'='*60}")
         print(f"🎨 Generating {self.asset_type}: {asset_config['name']}")
@@ -506,8 +510,8 @@ class BaseAssetGenerator(ABC):
         
         # If in dry-run mode or credits exhausted, just display info and return
         if self.credits_exhausted:
-            print(f"\n💳 NO CREDITS AVAILABLE - Displaying prompt and cost only")
-            print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
+            print("\n💳 NO CREDITS AVAILABLE - Displaying prompt and cost only")
+            print("   Top up your balance at: https://fal.ai/dashboard/billing")
             
             return {
                 "success": False,
@@ -518,7 +522,7 @@ class BaseAssetGenerator(ABC):
                 "dry_run": True
             }
         elif self.dry_run:
-            print(f"\n🔍 DRY-RUN MODE - Skipping actual generation")
+            print("\n🔍 DRY-RUN MODE - Skipping actual generation")
             
             return {
                 "success": False,
@@ -560,8 +564,8 @@ class BaseAssetGenerator(ABC):
                                   any(x in error_msg.lower() for x in ["payment", "credit", "balance", "quota", "insufficient", "402"])
                 
                 if is_credit_issue:
-                    print(f"\n💳 CREDIT ERROR DETECTED!")
-                    print(f"   Attempting fallback to Gemini (Imagen 3)...")
+                    print("\n💳 CREDIT ERROR DETECTED!")
+                    print("   Attempting fallback to Gemini (Imagen 3)...")
                     return self.generate_asset_with_gemini(asset_config, version)
                 
                 return {
@@ -578,7 +582,7 @@ class BaseAssetGenerator(ABC):
                     "error": "No URL in result",
                 }
             
-            print(f"✅ Generated successfully!")
+            print("✅ Generated successfully!")
             print(f"   URL: {result_url}")
             
             # Generate filename
@@ -644,10 +648,10 @@ class BaseAssetGenerator(ABC):
                     temp_path.unlink()
                 else:
                     # Conversion failed, use PNG instead
-                    print(f"⚠️  Using PNG format instead")
+                    print("⚠️  Using PNG format instead")
                     temp_path.rename(asset_path)
                     # Optimize the PNG for DaVinci Resolve since we're keeping it
-                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    print(self.MSG_OPTIMIZING_PNG)
                     self.optimize_png_for_resolve(asset_path)
             else:
                 # Direct download without conversion
@@ -656,7 +660,7 @@ class BaseAssetGenerator(ABC):
                 
                 # Optimize PNG files for DaVinci Resolve compatibility
                 if extension == 'png':
-                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    print(self.MSG_OPTIMIZING_PNG)
                     self.optimize_png_for_resolve(asset_path)
             
             # Add to manifest if available
@@ -718,7 +722,7 @@ class BaseAssetGenerator(ABC):
         except ValueError:
             return []
         
-        print(f"\n✅ API Key found")
+        print("\n✅ API Key found")
         print(f"📁 Output directory: {self.output_dir.absolute()}")
         print(f"\n📊 Assets to generate: {len(queue)}")
         

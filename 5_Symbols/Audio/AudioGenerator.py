@@ -8,8 +8,8 @@ import re
 from pathlib import Path
 from typing import Dict, List
 
-from Base.base_asset_generator import BaseAssetGenerator
-from Base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
+from base.base_asset_generator import BaseAssetGenerator
+from base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
 
 
 class AudioAssetGenerator(BaseAssetGenerator):

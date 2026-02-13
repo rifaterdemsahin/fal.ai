@@ -14,8 +14,8 @@ from xml.dom import minidom
 # Add parent directory to path to allow imports from base and Utils
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from Base.base_asset_generator import BaseAssetGenerator
-from Base.generator_config import SEEDS, BRAND_COLORS
+from base.base_asset_generator import BaseAssetGenerator
+from base.generator_config import SEEDS, BRAND_COLORS
 from Utils.asset_utils import generate_filename, extract_scene_number, convert_svg_to_jpeg
 
 
@@ -48,7 +48,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
             },
         )
         
-        background_rect = SubElement(
+        _background_rect = SubElement(
             svg,
             "rect",
             {
@@ -73,7 +73,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
         text_color: str,
     ) -> None:
         """Add a box with text to the SVG"""
-        rect = SubElement(
+        _rect = SubElement(
             svg,
             "rect",
             {
@@ -141,7 +141,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
                     "markerUnits": "strokeWidth",
                 },
             )
-            path = SubElement(
+            _path = SubElement(
                 marker,
                 "path",
                 {
@@ -150,7 +150,7 @@ class SVGAssetGenerator(BaseAssetGenerator):
                 },
             )
         
-        line = SubElement(
+        _line = SubElement(
             svg,
             "line",
             {
@@ -249,8 +249,8 @@ class SVGAssetGenerator(BaseAssetGenerator):
             with open(svg_path, "w") as f:
                 f.write(pretty_xml)
             
-            print(f"âœ… Generated successfully!")
-            print(f"ðŸ’¾ Saved to: {svg_path}")
+            print("✅ Generated successfully!")
+            print(f"💾 Saved to: {svg_path}")
             
             # Also save JPEG version
             jpeg_path = convert_svg_to_jpeg(svg_path)
