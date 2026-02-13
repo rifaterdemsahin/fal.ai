@@ -1,24 +1,82 @@
-### 3_Simulation - UI and Assets
+# Video Generation - 2026-02-15
 
-**Workspace**:
-This folder contains the `Feb1Youtube` directory, which acts as the primary workspace for simulation data and generated asset output.
+## Overview
+This directory contains video generation configuration with a **$2.00 budget limit**.
 
-**User Interface (UI)**:
-- Currently, the "UI" is a **Command Line Interface (CLI)**.
-- Users interact with the system by running Python scripts from the `5_Symbols` directory.
-- Feedback is provided via console logs (formatted with emojis for readability), JSON summary files, and comprehensive manifest tracking.
+## Directory Structure
+```
+2026-02-15/
+├── input/
+│   └── batch_generation_data.yaml    # Video generation queue
+└── output/
+    └── generated_video/               # Generated videos will be saved here
+```
 
-**Asset Management**:
-- Generated assets are organized into type-specific output directories (e.g., `generated_video`, `generated_icons`, `generated_assets_Images`) created at runtime.
-- Each generation run produces a metadata JSON file linking the prompt, settings, and result URL for traceability.
-- **Unified Manifest System**: The `manifest.json` file (created by MasterAssetGenerator) provides complete tracking of all assets with:
-  - Standardized filenames with scene numbers and versioning
-  - Full prompt text for each asset
-  - Generation timestamps
-  - Asset metadata (scene info, priority, model used, result URL, local path)
+## Setup Instructions
 
-**Weekly Reports**:
-- Generated reports are saved in the `Feb1Youtube/weekly/` directory:
-  - `generation_report_YYYY-MM-DD.md` - Detailed generation summary
-  - `cost_report_YYYY-MM-DD.md` - API cost analysis
-  - Summary JSON files with metrics and asset counts
+### 1. Install Dependencies
+```bash
+# Install required Python packages
+pip3 install --user PyYAML fal-client python-dotenv Pillow
+```
+
+### 2. Set API Key
+```bash
+# Set your fal.ai API key
+export FAL_KEY='your-api-key-here'
+
+# Or add to .env file in project root
+echo "FAL_KEY=your-api-key-here" >> /Users/rifaterdemsahin/projects/fal.ai/.env
+```
+
+### 3. Configure Videos
+Edit `input/batch_generation_data.yaml` to add/modify videos:
+- Each video costs approximately $0.25
+- Budget limit: $2.00 (max ~8 videos)
+- The script will warn if cost exceeds budget
+
+## Running Video Generation
+
+```bash
+cd /Users/rifaterdemsahin/projects/fal.ai/5_Symbols/Video
+python3 BatchAssetGeneratorVideo.py
+```
+
+## Budget Controls
+
+The script includes automatic budget protection:
+- **Maximum Total Cost**: $2.00
+- **Estimated Cost Per Video**: $0.25
+- **Pre-generation Warning**: If queue exceeds budget
+- **Runtime Tracking**: Monitors spending during generation
+- **Auto-stop Option**: Can halt before exceeding budget
+
+## Current Configuration
+
+**Videos in Queue**: 3
+- V_01: agentic_workflows_overview (HIGH)
+- V_02: automation_in_action (HIGH)
+- V_03: cloud_infrastructure (MEDIUM)
+
+**Estimated Cost**: $0.75 (well within $2.00 budget)
+
+## Output Files
+
+After generation:
+```
+output/generated_video/
+├── 001_0_video_agentic_workflows_overview_v1.mp4
+├── 001_0_video_agentic_workflows_overview_v1.json
+├── 002_0_video_automation_in_action_v1.mp4
+├── 002_0_video_automation_in_action_v1.json
+├── 003_0_video_cloud_infrastructure_v1.mp4
+├── 003_0_video_cloud_infrastructure_v1.json
+└── generation_summary.json
+```
+
+## Notes
+
+- Video generation takes 2-3 minutes per clip
+- 5-second cooldown between requests
+- All costs are estimates; actual costs may vary
+- Check fal.ai dashboard for actual usage

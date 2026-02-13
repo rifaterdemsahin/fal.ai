@@ -1,0 +1,15 @@
+{
+  "id": "3d.05",
+  "name": "free_tier_toolbox",
+  "priority": "MEDIUM",
+  "scene": "Scene 5: The Free Tier Journey",
+  "seed_key": "SEED_002",
+  "prompt": "A futuristic toolbox with holographic tools floating above, free badge label, clean geometric design, tech inspired",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A futuristic toolbox with holographic tools floating above, free badge label, clean geometric design, tech inspired",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5cff/ImpHZ8rayJQLnuX-V6ogJ_197f21ff0d048a5d7d49b04bec8614f5.obj",
+  "filename": "000_3d_free_tier_toolbox_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 123456
+}
