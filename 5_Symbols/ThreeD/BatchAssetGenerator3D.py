@@ -38,8 +38,8 @@ except ImportError:
         enhance_prompt = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_assets")
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Consistency seeds for different asset categories
 SEEDS = {
@@ -48,88 +48,125 @@ SEEDS = {
     "SEED_003": 789012,  # Decorative 3D elements (brand consistency)
 }
 
-# Asset generation queue for 3D models
+# Asset generation queue — The Delivery Pilot Transformation (10 scenes)
 GENERATION_QUEUE = [
-    # HIGH PRIORITY 3D ASSETS
     {
-        "id": "3d.1",
-        "name": "shopping_cart_3d",
+        "id": "3d.01",
+        "name": "golden_microphone",
         "priority": "HIGH",
-        "scene": "Scene 1: Hook",
+        "scene": "Scene 1: The Heavy Mic",
         "seed_key": "SEED_001",
         "prompt": (
-            "A modern shopping cart, sleek metallic design, detailed wheels, "
-            "professional product visualization, clean geometry, suitable for animation, "
-            "realistic materials with reflective metal surfaces"
+            "A massive golden microphone, ornate design, heavy metallic, "
+            "professional broadcast mic, shiny gold material, studio quality"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
     {
-        "id": "3d.2",
-        "name": "ferrari_sports_car_3d",
+        "id": "3d.02",
+        "name": "compass_pivot",
         "priority": "HIGH",
-        "scene": "Scene 1: Hook",
+        "scene": "Scene 2: The Pivot",
         "seed_key": "SEED_001",
         "prompt": (
-            "A sleek red Ferrari sports car, detailed exterior, "
-            "high-quality 3D model with realistic paint material, "
-            "professional automotive visualization, clean topology"
+            "A navigation compass with spinning needle, brass and glass, "
+            "detailed mechanical design, pivot mechanism visible"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
-    
-    # MEDIUM PRIORITY 3D ASSETS
     {
-        "id": "3d.3",
-        "name": "ai_robot_brain_3d",
+        "id": "3d.03",
+        "name": "mercury_liquid_figure",
+        "priority": "HIGH",
+        "scene": "Scene 3: Statues vs Mercury",
+        "seed_key": "SEED_001",
+        "prompt": (
+            "A liquid mercury humanoid figure, reflective chrome surface, "
+            "morphing shape, futuristic sci-fi character, metallic sheen"
+        ),
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+    },
+    {
+        "id": "3d.04",
+        "name": "laptop_terminal",
+        "priority": "HIGH",
+        "scene": "Scene 4: The Clone Lab",
+        "seed_key": "SEED_002",
+        "prompt": (
+            "A modern laptop with terminal code on screen, developer setup, "
+            "clean product design, open lid, glowing screen"
+        ),
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+    },
+    {
+        "id": "3d.05",
+        "name": "free_tier_toolbox",
         "priority": "MEDIUM",
-        "scene": "Scene 4: Skills Gap",
+        "scene": "Scene 5: The Free Tier Journey",
         "seed_key": "SEED_002",
         "prompt": (
-            "An AI robot brain with neural network connections, "
-            "futuristic design, glowing blue accents, holographic elements, "
-            "tech-inspired geometry, suitable for AI visualization"
+            "A futuristic toolbox with holographic tools floating above, "
+            "free badge label, clean geometric design, tech inspired"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
     {
-        "id": "3d.4",
-        "name": "smartphone_notification_3d",
+        "id": "3d.06",
+        "name": "internet_kill_switch",
         "priority": "MEDIUM",
-        "scene": "Scene 4: Skills Gap",
+        "scene": "Scene 6: Internet Kill Switch",
         "seed_key": "SEED_002",
         "prompt": (
-            "A modern smartphone with notification badge icon floating above it, "
-            "clean product design, detailed screen, metallic frame, "
-            "professional product visualization"
+            "A large red emergency button on a pedestal, industrial design, "
+            "kill switch style, metallic base, warning stripes"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
     {
-        "id": "3d.5",
-        "name": "workflow_node_3d",
+        "id": "3d.07",
+        "name": "ai_brain_feast",
+        "priority": "HIGH",
+        "scene": "Scene 7: The LLM Feast",
+        "seed_key": "SEED_001",
+        "prompt": (
+            "A glowing AI brain with neural connections, holographic display, "
+            "futuristic tech, blue energy pulses, floating in space"
+        ),
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+    },
+    {
+        "id": "3d.08",
+        "name": "automation_gear",
         "priority": "MEDIUM",
-        "scene": "Scene 5: Bounded Contexts",
+        "scene": "Scene 8: The Bespoke Logic",
         "seed_key": "SEED_002",
         "prompt": (
-            "A geometric node representing a workflow step, "
-            "hexagonal or rounded cube shape, clean edges, "
-            "suitable for technical diagrams, minimalist design"
+            "Interconnected mechanical gears in motion, automation symbol, "
+            "steampunk brass design, clean geometry, detailed teeth"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
-    
-    # LOW PRIORITY 3D ASSETS
     {
-        "id": "3d.6",
-        "name": "database_cylinder_3d",
-        "priority": "LOW",
-        "scene": "Scene 8: State Management",
-        "seed_key": "SEED_002",
+        "id": "3d.09",
+        "name": "rocket_cicd",
+        "priority": "MEDIUM",
+        "scene": "Scene 9: Success Metrics",
+        "seed_key": "SEED_003",
         "prompt": (
-            "A database cylinder icon in 3D, classic database symbol, "
-            "clean geometric design, metallic or glass material, "
-            "suitable for technical architecture visualization"
+            "A small rocket on a launch pad, space shuttle style, "
+            "detailed fins and body, metallic surface, ready for launch"
+        ),
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+    },
+    {
+        "id": "3d.10",
+        "name": "futuristic_city",
+        "priority": "HIGH",
+        "scene": "Scene 10: Conclusion",
+        "seed_key": "SEED_003",
+        "prompt": (
+            "A futuristic miniature city with drones flying above, "
+            "skyscrapers with holographic signs, clean sci-fi design"
         ),
         "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
     },
@@ -390,7 +427,7 @@ def main():
         return
     
     # Initialize manifest tracker if available
-    manifest_tracker = ManifestTracker() if ManifestTracker else None
+    manifest_tracker = ManifestTracker(OUTPUT_DIR) if ManifestTracker else None
     
     # Generate summary
     total_assets = len(GENERATION_QUEUE)
@@ -404,15 +441,10 @@ def main():
     print(f"   • MEDIUM priority: {medium_priority}")
     print(f"   • LOW priority: {low_priority}")
     
-    # Ask for confirmation
-    # NOTE: Cost estimate is approximate and should be verified with current API pricing
-    # See: https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d
+    # Cost estimate
     estimated_cost_per_model = 0.10  # Approximate cost in USD per 3D model
     print(f"\n⚠️  Estimated cost: ~${total_assets * estimated_cost_per_model:.2f} (approx ${estimated_cost_per_model:.2f} per 3D model)")
-    user_input = input("\nProceed with generation? (yes/no): ").strip().lower()
-    if user_input not in ['yes', 'y']:
-        print("❌ Generation cancelled by user.")
-        return
+    print("🚀 Auto-proceeding with generation...")
     
     # Process the queue
     results = process_queue(GENERATION_QUEUE, OUTPUT_DIR)
@@ -431,6 +463,168 @@ def main():
     
     print("\n🎉 Batch 3D generation complete!")
     print(f"📁 Output directory: {OUTPUT_DIR.absolute()}")
+
+    # Export GLB models to rotating videos
+    print("\n" + "="*60)
+    print("🎬 Exporting 3D Models to Video...")
+    print("="*60)
+    export_glb_to_videos(OUTPUT_DIR)
+
+
+def export_glb_to_videos(output_dir: Path, fps: int = 30, duration: float = 4.0, resolution: tuple = (1280, 720)):
+    """
+    Export all GLB files in output_dir to rotating MP4 videos using trimesh + matplotlib + ffmpeg.
+
+    Args:
+        output_dir: Directory containing GLB files
+        fps: Frames per second
+        duration: Video duration in seconds
+        resolution: Video resolution (width, height)
+    """
+    import glob
+    glb_files = sorted(glob.glob(str(output_dir / "*.glb")))
+    obj_files = sorted(glob.glob(str(output_dir / "*.obj")))
+    model_files = glb_files + obj_files
+
+    if not model_files:
+        print("⚠️  No GLB/OBJ files found for video export.")
+        return
+
+    print(f"📦 Found {len(model_files)} 3D model(s) to convert to video")
+
+    try:
+        import trimesh
+        import numpy as np
+    except ImportError:
+        print("❌ trimesh/numpy not installed. Run: pip3 install trimesh numpy")
+        return
+
+    # Try to use pyrender for high-quality rendering, fallback to matplotlib
+    use_pyrender = False
+    try:
+        import pyrender
+        use_pyrender = True
+    except ImportError:
+        pass
+
+    video_count = 0
+    for model_path in model_files:
+        model_name = Path(model_path).stem
+        video_path = output_dir / f"{model_name}_rotate.mp4"
+        print(f"\n🎬 Converting: {Path(model_path).name} → {video_path.name}")
+
+        try:
+            # Load the 3D model
+            scene = trimesh.load(model_path)
+
+            # Handle Scene vs Mesh
+            if isinstance(scene, trimesh.Scene):
+                mesh = scene.dump(concatenate=True)
+            else:
+                mesh = scene
+
+            if mesh is None or not hasattr(mesh, 'vertices') or len(mesh.vertices) == 0:
+                print(f"   ⚠️  Empty mesh, skipping")
+                continue
+
+            # Center and normalize the mesh
+            mesh.vertices -= mesh.centroid
+            scale = mesh.extents.max()
+            if scale > 0:
+                mesh.vertices /= scale
+
+            total_frames = int(fps * duration)
+            frame_dir = output_dir / f"_frames_{model_name}"
+            frame_dir.mkdir(exist_ok=True)
+
+            # Render rotating frames using matplotlib (works headless)
+            _render_frames_matplotlib(mesh, frame_dir, total_frames, resolution)
+
+            # Compile frames to MP4 with ffmpeg
+            frame_pattern = str(frame_dir / "frame_%04d.png")
+            ffmpeg_cmd = [
+                "ffmpeg", "-y",
+                "-framerate", str(fps),
+                "-i", frame_pattern,
+                "-c:v", "libx264",
+                "-pix_fmt", "yuv420p",
+                "-crf", "18",
+                "-preset", "fast",
+                str(video_path)
+            ]
+
+            result = subprocess.run(ffmpeg_cmd, capture_output=True, text=True, timeout=60)
+            if result.returncode == 0:
+                print(f"   ✅ Video saved: {video_path.name}")
+                video_count += 1
+            else:
+                print(f"   ❌ ffmpeg failed: {result.stderr[:200]}")
+
+            # Cleanup frame directory
+            import shutil
+            shutil.rmtree(frame_dir, ignore_errors=True)
+
+        except Exception as e:
+            print(f"   ❌ Error: {e}")
+
+    print(f"\n🎬 Video export complete: {video_count}/{len(model_files)} videos created")
+
+
+def _render_frames_matplotlib(mesh, frame_dir: Path, total_frames: int, resolution: tuple):
+    """Render rotating frames of a 3D mesh using matplotlib (headless compatible)."""
+    import matplotlib
+    matplotlib.use('Agg')  # Non-interactive backend
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+    import numpy as np
+
+    vertices = np.array(mesh.vertices)
+    faces = np.array(mesh.faces)
+
+    # Get face colors if available
+    if hasattr(mesh, 'visual') and hasattr(mesh.visual, 'face_colors'):
+        face_colors = mesh.visual.face_colors / 255.0
+    else:
+        face_colors = np.full((len(faces), 4), [0.3, 0.6, 0.9, 0.85])
+
+    dpi = 100
+    fig_w = resolution[0] / dpi
+    fig_h = resolution[1] / dpi
+
+    for i in range(total_frames):
+        angle = (360.0 / total_frames) * i
+        fig = plt.figure(figsize=(fig_w, fig_h), dpi=dpi)
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Create polygon collection for the faces
+        polys = vertices[faces]
+        collection = Poly3DCollection(polys, alpha=0.9)
+        collection.set_facecolor(face_colors[:, :3])
+        collection.set_edgecolor((0.2, 0.2, 0.2, 0.1))
+        ax.add_collection3d(collection)
+
+        # Set axis limits
+        max_range = 0.7
+        ax.set_xlim(-max_range, max_range)
+        ax.set_ylim(-max_range, max_range)
+        ax.set_zlim(-max_range, max_range)
+
+        # Set viewing angle (rotate around)
+        ax.view_init(elev=25, azim=angle)
+
+        # Clean up the plot
+        ax.set_axis_off()
+        fig.patch.set_facecolor('#1a1a2e')
+        ax.set_facecolor('#1a1a2e')
+
+        frame_path = frame_dir / f"frame_{i:04d}.png"
+        plt.savefig(str(frame_path), dpi=dpi, bbox_inches='tight',
+                    pad_inches=0, facecolor='#1a1a2e')
+        plt.close(fig)
+
+        if (i + 1) % 30 == 0 or i == total_frames - 1:
+            print(f"   🖼️  Rendered frame {i+1}/{total_frames}")
 
 
 if __name__ == "__main__":

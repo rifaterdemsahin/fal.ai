@@ -35,14 +35,12 @@ except ImportError:
         ManifestTracker = None
 
 # Configuration
-# Configuration
-DEFAULT_OUTPUT_DIR = Path("./generated_video")
-# OUTPUT_DIR.mkdir(exist_ok=True) # Moved to execution time
+DEFAULT_OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/generated_video")
+DATA_PATH = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/input/batch_generation_data.yaml")
 
-# Video Generation Queue
-# Based on EDL B-roll requirements of "Empty UK Streets", "Corporate Meeting"
-# Loaded from external YAML configuration
-DATA_PATH = Path(r"C:\projects\fal.ai\3_Simulation\Feb1Youtube\_source\batch_generation_data.yaml")
+# Cost Controls - DO NOT SPEND MORE THAN $2 TOTAL
+MAX_TOTAL_COST = 2.00  # Maximum total cost in USD
+ESTIMATED_COST_PER_VIDEO = 0.25  # Estimated cost per video (conservative estimate)
 
 def load_queue():
     """Load generation queue from YAML"""
@@ -187,7 +185,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     print("🚀 FAL.AI BATCH ASSET GENERATOR - VIDEO")
     print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
-    
+
     # Check API key
     api_key = os.environ.get("FAL_KEY")
     if not api_key:
@@ -195,11 +193,11 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
         print("   Set it with: export FAL_KEY='your-api-key-here'")
         print("   Get your key from: https://fal.ai/dashboard/keys")
         return []
-    
+
     print(f"\n✅ API Key found")
     print(f"📁 Output directory: {output_dir.absolute()}")
     print(f"\n🎬 Clips to generate: {len(queue)}")
-    
+
     if not queue:
         print("\n⚠️  QUEUE IS EMPTY.")
         return []
@@ -207,22 +205,61 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Cost Control Check
+    estimated_total_cost = len(queue) * ESTIMATED_COST_PER_VIDEO
+    print(f"\n💰 COST ESTIMATE:")
+    print(f"   • Videos to generate: {len(queue)}")
+    print(f"   • Estimated cost per video: ${ESTIMATED_COST_PER_VIDEO:.2f}")
+    print(f"   • Estimated total cost: ${estimated_total_cost:.2f}")
+    print(f"   • Budget limit: ${MAX_TOTAL_COST:.2f}")
+
+    if estimated_total_cost > MAX_TOTAL_COST:
+        max_videos = int(MAX_TOTAL_COST / ESTIMATED_COST_PER_VIDEO)
+        print(f"\n⚠️  WARNING: Estimated cost (${estimated_total_cost:.2f}) exceeds budget (${MAX_TOTAL_COST:.2f})")
+        print(f"   • Maximum videos within budget: {max_videos}")
+        print(f"   • Current queue size: {len(queue)}")
+
+        response = input(f"\n🤔 Limit generation to {max_videos} videos? (yes/no): ").strip().lower()
+        if response in ['yes', 'y']:
+            queue = queue[:max_videos]
+            print(f"✅ Queue limited to {len(queue)} videos")
+        else:
+            print("❌ Cancelled by user due to budget concerns")
+            return []
+
     # Count by priority
     high_priority = [a for a in queue if a.get("priority") == "HIGH"]
     medium_priority = [a for a in queue if a.get("priority") == "MEDIUM"]
     low_priority = [a for a in queue if a.get("priority") == "LOW"]
-    
+
+    print(f"\n📊 PRIORITY BREAKDOWN:")
     print(f"   • HIGH priority: {len(high_priority)}")
     print(f"   • MEDIUM priority: {len(medium_priority)}")
     print(f"   • LOW priority: {len(low_priority)}")
     
-    # Generate assets
+    # Generate assets with cost tracking
     results = []
+    total_generated = 0
+    estimated_spent = 0.0
+
     for i, asset in enumerate(queue, 1):
         print(f"\n\n{'#'*60}")
         print(f"# Clip {i}/{len(queue)}")
+        print(f"# Estimated spent so far: ${estimated_spent:.2f} / ${MAX_TOTAL_COST:.2f}")
         print(f"{'#'*60}")
-        
+
+        # Check if we're approaching the budget limit
+        if estimated_spent + ESTIMATED_COST_PER_VIDEO > MAX_TOTAL_COST:
+            print(f"\n⚠️  WARNING: Next video would exceed budget!")
+            print(f"   Current estimated cost: ${estimated_spent:.2f}")
+            print(f"   Budget remaining: ${MAX_TOTAL_COST - estimated_spent:.2f}")
+            print(f"   Videos generated: {total_generated}/{len(queue)}")
+
+            response = input("\n🤔 Continue anyway? (yes/no): ").strip().lower()
+            if response not in ['yes', 'y']:
+                print("❌ Stopping generation to stay within budget")
+                break
+
         result = generate_video(asset, output_dir, manifest)
         results.append({
             "asset_id": asset.get("id", f"auto_{i}"),
@@ -230,7 +267,13 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
             "priority": asset.get("priority", "MEDIUM"),
             **result
         })
-        
+
+        # Update cost tracking
+        if result["success"]:
+            total_generated += 1
+            estimated_spent += ESTIMATED_COST_PER_VIDEO
+            print(f"💰 Running total: {total_generated} videos, ~${estimated_spent:.2f} spent")
+
         # Add a small delay between requests to be nice to the API
         if i < len(queue):
             print("⏳ Cooling down for 5 seconds...")
@@ -240,23 +283,28 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     print("\n\n" + "="*60)
     print("📊 GENERATION SUMMARY")
     print("="*60)
-    
+
     successful = [r for r in results if r["success"]]
     failed = [r for r in results if not r["success"]]
-    
+
     print(f"\n✅ Successful: {len(successful)}/{len(results)}")
     print(f"❌ Failed: {len(failed)}/{len(results)}")
-    
+    print(f"\n💰 FINAL COST ESTIMATE:")
+    print(f"   • Videos generated: {total_generated}")
+    print(f"   • Estimated total cost: ${estimated_spent:.2f}")
+    print(f"   • Budget limit: ${MAX_TOTAL_COST:.2f}")
+    print(f"   • Budget remaining: ${MAX_TOTAL_COST - estimated_spent:.2f}")
+
     if successful:
         print("\n✅ SUCCESSFUL GENERATIONS:")
         for r in successful:
             print(f"   • {r['asset_id']}: {r['name']} ({r['priority']})")
-    
+
     if failed:
         print("\n❌ FAILED GENERATIONS:")
         for r in failed:
             print(f"   • {r['asset_id']}: {r['name']} - {r.get('error', 'Unknown error')}")
-    
+
     # Save summary
     summary_path = output_dir / "generation_summary.json"
     with open(summary_path, 'w') as f:
@@ -264,12 +312,14 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
             "total": len(results),
             "successful": len(successful),
             "failed": len(failed),
+            "estimated_cost": estimated_spent,
+            "budget_limit": MAX_TOTAL_COST,
             "results": results,
         }, f, indent=2)
-    
+
     print(f"\n💾 Summary saved: {summary_path}")
     print("\n✅ Done!")
-    
+
     return results
 
 def main():

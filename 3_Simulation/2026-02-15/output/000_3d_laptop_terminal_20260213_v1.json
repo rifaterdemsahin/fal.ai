@@ -1,0 +1,15 @@
+{
+  "id": "3d.04",
+  "name": "laptop_terminal",
+  "priority": "HIGH",
+  "scene": "Scene 4: The Clone Lab",
+  "seed_key": "SEED_002",
+  "prompt": "A modern laptop with terminal code on screen, developer setup, clean product design, open lid, glowing screen",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A modern laptop with terminal code on screen, developer setup, clean product design, open lid, glowing screen",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5cf5/8nFduTG6LnA2f2f_LPW9E_af27448116da750d064ca7c0658c396c.obj",
+  "filename": "000_3d_laptop_terminal_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 123456
+}

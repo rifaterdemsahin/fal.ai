@@ -1,0 +1,15 @@
+{
+  "id": "3d.02",
+  "name": "compass_pivot",
+  "priority": "HIGH",
+  "scene": "Scene 2: The Pivot",
+  "seed_key": "SEED_001",
+  "prompt": "A navigation compass with spinning needle, brass and glass, detailed mechanical design, pivot mechanism visible",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A navigation compass with spinning needle, brass and glass, detailed mechanical design, pivot mechanism visible",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5cda/Uo4dds2jKWLJLH9dpZVPU_1ce27213e3c34d4f538f079963861bd0.obj",
+  "filename": "000_3d_compass_pivot_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 42
+}

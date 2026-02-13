@@ -1,0 +1,15 @@
+{
+  "id": "3d.03",
+  "name": "mercury_liquid_figure",
+  "priority": "HIGH",
+  "scene": "Scene 3: Statues vs Mercury",
+  "seed_key": "SEED_001",
+  "prompt": "A liquid mercury humanoid figure, reflective chrome surface, morphing shape, futuristic sci-fi character, metallic sheen",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A liquid mercury humanoid figure, reflective chrome surface, morphing shape, futuristic sci-fi character, metallic sheen",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ce5/Zza1pE_rKYKfXO57KHtC2_ae78f1406a6bbe322943c887fe0c941d.obj",
+  "filename": "000_3d_mercury_liquid_figure_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 42
+}

@@ -1,0 +1,15 @@
+{
+  "id": "3d.01",
+  "name": "golden_microphone",
+  "priority": "HIGH",
+  "scene": "Scene 1: The Heavy Mic",
+  "seed_key": "SEED_001",
+  "prompt": "A massive golden microphone, ornate design, heavy metallic, professional broadcast mic, shiny gold material, studio quality",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A massive golden microphone, ornate design, heavy metallic, professional broadcast mic, shiny gold material, studio quality",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5cce/vua3d5OnT4LeRlY2W58DM_833293a9d5fa93dcf3c6226453fd1be3.obj",
+  "filename": "000_3d_golden_microphone_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 42
+}

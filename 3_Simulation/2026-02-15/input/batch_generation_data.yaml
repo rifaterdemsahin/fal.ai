@@ -1,99 +1,53 @@
-# Asset Management Template
-# Structure for organizing diagrams, images, videos, graphics, chapters, and infographics
+# Asset Management Configuration
+# Video generation queue for The Agentic Era project
+# Budget: $2.00 maximum total spend
 
-diagrams:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    mermaid_content: |
-      # Mermaid diagram content here
-    prompt: ""
-    model: ""  # e.g., fal-ai/flux/dev
-    image_size:
-      width: 
-      height: 
-    num_inference_steps: 
+diagrams: []
 
-images:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    prompt: ""
-    search_query: ""
-    model: ""  # e.g., fal-ai/flux/schnell, fal-ai/flux/dev
-    image_size:
-      width: 
-      height: 
-    num_inference_steps: 
-    note: ""  # Optional notes
+images: []
 
 video:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    prompt: ""
-    model: ""  # e.g., fal-ai/minimax/video-01
-    duration_seconds: 
-    aspect_ratio: ""  # e.g., 16:9
-    search_query: ""  # Optional
+  - id: "V_01"
+    name: "agentic_workflows_overview"
+    priority: "HIGH"
+    scene: "Scene 1"
+    seed_key: "SEED_VIDEO"
+    prompt: "Cinematic B-roll of modern office with holographic displays showing workflow diagrams, futuristic tech aesthetic, smooth camera movement, professional corporate environment, 4k quality"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: "tech office holographic displays"
 
-graphics:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    prompt: ""
-    model: ""  # e.g., fal-ai/flux/dev
-    image_size:
-      width: 
-      height: 
-    num_inference_steps: 
+  - id: "V_02"
+    name: "automation_in_action"
+    priority: "HIGH"
+    scene: "Scene 2"
+    seed_key: "SEED_VIDEO"
+    prompt: "Dynamic visualization of automated processes, connected nodes and data flowing through networks, abstract tech visualization, blue and purple color scheme, smooth transitions"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: "network automation visualization"
 
-chapters:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    timestamp: ""  # e.g., 00:00
-    prompt: ""
-    model: ""  # e.g., fal-ai/flux/dev, fal-ai/flux/schnell
-    image_size:
-      width: 
-      height: 
-    num_inference_steps: 
+  - id: "V_03"
+    name: "cloud_infrastructure"
+    priority: "MEDIUM"
+    scene: "Scene 3"
+    seed_key: "SEED_VIDEO"
+    prompt: "Abstract cloud computing infrastructure, servers and data centers, interconnected systems, modern technology aesthetic, cinematic lighting"
+    model: "fal-ai/minimax/video-01"
+    duration_seconds: 5
+    aspect_ratio: "16:9"
+    search_query: "cloud infrastructure data center"
 
-infographics:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    prompt: ""
-    model: ""  # e.g., fal-ai/flux/dev
-    image_size:
-      width: 
-      height: 
-    num_inference_steps:
+  # Note: With $2 budget limit and ~$0.25 per video, we can generate approximately 8 videos
+  # These 3 HIGH priority videos are within budget
+  # Add more as needed, but the script will warn if cost exceeds $2
 
-memory_palace:
-  - id: ""
-    name: ""
-    priority: ""  # HIGH, MEDIUM, LOW
-    scene: ""
-    seed_key: ""
-    prompt: ""
-    model: ""  # e.g., fal-ai/flux/dev
-    image_size:
-      width: 
-      height: 
-    num_inference_steps:
-    memory_location: ""  # e.g., entrance, hallway, chamber
-    concept: ""  # The concept this location represents
+graphics: []
+
+chapters: []
+
+infographics: []
+
+memory_palace: []

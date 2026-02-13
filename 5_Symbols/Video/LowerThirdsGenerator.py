@@ -4,19 +4,35 @@ Lower Thirds Asset Generator
 Generates lower third graphics using fal.ai with base class architecture
 """
 
+import sys
 from pathlib import Path
 from typing import Dict, List
+
+# Add parent directory to path to import base modules
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from base.base_asset_generator import BaseAssetGenerator
 from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
 
+# Import paths_config for dynamic weekly directory management
+try:
+    from paths_config import get_weekly_paths, get_latest_weekly_id
+    USE_PATHS_CONFIG = True
+except ImportError:
+    USE_PATHS_CONFIG = False
+    print("⚠️  paths_config not available, using hardcoded output directory")
+
 
 class LowerThirdsAssetGenerator(BaseAssetGenerator):
     """Generator for lower third assets"""
-    
-    def __init__(self):
+
+    def __init__(self, output_dir: Path = None):
+        # Use provided output_dir or fallback to hardcoded path
+        if output_dir is None:
+            output_dir = Path("./generated_assets/lower_thirds")
+
         super().__init__(
-            output_dir=Path("./generated_assets/lower_thirds"),
+            output_dir=output_dir,
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
             asset_type="lower_third",
@@ -214,7 +230,21 @@ class LowerThirdsAssetGenerator(BaseAssetGenerator):
 
 def main():
     """Main execution"""
-    generator = LowerThirdsAssetGenerator()
+    output_dir = None
+
+    # Use paths_config if available for dynamic weekly directory management
+    if USE_PATHS_CONFIG and get_weekly_paths and get_latest_weekly_id:
+        from datetime import datetime
+        # Get the latest weekly ID or use current date
+        weekly_id = get_latest_weekly_id() or datetime.now().strftime("%Y-%m-%d")
+        paths = get_weekly_paths(weekly_id)
+        output_dir = paths['output']
+        print(f"📁 Using weekly output directory: {output_dir}")
+        print(f"📅 Weekly ID: {weekly_id}")
+    else:
+        print("⚠️  Using hardcoded output directory: ./generated_assets/lower_thirds")
+
+    generator = LowerThirdsAssetGenerator(output_dir=output_dir)
     generator.run()
 
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Chapter 3: Core Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background: linear-gradient(135deg, #0f0f23 0%, #0f0f23dd 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background elements */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            background: #00d9ff;
+            top: -300px;
+            right: -200px;
+            filter: blur(100px);
+        }
+
+        .circle-2 {
+            width: 800px;
+            height: 800px;
+            background: #a855f7;
+            bottom: -400px;
+            left: -300px;
+            filter: blur(120px);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px;
+            max-width: 1600px;
+        }
+
+        .chapter-label {
+            font-size: 48px;
+            font-weight: 600;
+            color: #00d9ff;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .chapter-title {
+            font-size: 120px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 40px;
+            text-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .chapter-subtitle {
+            font-size: 42px;
+            font-weight: 400;
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 60px;
+        }
+
+        .timestamp {
+            position: absolute;
+            bottom: 60px;
+            left: 80px;
+            font-size: 36px;
+            font-weight: 600;
+            color: #00d9ff;
+            padding: 20px 40px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid #00d9ff;
+            border-radius: 12px;
+        }
+
+        .chapter-number {
+            position: absolute;
+            top: 60px;
+            right: 80px;
+            font-size: 200px;
+            font-weight: 900;
+            color: #00d9ff;
+            opacity: 0.15;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+    </div>
+
+    <div class="content">
+        <div class="chapter-label">Chapter 3</div>
+        <h1 class="chapter-title">Core Concepts</h1>
+        <p class="chapter-subtitle">Fundamental Principles | Key Technologies & Frameworks</p>
+    </div>
+
+    <div class="timestamp">05:00</div>
+    <div class="chapter-number">03</div>
+</body>
+</html>
