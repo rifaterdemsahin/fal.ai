@@ -336,6 +336,20 @@ cat 3_Simulation/2026-02-15/weekly/cost_report_YYYY-MM-DD.md
 - 📊 Asset breakdown by type
 - 🎞️ DaVinci Resolve import instructions
 
+### 5️⃣ Try the No-Credits Handling Demo **NEW**
+
+See how the system gracefully handles insufficient credits:
+
+```bash
+# Run the interactive demo
+python3 demo_no_credits_handling.py
+```
+
+The demo showcases:
+- 🔍 **Dry-run mode**: Preview prompts and costs without API calls
+- 💳 **Credit exhaustion handling**: Automatic fallback to dry-run
+- 💰 **Cost estimation**: See pricing for all fal.ai models
+
 ---
 
 ## 🤖 GitHub Actions Workflows
@@ -440,6 +454,7 @@ flowchart LR
 ## 📖 Detailed Documentation
 
 - **[🎌 Anime Generator Guide](./5_Symbols/Images/ANIME_GENERATOR_GUIDE.md)** - Complete guide for bulk anime generation with storylines **NEW**
+- **[💳 No-Credits Handling](./NO_CREDITS_HANDLING.md)** - Graceful handling when credits are exhausted **NEW**
 - **[🔑 API Key Setup](./4_Formula/api_key_setup.md)** - Comprehensive guide to getting, saving, and using your fal.ai API key
 - **[Setup & Best Practices](./4_Formula/README.md)** - Installation, configuration, and usage tips
 - **[Versioning System](./5_Symbols/VERSIONING_AND_MANIFEST.md)** - Complete guide to asset naming and manifest
@@ -472,6 +487,13 @@ flowchart LR
 - 📦 Minimal dependencies (fal-client)
 - 🧪 Comprehensive test suite
 - 📚 Well-documented codebase
+
+💳 **Graceful Credit Handling** **NEW**
+- 🔍 Automatic credit error detection
+- 🎯 Dry-run mode for prompt preview without API calls
+- 💰 Display prompts and costs when credits exhausted
+- 📝 Never lose track of planned assets
+- 🔗 Clear guidance to billing dashboard
 
 ---
 
@@ -521,6 +543,13 @@ Error: "Generation failed: No video URL"
 Solution: Check generation_summary.json for failed assets, then retry
 ```
 
+**💳 Insufficient Credits** **NEW**
+```
+Error: "User is locked. Reason: Exhausted balance"
+Solution: System automatically switches to dry-run mode, displaying prompts and costs
+         for remaining assets. Top up at https://fal.ai/dashboard/billing
+```
+
 For more troubleshooting help, see **[6_Semblance/README.md](./6_Semblance/README.md)**.
 
 ---
@@ -536,8 +565,9 @@ For more troubleshooting help, see **[6_Semblance/README.md](./6_Semblance/READM
 | 📝 Manifest System | ✅ Complete | Passing |
 | 🏷️ Versioning System | ✅ Complete | Passing |
 | 🏗️ Base Class Architecture | ✅ Complete | Passing |
+| 💳 No-Credits Handling | ✅ Complete | 5/5 Passing |
 | 🤖 GitHub Actions (14 workflows) | ✅ Complete | Operational |
-| 🧪 Test Suite | ✅ Complete | 13/13 Passing |
+| 🧪 Test Suite | ✅ Complete | 18/18 Passing |
 | 📚 Documentation | ✅ Complete | N/A |
 
 ---
