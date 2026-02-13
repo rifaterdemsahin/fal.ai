@@ -22,8 +22,8 @@ except ImportError:
     ManifestTracker = None
 
 # Configuration
-OUTPUT_DIR = Path("./generated_mermaid_diagrams")
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Mermaid diagram templates
 DIAGRAM_TEMPLATES = {
@@ -64,100 +64,180 @@ pie title {title}
 ```"""
 }
 
-# Generation queue for diagrams
+# Generation queue for diagrams — The Delivery Pilot Transformation (10 scenes)
 GENERATION_QUEUE = [
     {
-        "id": "1.1",
-        "scene": "Pipeline Overview",
+        "id": "MM.01",
+        "scene": "Scene 1 - The Heavy Mic",
         "priority": "HIGH",
         "type": "flowchart",
         "direction": "TB",
-        "title": "Weekly Video Creation Pipeline",
-        "content": """    A[📝 Script Input] --> B[🤖 Gemini Analysis]
-    B --> C[📋 Requirements]
-    C --> D[🎨 Asset Generation]
-    D --> E[📊 Manifest]
-    E --> F[🎞️ DaVinci Resolve]
-    
+        "title": "Enterprise AI Transformation Bottleneck",
+        "content": """    A[🏢 Enterprise AI Goal] --> B{Decision Makers}
+    B -->|Zombie Snails| C[🐌 10-Year Roadmap]
+    B -->|Delivery Pilots| D[🚀 Rapid Iteration]
+    C --> E[❌ Too Slow]
+    D --> F[✅ Ship Weekly]
+
     style A fill:#e1f5ff
+    style E fill:#f8d7da
     style F fill:#d4edda"""
     },
     {
-        "id": "2.1",
-        "scene": "Asset Generation Flow",
+        "id": "MM.02",
+        "scene": "Scene 2 - The Pivot",
         "priority": "HIGH",
-        "type": "sequence",
-        "title": "Asset Generation Sequence",
-        "content": """    participant User
-    participant Master
-    participant Generators
-    participant Storage
-    
-    User->>Master: Run Pipeline
-    Master->>Generators: Trigger Batch
-    Generators->>Storage: Save Assets
-    Storage->>Master: Return Paths
-    Master->>User: Generate Report"""
+        "type": "journey",
+        "title": "The Delivery Pilot Pivot",
+        "content": """    section Before Pivot
+      Complex 240 workflows: 2: Engineer
+      Scaring people off: 1: Audience
+    section After Pivot
+      No-code tools: 5: Everyone
+      Delivery Pilot identity: 5: Creator
+      Accessible AI building: 4: Audience"""
     },
     {
-        "id": "3.1",
-        "scene": "Weekly Production Timeline",
-        "priority": "MEDIUM",
-        "type": "gantt",
-        "title": "Weekly Video Production",
-        "content": """    section Planning
-    Script Writing           :a1, 2026-02-05, 1d
-    Gemini Analysis         :a2, after a1, 1d
-    
-    section Generation
-    Asset Generation        :a3, after a2, 2d
-    Quality Check           :a4, after a3, 1d
-    
-    section Post-Production
-    DaVinci Resolve Edit    :a5, after a4, 2d
-    Final Export            :a6, after a5, 1d"""
-    },
-    {
-        "id": "4.1",
-        "scene": "Asset Type Distribution",
-        "priority": "MEDIUM",
-        "type": "pie",
-        "title": "Asset Distribution by Type",
-        "content": """    "Video Assets" : 30
-    "Audio Assets" : 20
-    "Images" : 25
-    "Diagrams" : 15
-    "Icons" : 10"""
-    },
-    {
-        "id": "5.1",
-        "scene": "Platform Support",
-        "priority": "LOW",
+        "id": "MM.03",
+        "scene": "Scene 3 - Statues vs Mercury",
+        "priority": "HIGH",
         "type": "flowchart",
         "direction": "LR",
-        "title": "Environment Support",
-        "content": """    A[Pipeline] --> B[Codespaces]
-    A --> C[Windows]
-    A --> D[macOS]
-    
-    style B fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda"""
+        "title": "Static Rules vs Dynamic AI",
+        "content": """    subgraph Old[🗿 Static Systems]
+        A[Hard-Coded Rules] --> B[Rigid Logic]
+        B --> C[Breaks on Change]
+    end
+    subgraph New[💧 Dynamic AI]
+        D[AI-Driven Rules] --> E[Adaptive Logic]
+        E --> F[Self-Healing]
+    end
+    Old -->|Transform| New
+
+    style A fill:#f8d7da
+    style C fill:#f8d7da
+    style D fill:#d4edda
+    style F fill:#d4edda"""
     },
     {
-        "id": "6.1",
-        "scene": "Generator State Machine",
-        "priority": "LOW",
-        "type": "state",
-        "title": "Asset Generation States",
-        "content": """    [*] --> Queued
-    Queued --> Generating
-    Generating --> Success
-    Generating --> Failed
-    Success --> [*]
-    Failed --> Retry
-    Retry --> Generating
-    Retry --> [*]"""
+        "id": "MM.04",
+        "scene": "Scene 4 - The Clone Lab",
+        "priority": "HIGH",
+        "type": "sequence",
+        "title": "Git Clone to Local Powerhouse",
+        "content": """    participant Dev as Developer
+    participant GH as GitHub
+    participant Local as Local Machine
+    participant Agent as AI Agent
+
+    Dev->>GH: Browse delivery pilot template
+    Dev->>Local: git clone repo
+    Local->>Agent: Start AI agent
+    Agent->>Local: Execute commands
+    Agent->>Local: Build tooling system
+    Local->>Dev: Ready to develop"""
+    },
+    {
+        "id": "MM.05",
+        "scene": "Scene 5 - The Free Tier Journey",
+        "priority": "HIGH",
+        "type": "flowchart",
+        "direction": "TB",
+        "title": "Zero Capital AI Starter Kit",
+        "content": """    A[💰 Zero Capital] --> B[VS Code - Free]
+    A --> C[GitHub - Free]
+    B --> D{Need AI Pair?}
+    D -->|Cloud Co-pilot| E[GitHub Copilot]
+    D -->|Local Agentic| F[Cursor AI]
+    E --> G[🔄 Swap Between All Three]
+    F --> G
+
+    style A fill:#fff3cd
+    style G fill:#d4edda"""
+    },
+    {
+        "id": "MM.06",
+        "scene": "Scene 6 - Internet Kill Switch",
+        "priority": "MEDIUM",
+        "type": "flowchart",
+        "direction": "TB",
+        "title": "Parental Internet Kill Switch Workflow",
+        "content": """    A[👨‍👩‍👧‍👦 Parent] --> B[GitHub Pages UI]
+    B --> C{Select Child}
+    C -->|Kid A| D[MAC Address A]
+    C -->|Kid B| E[MAC Address B]
+    D --> F[n8n Workflow]
+    E --> F
+    F --> G[🔴 Drop Traffic]
+    F --> H[🟢 Allow Traffic]
+
+    style A fill:#e1f5ff
+    style G fill:#f8d7da
+    style H fill:#d4edda"""
+    },
+    {
+        "id": "MM.07",
+        "scene": "Scene 7 - The LLM Feast",
+        "priority": "HIGH",
+        "type": "pie",
+        "title": "LLM Model Strengths",
+        "content": """    "Claude - Reasoning" : 30
+    "ChatGPT - Search" : 25
+    "DeepSeek - Coding" : 20
+    "Gemini - Versatile Free" : 25"""
+    },
+    {
+        "id": "MM.08",
+        "scene": "Scene 8 - Bespoke Logic n8n",
+        "priority": "MEDIUM",
+        "type": "sequence",
+        "title": "n8n Bespoke Automation Flow",
+        "content": """    participant Wife as Wife
+    participant UI as GitHub Pages UI
+    participant N8N as n8n Workflow
+    participant Router as Home Router
+
+    Wife->>UI: Toggle internet off for Kid
+    UI->>N8N: Trigger webhook
+    N8N->>N8N: Lookup MAC address
+    N8N->>Router: Apply firewall rule
+    Router->>N8N: Confirm block
+    N8N->>UI: Status updated"""
+    },
+    {
+        "id": "MM.09",
+        "scene": "Scene 9 - Success Metrics CICD",
+        "priority": "MEDIUM",
+        "type": "gantt",
+        "title": "CI/CD Pipeline & Success Metrics",
+        "content": """    section Development
+    Feature Branch           :a1, 2026-02-10, 1d
+    Code Changes             :a2, after a1, 1d
+
+    section CI/CD Pipeline
+    GitHub Actions Build     :a3, after a2, 1d
+    Automated Tests          :a4, after a3, 1d
+    Deploy to Production     :a5, after a4, 1d
+
+    section Metrics
+    Compliance Audit         :a6, after a5, 1d
+    Accuracy Check           :a7, after a6, 1d"""
+    },
+    {
+        "id": "MM.10",
+        "scene": "Scene 10 - Conclusion Call to Action",
+        "priority": "HIGH",
+        "type": "flowchart",
+        "direction": "TB",
+        "title": "Your Delivery Pilot Journey",
+        "content": """    A[📝 Take Assessment] --> B[🔍 Identify Gaps]
+    B --> C[🎬 Watch Simulation]
+    C --> D[📂 Clone the Repo]
+    D --> E[⚙️ Configure Environment]
+    E --> F[🚀 Build the Future]
+
+    style A fill:#e1f5ff
+    style F fill:#d4edda"""
     }
 ]
 
