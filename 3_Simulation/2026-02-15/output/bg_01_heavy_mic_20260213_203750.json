@@ -1,0 +1,13 @@
+{
+  "id": "bg_01_heavy_mic",
+  "name": "Heavy Mic Stage",
+  "scene": "Scene 1: The Heavy Mic",
+  "timecode": "00:00:00 - 00:00:10",
+  "prompt": "Empty dramatic stage, single spotlight from above, dark moody atmosphere, polished black floor with reflections, theatrical fog, volumetric light beams, wide shot perspective, no people, cinematic lighting, 8K, ultra detailed, film production background plate, 16:9 aspect ratio",
+  "filename": "bg_01_heavy_mic_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac3/F3Bzpqojug8059YyuHP8v.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

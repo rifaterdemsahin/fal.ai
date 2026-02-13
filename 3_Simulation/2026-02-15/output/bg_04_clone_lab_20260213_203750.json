@@ -1,0 +1,13 @@
+{
+  "id": "bg_04_clone_lab",
+  "name": "Clone Lab",
+  "scene": "Scene 4: The Clone Lab",
+  "timecode": "00:00:48 - 00:03:52",
+  "prompt": "High-tech developer workspace, multiple large monitors showing code, dark room with RGB ambient lighting, terminal windows with green text, server racks in background, GitHub octocat logo on wall screen, no people, hacker aesthetic, cinematic, background plate, 16:9 aspect ratio",
+  "filename": "bg_04_clone_lab_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac4/plPmiNU-5BvuQF0gjKIck.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

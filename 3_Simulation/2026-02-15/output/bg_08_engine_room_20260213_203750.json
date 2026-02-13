@@ -1,0 +1,13 @@
+{
+  "id": "bg_08_engine_room",
+  "name": "Engine Room",
+  "scene": "Scene 8: The Engine Room",
+  "timecode": "00:08:26 - 00:09:01",
+  "prompt": "Industrial engine room with massive spinning gears and clockwork mechanisms, giant clock face on the wall with hands spinning fast, motion blur on gears, steam pipes, orange and blue industrial lighting, sparks flying, no people, steampunk meets high-tech aesthetic, dynamic energy, cinematic wide shot, background plate, 16:9 aspect ratio",
+  "filename": "bg_08_engine_room_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac5/LmuMPCnxrGL7RA9gVmpr9.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

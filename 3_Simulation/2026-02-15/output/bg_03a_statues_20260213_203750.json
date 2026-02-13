@@ -1,0 +1,13 @@
+{
+  "id": "bg_03a_statues",
+  "name": "Stone Statue Hall",
+  "scene": "Scene 3A: Static Rules",
+  "timecode": "00:00:35 - 00:00:48",
+  "prompt": "Grand museum hall filled with frozen stone statues, marble columns, classical architecture, dim moody lighting, dust particles in air, symmetrical composition, no people, wide shot, ancient Roman aesthetic, cinematic atmosphere, background plate, 16:9 aspect ratio",
+  "filename": "bg_03a_statues_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac3/K7qlTkuJ-Uj3QmKnhz5By.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

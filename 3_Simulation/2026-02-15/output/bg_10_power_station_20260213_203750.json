@@ -1,0 +1,13 @@
+{
+  "id": "bg_10_power_station",
+  "name": "Power Station",
+  "scene": "Scene 10: The Power Station",
+  "timecode": "00:11:45 - 00:13:15",
+  "prompt": "Dark laboratory with a glass bottle containing a captured lightning bolt, electrical arcs and plasma inside glass container, Tesla coil aesthetic, workflow diagrams projected on walls, blue and white electric glow illuminating the room, no people, powerful contained energy, cinematic close-up environment, background plate, 16:9 aspect ratio",
+  "filename": "bg_10_power_station_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac5/thSVE10sVND3tqFepss9B.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

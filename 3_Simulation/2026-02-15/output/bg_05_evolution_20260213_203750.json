@@ -1,0 +1,13 @@
+{
+  "id": "bg_05_evolution",
+  "name": "Evolution Workshop",
+  "scene": "Scene 5: The Evolution",
+  "timecode": "00:03:52 - 00:05:50",
+  "prompt": "Futuristic workshop with large industrial 3D printer in the center, glowing blue laser printing a human-shaped form, metallic surfaces, steam and particles in the air, warm industrial lighting, no people, sci-fi factory aesthetic, cinematic wide shot, background plate for green screen, 16:9 aspect ratio",
+  "filename": "bg_05_evolution_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac4/5ADkZtlb_d3BOdgbLCo5v.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

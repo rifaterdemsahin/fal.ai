@@ -1,0 +1,13 @@
+{
+  "id": "bg_03b_mercury",
+  "name": "Mercury Lab",
+  "scene": "Scene 3B: Dynamic AI",
+  "timecode": "00:00:35 - 00:00:48",
+  "prompt": "Futuristic laboratory with liquid mercury flowing in glass tubes, neon blue and silver reflections, sci-fi aesthetic, clean surfaces, holographic displays, dark background with electric highlights, no people, cyberpunk inspired, cinematic lighting, background plate, 16:9 aspect ratio",
+  "filename": "bg_03b_mercury_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac3/8yjSDAiSem2w35nQRbuo0.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

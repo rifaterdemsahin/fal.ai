@@ -1,0 +1,13 @@
+{
+  "id": "bg_09_digital_feast",
+  "name": "Digital Feast Table",
+  "scene": "Scene 9: The Digital Feast",
+  "timecode": "00:09:01 - 00:11:45",
+  "prompt": "Grand futuristic banquet hall, long elegant table covered with glowing tablets and screens displaying AI logos, holographic menus floating above each tablet, ambient blue and purple lighting, no people, abundant tech feast aesthetic, overhead perspective elements, cinematic atmosphere, background plate, 16:9 aspect ratio",
+  "filename": "bg_09_digital_feast_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac5/k_KZv7Li2R5Adx9jxkCOc.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

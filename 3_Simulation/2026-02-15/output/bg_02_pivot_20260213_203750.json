@@ -1,0 +1,13 @@
+{
+  "id": "bg_02_pivot",
+  "name": "Pivot Office",
+  "scene": "Scene 2: The Pivot",
+  "timecode": "00:00:10 - 00:00:35",
+  "prompt": "Modern open-plan office, blurred background, warm ambient lighting, desks with monitors, busy city visible through floor-to-ceiling windows, soft bokeh, depth of field, no people, corporate startup aesthetic, cinematic color grading, background plate for green screen, 16:9 aspect ratio",
+  "filename": "bg_02_pivot_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac3/9lcw8BxJqOMSNQ0cu4y1s.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

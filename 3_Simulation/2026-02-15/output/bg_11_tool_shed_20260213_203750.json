@@ -1,0 +1,13 @@
+{
+  "id": "bg_11_tool_shed",
+  "name": "Tool Shed Workshop",
+  "scene": "Scene 11: The Tool Shed",
+  "timecode": "00:13:15 - 00:17:24",
+  "prompt": "Energetic workshop with vibrating toolbox emitting blue colored energy, tools floating in the air surrounded by glowing particles, workbench with commit history scrolling on monitors, CI/CD pipeline visualization, green checkmarks floating in the air, no people, active workshop aesthetic, cinematic lighting, background plate, 16:9 aspect ratio",
+  "filename": "bg_11_tool_shed_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac6/tE_O_ByszHp8NHSl84VvV.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

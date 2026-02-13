@@ -1,0 +1,13 @@
+{
+  "id": "bg_06_nursery",
+  "name": "Nursery Room",
+  "scene": "Scene 6: The Nursery",
+  "timecode": "00:05:50 - 00:06:36",
+  "prompt": "Cozy children's nursery room at night, soft warm lighting, glowing nightlight on bedside table, comfortable bed with soft blankets, plush toys, stars on ceiling, no people, family-friendly atmosphere, warm color palette, intimate cinematic lighting, background plate, 16:9 aspect ratio",
+  "filename": "bg_06_nursery_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac4/7cnXnDXbahPmHi2cPH1TF.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "bg_12_balcony",
+  "name": "Balcony Cityscape",
+  "scene": "Scene 12: The Balcony",
+  "timecode": "00:17:24 - End",
+  "prompt": "Stunning futuristic cityscape viewed from a high-rise balcony at golden hour, flying drones building skyscrapers in the distance, gleaming towers, warm sunset glow, clouds below eye level, glass railing in foreground, no people, aspirational sci-fi utopia, epic scale, cinematic wide establishing shot, background plate, 16:9 aspect ratio",
+  "filename": "bg_12_balcony_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac6/XfAkXqyLiQ1ZCdN5MwvUZ.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "bg_07_crystal_ball",
+  "name": "Crystal Ball Tech Room",
+  "scene": "Scene 7: The Crystal Ball",
+  "timecode": "00:06:36 - 00:08:26",
+  "prompt": "Mystical tech showroom, dark environment with floating holographic logos, technology company logos glowing softly in the air, crystal ball on pedestal in center emitting soft blue light, smart speaker on table, ethereal fog, magical tech atmosphere, no people, cinematic, background plate, 16:9 aspect ratio",
+  "filename": "bg_07_crystal_ball_20260213_203750.png",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5ac4/BiAaoX9roRaTR_FA-5lOO.jpg",
+  "generated_at": "20260213_203750",
+  "model": "fal-ai/flux/schnell",
+  "cost": 0.01,
+  "purpose": "green_screen_background"
+}
