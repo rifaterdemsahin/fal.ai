@@ -1,0 +1,100 @@
+{
+  "generator": "BulkMermaidGenerator",
+  "version": "2.0-enhanced",
+  "timestamp": "2026-02-13T21:51:24.003925",
+  "total": 10,
+  "successful": 10,
+  "failed": 0,
+  "jpeg_exported": 10,
+  "output_directory": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output",
+  "features": [
+    "Subgraph support",
+    "Custom styling per node",
+    "High-quality JPEG export (2x scale)",
+    "Progressive JPEG optimization",
+    "HD resolution (1920x1080)",
+    "Manifest tracking"
+  ],
+  "results": [
+    {
+      "asset_id": "MM.01",
+      "filename": "diagram_MM_01_scene_1_-_the_heavy_mic.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_01_scene_1_-_the_heavy_mic.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_01_scene_1_-_the_heavy_mic.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.02",
+      "filename": "diagram_MM_02_scene_2_-_the_pivot.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_02_scene_2_-_the_pivot.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_02_scene_2_-_the_pivot.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.03",
+      "filename": "diagram_MM_03_scene_3_-_statues_vs_mercury.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_03_scene_3_-_statues_vs_mercury.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_03_scene_3_-_statues_vs_mercury.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.04",
+      "filename": "diagram_MM_04_scene_4_-_the_clone_lab.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_04_scene_4_-_the_clone_lab.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_04_scene_4_-_the_clone_lab.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.05",
+      "filename": "diagram_MM_05_scene_5_-_the_free_tier_journey.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_05_scene_5_-_the_free_tier_journey.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_05_scene_5_-_the_free_tier_journey.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.06",
+      "filename": "diagram_MM_06_scene_6_-_internet_kill_switch.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_06_scene_6_-_internet_kill_switch.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_06_scene_6_-_internet_kill_switch.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.07",
+      "filename": "diagram_MM_07_scene_7_-_the_llm_feast.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_07_scene_7_-_the_llm_feast.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_07_scene_7_-_the_llm_feast.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.08",
+      "filename": "diagram_MM_08_scene_8_-_bespoke_logic_n8n.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_08_scene_8_-_bespoke_logic_n8n.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_08_scene_8_-_bespoke_logic_n8n.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.09",
+      "filename": "diagram_MM_09_scene_9_-_success_metrics_cicd.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_09_scene_9_-_success_metrics_cicd.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_09_scene_9_-_success_metrics_cicd.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    },
+    {
+      "asset_id": "MM.10",
+      "filename": "diagram_MM_10_scene_10_-_conclusion_call_to_action.md",
+      "markdown_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_10_scene_10_-_conclusion_call_to_action.md",
+      "jpeg_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/diagram_MM_10_scene_10_-_conclusion_call_to_action.jpeg",
+      "has_jpeg": true,
+      "status": "success"
+    }
+  ]
+}

@@ -4,6 +4,6 @@
   "description": "Node dependencies for Mermaid diagram generation",
   "private": true,
   "dependencies": {
-    "@mermaid-js/mermaid-cli": "^11.4.1"
+    "@mermaid-js/mermaid-cli": "^11.12.0"
   }
 }

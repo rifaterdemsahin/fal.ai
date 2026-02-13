@@ -21,7 +21,17 @@ except ImportError:
     extract_scene_number = None
     ManifestTracker = None
 
-# Configuration
+# Import paths configuration
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent))
+try:
+    from paths_config import get_weekly_paths, get_latest_weekly_id
+    USE_PATHS_CONFIG = True
+except ImportError:
+    USE_PATHS_CONFIG = False
+    print("⚠️  paths_config not found. Using fallback directory.")
+
+# Configuration - will be updated in main() if paths_config is available
 OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -64,7 +74,7 @@ pie title {title}
 ```"""
 }
 
-# Generation queue for diagrams — The Delivery Pilot Transformation (10 scenes)
+# Generation queue v2 — The Delivery Pilot Transformation (10 scenes) — EMOJI ENHANCED
 GENERATION_QUEUE = [
     {
         "id": "MM.01",
@@ -73,29 +83,38 @@ GENERATION_QUEUE = [
         "type": "flowchart",
         "direction": "TB",
         "title": "Enterprise AI Transformation Bottleneck",
-        "content": """    A[🏢 Enterprise AI Goal] --> B{Decision Makers}
-    B -->|Zombie Snails| C[🐌 10-Year Roadmap]
-    B -->|Delivery Pilots| D[🚀 Rapid Iteration]
-    C --> E[❌ Too Slow]
-    D --> F[✅ Ship Weekly]
+        "content": """    A["\U0001F3E2 Enterprise AI Goal"] --> B{"\U0001F914 Decision Makers"}
+    B -->|"\U0001F40C Zombie Snails"| C["\U0001F4C5 10-Year Roadmap"]
+    B -->|"\U0001F680 Delivery Pilots"| D["\u26A1 Rapid Iteration"]
+    C --> E["\u274C Too Slow - Obsolete"]
+    D --> F["\u2705 Ship Weekly"]
+    E --> G["\U0001F480 Project Dead"]
+    F --> H["\U0001F3C6 Market Leader"]
 
-    style A fill:#e1f5ff
-    style E fill:#f8d7da
-    style F fill:#d4edda"""
+    style A fill:#4a90d9,color:#fff
+    style B fill:#f5a623,color:#fff
+    style C fill:#e74c3c,color:#fff
+    style D fill:#2ecc71,color:#fff
+    style E fill:#c0392b,color:#fff
+    style F fill:#27ae60,color:#fff
+    style G fill:#7f8c8d,color:#fff
+    style H fill:#f1c40f,color:#333"""
     },
     {
         "id": "MM.02",
         "scene": "Scene 2 - The Pivot",
         "priority": "HIGH",
         "type": "journey",
-        "title": "The Delivery Pilot Pivot",
-        "content": """    section Before Pivot
-      Complex 240 workflows: 2: Engineer
-      Scaring people off: 1: Audience
-    section After Pivot
-      No-code tools: 5: Everyone
-      Delivery Pilot identity: 5: Creator
-      Accessible AI building: 4: Audience"""
+        "title": "\U0001F504 The Delivery Pilot Pivot Journey",
+        "content": """    section \U0001F6AB Before Pivot
+      \U0001F62B Complex 240 workflows: 2: Engineer
+      \U0001F631 Scaring people off: 1: Audience
+      \U0001F4C9 Low engagement: 1: Creator
+    section \u2705 After Pivot
+      \U0001F6E0 No-code tools: 5: Everyone
+      \U0001F3AF Delivery Pilot identity: 5: Creator
+      \U0001F91D Accessible AI building: 4: Audience
+      \U0001F4C8 Growing community: 5: Creator"""
     },
     {
         "id": "MM.03",
@@ -104,20 +123,24 @@ GENERATION_QUEUE = [
         "type": "flowchart",
         "direction": "LR",
         "title": "Static Rules vs Dynamic AI",
-        "content": """    subgraph Old[🗿 Static Systems]
-        A[Hard-Coded Rules] --> B[Rigid Logic]
-        B --> C[Breaks on Change]
+        "content": """    subgraph OLD["\U0001F5FF OLD WORLD - Static Systems"]
+        direction TB
+        A["\U0001F4DC Hard-Coded Rules"] --> B["\U0001F512 Rigid Logic"]
+        B --> C["\U0001F4A5 Breaks on Change"]
+        C --> D["\U0001F6D1 System Down"]
     end
-    subgraph New[💧 Dynamic AI]
-        D[AI-Driven Rules] --> E[Adaptive Logic]
-        E --> F[Self-Healing]
+    subgraph NEW["\U0001F4A7 NEW WORLD - Dynamic AI"]
+        direction TB
+        E["\U0001F916 AI-Driven Rules"] --> F["\U0001F300 Adaptive Logic"]
+        F --> G["\U0001F504 Self-Healing"]
+        G --> H["\U0001F680 Always Running"]
     end
-    Old -->|Transform| New
+    OLD -->|"\u26A1 Transform"| NEW
 
-    style A fill:#f8d7da
-    style C fill:#f8d7da
-    style D fill:#d4edda
-    style F fill:#d4edda"""
+    style A fill:#e74c3c,color:#fff
+    style D fill:#c0392b,color:#fff
+    style E fill:#2ecc71,color:#fff
+    style H fill:#27ae60,color:#fff"""
     },
     {
         "id": "MM.04",
@@ -125,17 +148,19 @@ GENERATION_QUEUE = [
         "priority": "HIGH",
         "type": "sequence",
         "title": "Git Clone to Local Powerhouse",
-        "content": """    participant Dev as Developer
-    participant GH as GitHub
-    participant Local as Local Machine
-    participant Agent as AI Agent
+        "content": """    participant Dev as \U0001F468\u200D\U0001F4BB Developer
+    participant GH as \U0001F431 GitHub
+    participant Local as \U0001F4BB Local Machine
+    participant Agent as \U0001F916 AI Agent
 
-    Dev->>GH: Browse delivery pilot template
-    Dev->>Local: git clone repo
-    Local->>Agent: Start AI agent
-    Agent->>Local: Execute commands
-    Agent->>Local: Build tooling system
-    Local->>Dev: Ready to develop"""
+    Dev->>GH: \U0001F50D Browse delivery pilot template
+    GH-->>Dev: \U0001F4E6 Template found
+    Dev->>Local: \U0001F4E5 git clone repo
+    Local->>Local: \U0001F4C2 Repository ready
+    Local->>Agent: \u26A1 Start AI agent
+    Agent->>Local: \U0001F528 Execute commands
+    Agent->>Local: \U0001F3D7 Build tooling system
+    Local-->>Dev: \u2705 Ready to develop!"""
     },
     {
         "id": "MM.05",
@@ -144,16 +169,23 @@ GENERATION_QUEUE = [
         "type": "flowchart",
         "direction": "TB",
         "title": "Zero Capital AI Starter Kit",
-        "content": """    A[💰 Zero Capital] --> B[VS Code - Free]
-    A --> C[GitHub - Free]
-    B --> D{Need AI Pair?}
-    D -->|Cloud Co-pilot| E[GitHub Copilot]
-    D -->|Local Agentic| F[Cursor AI]
-    E --> G[🔄 Swap Between All Three]
-    F --> G
+        "content": """    A["\U0001F4B0 Zero Capital Start"] --> B["\U0001F4DD VS Code - FREE"]
+    A --> C["\U0001F431 GitHub - FREE"]
+    A --> D["\U0001F310 Browser - FREE"]
+    B --> E{"\U0001F916 Need AI Pair?"}
+    E -->|"\u2601 Cloud"| F["\U0001F9D1\u200D\u2708 GitHub Copilot"]
+    E -->|"\U0001F4BB Local"| G["\U0001F5B1 Cursor AI"]
+    E -->|"\U0001F310 Web"| H["\U0001F4AC ChatGPT Free"]
+    F --> I["\U0001F504 Swap Between All"]
+    G --> I
+    H --> I
+    I --> J["\U0001F680 Start Building!"]
 
-    style A fill:#fff3cd
-    style G fill:#d4edda"""
+    style A fill:#f1c40f,color:#333
+    style J fill:#27ae60,color:#fff
+    style F fill:#6c5ce7,color:#fff
+    style G fill:#00b894,color:#fff
+    style H fill:#0984e3,color:#fff"""
     },
     {
         "id": "MM.06",
@@ -161,30 +193,35 @@ GENERATION_QUEUE = [
         "priority": "MEDIUM",
         "type": "flowchart",
         "direction": "TB",
-        "title": "Parental Internet Kill Switch Workflow",
-        "content": """    A[👨‍👩‍👧‍👦 Parent] --> B[GitHub Pages UI]
-    B --> C{Select Child}
-    C -->|Kid A| D[MAC Address A]
-    C -->|Kid B| E[MAC Address B]
-    D --> F[n8n Workflow]
+        "title": "Parental Internet Kill Switch",
+        "content": """    A["\U0001F468\u200D\U0001F469\u200D\U0001F467\u200D\U0001F466 Parent"] --> B["\U0001F310 GitHub Pages UI"]
+    B --> C{"\U0001F476 Select Child"}
+    C -->|"\U0001F466 Kid A"| D["\U0001F4F1 MAC Address A"]
+    C -->|"\U0001F467 Kid B"| E["\U0001F4F1 MAC Address B"]
+    D --> F["\u2699 n8n Workflow"]
     E --> F
-    F --> G[🔴 Drop Traffic]
-    F --> H[🟢 Allow Traffic]
+    F --> G{"\U0001F6A6 Action"}
+    G -->|"Block"| H["\U0001F534 Drop Traffic"]
+    G -->|"Allow"| I["\U0001F7E2 Allow Traffic"]
+    H --> J["\U0001F634 Bedtime Enforced"]
+    I --> K["\U0001F3AE Internet Active"]
 
-    style A fill:#e1f5ff
-    style G fill:#f8d7da
-    style H fill:#d4edda"""
+    style A fill:#3498db,color:#fff
+    style H fill:#e74c3c,color:#fff
+    style I fill:#2ecc71,color:#fff
+    style J fill:#9b59b6,color:#fff
+    style K fill:#1abc9c,color:#fff"""
     },
     {
         "id": "MM.07",
         "scene": "Scene 7 - The LLM Feast",
         "priority": "HIGH",
         "type": "pie",
-        "title": "LLM Model Strengths",
-        "content": """    "Claude - Reasoning" : 30
-    "ChatGPT - Search" : 25
-    "DeepSeek - Coding" : 20
-    "Gemini - Versatile Free" : 25"""
+        "title": "\U0001F37D The LLM Feast - Model Strengths",
+        "content": """    "\U0001F9E0 Claude - Reasoning" : 30
+    "\U0001F50D ChatGPT - Search" : 25
+    "\U0001F4BB DeepSeek - Coding" : 20
+    "\U0001F48E Gemini - Versatile Free" : 25"""
     },
     {
         "id": "MM.08",
@@ -192,36 +229,38 @@ GENERATION_QUEUE = [
         "priority": "MEDIUM",
         "type": "sequence",
         "title": "n8n Bespoke Automation Flow",
-        "content": """    participant Wife as Wife
-    participant UI as GitHub Pages UI
-    participant N8N as n8n Workflow
-    participant Router as Home Router
+        "content": """    participant Wife as \U0001F469 Wife
+    participant UI as \U0001F310 GitHub Pages
+    participant N8N as \u2699 n8n Engine
+    participant Router as \U0001F4E1 Home Router
 
-    Wife->>UI: Toggle internet off for Kid
-    UI->>N8N: Trigger webhook
-    N8N->>N8N: Lookup MAC address
-    N8N->>Router: Apply firewall rule
-    Router->>N8N: Confirm block
-    N8N->>UI: Status updated"""
+    Wife->>UI: \U0001F446 Toggle internet off
+    UI->>N8N: \U0001F514 Trigger webhook
+    N8N->>N8N: \U0001F50D Lookup MAC address
+    N8N->>Router: \U0001F6E1 Apply firewall rule
+    Router-->>N8N: \u2705 Rule confirmed
+    N8N-->>UI: \U0001F4CA Status updated
+    UI-->>Wife: \U0001F44D Done!"""
     },
     {
         "id": "MM.09",
         "scene": "Scene 9 - Success Metrics CICD",
         "priority": "MEDIUM",
         "type": "gantt",
-        "title": "CI/CD Pipeline & Success Metrics",
-        "content": """    section Development
-    Feature Branch           :a1, 2026-02-10, 1d
-    Code Changes             :a2, after a1, 1d
+        "title": "\U0001F3AF CI-CD Pipeline and Success Metrics",
+        "content": """    section \U0001F4BB Development
+    \U0001F33F Feature Branch        :a1, 2026-02-10, 1d
+    \u270D Code Changes            :a2, after a1, 1d
 
-    section CI/CD Pipeline
-    GitHub Actions Build     :a3, after a2, 1d
-    Automated Tests          :a4, after a3, 1d
-    Deploy to Production     :a5, after a4, 1d
+    section \u2699 CI-CD Pipeline
+    \U0001F3D7 GitHub Actions Build  :a3, after a2, 1d
+    \U0001F9EA Automated Tests       :a4, after a3, 1d
+    \U0001F680 Deploy to Production  :a5, after a4, 1d
 
-    section Metrics
-    Compliance Audit         :a6, after a5, 1d
-    Accuracy Check           :a7, after a6, 1d"""
+    section \U0001F4CA Metrics
+    \U0001F6E1 Compliance Audit     :a6, after a5, 1d
+    \U0001F3AF Accuracy Check       :a7, after a6, 1d
+    \U0001F4C8 Self Growth          :a8, after a7, 1d"""
     },
     {
         "id": "MM.10",
@@ -230,14 +269,22 @@ GENERATION_QUEUE = [
         "type": "flowchart",
         "direction": "TB",
         "title": "Your Delivery Pilot Journey",
-        "content": """    A[📝 Take Assessment] --> B[🔍 Identify Gaps]
-    B --> C[🎬 Watch Simulation]
-    C --> D[📂 Clone the Repo]
-    D --> E[⚙️ Configure Environment]
-    E --> F[🚀 Build the Future]
+        "content": """    A["\U0001F4CB Take Assessment"] --> B["\U0001F50D Identify Gaps"]
+    B --> C["\U0001F3AC Watch Simulation"]
+    C --> D["\U0001F4E5 Clone the Repo"]
+    D --> E["\u2699 Configure Environment"]
+    E --> F["\U0001F528 Build Your Tools"]
+    F --> G["\U0001F680 Launch as Delivery Pilot"]
+    G --> H["\U0001F3C6 Build the Future!"]
 
-    style A fill:#e1f5ff
-    style F fill:#d4edda"""
+    style A fill:#3498db,color:#fff
+    style B fill:#9b59b6,color:#fff
+    style C fill:#e67e22,color:#fff
+    style D fill:#2ecc71,color:#fff
+    style E fill:#1abc9c,color:#fff
+    style F fill:#f39c12,color:#fff
+    style G fill:#e74c3c,color:#fff
+    style H fill:#f1c40f,color:#333"""
     }
 ]
 
@@ -312,20 +359,26 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
         jpeg_path = f"{base_path}.jpeg"
         
         # Check if mmdc (mermaid-cli) is available
+        # Look in current dir, parent dir (5_Symbols), and global
         mmdc_path = Path(__file__).parent / "node_modules" / ".bin" / "mmdc"
+        if not mmdc_path.exists():
+            mmdc_path = Path(__file__).parent.parent / "node_modules" / ".bin" / "mmdc"
         puppeteer_config = Path(__file__).parent / "puppeteer-config.json"
         
         # Remove existing PNG if it exists (to avoid -1 suffix)
         if Path(png_path).exists():
             Path(png_path).unlink()
         
-        # Step 1: Convert to PNG using mermaid-cli
+        # Step 1: Convert to PNG using mermaid-cli with enhanced quality
         cmd = [
             str(mmdc_path) if mmdc_path.exists() else "mmdc",
             "-i", md_filepath,
             "-o", png_path,
             "-b", "white",  # White background
-            "-t", "default"  # Default theme
+            "-t", "default",  # Default theme
+            "-s", "2",  # Scale factor for higher resolution (2x)
+            "-w", "1920",  # Width in pixels (HD)
+            "-H", "1080"  # Height in pixels (HD)
         ]
         
         # Add puppeteer config if it exists
@@ -375,12 +428,14 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
                 # Simple RGB conversion for other modes
                 img = img.convert('RGB')
             
-            # Save as JPEG
-            img.save(jpeg_path, 'JPEG', quality=95)
-            
+            # Save as JPEG with high quality and optimization
+            img.save(jpeg_path, 'JPEG', quality=95, optimize=True, progressive=True)
+
+            print(f"   ✅ Converted to JPEG: {Path(jpeg_path).name}")
+
             # Clean up the intermediate PNG file
             Path(actual_png_path).unlink()
-            
+
             return jpeg_path
             
         except ImportError:
@@ -393,31 +448,55 @@ def convert_to_jpeg(md_filepath: str) -> Optional[str]:
         print(f"⚠️  JPEG conversion failed: {str(e)}")
         return None
 
-def save_diagram_to_file(diagram: Dict, asset_id: str, filename: str) -> str:
-    """Save diagram to markdown file and optionally to JPEG"""
+def save_diagram_to_file(diagram: Dict, asset_id: str, filename: str) -> tuple[str, Optional[str]]:
+    """
+    Save diagram to markdown file and convert to JPEG
+
+    Returns:
+        Tuple of (markdown_path, jpeg_path)
+    """
     filepath = OUTPUT_DIR / filename
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(f"# {diagram.get('title', 'Mermaid Diagram')}\n\n")
         f.write(f"**Type:** {diagram['type']}\n")
+        f.write(f"**Asset ID:** {asset_id}\n")
         f.write(f"**Generated:** {diagram['timestamp']}\n\n")
         f.write(diagram['diagram_text'])
-        f.write("\n")
-    
+        f.write("\n\n---\n\n")
+        f.write("*Generated by BulkMermaidGenerator.py*\n")
+        f.write("*To render: paste the mermaid code into https://mermaid.live*\n")
+
+    print(f"   📄 Markdown saved: {filename}")
+
     # Also generate JPEG version
     jpeg_path = convert_to_jpeg(str(filepath))
     if jpeg_path:
-        print(f"   📸 JPEG: {Path(jpeg_path).name}")
-    
-    return str(filepath)
+        print(f"   📸 JPEG exported: {Path(jpeg_path).name}")
+    else:
+        print(f"   ⚠️  JPEG export failed (install mermaid-cli: npm install -g @mermaid-js/mermaid-cli)")
+
+    return str(filepath), jpeg_path
 
 def main():
     """Main execution function"""
-    print("🗺️  Bulk Mermaid Diagram Generator")
-    print("=" * 60)
-    print(f"Output Directory: {OUTPUT_DIR.absolute()}")
-    print(f"Total Diagrams to Generate: {len(GENERATION_QUEUE)}")
-    print("=" * 60)
+    # Update OUTPUT_DIR if paths_config is available
+    global OUTPUT_DIR
+    if USE_PATHS_CONFIG and get_weekly_paths and get_latest_weekly_id:
+        weekly_id = get_latest_weekly_id() or datetime.now().strftime("%Y-%m-%d")
+        paths = get_weekly_paths(weekly_id)
+        OUTPUT_DIR = paths['output']
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        print(f"✅ Using paths_config for weekly ID: {weekly_id}")
+    else:
+        print("⚠️  Using hardcoded output directory")
+
+    print("🗺️  Bulk Mermaid Diagram Generator (Enhanced)")
+    print("=" * 70)
+    print(f"📁 Output Directory: {OUTPUT_DIR.absolute()}")
+    print(f"📊 Total Diagrams: {len(GENERATION_QUEUE)}")
+    print("🎨 Features: Subgraphs, Styling, High-Quality JPEG Export")
+    print("=" * 70)
     
     # Initialize manifest tracker if available
     manifest = ManifestTracker(OUTPUT_DIR) if ManifestTracker else None
@@ -463,14 +542,15 @@ def main():
                 # Fallback naming
                 filename = f"diagram_{asset_id.replace('.', '_')}_{scene.replace(' ', '_').lower()}.md"
             
-            # Save to file
-            filepath = save_diagram_to_file(result, asset_id, filename)
-            
-            print(f"✅ Success: {filename}")
+            # Save to file (returns markdown and JPEG paths)
+            filepath, jpeg_path = save_diagram_to_file(result, asset_id, filename)
+
+            print("   ✅ Generation complete")
             successful += 1
             
             # Track in manifest
             if manifest:
+                # Track both markdown and JPEG if available
                 manifest.add_asset(
                     filename=filename,
                     prompt=f"Mermaid {diagram_type} diagram for {scene}",
@@ -482,14 +562,18 @@ def main():
                         "scene": scene,
                         "priority": priority,
                         "diagram_type": diagram_type,
-                        "title": item.get("title", scene)
+                        "title": item.get("title", scene),
+                        "has_jpeg": jpeg_path is not None,
+                        "jpeg_path": jpeg_path if jpeg_path else None
                     }
                 )
-            
+
             results.append({
                 "asset_id": asset_id,
                 "filename": filename,
-                "filepath": filepath,
+                "markdown_path": filepath,
+                "jpeg_path": jpeg_path,
+                "has_jpeg": jpeg_path is not None,
                 "status": "success"
             })
         else:
@@ -507,29 +591,53 @@ def main():
         manifest_path = OUTPUT_DIR / "manifest.json"
         print(f"\n📝 Manifest saved: {manifest_path}")
     
+    # Count JPEG exports
+    jpeg_count = sum(1 for r in results if r.get("has_jpeg", False))
+
     # Save summary
     summary = {
+        "generator": "BulkMermaidGenerator",
+        "version": "2.0-enhanced",
         "timestamp": datetime.now().isoformat(),
         "total": len(GENERATION_QUEUE),
         "successful": successful,
         "failed": failed,
+        "jpeg_exported": jpeg_count,
         "output_directory": str(OUTPUT_DIR.absolute()),
+        "features": [
+            "Subgraph support",
+            "Custom styling per node",
+            "High-quality JPEG export (2x scale)",
+            "Progressive JPEG optimization",
+            "HD resolution (1920x1080)",
+            "Manifest tracking"
+        ],
         "results": results
     }
-    
-    summary_path = OUTPUT_DIR / "generation_summary.json"
+
+    timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    summary_path = OUTPUT_DIR / f"mermaid_summary_{timestamp_str}.json"
     with open(summary_path, 'w') as f:
         json.dump(summary, f, indent=2)
-    
+
     # Print summary
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 70)
     print("📊 GENERATION SUMMARY")
-    print("=" * 60)
-    print(f"✅ Successful: {successful}")
-    print(f"❌ Failed: {failed}")
+    print("=" * 70)
+    print(f"✅ Successful: {successful}/{len(GENERATION_QUEUE)}")
+    print(f"❌ Failed: {failed}/{len(GENERATION_QUEUE)}")
+    print(f"📸 JPEG Exported: {jpeg_count}/{successful}")
     print(f"📁 Output Directory: {OUTPUT_DIR.absolute()}")
-    print(f"📝 Summary saved: {summary_path}")
-    print("=" * 60)
+    print(f"📝 Summary: {summary_path.name}")
+    print("=" * 70)
+
+    # Installation tips if JPEG export failed
+    if jpeg_count < successful:
+        print("\n💡 TIP: Install mermaid-cli for automatic JPEG export:")
+        print("   npm install -g @mermaid-js/mermaid-cli")
+        print("   Requires Node.js: https://nodejs.org/")
+
+    print("\n✅ Done! Check the output directory for your diagrams.")
 
 if __name__ == "__main__":
     main()
