@@ -9,6 +9,18 @@ import os
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
+import urllib.request
+import urllib.error
+import base64
+from datetime import datetime
+
+
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # Install: pip install fal-client
 try:
@@ -226,6 +238,142 @@ GENERATION_QUEUE = [
 ]
 
 
+
+
+def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
+    """Generate asset using Gemini (Imagen 3) API as fallback."""
+    api_key = os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("❌ No GEMINI_API_KEY found for fallback.")
+        return {"success": False, "error": "No Gemini API Key"}
+
+    print(f"✨ Generating with Gemini...")
+
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=api_key)
+        
+        # Try to find a suitable model
+        model_name = 'imagen-3.0-generate-001'
+        
+        # Helper to try generation
+        def try_generate(model_id, prompt):
+             print(f"   Trying model: {model_id}")
+             # The SDK for Imagen is slightly different, actually most current SDKs support 
+             # genai.ImageGenerationModel(model_id).generate_images(prompt=prompt)
+             # But for standard Gemini it's different.
+             # Let's check if the SDK supports image generation directly.
+             # If not, we might need to use the REST API still but with better model selection.
+             # However, let's try the REST API with a fallback list since we know SDK might be tricky with Imagen versions.
+             return None
+
+    except ImportError:
+        pass
+        
+    # REST API Fallback with multiple models
+    models_to_try = [
+        "models/imagen-3.0-generate-001",
+        "models/image-generation-001",
+        "models/gemini-pro-vision" # Unlikely to work for generation but listed for completeness of attempts? No, avoid.
+    ]
+    
+    headers = {"Content-Type": "application/json"}
+    prompt = asset_config.get("prompt", "")
+    
+    for model_name in models_to_try:
+        print(f"   Attempting with model: {model_name}")
+        url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:predict?key={api_key}"
+        
+        payload = {
+            "instances": [
+                {"prompt": prompt}
+            ],
+            "parameters": {
+                "sampleCount": 1,
+            }
+        }
+        
+        try:
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers=headers)
+            
+            with urllib.request.urlopen(req) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                
+                # Check for predictions
+                b64_data = None
+                if "predictions" in result and len(result["predictions"]) > 0:
+                    prediction = result["predictions"][0]
+                    if isinstance(prediction, dict):
+                            b64_data = prediction.get("bytesBase64Encoded")
+                    elif isinstance(prediction, str):
+                            b64_data = prediction
+                
+                if b64_data:
+                    # Success!
+                    image_data = base64.b64decode(b64_data)
+                    
+                    # Generate filename
+                    if generate_filename and extract_scene_number:
+                        scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                        base_filename = generate_filename(
+                            scene_num,
+                            'icon',
+                            asset_config['name'] + "_gemini",
+                            version
+                        )
+                        filename_json = base_filename + '.json'
+                        filename_png = base_filename + '.png'
+                    else:
+                        filename_json = f"{asset_config['name']}_gemini.json"
+                        filename_png = f"{asset_config['name']}_gemini.png"
+                    
+                    # Save metadata
+                    output_path = output_dir / filename_json
+                    metadata = {
+                        **asset_config,
+                        "provider": "gemini",
+                        "filename": filename_png,
+                        "model": model_name
+                    }
+                    if 'seed_key' in asset_config:
+                        metadata["seed_value"] = SEEDS.get(asset_config["seed_key"])
+                    
+                    with open(output_path, 'w') as f:
+                        json.dump(metadata, f, indent=2)
+                    
+                    # Save image
+                    image_path = output_dir / filename_png
+                    with open(image_path, "wb") as f:
+                        f.write(image_data)
+                    print(f"💾 Gemini Image saved: {image_path}")
+                    
+                    return {
+                        "success": True,
+                        "local_path": str(image_path),
+                        "filename": filename_png,
+                        "provider": "gemini"
+                    }
+                    
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                print(f"   ❌ Model {model_name} not found or not supported.")
+                continue
+            else:
+                 print(f"   ❌ HTTP Error: {e}")
+                 try:
+                    print(f"   Response: {e.read().decode('utf-8')}")
+                 except: pass
+                 # Don't break immediately, maybe try next model? 
+                 # Usually 400/403 means bad request or auth, but let's continue to be safe unless it's critical.
+                 continue
+        except Exception as e:
+            print(f"   ❌ Error: {e}")
+            continue
+
+    return {"success": False, "error": "All Gemini models failed."}
+
+
 def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
     """Generate a single asset using fal.ai"""
     print(f"\n{'='*60}")
@@ -254,10 +402,31 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         
         # Generate image
         print("⏳ Sending request to fal.ai...")
-        result = fal_client.subscribe(
-            asset_config["model"],
-            arguments=arguments,
-        )
+        try:
+            result = fal_client.subscribe(
+                asset_config["model"],
+                arguments=arguments,
+            )
+        except Exception as e:
+            error_msg = str(e).lower()
+            credit_indicators = [
+                "exhausted balance",
+                "insufficient credits",
+                "insufficient balance",
+                "user is locked",
+                "top up your balance",
+                "no credits remaining",
+                "credit limit exceeded",
+                "402"
+            ]
+            
+            if any(indicator in error_msg for indicator in credit_indicators):
+                print(f"\n💳 CREDIT ERROR DETECTED! ({str(e)})")
+                print(f"   Attempting fallback to Gemini (Imagen 3)...")
+                return generate_asset_with_gemini(asset_config, output_dir, manifest, version)
+            else:
+                raise e
+
         
         # Download and save
         if result and "images" in result and len(result["images"]) > 0:
@@ -397,13 +566,16 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
             print(f"   • {r['asset_id']}: {r['name']} - {r.get('error', 'Unknown error')}")
     
     # Save summary
-    summary_path = output_dir / "generation_summary.json"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    summary_path = output_dir / f"generation_summary_{timestamp}.json"
+    
     with open(summary_path, 'w') as f:
         json.dump({
             "total": len(results),
             "successful": len(successful),
             "failed": len(failed),
             "results": results,
+            "timestamp": timestamp
         }, f, indent=2)
     
     print(f"\n💾 Summary saved: {summary_path}")

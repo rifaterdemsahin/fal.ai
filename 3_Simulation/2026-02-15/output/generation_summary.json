@@ -8,63 +8,63 @@
       "name": "github_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_vscode",
       "name": "vscode_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_cursor",
       "name": "cursor_ai_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_n8n",
       "name": "n8n_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_anthropic",
       "name": "anthropic_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_openai",
       "name": "openai_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_deepseek",
       "name": "deepseek_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_google",
       "name": "google_gemini_logo",
       "priority": "HIGH",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "asset_id": "icon_shield",
       "name": "family_shield",
       "priority": "MEDIUM",
       "success": false,
-      "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+      "error": "HTTP Error 404: Not Found"
     }
   ]
 }
