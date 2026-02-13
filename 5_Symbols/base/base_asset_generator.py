@@ -7,6 +7,8 @@ Common functionality for all asset generators
 import os
 import json
 import urllib.request
+import urllib.error
+import base64
 import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -314,6 +316,138 @@ class BaseAssetGenerator(ABC):
         model = asset_config.get("model")
         # Use shared cost check function from generator_config
         return check_generation_cost(model)
+        
+    def generate_asset_with_gemini(
+        self,
+        asset_config: Dict,
+        version: int = 1
+    ) -> Dict:
+        """
+        Generate asset using Gemini (Imagen 3) API as fallback.
+        """
+        api_key = os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            print("❌ No GEMINI_API_KEY found for fallback.")
+            return {"success": False, "error": "No Gemini API Key"}
+
+        print(f"✨ Generating with Gemini (Imagen 3)...")
+        
+        # Endpoint for Imagen 3 on Generative Language API
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key={api_key}"
+        
+        headers = {"Content-Type": "application/json"}
+        
+        # Prepare payload
+        prompt = asset_config.get("prompt", "")
+        payload = {
+            "instances": [
+                {"prompt": prompt}
+            ],
+            "parameters": {
+                "sampleCount": 1,
+            }
+        }
+        
+        try:
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(url, data=data, headers=headers)
+            
+            with urllib.request.urlopen(req) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                
+                # Check for predictions
+                # Generative Language API usually returns "predictions" with "bytesBase64Encoded"
+                b64_data = None
+                if "predictions" in result and len(result["predictions"]) > 0:
+                    prediction = result["predictions"][0]
+                    if isinstance(prediction, dict):
+                         b64_data = prediction.get("bytesBase64Encoded")
+                    elif isinstance(prediction, str):
+                         b64_data = prediction
+                
+                if not b64_data:
+                     # Check alternate format if needed
+                     print(f"⚠️ Unexpected Gemini response format: {result.keys()}")
+                     return {"success": False, "error": "No image data in Gemini response"}
+                     
+                # Decode and save
+                image_data = base64.b64decode(b64_data)
+                
+                scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                
+                # Handle video fallback (Gemini only does images currently)
+                if self.asset_type == 'video':
+                    print("⚠️  Warning: Gemini fallback uses Imagen 3 (Image). Saving as PNG instead of MP4.")
+                    extension = 'png'
+                else:
+                    extension = self.get_file_extension(asset_config)
+                
+                # Append provider to name
+                name_with_provider = asset_config['name'] + "_gemini"
+                
+                base_filename = generate_filename(
+                    scene_num,
+                    self.asset_type,
+                    name_with_provider,
+                    version
+                )
+                filename_json = base_filename + '.json'
+                filename_asset = base_filename + '.' + extension
+                
+                # Save metadata
+                metadata = {
+                    **asset_config,
+                    "provider": "gemini",
+                    "filename": filename_asset,
+                }
+                if 'seed_key' in asset_config:
+                    metadata["seed_value"] = self.seeds.get(asset_config["seed_key"])
+                
+                metadata_path = self.output_dir / filename_json
+                with open(metadata_path, 'w') as f:
+                    json.dump(metadata, f, indent=2)
+                
+                asset_path = self.output_dir / filename_asset
+                with open(asset_path, "wb") as f:
+                    f.write(image_data)
+                    
+                print(f"💾 Gemini Asset saved: {asset_path}")
+                
+                # Optimize PNG if needed
+                if extension == 'png':
+                    print(f"🔧 Optimizing PNG for DaVinci Resolve...")
+                    self.optimize_png_for_resolve(asset_path)
+                    
+                # Add to manifest if available
+                if self.manifest:
+                    self.manifest.add_asset(
+                        filename=filename_asset,
+                        prompt=asset_config["prompt"],
+                        asset_type=self.asset_type,
+                        asset_id=asset_config.get("id", "unknown"),
+                        result_url="gemini-generated",
+                        local_path=str(asset_path),
+                        metadata={
+                            "scene": asset_config.get("scene", ""),
+                            "priority": asset_config.get("priority", ""),
+                            "model": "imagen-3.0-generate-001",
+                            "provider": "gemini"
+                        }
+                    )
+
+                return {
+                    "success": True, 
+                    "local_path": str(asset_path), 
+                    "provider": "gemini"
+                }
+                
+        except Exception as e:
+            print(f"❌ Gemini Fallback Error: {e}")
+            if hasattr(e, 'read'): # Handle HTTPError
+                try:
+                    print(f"   Response: {e.read().decode('utf-8')}")
+                except: pass
+            return {"success": False, "error": str(e)}
     
     def generate_asset(
         self,
@@ -411,10 +545,29 @@ class BaseAssetGenerator(ABC):
             
             # Generate asset
             print("⏳ Sending request to fal.ai...")
-            result = fal_client.subscribe(
-                asset_config["model"],
-                arguments=arguments,
-            )
+            result = None
+            try:
+                result = fal_client.subscribe(
+                    asset_config["model"],
+                    arguments=arguments,
+                )
+            except Exception as e:
+                error_msg = str(e)
+                print(f"❌ Error: {error_msg}")
+                
+                # Check for insufficient credits or payment required
+                is_credit_issue = self.is_credit_error(error_msg) or \
+                                  any(x in error_msg.lower() for x in ["payment", "credit", "balance", "quota", "insufficient", "402"])
+                
+                if is_credit_issue:
+                    print(f"\n💳 CREDIT ERROR DETECTED!")
+                    print(f"   Attempting fallback to Gemini (Imagen 3)...")
+                    return self.generate_asset_with_gemini(asset_config, version)
+                
+                return {
+                    "success": False,
+                    "error": error_msg,
+                }
             
             # Extract result URL
             result_url = self.extract_result_url(result, asset_config)
@@ -431,10 +584,14 @@ class BaseAssetGenerator(ABC):
             # Generate filename
             scene_num = extract_scene_number(asset_config.get('id', '0.0'))
             extension = self.get_file_extension(asset_config)
+            
+            # Append provider to name
+            name_with_provider = asset_config['name'] + "_fal"
+            
             base_filename = generate_filename(
                 scene_num,
                 self.asset_type,
-                asset_config['name'],
+                name_with_provider,
                 version
             )
             filename_json = base_filename + '.json'
@@ -443,6 +600,7 @@ class BaseAssetGenerator(ABC):
             # Save metadata
             metadata = {
                 **asset_config,
+                "provider": "fal",
                 "result_url": result_url,
                 "filename": filename_asset,
             }
@@ -514,6 +672,7 @@ class BaseAssetGenerator(ABC):
                         "scene": asset_config.get("scene", ""),
                         "priority": asset_config.get("priority", ""),
                         "model": asset_config.get("model", ""),
+                        "provider": "fal",
                     }
                 )
             
@@ -526,28 +685,11 @@ class BaseAssetGenerator(ABC):
         except Exception as e:
             error_msg = str(e)
             print(f"❌ Error: {error_msg}")
-            
-            # Check if this is a credit error
-            if self.is_credit_error(error_msg):
-                print(f"\n💳 CREDIT ERROR DETECTED!")
-                print(f"   Switching to dry-run mode for remaining assets...")
-                print(f"   You can view prompts and costs without making API calls.")
-                print(f"   Top up your balance at: https://fal.ai/dashboard/billing")
-                self.credits_exhausted = True
-                
-                return {
-                    "success": False,
-                    "error": error_msg,
-                    "credit_error": True,
-                    "prompt": asset_config['prompt'],
-                    "estimated_cost": MODEL_PRICING.get(asset_config.get("model", "unknown"), 0.0),
-                    "model": asset_config.get("model", "unknown"),
-                }
-            
             return {
                 "success": False,
                 "error": error_msg,
             }
+
     
     def process_queue(
         self,
