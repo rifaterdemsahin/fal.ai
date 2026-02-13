@@ -1,0 +1,13 @@
+{
+  "id": "music_02",
+  "name": "cta_energy_beatoven",
+  "priority": "HIGH",
+  "prompt": "High energy, motivational build-up music, cinematic, orchestral hybrid",
+  "model": "beatoven/music-generation",
+  "duration": 60,
+  "creativity": 16,
+  "refinement": 100,
+  "provider": "fal",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5e52/4C-7LkyvMNMeiGm5vM8UX_music_a32Smb.wav",
+  "filename": "000_music_cta_energy_beatoven_fal_v1.wav"
+}

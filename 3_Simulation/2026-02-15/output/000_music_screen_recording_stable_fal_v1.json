@@ -1,0 +1,11 @@
+{
+  "id": "music_03",
+  "name": "screen_recording_stable",
+  "priority": "MEDIUM",
+  "prompt": "Subtle background music, sweet, calm, lo-fi beats, gentle",
+  "model": "fal-ai/stable-audio",
+  "duration": 45,
+  "provider": "fal",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5e5d/-QhzbhjtPOssRTEJkn-Xz_tmpv09xy9nt.wav",
+  "filename": "000_music_screen_recording_stable_fal_v1.mp3"
+}

@@ -14,9 +14,9 @@ from base.generator_config import SEEDS, BRAND_COLORS
 class MusicAssetGenerator(BaseAssetGenerator):
     """Generator for music assets"""
     
-    def __init__(self):
+    def __init__(self, output_dir: Path = None):
         super().__init__(
-            output_dir=Path("./generated_music"),
+            output_dir=output_dir or Path("./generated_music"),
             seeds=SEEDS,
             brand_colors=BRAND_COLORS,
             asset_type="music"
@@ -153,7 +153,9 @@ class MusicAssetGenerator(BaseAssetGenerator):
 
 def main():
     """Main execution"""
-    generator = MusicAssetGenerator()
+    import sys
+    output_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else None
+    generator = MusicAssetGenerator(output_dir=output_dir)
     generator.run()
 
 
