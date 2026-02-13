@@ -35,12 +35,12 @@ except ImportError:
 
 # Import cost check function
 try:
-    from base.generator_config import check_generation_cost
+    from Base.generator_config import check_generation_cost
 except ImportError:
     # Fallback if running standalone
     import sys
     sys.path.append(str(Path(__file__).resolve().parent.parent))
-    from base.generator_config import check_generation_cost
+    from Base.generator_config import check_generation_cost
 
 # Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_icons")
@@ -413,14 +413,45 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
 
 def main():
     """Main execution"""
+    import argparse
+    parser = argparse.ArgumentParser(description="Fal.ai Batch Icon Generator")
+    parser.add_argument("--input", "-i", type=Path, help="Path to input JSON file containing icon definitions")
+    parser.add_argument("--output", "-o", type=Path, help="Path to output directory")
+    args = parser.parse_args()
+
+    # Determine input queue
+    queue = GENERATION_QUEUE
+    if args.input:
+        if not args.input.exists():
+            print(f"❌ Input file not found: {args.input}")
+            return
+        
+        try:
+            with open(args.input, 'r') as f:
+                queue = json.load(f)
+            print(f"✅ Loaded {len(queue)} icons from {args.input}")
+        except Exception as e:
+            print(f"❌ Error loading input file: {e}")
+            return
+
+    # Determine output directory
+    output_dir = args.output if args.output else DEFAULT_OUTPUT_DIR
+
     # Confirm before proceeding
     print("\n" + "="*60)
-    response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
-    if response not in ['yes', 'y']:
-        print("❌ Cancelled by user")
-        return
+    print(f"🚀 Starting generation for {len(queue)} icons")
+    print(f"📁 Output: {output_dir}")
+    if args.input:
+        print(f"📄 Input: {args.input}")
+    
+    # Skip confirmation if arguments are provided (assume automation), otherwise ask
+    if not args.input and not args.output:
+        response = input("🤔 Proceed with generation? (yes/no): ").strip().lower()
+        if response not in ['yes', 'y']:
+            print("❌ Cancelled by user")
+            return
         
-    process_queue(GENERATION_QUEUE, DEFAULT_OUTPUT_DIR)
+    process_queue(queue, output_dir)
 
 
 if __name__ == "__main__":

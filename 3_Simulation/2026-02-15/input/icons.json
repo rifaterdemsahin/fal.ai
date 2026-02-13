@@ -1,0 +1,128 @@
+[
+    {
+        "id": "icon_github",
+        "name": "github_logo",
+        "priority": "HIGH",
+        "scene": "General",
+        "seed_key": "SEED_003",
+        "prompt": "GitHub logo icon, minimalist flat design, octocat silhouette, black and white, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_vscode",
+        "name": "vscode_logo",
+        "priority": "HIGH",
+        "scene": "General",
+        "seed_key": "SEED_003",
+        "prompt": "Visual Studio Code logo icon, blue ribbon style, minimalist flat design, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_cursor",
+        "name": "cursor_ai_logo",
+        "priority": "HIGH",
+        "scene": "General",
+        "seed_key": "SEED_003",
+        "prompt": "Cursor AI code editor logo, minimalist modern tech icon, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_n8n",
+        "name": "n8n_logo",
+        "priority": "HIGH",
+        "scene": "General",
+        "seed_key": "SEED_003",
+        "prompt": "n8n workflow automation logo, orange and pink gradient nodes, minimalist flat design, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_anthropic",
+        "name": "anthropic_logo",
+        "priority": "HIGH",
+        "scene": "Scene 9",
+        "seed_key": "SEED_003",
+        "prompt": "Anthropic AI logo, minimalist geometrical shape, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_openai",
+        "name": "openai_logo",
+        "priority": "HIGH",
+        "scene": "Scene 9",
+        "seed_key": "SEED_003",
+        "prompt": "OpenAI logo, hexagon flower shape, minimalist black line art, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_deepseek",
+        "name": "deepseek_logo",
+        "priority": "HIGH",
+        "scene": "Scene 9",
+        "seed_key": "SEED_003",
+        "prompt": "DeepSeek AI logo, blue whale or abstract blue shape, minimalist flat design, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_google",
+        "name": "google_gemini_logo",
+        "priority": "HIGH",
+        "scene": "Scene 9",
+        "seed_key": "SEED_003",
+        "prompt": "Google Gemini logo, star sparkle shape, blue and purple gradient, minimalist flat design, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    },
+    {
+        "id": "icon_shield",
+        "name": "family_shield",
+        "priority": "MEDIUM",
+        "scene": "Scene 6",
+        "seed_key": "SEED_003",
+        "prompt": "Security shield icon, family friendly badge, soft rounded edges, warm colors, clean vector style, isolated on white background",
+        "model": "fal-ai/flux/dev",
+        "image_size": {
+            "width": 1024,
+            "height": 1024
+        },
+        "num_inference_steps": 28
+    }
+]

@@ -73,3 +73,8 @@ The assets produced here are designed for immediate consumption by the **DaVinci
 | **3D** | Fusion-ready motion graphics | GLB / OBJ |
 
 > **Note:** Always use the `manifest.json` generated in this folder to verify asset integrity before importing into your NLE (Non-Linear Editor).
+
+Classic Prompt to ask to generate
+@2026-02-15 generate the icons this week and use the source @input > and place it to the output @output
+
+---
