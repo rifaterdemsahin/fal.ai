@@ -1,0 +1,36 @@
+{
+  "total": 3,
+  "successful": 3,
+  "failed": 0,
+  "estimated_cost": 0.75,
+  "budget_limit": 2.0,
+  "results": [
+    {
+      "asset_id": "V_01",
+      "name": "agentic_workflows_overview",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5d94/Bt4HAcKN5Nnu2Gi40vVGW_output.mp4",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/generated_video/000_video_agentic_workflows_overview_v1.mp4",
+      "filename": "000_video_agentic_workflows_overview_v1.mp4"
+    },
+    {
+      "asset_id": "V_02",
+      "name": "automation_in_action",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5da9/Ddqkhi-ZLEGyJ_BlFC5Ie_output.mp4",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/generated_video/000_video_automation_in_action_v1.mp4",
+      "filename": "000_video_automation_in_action_v1.mp4"
+    },
+    {
+      "asset_id": "V_03",
+      "name": "cloud_infrastructure",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5dbb/hEeYAnyIreCC_DzCwyl8S_output.mp4",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/generated_video/000_video_cloud_infrastructure_v1.mp4",
+      "filename": "000_video_cloud_infrastructure_v1.mp4"
+    }
+  ]
+}

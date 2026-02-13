@@ -1,0 +1,15 @@
+{
+  "id": "V_03",
+  "name": "cloud_infrastructure",
+  "priority": "MEDIUM",
+  "scene": "Scene 3",
+  "seed_key": "SEED_VIDEO",
+  "prompt": "Abstract cloud computing infrastructure, servers and data centers, interconnected systems, modern technology aesthetic, cinematic lighting",
+  "model": "fal-ai/minimax/video-01",
+  "duration_seconds": 5,
+  "aspect_ratio": "16:9",
+  "search_query": "cloud infrastructure data center",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5dbb/hEeYAnyIreCC_DzCwyl8S_output.mp4",
+  "generated_at": 1771022679.624672,
+  "filename": "000_video_cloud_infrastructure_v1.mp4"
+}
