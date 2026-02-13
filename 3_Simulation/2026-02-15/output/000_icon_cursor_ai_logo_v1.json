@@ -1,0 +1,17 @@
+{
+  "id": "icon_cursor",
+  "name": "cursor_ai_logo",
+  "priority": "HIGH",
+  "scene": "General",
+  "seed_key": "SEED_003",
+  "prompt": "Cursor AI code editor logo, minimalist modern tech icon, clean vector style, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8e5313/Swqc5aBQEBoVrKr6HkC0M.jpg",
+  "seed_value": 789012,
+  "filename": "000_icon_cursor_ai_logo_v1.png"
+}

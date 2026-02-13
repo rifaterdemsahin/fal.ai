@@ -1,0 +1,17 @@
+{
+  "id": "icon_github",
+  "name": "github_logo",
+  "priority": "HIGH",
+  "scene": "General",
+  "seed_key": "SEED_003",
+  "prompt": "GitHub logo icon, minimalist flat design, octocat silhouette, black and white, clean vector style, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8e5312/blx9fjCfzWnXH2rFsT_la.jpg",
+  "seed_value": 789012,
+  "filename": "000_icon_github_logo_v1.png"
+}

@@ -240,51 +240,116 @@ GENERATION_QUEUE = [
 
 
 
+
 def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
-    """Generate asset using Gemini (Imagen 3) API as fallback."""
+    """
+    Generate asset using Gemini (Imagen 3) API as fallback.
+    Uses the new google-genai SDK (v1.0+) as recommended.
+    """
     api_key = os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("❌ No GEMINI_API_KEY found for fallback.")
         return {"success": False, "error": "No Gemini API Key"}
 
-    print(f"✨ Generating with Gemini...")
+    print(f"✨ Generating with Gemini (Imagen 3)...")
 
+    # Try using the new google-genai SDK first
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=api_key)
+        from google import genai
+        from google.genai import types
         
-        # Try to find a suitable model
+        client = genai.Client(api_key=api_key)
+        
         model_name = 'imagen-3.0-generate-001'
+        prompt = asset_config.get("prompt", "")
         
-        # Helper to try generation
-        def try_generate(model_id, prompt):
-             print(f"   Trying model: {model_id}")
-             # The SDK for Imagen is slightly different, actually most current SDKs support 
-             # genai.ImageGenerationModel(model_id).generate_images(prompt=prompt)
-             # But for standard Gemini it's different.
-             # Let's check if the SDK supports image generation directly.
-             # If not, we might need to use the REST API still but with better model selection.
-             # However, let's try the REST API with a fallback list since we know SDK might be tricky with Imagen versions.
-             return None
+        print(f"   Attempting with SDK model: {model_name}")
+        
+        # Generate image using SDK
+        response = client.models.generate_images(
+            model=model_name,
+            prompt=prompt,
+            config=types.GenerateImagesConfig(
+                number_of_images=1,
+            )
+        )
+        
+        if response.generated_images:
+            image = response.generated_images[0]
+            
+            # Generate filename
+            if generate_filename and extract_scene_number:
+                scene_num = extract_scene_number(asset_config.get('id', '0.0'))
+                base_filename = generate_filename(
+                    scene_num,
+                    'icon',
+                    asset_config['name'] + "_gemini",
+                    version
+                )
+                filename_json = base_filename + '.json'
+                filename_png = base_filename + '.png'
+            else:
+                filename_json = f"{asset_config['name']}_gemini.json"
+                filename_png = f"{asset_config['name']}_gemini.png"
+            
+            # Save metadata
+            output_path = output_dir / filename_json
+            metadata = {
+                **asset_config,
+                "provider": "gemini",
+                "filename": filename_png,
+                "model": model_name
+            }
+            if 'seed_key' in asset_config:
+                metadata["seed_value"] = SEEDS.get(asset_config["seed_key"])
+            
+            with open(output_path, 'w') as f:
+                json.dump(metadata, f, indent=2)
+            
+            # Save image
+            image_path = output_dir / filename_png
+            image.image.save(image_path)
+            print(f"💾 Gemini Image saved: {image_path}")
+            
+            # Add to manifest
+            if manifest:
+                manifest.add_asset(
+                    filename=filename_png,
+                    prompt=prompt,
+                    asset_type="icon",
+                    asset_id=asset_config.get("id", "unknown"),
+                    result_url="gemini-generated",
+                    local_path=str(image_path),
+                    metadata={
+                        "model": model_name,
+                        "provider": "gemini"
+                    }
+                )
 
+            return {
+                "success": True,
+                "local_path": str(image_path),
+                "filename": filename_png,
+                "provider": "gemini"
+            }
+            
     except ImportError:
-        pass
-        
-    # REST API Fallback with multiple models
+        print("⚠️  google-genai SDK not found. Falling back to REST API...")
+    except Exception as e:
+        print(f"❌ SDK Generation Error: {e}")
+        print("   Falling back to REST API...")
+
+    # REST API Fallback (Legacy / Manual)
     models_to_try = [
         "models/imagen-3.0-generate-001",
         "models/image-generation-001",
-        "models/gemini-1.5-pro", # Try multimodal models?
-        "models/gemini-2.0-flash-exp",
     ]
     
     headers = {"Content-Type": "application/json"}
     prompt = asset_config.get("prompt", "")
     
     for model_name in models_to_try:
-
-
-        print(f"   Attempting with model: {model_name}")
+        print(f"   Attempting with REST model: {model_name}")
         url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:predict?key={api_key}"
         
         payload = {
@@ -303,7 +368,6 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
             with urllib.request.urlopen(req) as response:
                 result = json.loads(response.read().decode("utf-8"))
                 
-                # Check for predictions
                 b64_data = None
                 if "predictions" in result and len(result["predictions"]) > 0:
                     prediction = result["predictions"][0]
@@ -313,63 +377,33 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
                             b64_data = prediction
                 
                 if b64_data:
-                    # Success!
                     image_data = base64.b64decode(b64_data)
                     
-                    # Generate filename
+                    # (Filename gen duplication omitted for brevity, reusing logic)
                     if generate_filename and extract_scene_number:
                         scene_num = extract_scene_number(asset_config.get('id', '0.0'))
-                        base_filename = generate_filename(
-                            scene_num,
-                            'icon',
-                            asset_config['name'] + "_gemini",
-                            version
-                        )
+                        base_filename = generate_filename(scene_num, 'icon', asset_config['name'] + "_gemini", version)
                         filename_json = base_filename + '.json'
                         filename_png = base_filename + '.png'
                     else:
                         filename_json = f"{asset_config['name']}_gemini.json"
                         filename_png = f"{asset_config['name']}_gemini.png"
                     
-                    # Save metadata
                     output_path = output_dir / filename_json
-                    metadata = {
-                        **asset_config,
-                        "provider": "gemini",
-                        "filename": filename_png,
-                        "model": model_name
-                    }
-                    if 'seed_key' in asset_config:
-                        metadata["seed_value"] = SEEDS.get(asset_config["seed_key"])
+                    metadata = {**asset_config, "provider": "gemini", "filename": filename_png, "model": model_name}
+                    with open(output_path, 'w') as f: json.dump(metadata, f, indent=2)
                     
-                    with open(output_path, 'w') as f:
-                        json.dump(metadata, f, indent=2)
-                    
-                    # Save image
                     image_path = output_dir / filename_png
-                    with open(image_path, "wb") as f:
-                        f.write(image_data)
+                    with open(image_path, "wb") as f: f.write(image_data)
                     print(f"💾 Gemini Image saved: {image_path}")
                     
-                    return {
-                        "success": True,
-                        "local_path": str(image_path),
-                        "filename": filename_png,
-                        "provider": "gemini"
-                    }
-                    
+                    return {"success": True, "local_path": str(image_path), "filename": filename_png, "provider": "gemini"}
+
         except urllib.error.HTTPError as e:
             if e.code == 404:
-                print(f"   ❌ Model {model_name} not found or not supported.")
-                continue
+                print(f"   ❌ Model {model_name} not found.")
             else:
                  print(f"   ❌ HTTP Error: {e}")
-                 try:
-                    print(f"   Response: {e.read().decode('utf-8')}")
-                 except: pass
-                 # Don't break immediately, maybe try next model? 
-                 # Usually 400/403 means bad request or auth, but let's continue to be safe unless it's critical.
-                 continue
         except Exception as e:
             print(f"   ❌ Error: {e}")
             continue

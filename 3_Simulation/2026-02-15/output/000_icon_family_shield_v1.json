@@ -1,0 +1,17 @@
+{
+  "id": "icon_shield",
+  "name": "family_shield",
+  "priority": "MEDIUM",
+  "scene": "Scene 6",
+  "seed_key": "SEED_003",
+  "prompt": "Security shield icon, family friendly badge, soft rounded edges, warm colors, clean vector style, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8e5315/AArQYy1rJUeWz40oth_GY.jpg",
+  "seed_value": 789012,
+  "filename": "000_icon_family_shield_v1.png"
+}

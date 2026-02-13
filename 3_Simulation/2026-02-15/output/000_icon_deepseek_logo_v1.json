@@ -1,0 +1,17 @@
+{
+  "id": "icon_deepseek",
+  "name": "deepseek_logo",
+  "priority": "HIGH",
+  "scene": "Scene 9",
+  "seed_key": "SEED_003",
+  "prompt": "DeepSeek AI logo, blue whale or abstract blue shape, minimalist flat design, clean vector style, isolated on white background",
+  "model": "fal-ai/flux/dev",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "result_url": "https://v3b.fal.media/files/b/0a8e5314/5PsEmoWE75IVL95J1FXPV.jpg",
+  "seed_value": 789012,
+  "filename": "000_icon_deepseek_logo_v1.png"
+}
