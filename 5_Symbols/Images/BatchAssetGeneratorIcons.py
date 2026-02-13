@@ -47,12 +47,12 @@ except ImportError:
 
 # Import cost check function
 try:
-    from Base.generator_config import check_generation_cost
+    from Base.generator_config import check_generation_cost, MODEL_PRICING
 except ImportError:
     # Fallback if running standalone
     import sys
     sys.path.append(str(Path(__file__).resolve().parent.parent))
-    from Base.generator_config import check_generation_cost
+    from Base.generator_config import check_generation_cost, MODEL_PRICING
 
 # Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_icons")
@@ -330,7 +330,8 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
                 "success": True,
                 "local_path": str(image_path),
                 "filename": filename_png,
-                "provider": "gemini"
+                "provider": "gemini",
+                "cost": 0.0
             }
             
     except ImportError:
@@ -397,7 +398,7 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
                     with open(image_path, "wb") as f: f.write(image_data)
                     print(f"💾 Gemini Image saved: {image_path}")
                     
-                    return {"success": True, "local_path": str(image_path), "filename": filename_png, "provider": "gemini"}
+                    return {"success": True, "local_path": str(image_path), "filename": filename_png, "provider": "gemini", "cost": 0.0}
 
         except urllib.error.HTTPError as e:
             if e.code == 404:
@@ -528,6 +529,7 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 "url": image_url,
                 "local_path": str(image_path),
                 "filename": filename_png,
+                "cost": MODEL_PRICING.get(asset_config["model"], 0.0)
             }
         else:
             print(f"❌ Generation failed: No images in result")
@@ -589,13 +591,16 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
     successful = [r for r in results if r["success"]]
     failed = [r for r in results if not r["success"]]
     
+    total_cost = sum(r.get("cost", 0.0) for r in results)
+    
     print(f"\n✅ Successful: {len(successful)}/{len(results)}")
     print(f"❌ Failed: {len(failed)}/{len(results)}")
+    print(f"💰 Total Cost: ${total_cost:.4f}")
     
     if successful:
         print("\n✅ SUCCESSFUL GENERATIONS:")
         for r in successful:
-            print(f"   • {r['asset_id']}: {r['name']} ({r['priority']})")
+            print(f"   • {r['asset_id']}: {r['name']} ({r['priority']}) - ${r.get('cost', 0.0):.4f}")
     
     if failed:
         print("\n❌ FAILED GENERATIONS:")
@@ -611,6 +616,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
             "total": len(results),
             "successful": len(successful),
             "failed": len(failed),
+            "total_cost": total_cost,
             "results": results,
             "timestamp": timestamp
         }, f, indent=2)

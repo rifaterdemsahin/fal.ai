@@ -2,6 +2,7 @@
   "total": 9,
   "successful": 9,
   "failed": 0,
+  "total_cost": 0.45,
   "results": [
     {
       "asset_id": "icon_github",
@@ -10,7 +11,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5312/blx9fjCfzWnXH2rFsT_la.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_github_logo_v1.png",
-      "filename": "000_icon_github_logo_v1.png"
+      "filename": "000_icon_github_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_vscode",
@@ -19,7 +21,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5313/xpwMBdiN1XpJdYCIap_PM.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_vscode_logo_v1.png",
-      "filename": "000_icon_vscode_logo_v1.png"
+      "filename": "000_icon_vscode_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_cursor",
@@ -28,7 +31,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5313/Swqc5aBQEBoVrKr6HkC0M.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_cursor_ai_logo_v1.png",
-      "filename": "000_icon_cursor_ai_logo_v1.png"
+      "filename": "000_icon_cursor_ai_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_n8n",
@@ -37,7 +41,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5313/H5uMn7TjSIvaOPrYVERuC.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_n8n_logo_v1.png",
-      "filename": "000_icon_n8n_logo_v1.png"
+      "filename": "000_icon_n8n_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_anthropic",
@@ -46,7 +51,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5314/1DrTwxZT65K7NG6hD4V_r.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_anthropic_logo_v1.png",
-      "filename": "000_icon_anthropic_logo_v1.png"
+      "filename": "000_icon_anthropic_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_openai",
@@ -55,7 +61,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5314/U3iLB-yYIPhvZ7kRHLpgB.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_openai_logo_v1.png",
-      "filename": "000_icon_openai_logo_v1.png"
+      "filename": "000_icon_openai_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_deepseek",
@@ -64,7 +71,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5314/5PsEmoWE75IVL95J1FXPV.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_deepseek_logo_v1.png",
-      "filename": "000_icon_deepseek_logo_v1.png"
+      "filename": "000_icon_deepseek_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_google",
@@ -73,7 +81,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5315/iH4MuOXaV86n4QdGcHwz0.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_google_gemini_logo_v1.png",
-      "filename": "000_icon_google_gemini_logo_v1.png"
+      "filename": "000_icon_google_gemini_logo_v1.png",
+      "cost": 0.05
     },
     {
       "asset_id": "icon_shield",
@@ -82,7 +91,8 @@
       "success": true,
       "url": "https://v3b.fal.media/files/b/0a8e5315/AArQYy1rJUeWz40oth_GY.jpg",
       "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_family_shield_v1.png",
-      "filename": "000_icon_family_shield_v1.png"
+      "filename": "000_icon_family_shield_v1.png",
+      "cost": 0.05
     }
   ],
   "timestamp": "20260213_151015"
