@@ -182,7 +182,7 @@ timeline
 - ✅ Batch processing system ([`MasterAssetGenerator.py`](../5_Symbols/MasterAssetGenerator.py))
 - ✅ Mermaid diagram generation ([`BulkMermaidGenerator.py`](../5_Symbols/Diagrams/BulkMermaidGenerator.py))
 - ✅ SVG diagram generation ([`BulkSVGGenerator.py`](../5_Symbols/Diagrams/BulkSVGGenerator.py))
-- 🔄 Gemini agent integration (planned)
+- 🔄 Gemini integration (partial: prompt enhancement + fallback generation working, full script analysis in progress)
 
 **Documentation**:
 - [`.github/workflows/README.md`](../.github/workflows/README.md)
@@ -234,6 +234,7 @@ timeline
 - **Visual Documentation**:
   - 📊 **Mermaid Diagrams**: Workflow and architecture visualizations
   - 🎨 **SVG Diagrams**: Professional vector graphics for explanations
+  - 📈 **Infographics**: Data visualization and overlay graphics for scenes
   - 🧩 **Icons**: Minimalist assets for UI overlays
   - 📺 **Lower Thirds**: Text overlays for speaker identification
   - 📖 **Chapter Markers**: Visual breaks for video segments
