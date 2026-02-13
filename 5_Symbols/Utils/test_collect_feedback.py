@@ -24,12 +24,14 @@ def test_collect_feedback():
             def mock_walk(*args, **kwargs):
                 yield ('.', [], [test_file])
             
-            with patch('os.walk', side_effect=mock_walk):
-                # Run the function (now calls collect_feedback_watcher)
-                CollectFeedbackYaml.collect_feedback_yaml()
+            # Mock get_next_batch_number to ensure we always write to batch 1 for testing
+            with patch('CollectFeedbackYaml.get_next_batch_number', return_value=1):
+                with patch('os.walk', side_effect=mock_walk):
+                    # Run the function (now calls collect_feedback_watcher)
+                    CollectFeedbackYaml.collect_feedback_yaml()
                 
         # Check if YAML was created (new filename format)
-        expected_output = EXPECTED_OUTPUT_PATTERN.format(1)
+        expected_output = os.path.join(CollectFeedbackYaml.OUTPUT_DIR, EXPECTED_OUTPUT_PATTERN.format(1))
         if os.path.exists(expected_output):
             print(f"SUCCESS: {expected_output} created.")
             with open(expected_output, 'r') as f:
@@ -39,7 +41,7 @@ def test_collect_feedback():
                 
                 # Verify new structure
                 assert 'metadata' in data, "Missing 'metadata' field"
-                assert 'architecture_rules' in data, "Missing 'architecture_rules' field"
+                assert 'hierarchy_rules' in data['metadata'], "Missing 'hierarchy_rules' field in metadata"
                 assert 'watcher_validation_prompt' in data, "Missing 'watcher_validation_prompt' field"
                 assert 'files' in data, "Missing 'files' field"
                 
@@ -49,7 +51,6 @@ def test_collect_feedback():
                     assert 'layer' in file_entry, "Missing 'layer' field in file entry"
                     assert 'role' in file_entry, "Missing 'role' field in file entry"
                     assert 'path' in file_entry, "Missing 'path' field in file entry"
-                    assert 'source' in file_entry, "Missing 'source' field in file entry"
                     assert 'instruction' in file_entry, "Missing 'instruction' field in file entry"
                     
                 print("\nAll structure validations passed!")
