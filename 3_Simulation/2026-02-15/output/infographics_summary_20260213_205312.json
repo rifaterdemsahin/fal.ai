@@ -1,0 +1,212 @@
+{
+  "generator": "BatchAssetGeneratorInfographics",
+  "model": "fal-ai/flux/schnell",
+  "timestamp": "20260213_205312",
+  "total": 25,
+  "successful": 25,
+  "failed": 0,
+  "total_cost_usd": 0.25000000000000006,
+  "budget_usd": 0.5,
+  "results": [
+    {
+      "asset_id": "IG.01",
+      "name": "ig_01_240_workflows_stat",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b1f/EGkQnCpRsPDeUaaKAIZZs.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_01_240_workflows_stat_20260213_205312.png",
+      "filename": "ig_01_240_workflows_stat_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.02",
+      "name": "ig_02_pivot_title_card",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b1f/_JGEcN1owOwtA7uiKEsBn.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_02_pivot_title_card_20260213_205312.png",
+      "filename": "ig_02_pivot_title_card_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.03",
+      "name": "ig_03_static_vs_dynamic",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b1f/Y8F9_GBu8c_YaAQn782uJ.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_03_static_vs_dynamic_20260213_205312.png",
+      "filename": "ig_03_static_vs_dynamic_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.04",
+      "name": "ig_04_breaking_chains",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b20/Ai0guaJG3CkRGrv1tutPc.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_04_breaking_chains_20260213_205312.png",
+      "filename": "ig_04_breaking_chains_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.05",
+      "name": "ig_05_clone_steps_checklist",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b20/Nc0CvUDL_kC-2yZ60lDhv.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_05_clone_steps_checklist_20260213_205312.png",
+      "filename": "ig_05_clone_steps_checklist_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.06",
+      "name": "ig_06_tool_comparison_table",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b20/I-h4gmXXsvpusSyXRPI4n.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_06_tool_comparison_table_20260213_205312.png",
+      "filename": "ig_06_tool_comparison_table_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.07",
+      "name": "ig_07_cloning_flowchart",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b20/_8C1HdSlIg3dshg5dqHZi.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_07_cloning_flowchart_20260213_205312.png",
+      "filename": "ig_07_cloning_flowchart_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.08",
+      "name": "ig_08_3d_printer_progress",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b20/aWt9FkpA5VrLqE8BlL2oX.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_08_3d_printer_progress_20260213_205312.png",
+      "filename": "ig_08_3d_printer_progress_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.09",
+      "name": "ig_09_consistency_quote",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b21/Ja4fZ94zLctnCdXwn0wuA.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_09_consistency_quote_20260213_205312.png",
+      "filename": "ig_09_consistency_quote_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.10",
+      "name": "ig_10_family_friendly_badge",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b21/DGh62CfqC8RB-2FqYfpO3.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_10_family_friendly_badge_20260213_205312.png",
+      "filename": "ig_10_family_friendly_badge_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.11",
+      "name": "ig_11_tech_logos_layout",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b21/9tsMTB_CUcYgWbp1t8FuM.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_11_tech_logos_layout_20260213_205312.png",
+      "filename": "ig_11_tech_logos_layout_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.12",
+      "name": "ig_12_speed_1000x",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b21/e1538oRUPlOuXT5BdeW3m.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_12_speed_1000x_20260213_205312.png",
+      "filename": "ig_12_speed_1000x_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.13",
+      "name": "ig_13_speed_comparison_bars",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b22/LCZua3CbaVhPBCssUR_zX.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_13_speed_comparison_bars_20260213_205312.png",
+      "filename": "ig_13_speed_comparison_bars_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.14",
+      "name": "ig_14_llm_claude_card",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b22/uj3wUpKv92hnJIK0S3qCQ.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_14_llm_claude_card_20260213_205312.png",
+      "filename": "ig_14_llm_claude_card_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.15",
+      "name": "ig_15_llm_chatgpt_card",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b22/HCNv7vXD3PX96cxWu3cf6.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_15_llm_chatgpt_card_20260213_205312.png",
+      "filename": "ig_15_llm_chatgpt_card_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.16",
+      "name": "ig_16_llm_deepseek_card",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b22/PWU0uTdLFi3ujsOgXoKjD.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_16_llm_deepseek_card_20260213_205312.png",
+      "filename": "ig_16_llm_deepseek_card_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.17",
+      "name": "ig_17_llm_gemini_card",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b22/GbSs4vNlMQUSPkLPITzEP.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_17_llm_gemini_card_20260213_205312.png",
+      "filename": "ig_17_llm_gemini_card_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.18",
+      "name": "ig_18_100_tablets_stat",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b23/TnlU471eWIWsKRNqnbszi.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_18_100_tablets_stat_20260213_205312.png",
+      "filename": "ig_18_100_tablets_stat_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.19",
+      "name": "ig_19_n8n_workflow_diagram",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b23/S7igODSVetuYJeiA30Bhz.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_19_n8n_workflow_diagram_20260213_205312.png",
+      "filename": "ig_19_n8n_workflow_diagram_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.20",
+      "name": "ig_20_internet_kill_switch",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b23/HuW07n7GEwtDlY-2HPJDo.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_20_internet_kill_switch_20260213_205312.png",
+      "filename": "ig_20_internet_kill_switch_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.21",
+      "name": "ig_21_37_commits_counter",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b23/39LjqUR_v7Q72gcefMhNX.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_21_37_commits_counter_20260213_205312.png",
+      "filename": "ig_21_37_commits_counter_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.22",
+      "name": "ig_22_cicd_pipeline",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b24/VcROPJ27Z5H5VzadsrlWt.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_22_cicd_pipeline_20260213_205312.png",
+      "filename": "ig_22_cicd_pipeline_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.23",
+      "name": "ig_23_success_metrics_dashboard",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b24/J-uLqh932E_CI1Owo7B_l.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_23_success_metrics_dashboard_20260213_205312.png",
+      "filename": "ig_23_success_metrics_dashboard_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.24",
+      "name": "ig_24_call_to_action",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b24/ohiHzXZKK344JdudUDd86.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_24_call_to_action_20260213_205312.png",
+      "filename": "ig_24_call_to_action_20260213_205312.png"
+    },
+    {
+      "asset_id": "IG.25",
+      "name": "ig_25_zero_capital_quote",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b24/84nu35jzG-US2lOyLbF0o.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/ig_25_zero_capital_quote_20260213_205312.png",
+      "filename": "ig_25_zero_capital_quote_20260213_205312.png"
+    }
+  ]
+}
