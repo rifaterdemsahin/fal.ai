@@ -32,6 +32,7 @@ except ImportError:
 # Import asset utilities
 try:
     from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+    from Utils.prompt_enhancer import enhance_prompt
 except ImportError:
     # Fallback if running standalone
     import sys
@@ -39,20 +40,22 @@ except ImportError:
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     try:
         from Utils.asset_utils import generate_filename, extract_scene_number, ManifestTracker
+        from Utils.prompt_enhancer import enhance_prompt
     except ImportError:
-        print("⚠️  asset_utils not found. Using legacy naming convention.")
+        print("⚠️  asset_utils or prompt_enhancer not found. Using legacy naming and no enhancement.")
         generate_filename = None
         extract_scene_number = None
         ManifestTracker = None
+        enhance_prompt = lambda p, **kwargs: p  # No-op fallback
 
 # Import cost check function
 try:
-    from Base.generator_config import check_generation_cost, MODEL_PRICING
+    from base.generator_config import check_generation_cost, MODEL_PRICING
 except ImportError:
     # Fallback if running standalone
     import sys
     sys.path.append(str(Path(__file__).resolve().parent.parent))
-    from Base.generator_config import check_generation_cost, MODEL_PRICING
+    from base.generator_config import check_generation_cost, MODEL_PRICING
 
 # Configuration
 DEFAULT_OUTPUT_DIR = Path("./generated_icons")
@@ -251,7 +254,12 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
         print("❌ No GEMINI_API_KEY found for fallback.")
         return {"success": False, "error": "No Gemini API Key"}
 
+    # Construct color palette string
+    color_palette = ", ".join([f"{k.replace('_', ' ').title()}: {v}" for k, v in BRAND_COLORS.items()])
+    color_instruction = f" Use this consistent color palette: {color_palette}."
+
     print(f"✨ Generating with Gemini (Imagen 3)...")
+    print(f"   🎨 Color Palette: {color_palette}")
 
     # Try using the new google-genai SDK first
     try:
@@ -269,7 +277,7 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
         client = genai.Client(api_key=api_key)
         
         model_name = 'imagen-3.0-generate-001'
-        prompt = asset_config.get("prompt", "")
+        prompt = asset_config.get("prompt", "") + color_instruction
         
         print(f"   Attempting with SDK model: {model_name}")
         
@@ -350,12 +358,14 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
 
     # REST API Fallback (Legacy / Manual)
     models_to_try = [
+        "models/imagen-4.0-generate-001",
+        "models/imagen-4.0-fast-generate-001",
         "models/imagen-3.0-generate-001",
         "models/image-generation-001",
     ]
     
     headers = {"Content-Type": "application/json"}
-    prompt = asset_config.get("prompt", "")
+    prompt = asset_config.get("prompt", "") + color_instruction
     
     for model_name in models_to_try:
         print(f"   Attempting with REST model: {model_name}")
@@ -442,9 +452,29 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
                 "error": "Skipped due to cost exceeding threshold",
             }
         
+        # Construct color palette string
+        color_palette = ", ".join([f"{k.replace('_', ' ').title()}: {v}" for k, v in BRAND_COLORS.items()])
+        color_instruction = f" Strictly use this consistent color palette for the icon design: {color_palette}."
+
+        # Enhance prompt if available
+        base_prompt = asset_config["prompt"]
+        final_prompt = base_prompt
+        
+        if enhance_prompt:
+            print(f"✨ Enhancing prompt with Gemini (icon)...")
+            enhanced_prompt = enhance_prompt(base_prompt + color_instruction, asset_type='icon')
+            if enhanced_prompt and enhanced_prompt != base_prompt:
+                print(f"   Original: {base_prompt[:50]}...")
+                print(f"   Enhanced: {enhanced_prompt[:50]}...")
+                final_prompt = enhanced_prompt
+            else:
+                final_prompt = base_prompt + color_instruction # Fallback to appending if enhancement fails or returns same
+        else:
+            final_prompt = base_prompt + color_instruction
+
         # Prepare arguments
         arguments = {
-            "prompt": asset_config["prompt"],
+            "prompt": final_prompt,
             "image_size": asset_config["image_size"],
             "num_inference_steps": asset_config["num_inference_steps"],
             "seed": SEEDS[asset_config["seed_key"]],
