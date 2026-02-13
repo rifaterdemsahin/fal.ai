@@ -412,8 +412,13 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
     return {"success": False, "error": "All Gemini models failed."}
 
 
-def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1) -> Dict:
-    """Generate a single asset using fal.ai"""
+def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[object] = None, version: int = 1, provider: str = "auto") -> Dict:
+    """Generate a single asset using fal.ai or fallback to Gemini"""
+    
+    # Force Gemini provider if requested
+    if provider == "gemini":
+        return generate_asset_with_gemini(asset_config, output_dir, manifest, version)
+        
     print(f"\n{'='*60}")
     print(f"🎨 Generating Icon: {asset_config['name']}")
     print(f"   Scene: {asset_config['scene']}")
@@ -539,20 +544,24 @@ def generate_asset(asset_config: Dict, output_dir: Path, manifest: Optional[obje
         print(f"❌ Error generating asset: {str(e)}")
         return {"success": False, "error": str(e)}
 
-def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object] = None) -> List[Dict]:
+def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object] = None, provider: str = "auto") -> List[Dict]:
     """Process a queue of icons to generate"""
     print(f"\n{'='*60}")
     print("🚀 FAL.AI BATCH ICON GENERATOR")
     print("   Project: The Agentic Era - Managing 240+ Workflows")
     print("="*60)
     
-    # Check API key
-    api_key = os.environ.get("FAL_KEY")
-    if not api_key:
-        print("\n❌ ERROR: FAL_KEY environment variable not set")
-        print("   Set it with: export FAL_KEY='your-api-key-here'")
-        print("   Get your key from: https://fal.ai/dashboard/keys")
-        return []
+    # Check API key if using fal or auto
+    if provider in ["fal", "auto"]:
+        api_key = os.environ.get("FAL_KEY")
+        if not api_key:
+            if provider == "fal":
+                print("\n❌ ERROR: FAL_KEY environment variable not set")
+                return []
+            else:
+                print("\n⚠️ FAL_KEY not found. Switching to Gemini only.")
+                provider = "gemini" 
+
     
     print(f"\n✅ API Key found")
     print(f"📁 Output directory: {output_dir.absolute()}")
@@ -575,7 +584,7 @@ def process_queue(queue: List[Dict], output_dir: Path, manifest: Optional[object
         print(f"# Icon {i}/{len(queue)}")
         print(f"{'#'*60}")
         
-        result = generate_asset(asset, output_dir, manifest)
+        result = generate_asset(asset, output_dir, manifest, provider=provider)
         results.append({
             "asset_id": asset["id"],
             "name": asset["name"],
@@ -632,6 +641,7 @@ def main():
     parser = argparse.ArgumentParser(description="Fal.ai Batch Icon Generator")
     parser.add_argument("--input", "-i", type=Path, help="Path to input JSON file containing icon definitions")
     parser.add_argument("--output", "-o", type=Path, help="Path to output directory")
+    parser.add_argument("--provider", "-p", choices=["fal", "gemini", "auto"], default="auto", help="Force specific provider")
     args = parser.parse_args()
 
     # Determine input queue
@@ -658,6 +668,7 @@ def main():
     print(f"📁 Output: {output_dir}")
     if args.input:
         print(f"📄 Input: {args.input}")
+    print(f"🤖 Provider: {args.provider}")
     
     # Skip confirmation if arguments are provided (assume automation), otherwise ask
     if not args.input and not args.output:
@@ -666,7 +677,7 @@ def main():
             print("❌ Cancelled by user")
             return
         
-    process_queue(queue, output_dir)
+    process_queue(queue, output_dir, provider=args.provider)
 
 
 if __name__ == "__main__":
