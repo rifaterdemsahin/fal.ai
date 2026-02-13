@@ -1,0 +1,15 @@
+{
+  "id": "V_01",
+  "name": "agentic_workflows_overview",
+  "priority": "HIGH",
+  "scene": "Scene 1",
+  "seed_key": "SEED_VIDEO",
+  "prompt": "Cinematic B-roll of modern office with holographic displays showing workflow diagrams, futuristic tech aesthetic, smooth camera movement, professional corporate environment, 4k quality",
+  "model": "fal-ai/minimax/video-01",
+  "duration_seconds": 5,
+  "aspect_ratio": "16:9",
+  "search_query": "tech office holographic displays",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5d94/Bt4HAcKN5Nnu2Gi40vVGW_output.mp4",
+  "generated_at": 1771022282.151871,
+  "filename": "000_video_agentic_workflows_overview_v1.mp4"
+}

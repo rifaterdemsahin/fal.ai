@@ -1,0 +1,15 @@
+{
+  "id": "V_02",
+  "name": "automation_in_action",
+  "priority": "HIGH",
+  "scene": "Scene 2",
+  "seed_key": "SEED_VIDEO",
+  "prompt": "Dynamic visualization of automated processes, connected nodes and data flowing through networks, abstract tech visualization, blue and purple color scheme, smooth transitions",
+  "model": "fal-ai/minimax/video-01",
+  "duration_seconds": 5,
+  "aspect_ratio": "16:9",
+  "search_query": "network automation visualization",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5da9/Ddqkhi-ZLEGyJ_BlFC5Ie_output.mp4",
+  "generated_at": 1771022490.995142,
+  "filename": "000_video_automation_in_action_v1.mp4"
+}
