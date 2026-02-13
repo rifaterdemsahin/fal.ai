@@ -1,0 +1,108 @@
+{
+  "generator": "BatchAssetGeneratorDiagrams",
+  "model": "fal-ai/flux/schnell",
+  "timestamp": "20260213_211013",
+  "total": 12,
+  "successful": 12,
+  "failed": 0,
+  "total_cost_usd": 0.11999999999999998,
+  "budget_usd": 0.5,
+  "results": [
+    {
+      "asset_id": "DG.01",
+      "name": "dg_01_golden_mic_hierarchy",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b85/g2i34eXbYGHYayfl1bN2_.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_01_golden_mic_hierarchy_20260213_211013.png",
+      "filename": "dg_01_golden_mic_hierarchy_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.02",
+      "name": "dg_02_240_workflow_architecture",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b85/ZFwwU2OIhwoEjhyHZtqa2.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_02_240_workflow_architecture_20260213_211013.png",
+      "filename": "dg_02_240_workflow_architecture_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.03",
+      "name": "dg_03_static_vs_dynamic_flow",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b86/fcTIhF0m5ag4N7vf0BeY8.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_03_static_vs_dynamic_flow_20260213_211013.png",
+      "filename": "dg_03_static_vs_dynamic_flow_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.04",
+      "name": "dg_04_git_clone_sequence",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b86/3ErAAAA9RfD6I7QdDfAQV.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_04_git_clone_sequence_20260213_211013.png",
+      "filename": "dg_04_git_clone_sequence_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.05",
+      "name": "dg_05_tool_evolution_timeline",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b86/wJ6DeTvEVG_LR4c3LaYU9.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_05_tool_evolution_timeline_20260213_211013.png",
+      "filename": "dg_05_tool_evolution_timeline_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.06",
+      "name": "dg_06_internet_kill_switch_flow",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b86/YZzIk2W7Pq6uKwjF8zAXY.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_06_internet_kill_switch_flow_20260213_211013.png",
+      "filename": "dg_06_internet_kill_switch_flow_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.07",
+      "name": "dg_07_tech_platform_comparison",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b87/mt5R5HH-nFj5TLTWNCUTo.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_07_tech_platform_comparison_20260213_211013.png",
+      "filename": "dg_07_tech_platform_comparison_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.08",
+      "name": "dg_08_speed_benchmark_chart",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b87/c8gpYZP8Vdvf2GV-xnDj0.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_08_speed_benchmark_chart_20260213_211013.png",
+      "filename": "dg_08_speed_benchmark_chart_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.09",
+      "name": "dg_09_llm_comparison_matrix",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b87/LvKMpWU2hhRmwXOPdqSmB.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_09_llm_comparison_matrix_20260213_211013.png",
+      "filename": "dg_09_llm_comparison_matrix_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.10",
+      "name": "dg_10_n8n_automation_flow",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b87/nppErMEq8FAhgMBYbifMk.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_10_n8n_automation_flow_20260213_211013.png",
+      "filename": "dg_10_n8n_automation_flow_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.11",
+      "name": "dg_11_cicd_pipeline_diagram",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b88/ZS9Ao_Fv-AF1gokgIoAbb.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_11_cicd_pipeline_diagram_20260213_211013.png",
+      "filename": "dg_11_cicd_pipeline_diagram_20260213_211013.png"
+    },
+    {
+      "asset_id": "DG.12",
+      "name": "dg_12_journey_roadmap",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e5b88/J_mThdatECG4WJjjJDHgW.jpg",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/dg_12_journey_roadmap_20260213_211013.png",
+      "filename": "dg_12_journey_roadmap_20260213_211013.png"
+    }
+  ]
+}
