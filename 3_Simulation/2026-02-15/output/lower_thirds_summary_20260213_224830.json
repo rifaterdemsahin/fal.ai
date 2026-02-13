@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-02-13T22:48:30.529707",
+  "total_generated": 10,
+  "files": [
+    {
+      "filename": "lt_01_agentic_era.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_01_agentic_era.png",
+      "text": "The Agentic Era",
+      "subtext": "Managing 240+ Workflows"
+    },
+    {
+      "filename": "lt_02_mcp.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_02_mcp.png",
+      "text": "Model Context Protocol",
+      "subtext": "Standardized AI Connections"
+    },
+    {
+      "filename": "lt_03_skills_gap.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_03_skills_gap.png",
+      "text": "The Skills Gap",
+      "subtext": "Technology vs. Delivery"
+    },
+    {
+      "filename": "lt_04_bounded_contexts.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_04_bounded_contexts.png",
+      "text": "Bounded Contexts",
+      "subtext": "Separation of Concerns"
+    },
+    {
+      "filename": "lt_05_para_method.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_05_para_method.png",
+      "text": "PARA Method",
+      "subtext": "Projects \u2022 Areas \u2022 Resources \u2022 Archives"
+    },
+    {
+      "filename": "lt_06_state_management.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_06_state_management.png",
+      "text": "State Management",
+      "subtext": "Persistence in Automation"
+    },
+    {
+      "filename": "lt_07_deliverpilot.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_07_deliverpilot.png",
+      "text": "DeliverPilot",
+      "subtext": "Methodology & Documentation"
+    },
+    {
+      "filename": "lt_08_bottom_up.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_08_bottom_up.png",
+      "text": "Bottom-Up Revolution",
+      "subtext": "Individual AI Adoption"
+    },
+    {
+      "filename": "lt_09_n8n_workflows.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_09_n8n_workflows.png",
+      "text": "240+ Autonomous Workflows",
+      "subtext": "Running on n8n"
+    },
+    {
+      "filename": "lt_10_ai_transformation.png",
+      "path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/lt_10_ai_transformation.png",
+      "text": "AI Transformation",
+      "subtext": "The Bigger Picture"
+    }
+  ]
+}

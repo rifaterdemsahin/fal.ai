@@ -1,253 +1,282 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
-Lower Thirds Asset Generator
-Generates lower third graphics using fal.ai with base class architecture
+Lower Thirds Generator - Cost-Effective Edition
+Generates professional lower third graphics using PIL/Pillow (FREE!)
+Perfect for DaVinci Resolve with transparent backgrounds
 """
 
 import sys
 from pathlib import Path
-from typing import Dict, List
+from datetime import datetime
+from PIL import Image, ImageDraw, ImageFont
+import json
 
-# Add parent directory to path to import base modules
-sys.path.insert(0, str(Path(__file__).parent.parent))
+class LowerThirdsGenerator:
+    """Generates professional lower thirds graphics for DaVinci Resolve"""
 
-from base.base_asset_generator import BaseAssetGenerator
-from base.generator_config import SEEDS, BRAND_COLORS, OUTPUT_FORMATS
+    def __init__(self, input_dir: Path, output_dir: Path):
+        self.input_dir = Path(input_dir)
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
 
-# Import paths_config for dynamic weekly directory management
-try:
-    from paths_config import get_weekly_paths, get_latest_weekly_id
-    USE_PATHS_CONFIG = True
-except ImportError:
-    USE_PATHS_CONFIG = False
-    print("⚠️  paths_config not available, using hardcoded output directory")
+        # Design specifications for DaVinci Resolve
+        self.width = 1920
+        self.height = 1080
 
+        # Professional color palette
+        self.colors = {
+            'bg_dark': (26, 26, 46, 220),  # #1a1a2e with transparency
+            'accent_blue': (0, 212, 255, 255),  # #00d4ff
+            'accent_purple': (123, 44, 191, 255),  # #7b2cbf
+            'highlight_orange': (255, 107, 53, 255),  # #ff6b35
+            'secondary_teal': (0, 191, 165, 255),  # #00bfa5
+            'text_white': (255, 255, 255, 255),
+            'text_gray': (180, 180, 180, 255),
+        }
 
-class LowerThirdsAssetGenerator(BaseAssetGenerator):
-    """Generator for lower third assets"""
+    def create_lower_third(self, main_text: str, subtext: str,
+                          accent_color: str = 'accent_blue',
+                          filename: str = None) -> Path:
+        """
+        Create a lower third graphic with transparent background
 
-    def __init__(self, output_dir: Path = None):
-        # Use provided output_dir or fallback to hardcoded path
-        if output_dir is None:
-            output_dir = Path("./generated_assets/lower_thirds")
+        Args:
+            main_text: Primary text (e.g., "The Agentic Era")
+            subtext: Secondary text (e.g., "Managing 240+ Workflows")
+            accent_color: Color key from self.colors
+            filename: Output filename (auto-generated if None)
 
-        super().__init__(
-            output_dir=output_dir,
-            seeds=SEEDS,
-            brand_colors=BRAND_COLORS,
-            asset_type="lower_third",
-            output_format=OUTPUT_FORMATS.get("lower_third", "png")  # Keep PNG for lower thirds (transparency)
+        Returns:
+            Path to generated PNG file
+        """
+        # Create transparent image (RGBA mode)
+        img = Image.new('RGBA', (self.width, self.height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+
+        # Position in lower-left area (typical lower third placement)
+        margin_x = 60
+        margin_y = 840  # Start lower third at 840px from top
+
+        # Load fonts (try to use system fonts, fallback to default)
+        try:
+            font_main = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 48)
+            font_sub = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial.ttf", 32)
+        except (OSError, IOError):
+            try:
+                # macOS alternative
+                font_main = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 48)
+                font_sub = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 32)
+            except (OSError, IOError):
+                # Fallback to default
+                font_main = ImageFont.load_default()
+                font_sub = ImageFont.load_default()
+
+        # Draw background panel (glassmorphism style)
+        panel_width = 700
+        panel_height = 140
+        panel_x = margin_x
+        panel_y = margin_y
+
+        # Background rectangle with rounded corners
+        draw.rounded_rectangle(
+            [panel_x, panel_y, panel_x + panel_width, panel_y + panel_height],
+            radius=8,
+            fill=self.colors['bg_dark']
         )
-    
-    def get_generation_queue(self) -> List[Dict]:
-        """Return the list of lower thirds to generate"""
-        # Common Prompt Base
-        PROMPT_BASE = (
-            "Professional lower third broadcast graphic for video overlay, "
-            "floating on transparent background (alpha channel), "
-            "modern tech aesthetic, clean sans-serif typography, "
-            "positioned in lower left area, high contrast for readability, "
-            "dark glassmorphism background panel (#1a1a2e) with distinct accent borders, "
-            "4k resolution, high quality render"
+
+        # Accent line (left side)
+        accent_width = 6
+        draw.rectangle(
+            [panel_x, panel_y, panel_x + accent_width, panel_y + panel_height],
+            fill=self.colors[accent_color]
         )
-        
-        return [
-            # HIGH PRIORITY - Core Concepts
-            {
-                "id": "LT_01",
-                "name": "lt_agentic_era",
-                "priority": "HIGH",
-                "text": "The Agentic Era",
-                "subtext": "Managing 240+ Workflows",
-                "color_theme": "accent_blue",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'THE AGENTIC ERA' in bold white font, "
-                    "subtext 'Managing 240+ Workflows' in smaller cyan font, "
-                    "neon blue (#00d4ff) glowing accent line, futuristic interface style."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_02",
-                "name": "lt_mcp",
-                "priority": "HIGH",
-                "text": "Model Context Protocol",
-                "subtext": "Standardized AI Connections",
-                "color_theme": "accent_purple",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'MODEL CONTEXT PROTOCOL' in bold white font, "
-                    "subtext 'Standardized AI Connections' in smaller purple font, "
-                    "neon purple (#7b2cbf) glowing accent line, technical diagram aesthetic."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_03",
-                "name": "lt_skills_gap",
-                "priority": "HIGH",
-                "text": "The Skills Gap",
-                "subtext": "Technology vs. Delivery",
-                "color_theme": "highlight_orange",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'THE SKILLS GAP' in bold white font, "
-                    "subtext 'Technology vs. Delivery' in smaller orange font, "
-                    "bright orange (#ff6b35) accent details, alert/warning style UI elements."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_04",
-                "name": "lt_bounded_contexts",
-                "priority": "HIGH",
-                "text": "Bounded Contexts",
-                "subtext": "Separation of Concerns",
-                "color_theme": "secondary_teal",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'BOUNDED CONTEXTS' in bold white font, "
-                    "subtext 'Separation of Concerns' in smaller teal font, "
-                    "clean teal (#00bfa5) border lines, architectural structure design."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_05",
-                "name": "lt_para_method",
-                "priority": "HIGH",
-                "text": "PARA Method",
-                "subtext": "Projects Areas Resources Archives",
-                "color_theme": "accent_blue",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'PARA METHOD' in bold white font, "
-                    "subtext 'Projects â€¢ Areas â€¢ Resources â€¢ Archives' in smaller grey/blue font, "
-                    "minimalist organized structure, sharp blue accents."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            
-            # MEDIUM PRIORITY - Technical Terms & Tools
-            {
-                "id": "LT_06",
-                "name": "lt_state_management",
-                "priority": "MEDIUM",
-                "text": "State Management",
-                "subtext": "Persistence in Automation",
-                "color_theme": "accent_purple",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'STATE MANAGEMENT' in bold white font, "
-                    "subtext 'Persistence in Automation' in smaller font, "
-                    "data flow visualization elements, purple accent lighting."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_07",
-                "name": "lt_deliverpilot",
-                "priority": "MEDIUM",
-                "text": "DeliverPilot",
-                "subtext": "Methodology & Documentation",
-                "color_theme": "secondary_teal",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'DELIVERPILOT' in bold white font, "
-                    "subtext 'Methodology & Documentation' in smaller teal font, "
-                    "navigator/compass interface hints, clean professional look."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_08",
-                "name": "lt_bottom_up",
-                "priority": "MEDIUM",
-                "text": "Bottom-Up Revolution",
-                "subtext": "Individual AI Adoption",
-                "color_theme": "highlight_orange",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'BOTTOM-UP REVOLUTION' in bold white font, "
-                    "subtext 'Individual AI Adoption' in smaller gold/orange font, "
-                    "dynamic upward motion visuals in background opacity, empowering aesthetic."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_09",
-                "name": "lt_n8n_workflows",
-                "priority": "MEDIUM",
-                "text": "240+ Autonomous Workflows",
-                "subtext": "Running on n8n",
-                "color_theme": "accent_blue",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text '240+ AUTONOMOUS WORKFLOWS' in bold white font, "
-                    "subtext 'Running on n8n' in smaller font with n8n signature pink/orange hint, "
-                    "network node background pattern overlays."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
-            },
-            {
-                "id": "LT_10",
-                "name": "lt_ai_transformation",
-                "priority": "MEDIUM",
-                "text": "AI Transformation",
-                "subtext": "The Bigger Picture",
-                "color_theme": "accent_purple",
-                "seed_key": "SEED_004",
-                "prompt": (
-                    f"{PROMPT_BASE}, main text 'AI TRANSFORMATION' in bold white font, "
-                    "subtext 'The Bigger Picture' in smaller purple font, "
-                    "digital transformation particle effects in glass panel."
-                ),
-                "model": "fal-ai/flux/dev",
-                "image_size": {"width": 1920, "height": 1080},
-                "num_inference_steps": 30,
+
+        # Draw main text
+        text_x = panel_x + 25
+        text_y = panel_y + 20
+        draw.text(
+            (text_x, text_y),
+            main_text.upper(),
+            font=font_main,
+            fill=self.colors['text_white']
+        )
+
+        # Draw subtext
+        subtext_y = panel_y + 80
+        draw.text(
+            (text_x, subtext_y),
+            subtext,
+            font=font_sub,
+            fill=self.colors['text_gray']
+        )
+
+        # Generate filename if not provided
+        if filename is None:
+            safe_name = main_text.lower().replace(' ', '_').replace('-', '_')
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"lt_{safe_name}_{timestamp}.png"
+
+        # Save with transparency
+        output_path = self.output_dir / filename
+        img.save(output_path, 'PNG', optimize=True)
+
+        print(f"✅ Generated: {filename}")
+        return output_path
+
+    def generate_from_config(self, config_path: Path = None) -> dict:
+        """
+        Generate multiple lower thirds from a JSON configuration file
+
+        Returns:
+            Dictionary with generation summary
+        """
+        if config_path is None:
+            config_path = self.input_dir / "lower_thirds_config.json"
+
+        # Default configuration if file doesn't exist
+        if not config_path.exists():
+            print(f"⚠️  Config file not found: {config_path}")
+            print("📝 Using default lower thirds configuration")
+            config = self.get_default_config()
+        else:
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+
+        generated_files = []
+        summary = {
+            'timestamp': datetime.now().isoformat(),
+            'total_generated': 0,
+            'files': []
+        }
+
+        for item in config['lower_thirds']:
+            output_path = self.create_lower_third(
+                main_text=item['text'],
+                subtext=item['subtext'],
+                accent_color=item.get('accent_color', 'accent_blue'),
+                filename=item.get('filename')
+            )
+
+            file_info = {
+                'filename': output_path.name,
+                'path': str(output_path),
+                'text': item['text'],
+                'subtext': item['subtext']
             }
-        ]
+
+            generated_files.append(output_path)
+            summary['files'].append(file_info)
+
+        summary['total_generated'] = len(generated_files)
+
+        # Save summary JSON
+        summary_path = self.output_dir / f"lower_thirds_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f, indent=2)
+
+        print(f"\n🎉 Generated {len(generated_files)} lower thirds!")
+        print(f"📁 Output directory: {self.output_dir}")
+        print(f"📊 Summary saved to: {summary_path}")
+
+        return summary
+
+    def get_default_config(self) -> dict:
+        """Return default lower thirds configuration"""
+        return {
+            "lower_thirds": [
+                {
+                    "text": "The Agentic Era",
+                    "subtext": "Managing 240+ Workflows",
+                    "accent_color": "accent_blue",
+                    "filename": "lt_01_agentic_era.png"
+                },
+                {
+                    "text": "Model Context Protocol",
+                    "subtext": "Standardized AI Connections",
+                    "accent_color": "accent_purple",
+                    "filename": "lt_02_mcp.png"
+                },
+                {
+                    "text": "The Skills Gap",
+                    "subtext": "Technology vs. Delivery",
+                    "accent_color": "highlight_orange",
+                    "filename": "lt_03_skills_gap.png"
+                },
+                {
+                    "text": "Bounded Contexts",
+                    "subtext": "Separation of Concerns",
+                    "accent_color": "secondary_teal",
+                    "filename": "lt_04_bounded_contexts.png"
+                },
+                {
+                    "text": "PARA Method",
+                    "subtext": "Projects • Areas • Resources • Archives",
+                    "accent_color": "accent_blue",
+                    "filename": "lt_05_para_method.png"
+                },
+                {
+                    "text": "State Management",
+                    "subtext": "Persistence in Automation",
+                    "accent_color": "accent_purple",
+                    "filename": "lt_06_state_management.png"
+                },
+                {
+                    "text": "DeliverPilot",
+                    "subtext": "Methodology & Documentation",
+                    "accent_color": "secondary_teal",
+                    "filename": "lt_07_deliverpilot.png"
+                },
+                {
+                    "text": "Bottom-Up Revolution",
+                    "subtext": "Individual AI Adoption",
+                    "accent_color": "highlight_orange",
+                    "filename": "lt_08_bottom_up.png"
+                },
+                {
+                    "text": "240+ Autonomous Workflows",
+                    "subtext": "Running on n8n",
+                    "accent_color": "accent_blue",
+                    "filename": "lt_09_n8n_workflows.png"
+                },
+                {
+                    "text": "AI Transformation",
+                    "subtext": "The Bigger Picture",
+                    "accent_color": "accent_purple",
+                    "filename": "lt_10_ai_transformation.png"
+                }
+            ]
+        }
 
 
 def main():
     """Main execution"""
-    output_dir = None
+    # Set directories from arguments or use defaults
+    input_dir = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/input")
+    output_dir = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
 
-    # Use paths_config if available for dynamic weekly directory management
-    if USE_PATHS_CONFIG and get_weekly_paths and get_latest_weekly_id:
-        from datetime import datetime
-        # Get the latest weekly ID or use current date
-        weekly_id = get_latest_weekly_id() or datetime.now().strftime("%Y-%m-%d")
-        paths = get_weekly_paths(weekly_id)
-        output_dir = paths['output']
-        print(f"📁 Using weekly output directory: {output_dir}")
-        print(f"📅 Weekly ID: {weekly_id}")
-    else:
-        print("⚠️  Using hardcoded output directory: ./generated_assets/lower_thirds")
+    print("=" * 60)
+    print("🎬 LOWER THIRDS GENERATOR - Cost-Effective Edition")
+    print("=" * 60)
+    print("💰 Cost: $0.00 (FREE! Using PIL/Pillow)")
+    print(f"📥 Input:  {input_dir}")
+    print(f"📤 Output: {output_dir}")
+    print("=" * 60)
+    print()
 
-    generator = LowerThirdsAssetGenerator(output_dir=output_dir)
-    generator.run()
+    generator = LowerThirdsGenerator(input_dir=input_dir, output_dir=output_dir)
+    generator.generate_from_config()
+
+    print("\n" + "=" * 60)
+    print("✨ BENEFITS FOR DAVINCI RESOLVE:")
+    print("=" * 60)
+    print("✅ PNG format with alpha channel (transparency)")
+    print("✅ 1920x1080 resolution (Full HD)")
+    print("✅ Professional glassmorphism design")
+    print("✅ Positioned in lower-left (broadcast standard)")
+    print("✅ Optimized file size")
+    print("✅ Ready to drag-and-drop into timeline")
+    print("=" * 60)
 
 
 if __name__ == "__main__":
     main()
-
