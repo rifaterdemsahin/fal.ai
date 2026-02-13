@@ -1,0 +1,16 @@
+{
+  "id": "7",
+  "name": "frame_7_the_crystal_ball",
+  "priority": "MEDIUM",
+  "scene": "Frame 7: The Crystal Ball",
+  "description": "Google/Microsoft logos with Alexa speaker. Mood: Mystical, tech-forward",
+  "prompt": "Anime style, Google/Microsoft logos with Alexa speaker, Mystical, tech-forward, Medium shot, Reveal shot, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59dc/cnkePGTXcVQns5UlN5IYQ.jpg",
+  "generated_at": 1771012764.830824,
+  "filename": "007_anime_frame_7_the_crystal_ball_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

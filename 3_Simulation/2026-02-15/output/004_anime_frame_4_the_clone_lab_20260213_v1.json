@@ -1,0 +1,16 @@
+{
+  "id": "4",
+  "name": "frame_4_the_clone_lab",
+  "priority": "MEDIUM",
+  "scene": "Frame 4: The Clone Lab",
+  "description": "Terminal window showing `git clone` command. Mood: Technical, educational",
+  "prompt": "Anime style, Terminal window showing `git clone` command, Technical, educational, Screen capture overlay, Zoom in on terminal, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59da/qPPebaYmdWIdBHCvfKW5Y.jpg",
+  "generated_at": 1771012742.0276852,
+  "filename": "004_anime_frame_4_the_clone_lab_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

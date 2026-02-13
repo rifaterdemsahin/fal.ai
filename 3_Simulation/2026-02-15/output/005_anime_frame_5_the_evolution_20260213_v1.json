@@ -1,0 +1,16 @@
+{
+  "id": "5",
+  "name": "frame_5_the_evolution",
+  "priority": "MEDIUM",
+  "scene": "Frame 5: The Evolution",
+  "description": "3D printer creating a copy. Mood: Futuristic, innovative",
+  "prompt": "Anime style, 3D printer creating a copy, Futuristic, innovative, Wide shot with animation overlay, Slow orbit around printer, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59da/_unjSfVPTN4jvdAXH1Pwg.jpg",
+  "generated_at": 1771012749.4706,
+  "filename": "005_anime_frame_5_the_evolution_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "8",
+  "name": "frame_8_the_engine_room",
+  "priority": "MEDIUM",
+  "scene": "Frame 8: The Engine Room",
+  "description": "Host with spinning clock (1000x speed). Mood: Fast-paced, energetic",
+  "prompt": "Anime style, Host with spinning clock (1000x speed), Fast-paced, energetic, Dynamic shot, Dynamic cutting, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59dd/EbihZzzwSGOY97SLkdqMq.jpg",
+  "generated_at": 1771012772.3655958,
+  "filename": "008_anime_frame_8_the_engine_room_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

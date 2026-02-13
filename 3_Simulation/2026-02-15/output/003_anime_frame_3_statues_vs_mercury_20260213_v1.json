@@ -1,0 +1,16 @@
+{
+  "id": "3",
+  "name": "frame_3_statues_vs._mercury",
+  "priority": "MEDIUM",
+  "scene": "Frame 3: Statues vs. Mercury",
+  "description": ". Mood: Contrasting, transformative",
+  "prompt": "Anime style, Contrasting, transformative, Split screen / Comparison shot, Pan between two scenes, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59d9/vnxY_wQ7TYyEfpfrS6eVV.jpg",
+  "generated_at": 1771012734.4242072,
+  "filename": "003_anime_frame_3_statues_vs_mercury_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

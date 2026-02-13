@@ -1,0 +1,16 @@
+{
+  "id": "10",
+  "name": "frame_10_the_power_station",
+  "priority": "MEDIUM",
+  "scene": "Frame 10: The Power Station",
+  "description": "Lightning bolt in glass bottle. Mood: Powerful, contained energy",
+  "prompt": "Anime style, Lightning bolt in glass bottle, Powerful, contained energy, Close-up, Slow rotation around bottle, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59de/u-vugnwfOKc5knkeTTdW2.jpg",
+  "generated_at": 1771012787.848254,
+  "filename": "010_anime_frame_10_the_power_station_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

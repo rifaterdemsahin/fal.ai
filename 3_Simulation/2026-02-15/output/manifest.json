@@ -1,38 +1,208 @@
 {
-  "generation_timestamp": "2026-02-12T08:51:04.444833",
-  "completion_timestamp": "2026-02-12T08:58:25.021522",
-  "total_assets": 2,
+  "generation_timestamp": "2026-02-13T19:58:35.936055",
+  "completion_timestamp": "2026-02-13T20:00:04.442391",
+  "total_assets": 12,
   "assets": [
     {
-      "filename": "001_anime_frame_1_opening_the_heavy_mic_20260212_v1.mp4",
+      "filename": "001_anime_frame_1_opening_the_heavy_mic_20260213_v1.png",
       "prompt": "Anime style, Host holding massive golden microphone, Dramatic, symbolic, Wide shot, Static establishing shot, high quality animation, 16:9 aspect ratio",
-      "timestamp": "2026-02-12T08:53:58.396969",
+      "timestamp": "2026-02-13T19:58:38.774376",
       "asset_type": "anime",
       "asset_id": "1",
-      "result_url": "https://v3b.fal.media/files/b/0a8e2883/5ueFFQquS9cV0uaNRl_Ct_output.mp4",
-      "local_path": "3_Simulation/2026-02-15/output/001_anime_frame_1_opening_the_heavy_mic_20260212_v1.mp4",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59d7/cGUO-p7z1OrbVMRc5M4Fw.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/001_anime_frame_1_opening_the_heavy_mic_20260213_v1.png",
       "metadata": {
         "scene": "Frame 1: Opening - The Heavy Mic",
         "description": "Host holding massive golden microphone. Mood: Dramatic, symbolic",
         "priority": "MEDIUM",
-        "model": "fal-ai/minimax/video-01",
+        "model": "fal-ai/flux/schnell",
         "characters": [],
         "setting": "Unknown"
       }
     },
     {
-      "filename": "002_anime_frame_2_the_pivot_20260212_v1.mp4",
+      "filename": "002_anime_frame_2_the_pivot_20260213_v1.png",
       "prompt": "Anime style, Host speaking directly to camera, people struggling in background, Empathetic, determined, Medium close-up, Slight push-in, high quality animation, 16:9 aspect ratio",
-      "timestamp": "2026-02-12T08:57:11.629361",
+      "timestamp": "2026-02-13T19:58:46.023641",
       "asset_type": "anime",
       "asset_id": "2",
-      "result_url": "https://v3b.fal.media/files/b/0a8e2896/jFYnyXX4uCUHIqtePOgJD_output.mp4",
-      "local_path": "3_Simulation/2026-02-15/output/002_anime_frame_2_the_pivot_20260212_v1.mp4",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59d8/PyetdOx4mtZW1l7PWydBL.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/002_anime_frame_2_the_pivot_20260213_v1.png",
       "metadata": {
         "scene": "Frame 2: The Pivot",
         "description": "Host speaking directly to camera, people struggling in background. Mood: Empathetic, determined",
         "priority": "MEDIUM",
-        "model": "fal-ai/minimax/video-01",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "003_anime_frame_3_statues_vs_mercury_20260213_v1.png",
+      "prompt": "Anime style, Contrasting, transformative, Split screen / Comparison shot, Pan between two scenes, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:58:55.547839",
+      "asset_type": "anime",
+      "asset_id": "3",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59d9/vnxY_wQ7TYyEfpfrS6eVV.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/003_anime_frame_3_statues_vs_mercury_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 3: Statues vs. Mercury",
+        "description": ". Mood: Contrasting, transformative",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "004_anime_frame_4_the_clone_lab_20260213_v1.png",
+      "prompt": "Anime style, Terminal window showing `git clone` command, Technical, educational, Screen capture overlay, Zoom in on terminal, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:02.819332",
+      "asset_type": "anime",
+      "asset_id": "4",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59da/qPPebaYmdWIdBHCvfKW5Y.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/004_anime_frame_4_the_clone_lab_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 4: The Clone Lab",
+        "description": "Terminal window showing `git clone` command. Mood: Technical, educational",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "005_anime_frame_5_the_evolution_20260213_v1.png",
+      "prompt": "Anime style, 3D printer creating a copy, Futuristic, innovative, Wide shot with animation overlay, Slow orbit around printer, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:10.617255",
+      "asset_type": "anime",
+      "asset_id": "5",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59da/_unjSfVPTN4jvdAXH1Pwg.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/005_anime_frame_5_the_evolution_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 5: The Evolution",
+        "description": "3D printer creating a copy. Mood: Futuristic, innovative",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "006_anime_frame_6_the_nursery_20260213_v1.png",
+      "prompt": "Anime style, Giant GitHub logo as baby's nightlight, Family-oriented, caring, Warm, intimate shot, Gentle push-in, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:18.422145",
+      "asset_type": "anime",
+      "asset_id": "6",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59db/lZBCiGl0e9mLrUQhVMG5-.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/006_anime_frame_6_the_nursery_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 6: The Nursery",
+        "description": "Giant GitHub logo as baby's nightlight. Mood: Family-oriented, caring",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "007_anime_frame_7_the_crystal_ball_20260213_v1.png",
+      "prompt": "Anime style, Google/Microsoft logos with Alexa speaker, Mystical, tech-forward, Medium shot, Reveal shot, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:25.803414",
+      "asset_type": "anime",
+      "asset_id": "7",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59dc/cnkePGTXcVQns5UlN5IYQ.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/007_anime_frame_7_the_crystal_ball_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 7: The Crystal Ball",
+        "description": "Google/Microsoft logos with Alexa speaker. Mood: Mystical, tech-forward",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "008_anime_frame_8_the_engine_room_20260213_v1.png",
+      "prompt": "Anime style, Host with spinning clock (1000x speed), Fast-paced, energetic, Dynamic shot, Dynamic cutting, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:33.407358",
+      "asset_type": "anime",
+      "asset_id": "8",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59dd/EbihZzzwSGOY97SLkdqMq.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/008_anime_frame_8_the_engine_room_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 8: The Engine Room",
+        "description": "Host with spinning clock (1000x speed). Mood: Fast-paced, energetic",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "009_anime_frame_9_the_digital_feast_20260213_v1.png",
+      "prompt": "Anime style, Kitchen table with 100 tablets as food, Abundant, overwhelming, Overhead shot, Crane shot descending, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:41.116118",
+      "asset_type": "anime",
+      "asset_id": "9",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59dd/4HYBk4x2hDPcZdPJirHLH.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/009_anime_frame_9_the_digital_feast_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 9: The Digital Feast",
+        "description": "Kitchen table with 100 tablets as food. Mood: Abundant, overwhelming",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "010_anime_frame_10_the_power_station_20260213_v1.png",
+      "prompt": "Anime style, Lightning bolt in glass bottle, Powerful, contained energy, Close-up, Slow rotation around bottle, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:48.945621",
+      "asset_type": "anime",
+      "asset_id": "10",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59de/u-vugnwfOKc5knkeTTdW2.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/010_anime_frame_10_the_power_station_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 10: The Power Station",
+        "description": "Lightning bolt in glass bottle. Mood: Powerful, contained energy",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "011_anime_frame_11_the_tool_shed_20260213_v1.png",
+      "prompt": "Anime style, Vibrating toolbox with GitHub energy, Active, ready-to-use, Medium shot, Handheld, energetic, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T19:59:56.534164",
+      "asset_type": "anime",
+      "asset_id": "11",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59df/X7QDWEDMl7R0O1o6ctRJb.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/011_anime_frame_11_the_tool_shed_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 11: The Tool Shed",
+        "description": "Vibrating toolbox with GitHub energy. Mood: Active, ready-to-use",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
+        "characters": [],
+        "setting": "Unknown"
+      }
+    },
+    {
+      "filename": "012_anime_frame_12_the_balcony_20260213_v1.png",
+      "prompt": "Anime style, Host overlooking futuristic city built by drones, Aspirational, conclusive, Wide establishing shot, Pull back to reveal full cityscape, high quality animation, 16:9 aspect ratio",
+      "timestamp": "2026-02-13T20:00:04.440455",
+      "asset_type": "anime",
+      "asset_id": "12",
+      "result_url": "https://v3b.fal.media/files/b/0a8e59e0/aNHmYXTUY8AjhEYTB7q5u.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/012_anime_frame_12_the_balcony_20260213_v1.png",
+      "metadata": {
+        "scene": "Frame 12: The Balcony",
+        "description": "Host overlooking futuristic city built by drones. Mood: Aspirational, conclusive",
+        "priority": "MEDIUM",
+        "model": "fal-ai/flux/schnell",
         "characters": [],
         "setting": "Unknown"
       }

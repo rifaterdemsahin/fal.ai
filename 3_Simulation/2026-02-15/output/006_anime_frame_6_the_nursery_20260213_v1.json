@@ -1,0 +1,16 @@
+{
+  "id": "6",
+  "name": "frame_6_the_nursery",
+  "priority": "MEDIUM",
+  "scene": "Frame 6: The Nursery",
+  "description": "Giant GitHub logo as baby's nightlight. Mood: Family-oriented, caring",
+  "prompt": "Anime style, Giant GitHub logo as baby's nightlight, Family-oriented, caring, Warm, intimate shot, Gentle push-in, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59db/lZBCiGl0e9mLrUQhVMG5-.jpg",
+  "generated_at": 1771012757.289175,
+  "filename": "006_anime_frame_6_the_nursery_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

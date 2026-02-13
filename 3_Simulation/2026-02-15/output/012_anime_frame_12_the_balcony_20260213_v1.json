@@ -1,0 +1,16 @@
+{
+  "id": "12",
+  "name": "frame_12_the_balcony",
+  "priority": "MEDIUM",
+  "scene": "Frame 12: The Balcony",
+  "description": "Host overlooking futuristic city built by drones. Mood: Aspirational, conclusive",
+  "prompt": "Anime style, Host overlooking futuristic city built by drones, Aspirational, conclusive, Wide establishing shot, Pull back to reveal full cityscape, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59e0/aNHmYXTUY8AjhEYTB7q5u.jpg",
+  "generated_at": 1771012803.2921972,
+  "filename": "012_anime_frame_12_the_balcony_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

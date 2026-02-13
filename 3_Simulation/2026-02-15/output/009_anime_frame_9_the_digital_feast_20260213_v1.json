@@ -1,0 +1,16 @@
+{
+  "id": "9",
+  "name": "frame_9_the_digital_feast",
+  "priority": "MEDIUM",
+  "scene": "Frame 9: The Digital Feast",
+  "description": "Kitchen table with 100 tablets as food. Mood: Abundant, overwhelming",
+  "prompt": "Anime style, Kitchen table with 100 tablets as food, Abundant, overwhelming, Overhead shot, Crane shot descending, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59dd/4HYBk4x2hDPcZdPJirHLH.jpg",
+  "generated_at": 1771012779.997636,
+  "filename": "009_anime_frame_9_the_digital_feast_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}

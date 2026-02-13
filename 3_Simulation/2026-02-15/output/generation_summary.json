@@ -1,70 +1,128 @@
 {
-  "total": 9,
-  "successful": 0,
-  "failed": 9,
+  "storyline": "Storyboard Animation",
+  "total_scenes": 12,
+  "successful": 12,
+  "failed": 0,
   "results": [
     {
-      "asset_id": "icon_github",
-      "name": "github_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_vscode",
-      "name": "vscode_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_cursor",
-      "name": "cursor_ai_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_n8n",
-      "name": "n8n_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_anthropic",
-      "name": "anthropic_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_openai",
-      "name": "openai_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_deepseek",
-      "name": "deepseek_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_google",
-      "name": "google_gemini_logo",
-      "priority": "HIGH",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
-    },
-    {
-      "asset_id": "icon_shield",
-      "name": "family_shield",
+      "scene_id": "1",
+      "name": "frame_1_opening_-_the_heavy_mic",
+      "scene": "Frame 1: Opening - The Heavy Mic",
       "priority": "MEDIUM",
-      "success": false,
-      "error": "HTTP Error 404: Not Found"
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59d7/cGUO-p7z1OrbVMRc5M4Fw.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/001_anime_frame_1_opening_the_heavy_mic_20260213_v1.png",
+      "filename": "001_anime_frame_1_opening_the_heavy_mic_20260213_v1.png"
+    },
+    {
+      "scene_id": "2",
+      "name": "frame_2_the_pivot",
+      "scene": "Frame 2: The Pivot",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59d8/PyetdOx4mtZW1l7PWydBL.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/002_anime_frame_2_the_pivot_20260213_v1.png",
+      "filename": "002_anime_frame_2_the_pivot_20260213_v1.png"
+    },
+    {
+      "scene_id": "3",
+      "name": "frame_3_statues_vs._mercury",
+      "scene": "Frame 3: Statues vs. Mercury",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59d9/vnxY_wQ7TYyEfpfrS6eVV.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/003_anime_frame_3_statues_vs_mercury_20260213_v1.png",
+      "filename": "003_anime_frame_3_statues_vs_mercury_20260213_v1.png"
+    },
+    {
+      "scene_id": "4",
+      "name": "frame_4_the_clone_lab",
+      "scene": "Frame 4: The Clone Lab",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59da/qPPebaYmdWIdBHCvfKW5Y.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/004_anime_frame_4_the_clone_lab_20260213_v1.png",
+      "filename": "004_anime_frame_4_the_clone_lab_20260213_v1.png"
+    },
+    {
+      "scene_id": "5",
+      "name": "frame_5_the_evolution",
+      "scene": "Frame 5: The Evolution",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59da/_unjSfVPTN4jvdAXH1Pwg.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/005_anime_frame_5_the_evolution_20260213_v1.png",
+      "filename": "005_anime_frame_5_the_evolution_20260213_v1.png"
+    },
+    {
+      "scene_id": "6",
+      "name": "frame_6_the_nursery",
+      "scene": "Frame 6: The Nursery",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59db/lZBCiGl0e9mLrUQhVMG5-.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/006_anime_frame_6_the_nursery_20260213_v1.png",
+      "filename": "006_anime_frame_6_the_nursery_20260213_v1.png"
+    },
+    {
+      "scene_id": "7",
+      "name": "frame_7_the_crystal_ball",
+      "scene": "Frame 7: The Crystal Ball",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59dc/cnkePGTXcVQns5UlN5IYQ.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/007_anime_frame_7_the_crystal_ball_20260213_v1.png",
+      "filename": "007_anime_frame_7_the_crystal_ball_20260213_v1.png"
+    },
+    {
+      "scene_id": "8",
+      "name": "frame_8_the_engine_room",
+      "scene": "Frame 8: The Engine Room",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59dd/EbihZzzwSGOY97SLkdqMq.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/008_anime_frame_8_the_engine_room_20260213_v1.png",
+      "filename": "008_anime_frame_8_the_engine_room_20260213_v1.png"
+    },
+    {
+      "scene_id": "9",
+      "name": "frame_9_the_digital_feast",
+      "scene": "Frame 9: The Digital Feast",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59dd/4HYBk4x2hDPcZdPJirHLH.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/009_anime_frame_9_the_digital_feast_20260213_v1.png",
+      "filename": "009_anime_frame_9_the_digital_feast_20260213_v1.png"
+    },
+    {
+      "scene_id": "10",
+      "name": "frame_10_the_power_station",
+      "scene": "Frame 10: The Power Station",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59de/u-vugnwfOKc5knkeTTdW2.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/010_anime_frame_10_the_power_station_20260213_v1.png",
+      "filename": "010_anime_frame_10_the_power_station_20260213_v1.png"
+    },
+    {
+      "scene_id": "11",
+      "name": "frame_11_the_tool_shed",
+      "scene": "Frame 11: The Tool Shed",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59df/X7QDWEDMl7R0O1o6ctRJb.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/011_anime_frame_11_the_tool_shed_20260213_v1.png",
+      "filename": "011_anime_frame_11_the_tool_shed_20260213_v1.png"
+    },
+    {
+      "scene_id": "12",
+      "name": "frame_12_the_balcony",
+      "scene": "Frame 12: The Balcony",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e59e0/aNHmYXTUY8AjhEYTB7q5u.jpg",
+      "local_path": "3_Simulation/2026-02-15/output/012_anime_frame_12_the_balcony_20260213_v1.png",
+      "filename": "012_anime_frame_12_the_balcony_20260213_v1.png"
     }
   ]
 }

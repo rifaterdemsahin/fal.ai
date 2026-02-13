@@ -1,0 +1,16 @@
+{
+  "id": "2",
+  "name": "frame_2_the_pivot",
+  "priority": "MEDIUM",
+  "scene": "Frame 2: The Pivot",
+  "description": "Host speaking directly to camera, people struggling in background. Mood: Empathetic, determined",
+  "prompt": "Anime style, Host speaking directly to camera, people struggling in background, Empathetic, determined, Medium close-up, Slight push-in, high quality animation, 16:9 aspect ratio",
+  "duration_seconds": 5,
+  "characters": [],
+  "setting": "Unknown",
+  "result_url": "https://v3b.fal.media/files/b/0a8e59d8/PyetdOx4mtZW1l7PWydBL.jpg",
+  "generated_at": 1771012725.154899,
+  "filename": "002_anime_frame_2_the_pivot_20260213_v1.png",
+  "file_extension": "png",
+  "model_used": "fal-ai/flux/schnell"
+}
