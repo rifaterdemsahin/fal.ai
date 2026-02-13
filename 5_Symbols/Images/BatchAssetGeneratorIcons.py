@@ -258,6 +258,14 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
         from google import genai
         from google.genai import types
         
+        # Force unset GOOGLE_API_KEY to prevent SDK auto-discovery
+        if "GOOGLE_API_KEY" in os.environ:
+             del os.environ["GOOGLE_API_KEY"]
+             
+        # Also unset GEMINI_API_KEY if it exists, just in case
+        if "GEMINI_API_KEY" in os.environ:
+             del os.environ["GEMINI_API_KEY"]
+
         client = genai.Client(api_key=api_key)
         
         model_name = 'imagen-3.0-generate-001'

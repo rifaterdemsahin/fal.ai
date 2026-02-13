@@ -5,6 +5,7 @@
 Upon scanning the `Feb1Youtube` project modules, the following batch job is missing to complete the video production pipeline:
 
 ### 1. **BatchAssetGeneratorVideo.py** (Missing)
+
 The current pipeline generates static assets (Images, Icons, Graphics, Lower Thirds) and Music. However, the EDL calls for **B-roll footage** (e.g., "Empty UK Streets", "Corporate Meeting").
 
 - **Current State**: These assets are handled by `BatchAssetGeneratorImages.py` (producing .png) or marked for "Stock Footage".
@@ -14,3 +15,11 @@ The current pipeline generates static assets (Images, Icons, Graphics, Lower Thi
 
 - **`BatchAssetGeneratorAudio.py`**: This file is misnamed. Its current logic parses the EDL to generate **text-based Chapter Markers**, not audio/sound effects. It should be renamed to `BatchAssetGeneratorMarkersExtractor.py` or similar, and a true Audio/SFX generator should be created if needed.
 - **`BatchAssetGeneratorMusic.py`**: Exists in the codebase but is missing from `README.md`.
+
+## Project Constraints
+
+### Vertex AI / Google Cloud
+
+- **API Access Restricted**: Organizational policy `iam.managed.disableServiceAccountApiKeyCreation` is **Enforced**. This explicitly blocks the creation of API keys bound to service accounts for the `imagegen` project.
+- **Imagen 3 Access**: Due to the above policy and existing restrictions, the Gemini/Imagen 3 API fallback via `google-genai` is currently returning `404 Not Found` for model endpoints.
+- **Action**: The pipeline must rely on **fal.ai** as the primary and only functional provider for image generation until the Google Cloud policy is overridden or excepted for this project.

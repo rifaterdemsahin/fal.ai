@@ -1,0 +1,99 @@
+{
+  "total": 9,
+  "successful": 9,
+  "failed": 0,
+  "total_cost": 0.45,
+  "results": [
+    {
+      "asset_id": "icon_github",
+      "name": "github_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53af/oFC3ZegjUcIc2SF1DfZJR.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_github_logo_v1.png",
+      "filename": "000_icon_github_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_vscode",
+      "name": "vscode_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b0/v34S2A_c52ScyfTZ5CiNW.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_vscode_logo_v1.png",
+      "filename": "000_icon_vscode_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_cursor",
+      "name": "cursor_ai_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b0/XD8c6-LJDEzHNwJm4XwgS.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_cursor_ai_logo_v1.png",
+      "filename": "000_icon_cursor_ai_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_n8n",
+      "name": "n8n_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b0/zLZKVT6x8rFrmtO4urhkA.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_n8n_logo_v1.png",
+      "filename": "000_icon_n8n_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_anthropic",
+      "name": "anthropic_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b1/zSiOR66aWUX4ObfTLVoML.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_anthropic_logo_v1.png",
+      "filename": "000_icon_anthropic_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_openai",
+      "name": "openai_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b1/WGURk2a0PnyRik20ihFN5.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_openai_logo_v1.png",
+      "filename": "000_icon_openai_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_deepseek",
+      "name": "deepseek_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b1/OBWop4Rdwm-kSLWXhi3FO.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_deepseek_logo_v1.png",
+      "filename": "000_icon_deepseek_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_google",
+      "name": "google_gemini_logo",
+      "priority": "HIGH",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b1/x9bFW8FNESma7uOOTBADQ.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_google_gemini_logo_v1.png",
+      "filename": "000_icon_google_gemini_logo_v1.png",
+      "cost": 0.05
+    },
+    {
+      "asset_id": "icon_shield",
+      "name": "family_shield",
+      "priority": "MEDIUM",
+      "success": true,
+      "url": "https://v3b.fal.media/files/b/0a8e53b2/DNyRpCmj-sGDc974hGW01.jpg",
+      "local_path": "3_Simulation\\2026-02-15\\output\\000_icon_family_shield_v1.png",
+      "filename": "000_icon_family_shield_v1.png",
+      "cost": 0.05
+    }
+  ],
+  "timestamp": "20260213_153623"
+}
