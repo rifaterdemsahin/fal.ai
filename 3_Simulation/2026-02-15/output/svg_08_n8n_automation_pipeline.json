@@ -1,0 +1,82 @@
+{
+  "id": "SVG8.1",
+  "name": "svg_08_n8n_automation_pipeline",
+  "priority": "HIGH",
+  "scene": "Scene 8: Bespoke Logic",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Telegram\nTrigger",
+      "x": 30,
+      "y": 160,
+      "width": 160,
+      "height": 90,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 210,
+      "y1": 205,
+      "x2": 270,
+      "y2": 205,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "n8n\nLogic",
+      "x": 290,
+      "y": 160,
+      "width": 140,
+      "height": 90,
+      "fill": "#2e2e4e",
+      "stroke": "#ff6b35",
+      "text_color": "#ff6b35"
+    },
+    {
+      "type": "arrow",
+      "x1": 450,
+      "y1": 205,
+      "x2": 510,
+      "y2": 205,
+      "color": "#ff6b35"
+    },
+    {
+      "type": "box",
+      "text": "MAC\nFilter",
+      "x": 530,
+      "y": 160,
+      "width": 140,
+      "height": 90,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 690,
+      "y1": 205,
+      "x2": 750,
+      "y2": 205,
+      "color": "#7b2cbf"
+    },
+    {
+      "type": "box",
+      "text": "GitHub\nPages UI",
+      "x": 770,
+      "y": 160,
+      "width": 160,
+      "height": 90,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    }
+  ],
+  "canvas_width": 1000,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_08_n8n_automation_pipeline.svg",
+  "filename": "svg_08_n8n_automation_pipeline.svg"
+}

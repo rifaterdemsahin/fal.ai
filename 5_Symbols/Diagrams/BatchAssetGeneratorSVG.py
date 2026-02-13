@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 SVG Batch Asset Generator
-Project: The Agentic Era - Managing 240+ Workflows
-Generates SVG diagrams to showcase processes in video scripts
+Project: The Delivery Pilot Transformation
+Generates SVG diagrams for each scene in the video script.
+Cost: $0.00 (SVGs are generated locally, no API calls)
 """
 
 import os
@@ -27,8 +28,8 @@ except ImportError:
     ManifestTracker = None
     convert_svg_to_jpeg = None
 
-# Configuration - output to 3_Simulation/Feb1Youtube/generated_svgs
-OUTPUT_DIR = project_root / "3_Simulation" / "Feb1Youtube" / "generated_svgs"
+# Configuration - output to weekly simulation folder
+OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
 OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 
 # Display constants
@@ -48,246 +49,235 @@ BRAND_COLORS = {
     "arrow_color": "#00d4ff",
 }
 
-# SVG Generation Queue
+# ─── SVG Generation Queue — one per scene from the script ─────────────────────
+
 GENERATION_QUEUE = [
+    # Scene 1: The Heavy Mic — Enterprise vs Delivery Pilot hierarchy
     {
         "id": "SVG1.1",
-        "name": "agentic_era_transition",
+        "name": "svg_01_enterprise_vs_delivery_pilot",
         "priority": "HIGH",
-        "scene": "Agentic Era Explanation",
-        "diagram_type": "flow",
-        "elements": [
-            {
-                "type": "box",
-                "text": "Prompts",
-                "x": 100,
-                "y": 200,
-                "width": 200,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#00d4ff",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 320,
-                "y1": 250,
-                "x2": 480,
-                "y2": 250,
-                "color": "#00d4ff",
-                "label": "Evolution",
-            },
-            {
-                "type": "box",
-                "text": "Agents",
-                "x": 500,
-                "y": 200,
-                "width": 200,
-                "height": 100,
-                "fill": "#7b2cbf",
-                "stroke": "#00d4ff",
-                "text_color": "#ffffff",
-            },
-        ],
-        "canvas_width": 800,
-        "canvas_height": 450,
-        "background": "#1a1a2e",
-    },
-    {
-        "id": "SVG2.1",
-        "name": "workflow_process",
-        "priority": "HIGH",
-        "scene": "Workflow Process Flow",
-        "diagram_type": "flow",
-        "elements": [
-            {
-                "type": "box",
-                "text": "Input",
-                "x": 50,
-                "y": 175,
-                "width": 150,
-                "height": 80,
-                "fill": "#2e2e4e",
-                "stroke": "#00bfa5",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 220,
-                "y1": 215,
-                "x2": 280,
-                "y2": 215,
-                "color": "#00bfa5",
-            },
-            {
-                "type": "box",
-                "text": "Process",
-                "x": 300,
-                "y": 175,
-                "width": 150,
-                "height": 80,
-                "fill": "#2e2e4e",
-                "stroke": "#00d4ff",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 470,
-                "y1": 215,
-                "x2": 530,
-                "y2": 215,
-                "color": "#00d4ff",
-            },
-            {
-                "type": "box",
-                "text": "Output",
-                "x": 550,
-                "y": 175,
-                "width": 150,
-                "height": 80,
-                "fill": "#2e2e4e",
-                "stroke": "#7b2cbf",
-                "text_color": "#ffffff",
-            },
-        ],
-        "canvas_width": 750,
-        "canvas_height": 430,
-        "background": "#1a1a2e",
-    },
-    {
-        "id": "SVG3.1",
-        "name": "data_collection_understanding_notification",
-        "priority": "MEDIUM",
-        "scene": "AI Agent Process",
-        "diagram_type": "flow",
-        "elements": [
-            {
-                "type": "box",
-                "text": "Data\nCollection",
-                "x": 50,
-                "y": 150,
-                "width": 180,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#00bfa5",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 250,
-                "y1": 200,
-                "x2": 320,
-                "y2": 200,
-                "color": "#00bfa5",
-            },
-            {
-                "type": "box",
-                "text": "Understanding",
-                "x": 340,
-                "y": 150,
-                "width": 180,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#00d4ff",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 540,
-                "y1": 200,
-                "x2": 610,
-                "y2": 200,
-                "color": "#00d4ff",
-            },
-            {
-                "type": "box",
-                "text": "Notification",
-                "x": 630,
-                "y": 150,
-                "width": 180,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#7b2cbf",
-                "text_color": "#ffffff",
-            },
-        ],
-        "canvas_width": 860,
-        "canvas_height": 400,
-        "background": "#1a1a2e",
-    },
-    {
-        "id": "SVG4.1",
-        "name": "traditional_vs_agentic",
-        "priority": "MEDIUM",
-        "scene": "Comparison: Traditional vs Agentic",
+        "scene": "Scene 1: The Heavy Mic",
         "diagram_type": "comparison",
         "elements": [
-            # Traditional side
-            {
-                "type": "box",
-                "text": "Traditional\nWorkflow",
-                "x": 100,
-                "y": 100,
-                "width": 200,
-                "height": 100,
-                "fill": "#3a3a3a",
-                "stroke": "#6b6b6b",
-                "text_color": "#cccccc",
-            },
-            {
-                "type": "arrow",
-                "x1": 200,
-                "y1": 220,
-                "x2": 200,
-                "y2": 280,
-                "color": "#6b6b6b",
-            },
-            {
-                "type": "box",
-                "text": "Manual\nProcessing",
-                "x": 100,
-                "y": 300,
-                "width": 200,
-                "height": 100,
-                "fill": "#3a3a3a",
-                "stroke": "#6b6b6b",
-                "text_color": "#cccccc",
-            },
-            # Agentic side
-            {
-                "type": "box",
-                "text": "Agentic\nWorkflow",
-                "x": 500,
-                "y": 100,
-                "width": 200,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#00d4ff",
-                "text_color": "#ffffff",
-            },
-            {
-                "type": "arrow",
-                "x1": 600,
-                "y1": 220,
-                "x2": 600,
-                "y2": 280,
-                "color": "#00d4ff",
-            },
-            {
-                "type": "box",
-                "text": "Automated\nIntelligence",
-                "x": 500,
-                "y": 300,
-                "width": 200,
-                "height": 100,
-                "fill": "#2e2e4e",
-                "stroke": "#7b2cbf",
-                "text_color": "#ffffff",
-            },
+            {"type": "box", "text": "Enterprise\nEngineers", "x": 80, "y": 80, "width": 220, "height": 100,
+             "fill": "#3a3a3a", "stroke": "#6b6b6b", "text_color": "#cccccc"},
+            {"type": "box", "text": "Golden Mic\n(10-Year Race)", "x": 80, "y": 240, "width": 220, "height": 100,
+             "fill": "#3a3a3a", "stroke": "#FFD700", "text_color": "#FFD700"},
+            {"type": "arrow", "x1": 190, "y1": 180, "x2": 190, "y2": 240, "color": "#6b6b6b", "label": "Gatekeeping"},
+            {"type": "box", "text": "Delivery\nPilot", "x": 500, "y": 80, "width": 220, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "box", "text": "AI Tools\n(No Code)", "x": 500, "y": 240, "width": 220, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            {"type": "arrow", "x1": 610, "y1": 180, "x2": 610, "y2": 240, "color": "#00d4ff", "label": "Accessible"},
         ],
-        "canvas_width": 800,
-        "canvas_height": 500,
-        "background": "#1a1a2e",
+        "canvas_width": 800, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 2: The Pivot — 240 Workflows to No-Code
+    {
+        "id": "SVG2.1",
+        "name": "svg_02_pivot_from_complex_to_simple",
+        "priority": "HIGH",
+        "scene": "Scene 2: The Pivot",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "240 Complex\nWorkflows", "x": 50, "y": 160, "width": 200, "height": 100,
+             "fill": "#3a3a3a", "stroke": "#ff4444", "text_color": "#ff4444"},
+            {"type": "arrow", "x1": 270, "y1": 210, "x2": 370, "y2": 210, "color": "#FFD700", "label": "PIVOT"},
+            {"type": "box", "text": "No-Code\nTools", "x": 390, "y": 160, "width": 200, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 610, "y1": 210, "x2": 710, "y2": 210, "color": "#00bfa5"},
+            {"type": "box", "text": "Delivery\nPilot", "x": 730, "y": 160, "width": 200, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+        ],
+        "canvas_width": 1000, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 3: Statues vs Mercury — Static vs Dynamic
+    {
+        "id": "SVG3.1",
+        "name": "svg_03_static_vs_dynamic_rules",
+        "priority": "HIGH",
+        "scene": "Scene 3: Statues vs Mercury",
+        "diagram_type": "comparison",
+        "elements": [
+            {"type": "box", "text": "Static Rules", "x": 80, "y": 60, "width": 240, "height": 80,
+             "fill": "#3a3a3a", "stroke": "#6b6b6b", "text_color": "#cccccc"},
+            {"type": "arrow", "x1": 200, "y1": 140, "x2": 200, "y2": 180, "color": "#6b6b6b"},
+            {"type": "box", "text": "Hard-Coded", "x": 80, "y": 180, "width": 240, "height": 70,
+             "fill": "#3a3a3a", "stroke": "#6b6b6b", "text_color": "#999999"},
+            {"type": "arrow", "x1": 200, "y1": 250, "x2": 200, "y2": 290, "color": "#ff4444"},
+            {"type": "box", "text": "BREAKS ✗", "x": 120, "y": 290, "width": 160, "height": 60,
+             "fill": "#4a1a1a", "stroke": "#ff4444", "text_color": "#ff4444"},
+            # Dynamic side
+            {"type": "box", "text": "Dynamic AI", "x": 480, "y": 60, "width": 240, "height": 80,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#00d4ff"},
+            {"type": "arrow", "x1": 600, "y1": 140, "x2": 600, "y2": 180, "color": "#00d4ff"},
+            {"type": "box", "text": "Adaptive", "x": 480, "y": 180, "width": 240, "height": 70,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 600, "y1": 250, "x2": 600, "y2": 290, "color": "#00bfa5"},
+            {"type": "box", "text": "ADAPTS ✓", "x": 520, "y": 290, "width": 160, "height": 60,
+             "fill": "#1a3a2a", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+        ],
+        "canvas_width": 800, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 4: The Clone Lab — Git Clone Process
+    {
+        "id": "SVG4.1",
+        "name": "svg_04_git_clone_process",
+        "priority": "HIGH",
+        "scene": "Scene 4: The Clone Lab",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "GitHub\nRepository", "x": 50, "y": 160, "width": 180, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 250, "y1": 210, "x2": 340, "y2": 210, "color": "#00d4ff", "label": "git clone"},
+            {"type": "box", "text": "Local\nPowerhouse", "x": 360, "y": 160, "width": 180, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 560, "y1": 210, "x2": 650, "y2": 210, "color": "#00bfa5", "label": "Run Agent"},
+            {"type": "box", "text": "Tooling\nSystem", "x": 670, "y": 160, "width": 180, "height": 100,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#ffffff"},
+        ],
+        "canvas_width": 920, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 5: The Free Tier Journey — Tool Evolution
+    {
+        "id": "SVG5.1",
+        "name": "svg_05_tool_evolution_tiers",
+        "priority": "HIGH",
+        "scene": "Scene 5: Free Tier Journey",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "VS Code\n+ GitHub\n(FREE)", "x": 50, "y": 130, "width": 180, "height": 120,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            {"type": "arrow", "x1": 250, "y1": 190, "x2": 340, "y2": 190, "color": "#FFD700", "label": "Level Up"},
+            {"type": "box", "text": "GitHub\nCopilot\n(Pair Pilot)", "x": 360, "y": 130, "width": 180, "height": 120,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#00d4ff"},
+            {"type": "arrow", "x1": 560, "y1": 190, "x2": 650, "y2": 190, "color": "#FFD700", "label": "Level Up"},
+            {"type": "box", "text": "Cursor AI\n(Agentic)", "x": 670, "y": 130, "width": 180, "height": 120,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#7b2cbf"},
+        ],
+        "canvas_width": 920, "canvas_height": 400, "background": "#1a1a2e",
+    },
+    # Scene 6: Internet Kill Switch — Network Diagram
+    {
+        "id": "SVG6.1",
+        "name": "svg_06_internet_kill_switch",
+        "priority": "HIGH",
+        "scene": "Scene 6: Internet Kill Switch",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "GitHub\nWorkflow", "x": 50, "y": 50, "width": 180, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 250, "y1": 95, "x2": 340, "y2": 95, "color": "#00d4ff", "label": "Trigger"},
+            {"type": "box", "text": "KILL\nSWITCH", "x": 360, "y": 50, "width": 180, "height": 90,
+             "fill": "#4a1a1a", "stroke": "#ff4444", "text_color": "#ff4444"},
+            {"type": "arrow", "x1": 450, "y1": 140, "x2": 300, "y2": 220, "color": "#00bfa5", "label": "Kid A: ON"},
+            {"type": "arrow", "x1": 450, "y1": 140, "x2": 600, "y2": 220, "color": "#ff4444", "label": "Kid B: OFF"},
+            {"type": "box", "text": "Device A\n✓ Online", "x": 200, "y": 220, "width": 180, "height": 90,
+             "fill": "#1a3a2a", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            {"type": "box", "text": "Device B\n✗ Blocked", "x": 520, "y": 220, "width": 180, "height": 90,
+             "fill": "#4a1a1a", "stroke": "#ff4444", "text_color": "#ff4444"},
+        ],
+        "canvas_width": 780, "canvas_height": 380, "background": "#1a1a2e",
+    },
+    # Scene 7: The LLM Feast — Model Comparison
+    {
+        "id": "SVG7.1",
+        "name": "svg_07_llm_model_comparison",
+        "priority": "HIGH",
+        "scene": "Scene 7: The LLM Feast",
+        "diagram_type": "comparison",
+        "elements": [
+            {"type": "box", "text": "Claude\nReasoning\nSonnet 3.5-4.6", "x": 50, "y": 80, "width": 180, "height": 110,
+             "fill": "#2e2e4e", "stroke": "#ff6b35", "text_color": "#ff6b35"},
+            {"type": "box", "text": "ChatGPT\nVersatile\nSearch Engine", "x": 260, "y": 80, "width": 180, "height": 110,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            {"type": "box", "text": "DeepSeek\nCoding\nFree Alt", "x": 470, "y": 80, "width": 180, "height": 110,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#00d4ff"},
+            {"type": "box", "text": "Gemini\nMulti-modal\nFree Tier", "x": 680, "y": 80, "width": 180, "height": 110,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#7b2cbf"},
+            # Connecting to central choice
+            {"type": "arrow", "x1": 140, "y1": 190, "x2": 400, "y2": 270, "color": "#ff6b35"},
+            {"type": "arrow", "x1": 350, "y1": 190, "x2": 430, "y2": 270, "color": "#00bfa5"},
+            {"type": "arrow", "x1": 560, "y1": 190, "x2": 470, "y2": 270, "color": "#00d4ff"},
+            {"type": "arrow", "x1": 770, "y1": 190, "x2": 500, "y2": 270, "color": "#7b2cbf"},
+            {"type": "box", "text": "Choose\nYour Model", "x": 350, "y": 270, "width": 200, "height": 80,
+             "fill": "#2e2e4e", "stroke": "#FFD700", "text_color": "#FFD700"},
+        ],
+        "canvas_width": 920, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 8: Bespoke Logic — n8n Automation
+    {
+        "id": "SVG8.1",
+        "name": "svg_08_n8n_automation_pipeline",
+        "priority": "HIGH",
+        "scene": "Scene 8: Bespoke Logic",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "Telegram\nTrigger", "x": 30, "y": 160, "width": 160, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 210, "y1": 205, "x2": 270, "y2": 205, "color": "#00d4ff"},
+            {"type": "box", "text": "n8n\nLogic", "x": 290, "y": 160, "width": 140, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#ff6b35", "text_color": "#ff6b35"},
+            {"type": "arrow", "x1": 450, "y1": 205, "x2": 510, "y2": 205, "color": "#ff6b35"},
+            {"type": "box", "text": "MAC\nFilter", "x": 530, "y": 160, "width": 140, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 690, "y1": 205, "x2": 750, "y2": 205, "color": "#7b2cbf"},
+            {"type": "box", "text": "GitHub\nPages UI", "x": 770, "y": 160, "width": 160, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+        ],
+        "canvas_width": 1000, "canvas_height": 420, "background": "#1a1a2e",
+    },
+    # Scene 9: Success Metrics — CI/CD Pipeline
+    {
+        "id": "SVG9.1",
+        "name": "svg_09_cicd_success_metrics",
+        "priority": "HIGH",
+        "scene": "Scene 9: Success Metrics",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "Commit\n(37+)", "x": 30, "y": 80, "width": 150, "height": 80,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 200, "y1": 120, "x2": 260, "y2": 120, "color": "#00d4ff"},
+            {"type": "box", "text": "GitHub\nActions", "x": 280, "y": 80, "width": 150, "height": 80,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 450, "y1": 120, "x2": 510, "y2": 120, "color": "#00bfa5"},
+            {"type": "box", "text": "CI/CD\nDeploy", "x": 530, "y": 80, "width": 150, "height": 80,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 700, "y1": 120, "x2": 760, "y2": 120, "color": "#7b2cbf"},
+            {"type": "box", "text": "Live\nSite", "x": 780, "y": 80, "width": 150, "height": 80,
+             "fill": "#1a3a2a", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            # Metrics row
+            {"type": "box", "text": "Compliance", "x": 130, "y": 250, "width": 180, "height": 70,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#00bfa5"},
+            {"type": "box", "text": "Accuracy", "x": 380, "y": 250, "width": 180, "height": 70,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#00d4ff"},
+            {"type": "box", "text": "Self-Growth", "x": 630, "y": 250, "width": 180, "height": 70,
+             "fill": "#2e2e4e", "stroke": "#FFD700", "text_color": "#FFD700"},
+        ],
+        "canvas_width": 1000, "canvas_height": 380, "background": "#1a1a2e",
+    },
+    # Scene 10: Conclusion — Journey Roadmap
+    {
+        "id": "SVG10.1",
+        "name": "svg_10_delivery_pilot_roadmap",
+        "priority": "HIGH",
+        "scene": "Scene 10: Conclusion",
+        "diagram_type": "flow",
+        "elements": [
+            {"type": "box", "text": "1. Take\nAssessment", "x": 50, "y": 280, "width": 180, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#00d4ff", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 230, "y1": 300, "x2": 280, "y2": 250, "color": "#FFD700"},
+            {"type": "box", "text": "2. Watch\nSimulation", "x": 280, "y": 190, "width": 180, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#00bfa5", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 460, "y1": 210, "x2": 510, "y2": 160, "color": "#FFD700"},
+            {"type": "box", "text": "3. Clone\nRepo", "x": 510, "y": 100, "width": 180, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#7b2cbf", "text_color": "#ffffff"},
+            {"type": "arrow", "x1": 690, "y1": 120, "x2": 740, "y2": 70, "color": "#FFD700"},
+            {"type": "box", "text": "4. Build\nYour Future", "x": 740, "y": 20, "width": 180, "height": 90,
+             "fill": "#2e2e4e", "stroke": "#FFD700", "text_color": "#FFD700"},
+        ],
+        "canvas_width": 1000, "canvas_height": 420, "background": "#1a1a2e",
     },
 ]
 
@@ -669,16 +659,12 @@ def process_queue(queue: List[Dict], output_dir: Path, version: int = 1) -> List
 
 
 def main():
-    """Main execution"""
+    """Main execution — no interactive prompt."""
     print("\n" + "="*SEPARATOR_WIDTH)
-    print("SVG Batch Asset Generator")
-    print("Generates process flow diagrams for video scripts")
+    print("📐 SVG Batch Asset Generator")
+    print("   Project: The Delivery Pilot Transformation")
+    print("   Cost: $0.00 (local generation, no API calls)")
     print("="*SEPARATOR_WIDTH)
-    
-    response = input("\n🤔 Proceed with SVG generation? (yes/no): ").strip().lower()
-    if response not in ["yes", "y"]:
-        print("❌ Cancelled by user")
-        return
     
     process_queue(GENERATION_QUEUE, OUTPUT_DIR)
 

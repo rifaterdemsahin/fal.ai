@@ -1,0 +1,65 @@
+{
+  "id": "SVG5.1",
+  "name": "svg_05_tool_evolution_tiers",
+  "priority": "HIGH",
+  "scene": "Scene 5: Free Tier Journey",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "VS Code\n+ GitHub\n(FREE)",
+      "x": 50,
+      "y": 130,
+      "width": 180,
+      "height": 120,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    },
+    {
+      "type": "arrow",
+      "x1": 250,
+      "y1": 190,
+      "x2": 340,
+      "y2": 190,
+      "color": "#FFD700",
+      "label": "Level Up"
+    },
+    {
+      "type": "box",
+      "text": "GitHub\nCopilot\n(Pair Pilot)",
+      "x": 360,
+      "y": 130,
+      "width": 180,
+      "height": 120,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#00d4ff"
+    },
+    {
+      "type": "arrow",
+      "x1": 560,
+      "y1": 190,
+      "x2": 650,
+      "y2": 190,
+      "color": "#FFD700",
+      "label": "Level Up"
+    },
+    {
+      "type": "box",
+      "text": "Cursor AI\n(Agentic)",
+      "x": 670,
+      "y": 130,
+      "width": 180,
+      "height": 120,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#7b2cbf"
+    }
+  ],
+  "canvas_width": 920,
+  "canvas_height": 400,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_05_tool_evolution_tiers.svg",
+  "filename": "svg_05_tool_evolution_tiers.svg"
+}

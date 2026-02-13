@@ -1,0 +1,112 @@
+{
+  "id": "SVG3.1",
+  "name": "svg_03_static_vs_dynamic_rules",
+  "priority": "HIGH",
+  "scene": "Scene 3: Statues vs Mercury",
+  "diagram_type": "comparison",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Static Rules",
+      "x": 80,
+      "y": 60,
+      "width": 240,
+      "height": 80,
+      "fill": "#3a3a3a",
+      "stroke": "#6b6b6b",
+      "text_color": "#cccccc"
+    },
+    {
+      "type": "arrow",
+      "x1": 200,
+      "y1": 140,
+      "x2": 200,
+      "y2": 180,
+      "color": "#6b6b6b"
+    },
+    {
+      "type": "box",
+      "text": "Hard-Coded",
+      "x": 80,
+      "y": 180,
+      "width": 240,
+      "height": 70,
+      "fill": "#3a3a3a",
+      "stroke": "#6b6b6b",
+      "text_color": "#999999"
+    },
+    {
+      "type": "arrow",
+      "x1": 200,
+      "y1": 250,
+      "x2": 200,
+      "y2": 290,
+      "color": "#ff4444"
+    },
+    {
+      "type": "box",
+      "text": "BREAKS \u2717",
+      "x": 120,
+      "y": 290,
+      "width": 160,
+      "height": 60,
+      "fill": "#4a1a1a",
+      "stroke": "#ff4444",
+      "text_color": "#ff4444"
+    },
+    {
+      "type": "box",
+      "text": "Dynamic AI",
+      "x": 480,
+      "y": 60,
+      "width": 240,
+      "height": 80,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#00d4ff"
+    },
+    {
+      "type": "arrow",
+      "x1": 600,
+      "y1": 140,
+      "x2": 600,
+      "y2": 180,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "Adaptive",
+      "x": 480,
+      "y": 180,
+      "width": 240,
+      "height": 70,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 600,
+      "y1": 250,
+      "x2": 600,
+      "y2": 290,
+      "color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "ADAPTS \u2713",
+      "x": 520,
+      "y": 290,
+      "width": 160,
+      "height": 60,
+      "fill": "#1a3a2a",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    }
+  ],
+  "canvas_width": 800,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_03_static_vs_dynamic_rules.svg",
+  "filename": "svg_03_static_vs_dynamic_rules.svg"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "SVG1.1",
+  "name": "svg_01_enterprise_vs_delivery_pilot",
+  "priority": "HIGH",
+  "scene": "Scene 1: The Heavy Mic",
+  "diagram_type": "comparison",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Enterprise\nEngineers",
+      "x": 80,
+      "y": 80,
+      "width": 220,
+      "height": 100,
+      "fill": "#3a3a3a",
+      "stroke": "#6b6b6b",
+      "text_color": "#cccccc"
+    },
+    {
+      "type": "box",
+      "text": "Golden Mic\n(10-Year Race)",
+      "x": 80,
+      "y": 240,
+      "width": 220,
+      "height": 100,
+      "fill": "#3a3a3a",
+      "stroke": "#FFD700",
+      "text_color": "#FFD700"
+    },
+    {
+      "type": "arrow",
+      "x1": 190,
+      "y1": 180,
+      "x2": 190,
+      "y2": 240,
+      "color": "#6b6b6b",
+      "label": "Gatekeeping"
+    },
+    {
+      "type": "box",
+      "text": "Delivery\nPilot",
+      "x": 500,
+      "y": 80,
+      "width": 220,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "box",
+      "text": "AI Tools\n(No Code)",
+      "x": 500,
+      "y": 240,
+      "width": 220,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    },
+    {
+      "type": "arrow",
+      "x1": 610,
+      "y1": 180,
+      "x2": 610,
+      "y2": 240,
+      "color": "#00d4ff",
+      "label": "Accessible"
+    }
+  ],
+  "canvas_width": 800,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_01_enterprise_vs_delivery_pilot.svg",
+  "filename": "svg_01_enterprise_vs_delivery_pilot.svg"
+}

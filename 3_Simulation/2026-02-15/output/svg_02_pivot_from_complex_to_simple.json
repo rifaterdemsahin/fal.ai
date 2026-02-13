@@ -1,0 +1,64 @@
+{
+  "id": "SVG2.1",
+  "name": "svg_02_pivot_from_complex_to_simple",
+  "priority": "HIGH",
+  "scene": "Scene 2: The Pivot",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "240 Complex\nWorkflows",
+      "x": 50,
+      "y": 160,
+      "width": 200,
+      "height": 100,
+      "fill": "#3a3a3a",
+      "stroke": "#ff4444",
+      "text_color": "#ff4444"
+    },
+    {
+      "type": "arrow",
+      "x1": 270,
+      "y1": 210,
+      "x2": 370,
+      "y2": 210,
+      "color": "#FFD700",
+      "label": "PIVOT"
+    },
+    {
+      "type": "box",
+      "text": "No-Code\nTools",
+      "x": 390,
+      "y": 160,
+      "width": 200,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 610,
+      "y1": 210,
+      "x2": 710,
+      "y2": 210,
+      "color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "Delivery\nPilot",
+      "x": 730,
+      "y": 160,
+      "width": 200,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    }
+  ],
+  "canvas_width": 1000,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_02_pivot_from_complex_to_simple.svg",
+  "filename": "svg_02_pivot_from_complex_to_simple.svg"
+}

@@ -1,0 +1,101 @@
+{
+  "id": "SVG7.1",
+  "name": "svg_07_llm_model_comparison",
+  "priority": "HIGH",
+  "scene": "Scene 7: The LLM Feast",
+  "diagram_type": "comparison",
+  "elements": [
+    {
+      "type": "box",
+      "text": "Claude\nReasoning\nSonnet 3.5-4.6",
+      "x": 50,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "fill": "#2e2e4e",
+      "stroke": "#ff6b35",
+      "text_color": "#ff6b35"
+    },
+    {
+      "type": "box",
+      "text": "ChatGPT\nVersatile\nSearch Engine",
+      "x": 260,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "DeepSeek\nCoding\nFree Alt",
+      "x": 470,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#00d4ff"
+    },
+    {
+      "type": "box",
+      "text": "Gemini\nMulti-modal\nFree Tier",
+      "x": 680,
+      "y": 80,
+      "width": 180,
+      "height": 110,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#7b2cbf"
+    },
+    {
+      "type": "arrow",
+      "x1": 140,
+      "y1": 190,
+      "x2": 400,
+      "y2": 270,
+      "color": "#ff6b35"
+    },
+    {
+      "type": "arrow",
+      "x1": 350,
+      "y1": 190,
+      "x2": 430,
+      "y2": 270,
+      "color": "#00bfa5"
+    },
+    {
+      "type": "arrow",
+      "x1": 560,
+      "y1": 190,
+      "x2": 470,
+      "y2": 270,
+      "color": "#00d4ff"
+    },
+    {
+      "type": "arrow",
+      "x1": 770,
+      "y1": 190,
+      "x2": 500,
+      "y2": 270,
+      "color": "#7b2cbf"
+    },
+    {
+      "type": "box",
+      "text": "Choose\nYour Model",
+      "x": 350,
+      "y": 270,
+      "width": 200,
+      "height": 80,
+      "fill": "#2e2e4e",
+      "stroke": "#FFD700",
+      "text_color": "#FFD700"
+    }
+  ],
+  "canvas_width": 920,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_07_llm_model_comparison.svg",
+  "filename": "svg_07_llm_model_comparison.svg"
+}

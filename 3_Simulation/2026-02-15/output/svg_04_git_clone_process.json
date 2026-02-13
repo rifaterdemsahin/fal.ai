@@ -1,0 +1,65 @@
+{
+  "id": "SVG4.1",
+  "name": "svg_04_git_clone_process",
+  "priority": "HIGH",
+  "scene": "Scene 4: The Clone Lab",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "GitHub\nRepository",
+      "x": 50,
+      "y": 160,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 250,
+      "y1": 210,
+      "x2": 340,
+      "y2": 210,
+      "color": "#00d4ff",
+      "label": "git clone"
+    },
+    {
+      "type": "box",
+      "text": "Local\nPowerhouse",
+      "x": 360,
+      "y": 160,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#00bfa5",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 560,
+      "y1": 210,
+      "x2": 650,
+      "y2": 210,
+      "color": "#00bfa5",
+      "label": "Run Agent"
+    },
+    {
+      "type": "box",
+      "text": "Tooling\nSystem",
+      "x": 670,
+      "y": 160,
+      "width": 180,
+      "height": 100,
+      "fill": "#2e2e4e",
+      "stroke": "#7b2cbf",
+      "text_color": "#ffffff"
+    }
+  ],
+  "canvas_width": 920,
+  "canvas_height": 420,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_04_git_clone_process.svg",
+  "filename": "svg_04_git_clone_process.svg"
+}

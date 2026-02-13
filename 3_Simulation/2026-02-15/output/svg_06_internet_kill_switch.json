@@ -1,0 +1,85 @@
+{
+  "id": "SVG6.1",
+  "name": "svg_06_internet_kill_switch",
+  "priority": "HIGH",
+  "scene": "Scene 6: Internet Kill Switch",
+  "diagram_type": "flow",
+  "elements": [
+    {
+      "type": "box",
+      "text": "GitHub\nWorkflow",
+      "x": 50,
+      "y": 50,
+      "width": 180,
+      "height": 90,
+      "fill": "#2e2e4e",
+      "stroke": "#00d4ff",
+      "text_color": "#ffffff"
+    },
+    {
+      "type": "arrow",
+      "x1": 250,
+      "y1": 95,
+      "x2": 340,
+      "y2": 95,
+      "color": "#00d4ff",
+      "label": "Trigger"
+    },
+    {
+      "type": "box",
+      "text": "KILL\nSWITCH",
+      "x": 360,
+      "y": 50,
+      "width": 180,
+      "height": 90,
+      "fill": "#4a1a1a",
+      "stroke": "#ff4444",
+      "text_color": "#ff4444"
+    },
+    {
+      "type": "arrow",
+      "x1": 450,
+      "y1": 140,
+      "x2": 300,
+      "y2": 220,
+      "color": "#00bfa5",
+      "label": "Kid A: ON"
+    },
+    {
+      "type": "arrow",
+      "x1": 450,
+      "y1": 140,
+      "x2": 600,
+      "y2": 220,
+      "color": "#ff4444",
+      "label": "Kid B: OFF"
+    },
+    {
+      "type": "box",
+      "text": "Device A\n\u2713 Online",
+      "x": 200,
+      "y": 220,
+      "width": 180,
+      "height": 90,
+      "fill": "#1a3a2a",
+      "stroke": "#00bfa5",
+      "text_color": "#00bfa5"
+    },
+    {
+      "type": "box",
+      "text": "Device B\n\u2717 Blocked",
+      "x": 520,
+      "y": 220,
+      "width": 180,
+      "height": 90,
+      "fill": "#4a1a1a",
+      "stroke": "#ff4444",
+      "text_color": "#ff4444"
+    }
+  ],
+  "canvas_width": 780,
+  "canvas_height": 380,
+  "background": "#1a1a2e",
+  "output_file": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/svg_06_internet_kill_switch.svg",
+  "filename": "svg_06_internet_kill_switch.svg"
+}
