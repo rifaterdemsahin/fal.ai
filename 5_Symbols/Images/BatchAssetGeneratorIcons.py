@@ -246,7 +246,7 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
     Generate asset using Gemini (Imagen 3) API as fallback.
     Uses the new google-genai SDK (v1.0+) as recommended.
     """
-    api_key = os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GOOGLE_IMAGEGENKEY") or os.environ.get("GEMINIKEY") or os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("❌ No GEMINI_API_KEY found for fallback.")
         return {"success": False, "error": "No Gemini API Key"}

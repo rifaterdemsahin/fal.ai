@@ -1,0 +1,72 @@
+{
+  "total": 9,
+  "successful": 0,
+  "failed": 9,
+  "total_cost": 0.0,
+  "results": [
+    {
+      "asset_id": "icon_github",
+      "name": "github_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_vscode",
+      "name": "vscode_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_cursor",
+      "name": "cursor_ai_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_n8n",
+      "name": "n8n_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_anthropic",
+      "name": "anthropic_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_openai",
+      "name": "openai_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_deepseek",
+      "name": "deepseek_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_google",
+      "name": "google_gemini_logo",
+      "priority": "HIGH",
+      "success": false,
+      "error": "All Gemini models failed."
+    },
+    {
+      "asset_id": "icon_shield",
+      "name": "family_shield",
+      "priority": "MEDIUM",
+      "success": false,
+      "error": "All Gemini models failed."
+    }
+  ],
+  "timestamp": "20260213_152349"
+}
