@@ -274,13 +274,16 @@ def generate_asset_with_gemini(asset_config: Dict, output_dir: Path, manifest: O
     models_to_try = [
         "models/imagen-3.0-generate-001",
         "models/image-generation-001",
-        "models/gemini-pro-vision" # Unlikely to work for generation but listed for completeness of attempts? No, avoid.
+        "models/gemini-1.5-pro", # Try multimodal models?
+        "models/gemini-2.0-flash-exp",
     ]
     
     headers = {"Content-Type": "application/json"}
     prompt = asset_config.get("prompt", "")
     
     for model_name in models_to_try:
+
+
         print(f"   Attempting with model: {model_name}")
         url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:predict?key={api_key}"
         
