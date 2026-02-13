@@ -1,0 +1,15 @@
+{
+  "id": "3d.09",
+  "name": "rocket_cicd",
+  "priority": "MEDIUM",
+  "scene": "Scene 9: Success Metrics",
+  "seed_key": "SEED_003",
+  "prompt": "A small rocket on a launch pad, space shuttle style, detailed fins and body, metallic surface, ready for launch",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A small rocket on a launch pad, space shuttle style, detailed fins and body, metallic surface, ready for launch",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5d2e/KeVQl2afZiSznuMzUADFR_ec4c66da117435327ffc611c78a401f9.obj",
+  "filename": "000_3d_rocket_cicd_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 789012
+}

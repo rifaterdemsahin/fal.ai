@@ -1,0 +1,15 @@
+{
+  "id": "3d.08",
+  "name": "automation_gear",
+  "priority": "MEDIUM",
+  "scene": "Scene 8: The Bespoke Logic",
+  "seed_key": "SEED_002",
+  "prompt": "Interconnected mechanical gears in motion, automation symbol, steampunk brass design, clean geometry, detailed teeth",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "Interconnected mechanical gears in motion, automation symbol, steampunk brass design, clean geometry, detailed teeth",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5d23/RfCyJqpz0F82gsbqkKR9L_c72d485b511c681c4ab20b38411415ae.obj",
+  "filename": "000_3d_automation_gear_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 123456
+}

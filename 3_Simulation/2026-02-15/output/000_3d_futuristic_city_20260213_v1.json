@@ -1,0 +1,15 @@
+{
+  "id": "3d.10",
+  "name": "futuristic_city",
+  "priority": "HIGH",
+  "scene": "Scene 10: Conclusion",
+  "seed_key": "SEED_003",
+  "prompt": "A futuristic miniature city with drones flying above, skyscrapers with holographic signs, clean sci-fi design",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A futuristic miniature city with drones flying above, skyscrapers with holographic signs, clean sci-fi design",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5d3a/gTDfFzM9AwyBTDPwvNqsL_4f6308b6e8e1487de56356900b6a8024.obj",
+  "filename": "000_3d_futuristic_city_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 789012
+}

@@ -1,0 +1,15 @@
+{
+  "id": "3d.06",
+  "name": "internet_kill_switch",
+  "priority": "MEDIUM",
+  "scene": "Scene 6: Internet Kill Switch",
+  "seed_key": "SEED_002",
+  "prompt": "A large red emergency button on a pedestal, industrial design, kill switch style, metallic base, warning stripes",
+  "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+  "original_prompt": "A large red emergency button on a pedestal, industrial design, kill switch style, metallic base, warning stripes",
+  "result_url": "https://v3b.fal.media/files/b/0a8e5d0b/WzCwyQyCR6PX117KqEFij_2ded98d452505964bb67e1255e0b5d7e.obj",
+  "filename": "000_3d_internet_kill_switch_20260213_v1.obj",
+  "format": "obj",
+  "date": "20260213",
+  "seed_value": 123456
+}

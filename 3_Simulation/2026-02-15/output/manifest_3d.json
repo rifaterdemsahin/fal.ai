@@ -1,0 +1,167 @@
+{
+  "generation_timestamp": "2026-02-13T22:02:08.831751",
+  "completion_timestamp": "2026-02-13T22:23:14.876773",
+  "total_assets": 10,
+  "assets": [
+    {
+      "filename": "000_3d_golden_microphone_20260213_v1.obj",
+      "prompt": "A massive golden microphone, ornate design, heavy metallic, professional broadcast mic, shiny gold material, studio quality",
+      "timestamp": "2026-02-13T22:05:16.109193",
+      "asset_type": "3d",
+      "asset_id": "3d.01",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5cce/vua3d5OnT4LeRlY2W58DM_833293a9d5fa93dcf3c6226453fd1be3.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_golden_microphone_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 1: The Heavy Mic",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_001",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_compass_pivot_20260213_v1.obj",
+      "prompt": "A navigation compass with spinning needle, brass and glass, detailed mechanical design, pivot mechanism visible",
+      "timestamp": "2026-02-13T22:07:15.165532",
+      "asset_type": "3d",
+      "asset_id": "3d.02",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5cda/Uo4dds2jKWLJLH9dpZVPU_1ce27213e3c34d4f538f079963861bd0.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_compass_pivot_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 2: The Pivot",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_001",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_mercury_liquid_figure_20260213_v1.obj",
+      "prompt": "A liquid mercury humanoid figure, reflective chrome surface, morphing shape, futuristic sci-fi character, metallic sheen",
+      "timestamp": "2026-02-13T22:09:42.733480",
+      "asset_type": "3d",
+      "asset_id": "3d.03",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5ce5/Zza1pE_rKYKfXO57KHtC2_ae78f1406a6bbe322943c887fe0c941d.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_mercury_liquid_figure_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 3: Statues vs Mercury",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_001",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_laptop_terminal_20260213_v1.obj",
+      "prompt": "A modern laptop with terminal code on screen, developer setup, clean product design, open lid, glowing screen",
+      "timestamp": "2026-02-13T22:11:41.132280",
+      "asset_type": "3d",
+      "asset_id": "3d.04",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5cf5/8nFduTG6LnA2f2f_LPW9E_af27448116da750d064ca7c0658c396c.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_laptop_terminal_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 4: The Clone Lab",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_002",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_free_tier_toolbox_20260213_v1.obj",
+      "prompt": "A futuristic toolbox with holographic tools floating above, free badge label, clean geometric design, tech inspired",
+      "timestamp": "2026-02-13T22:13:27.578616",
+      "asset_type": "3d",
+      "asset_id": "3d.05",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5cff/ImpHZ8rayJQLnuX-V6ogJ_197f21ff0d048a5d7d49b04bec8614f5.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_free_tier_toolbox_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 5: The Free Tier Journey",
+        "priority": "MEDIUM",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_002",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_internet_kill_switch_20260213_v1.obj",
+      "prompt": "A large red emergency button on a pedestal, industrial design, kill switch style, metallic base, warning stripes",
+      "timestamp": "2026-02-13T22:15:20.000080",
+      "asset_type": "3d",
+      "asset_id": "3d.06",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5d0b/WzCwyQyCR6PX117KqEFij_2ded98d452505964bb67e1255e0b5d7e.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_internet_kill_switch_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 6: Internet Kill Switch",
+        "priority": "MEDIUM",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_002",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_ai_brain_feast_20260213_v1.obj",
+      "prompt": "A glowing AI brain with neural connections, holographic display, futuristic tech, blue energy pulses, floating in space",
+      "timestamp": "2026-02-13T22:17:23.819236",
+      "asset_type": "3d",
+      "asset_id": "3d.07",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5d17/5EwGDC8B_Bem0cyBb-OtY_0341591f5a7bcb64c3b436c38ba17fde.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_ai_brain_feast_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 7: The LLM Feast",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_001",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_automation_gear_20260213_v1.obj",
+      "prompt": "Interconnected mechanical gears in motion, automation symbol, steampunk brass design, clean geometry, detailed teeth",
+      "timestamp": "2026-02-13T22:19:19.971683",
+      "asset_type": "3d",
+      "asset_id": "3d.08",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5d23/RfCyJqpz0F82gsbqkKR9L_c72d485b511c681c4ab20b38411415ae.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_automation_gear_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 8: The Bespoke Logic",
+        "priority": "MEDIUM",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_002",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_rocket_cicd_20260213_v1.obj",
+      "prompt": "A small rocket on a launch pad, space shuttle style, detailed fins and body, metallic surface, ready for launch",
+      "timestamp": "2026-02-13T22:21:11.372042",
+      "asset_type": "3d",
+      "asset_id": "3d.09",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5d2e/KeVQl2afZiSznuMzUADFR_ec4c66da117435327ffc611c78a401f9.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_rocket_cicd_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 9: Success Metrics",
+        "priority": "MEDIUM",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_003",
+        "format": "obj"
+      }
+    },
+    {
+      "filename": "000_3d_futuristic_city_20260213_v1.obj",
+      "prompt": "A futuristic miniature city with drones flying above, skyscrapers with holographic signs, clean sci-fi design",
+      "timestamp": "2026-02-13T22:23:14.876724",
+      "asset_type": "3d",
+      "asset_id": "3d.10",
+      "result_url": "https://v3b.fal.media/files/b/0a8e5d3a/gTDfFzM9AwyBTDPwvNqsL_4f6308b6e8e1487de56356900b6a8024.obj",
+      "local_path": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/000_3d_futuristic_city_20260213_v1.obj",
+      "metadata": {
+        "scene": "Scene 10: Conclusion",
+        "priority": "HIGH",
+        "model": "fal-ai/hunyuan-3d/v3.1/rapid/text-to-3d",
+        "seed_key": "SEED_003",
+        "format": "obj"
+      }
+    }
+  ]
+}
