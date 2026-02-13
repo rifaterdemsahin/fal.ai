@@ -1,0 +1,72 @@
+{
+  "total": 13,
+  "successful": 0,
+  "failed": 13,
+  "results": [
+    {
+      "success": false,
+      "name": "Heavy Mic Stage",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Pivot Office",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Stone Statue Hall",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Mercury Lab",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Clone Lab",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Evolution Workshop",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Nursery Room",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Crystal Ball Tech Room",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Engine Room",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Digital Feast Table",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Power Station",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Tool Shed Workshop",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "Balcony Cityscape",
+      "error": "Generation failed"
+    }
+  ]
+}
