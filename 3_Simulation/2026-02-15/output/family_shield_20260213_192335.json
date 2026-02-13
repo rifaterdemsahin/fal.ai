@@ -1,0 +1,17 @@
+{
+  "id": "icon_shield",
+  "name": "family_shield",
+  "priority": "MEDIUM",
+  "scene": "Scene 6",
+  "seed_key": "SEED_003",
+  "prompt": "Security shield icon, family friendly badge, soft rounded edges, warm colors, clean vector style, isolated on white background",
+  "model": "imagen-4.0-generate-001",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "category": "icon",
+  "filename": "family_shield_20260213_192335.png",
+  "generated_at": "20260213_192335"
+}

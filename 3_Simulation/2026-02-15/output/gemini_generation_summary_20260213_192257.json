@@ -1,0 +1,112 @@
+{
+  "total": 21,
+  "successful": 0,
+  "failed": 21,
+  "results": [
+    {
+      "success": false,
+      "name": "1__opening_-_the_heavy_mic",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "2__the_pivot",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "3__statues_vs._mercury",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "4__the_clone_lab",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "5__the_evolution",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "6__the_nursery",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "7__the_crystal_ball",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "8__the_engine_room",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "9__the_digital_feast",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "10__the_power_station",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "11__the_tool_shed",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "12__the_balcony",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "github_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "vscode_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "cursor_ai_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "n8n_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "anthropic_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "openai_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "deepseek_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "google_gemini_logo",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "family_shield",
+      "error": "Generation failed"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "icon_cursor",
+  "name": "cursor_ai_logo",
+  "priority": "HIGH",
+  "scene": "General",
+  "seed_key": "SEED_003",
+  "prompt": "Cursor AI code editor logo, minimalist modern tech icon, clean vector style, isolated on white background",
+  "model": "imagen-4.0-generate-001",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "category": "icon",
+  "filename": "cursor_ai_logo_20260213_192335.png",
+  "generated_at": "20260213_192335"
+}

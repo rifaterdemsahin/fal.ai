@@ -1,0 +1,17 @@
+{
+  "id": "icon_google",
+  "name": "google_gemini_logo",
+  "priority": "HIGH",
+  "scene": "Scene 9",
+  "seed_key": "SEED_003",
+  "prompt": "Google Gemini logo, star sparkle shape, blue and purple gradient, minimalist flat design, clean vector style, isolated on white background",
+  "model": "imagen-4.0-generate-001",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  },
+  "num_inference_steps": 28,
+  "category": "icon",
+  "filename": "google_gemini_logo_20260213_192335.png",
+  "generated_at": "20260213_192335"
+}
