@@ -8,31 +8,36 @@ Derived from: 3_Simulation/2026-02-15/input/source_graphics.md
 Cost: ~$0.01/image × ~25 infographics = ~$0.25 (budget: $0.50)
 """
 
-import os
-import json
-import urllib.request
+import sys
 from pathlib import Path
-from datetime import datetime
 from typing import Dict, List
 
-# fal.ai client
-try:
-    import fal_client
-except ImportError:
-    print("❌ fal_client not installed. Run: pip install fal-client")
-    exit(1)
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Configuration
-OUTPUT_DIR = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+from base.base_asset_generator import BaseAssetGenerator
+from paths_config import get_weekly_paths, get_latest_weekly_id
 
-# Model config — flux/schnell is ~$0.01 per image
-MODEL = "fal-ai/flux/schnell"
-COST_PER_IMAGE = 0.01
-BUDGET_LIMIT = 0.50
+# Consistency seeds for different asset categories
+SEEDS = {
+    "SEED_001": 42,      # B-roll (can vary)
+    "SEED_002": 123456,  # Infographics (MUST match)
+    "SEED_003": 789012,  # Motion graphics (brand)
+    "SEED_004": 345678,  # UI overlays (template)
+}
 
-IMAGE_SIZE = {"width": 1920, "height": 1080}
-NUM_INFERENCE_STEPS = 4
+# Brand color palette (reference for prompts)
+BRAND_COLORS = {
+    "primary_dark": "#1a1a2e",
+    "accent_blue": "#00d4ff",
+    "accent_purple": "#7b2cbf",
+    "secondary_teal": "#00bfa5",
+    "highlight_orange": "#ff6b35",
+    "text_white": "#ffffff",
+}
+
+# Model configuration
+DEFAULT_MODEL = "fal-ai/flux/schnell"
 
 # ─── Infographic Queue — derived from source_graphics.md ────────────────────
 
@@ -42,6 +47,8 @@ GENERATION_QUEUE = [
         "id": "IG.01",
         "name": "ig_01_240_workflows_stat",
         "scene": "Scene 1-2: Opening (00:00:15)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Clean modern infographic stat card on dark background: large bold glowing number '240' "
             "in white with gold accent, subtitle 'Workflows Managed' underneath in sans-serif font, "
@@ -53,6 +60,8 @@ GENERATION_QUEUE = [
         "id": "IG.02",
         "name": "ig_02_pivot_title_card",
         "scene": "Scene 2: The Pivot (00:00:20)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Professional title card infographic: text 'The Pivot: Building for Everyone' in bold "
             "Montserrat-style sans-serif, clean dark background with subtle gradient, gold underline "
@@ -65,6 +74,8 @@ GENERATION_QUEUE = [
         "id": "IG.03",
         "name": "ig_03_static_vs_dynamic",
         "scene": "Scene 3: Static vs Dynamic (00:00:38)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Split-screen infographic comparison: left side labeled 'Static Rules' with icon of "
             "a locked padlock and rigid grid pattern in grey tones; right side labeled 'Dynamic AI' "
@@ -76,6 +87,8 @@ GENERATION_QUEUE = [
         "id": "IG.04",
         "name": "ig_04_breaking_chains",
         "scene": "Scene 3: Breaking Chains (00:00:45)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Dramatic infographic visual: iron chains breaking apart into golden particles, "
             "text overlay 'Breaking the Iron Chains' in bold white, dark moody background, "
@@ -87,6 +100,8 @@ GENERATION_QUEUE = [
         "id": "IG.05",
         "name": "ig_05_clone_steps_checklist",
         "scene": "Scene 4: Clone Lab Steps",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Clean process infographic checklist on dark background: three steps with checkmarks, "
             "'Step 1: Clone Repository ✓', 'Step 2: Setup Environment ✓', 'Step 3: Run Agent ✓', "
@@ -98,6 +113,8 @@ GENERATION_QUEUE = [
         "id": "IG.06",
         "name": "ig_06_tool_comparison_table",
         "scene": "Scene 4: Tool Comparison (00:02:30)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Clean data comparison table infographic: 'VS Code vs Cursor AI' header, "
             "rows showing features like Free Tier, Local Agent, Git Support with checkmark and "
@@ -110,6 +127,8 @@ GENERATION_QUEUE = [
         "id": "IG.07",
         "name": "ig_07_cloning_flowchart",
         "scene": "Scene 5: Cloning Diagram (00:04:00)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Flowchart infographic: 'User → Repository → Clone' with flowing arrow connections, "
             "cloud icon for source, laptop icon for local machine, file copy animation trail, "
@@ -121,6 +140,8 @@ GENERATION_QUEUE = [
         "id": "IG.08",
         "name": "ig_08_3d_printer_progress",
         "scene": "Scene 5: Progress Bar (00:04:30)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Futuristic progress bar infographic: circular progress indicator showing 78% complete, "
             "3D printer silhouette in background, percentage counter in large bold font, "
@@ -133,6 +154,8 @@ GENERATION_QUEUE = [
         "id": "IG.09",
         "name": "ig_09_consistency_quote",
         "scene": "Scene 6: Consistency Quote (00:06:00)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Inspirational quote infographic: 'Consistency is Your Magic Shield' in large bold "
             "white typography, decorative shield icon with golden glow, warm soft gradient "
@@ -144,6 +167,8 @@ GENERATION_QUEUE = [
         "id": "IG.10",
         "name": "ig_10_family_friendly_badge",
         "scene": "Scene 6: Family Badge (00:06:20)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Badge infographic overlay: shield-shaped badge icon with text 'Family-Tested Solution', "
             "warm golden and green colors, checkmark inside shield, friendly approachable design, "
@@ -155,6 +180,8 @@ GENERATION_QUEUE = [
         "id": "IG.11",
         "name": "ig_11_tech_logos_layout",
         "scene": "Scene 7: Tech Platforms (00:06:36)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Tech platform comparison infographic: four quadrant layout showing abstract icons "
             "representing major AI platforms, each with a label — 'Search', 'Assistant', "
@@ -167,6 +194,8 @@ GENERATION_QUEUE = [
         "id": "IG.12",
         "name": "ig_12_speed_1000x",
         "scene": "Scene 8: Speed Stat (00:08:35)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Bold stat infographic: massive text '1000x' in white with motion blur streaks, "
             "subtitle 'Faster Deployment' below, speed lines radiating from center, "
@@ -178,6 +207,8 @@ GENERATION_QUEUE = [
         "id": "IG.13",
         "name": "ig_13_speed_comparison_bars",
         "scene": "Scene 8: Speed Chart (00:08:50)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Horizontal bar chart infographic: 'Traditional' bar in grey at 10%, "
             "'AI-Powered' bar in glowing blue at 95%, clean comparison visualization, "
@@ -190,6 +221,8 @@ GENERATION_QUEUE = [
         "id": "IG.14",
         "name": "ig_14_llm_claude_card",
         "scene": "Scene 9: Claude Card (00:09:30)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Feature card infographic: 'The Reasoning Layer' headline in bold white, "
             "abstract brain-circuit icon, bullet points 'Sonnet 3.5, 4.5, 4.6', "
@@ -201,6 +234,8 @@ GENERATION_QUEUE = [
         "id": "IG.15",
         "name": "ig_15_llm_chatgpt_card",
         "scene": "Scene 9: ChatGPT Card",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Feature card infographic: 'The Versatile Leader' headline in bold white, "
             "abstract chat bubble icon with search lens, bullet points 'Search, Browsing, Plugins', "
@@ -212,6 +247,8 @@ GENERATION_QUEUE = [
         "id": "IG.16",
         "name": "ig_16_llm_deepseek_card",
         "scene": "Scene 9: DeepSeek Card",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Feature card infographic: 'The Coding Disruptor' headline in bold white, "
             "abstract code terminal icon with lightning bolt, bullet points 'Free, Powerful', "
@@ -223,6 +260,8 @@ GENERATION_QUEUE = [
         "id": "IG.17",
         "name": "ig_17_llm_gemini_card",
         "scene": "Scene 9: Gemini Card",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Feature card infographic: 'The Versatile Platform' headline in bold white, "
             "abstract multi-faceted gem icon, bullet points 'Images, Code, Nano', "
@@ -234,6 +273,8 @@ GENERATION_QUEUE = [
         "id": "IG.18",
         "name": "ig_18_100_tablets_stat",
         "scene": "Scene 9: 100 Tablets (00:09:05)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Glowing stat infographic: large text '100+' in digital glitch aesthetic, "
             "flickering neon effect, subtitle 'AI Models Available' below, "
@@ -246,6 +287,8 @@ GENERATION_QUEUE = [
         "id": "IG.19",
         "name": "ig_19_n8n_workflow_diagram",
         "scene": "Scene 10: n8n Workflow (00:12:15)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Node-based workflow diagram infographic: connected nodes showing "
             "'Telegram/Email → n8n → MAC Filter → Internet Control', "
@@ -257,6 +300,8 @@ GENERATION_QUEUE = [
         "id": "IG.20",
         "name": "ig_20_internet_kill_switch",
         "scene": "Scene 10: Kill Switch (00:12:00)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Bold title infographic: 'The Internet Kill Switch' in stark white text with red "
             "glitch distortion effect, big red power button icon below, tech-noir aesthetic, "
@@ -268,6 +313,8 @@ GENERATION_QUEUE = [
         "id": "IG.21",
         "name": "ig_21_37_commits_counter",
         "scene": "Scene 11: Commits Stat (00:14:00)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "GitHub-style stat box infographic: large number '37+' in bold white, "
             "subtitle 'Commits — Continuous Evolution' below, green contribution graph pattern "
@@ -279,6 +326,8 @@ GENERATION_QUEUE = [
         "id": "IG.22",
         "name": "ig_22_cicd_pipeline",
         "scene": "Scene 11: CI/CD Pipeline (00:15:30)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Linear pipeline infographic: five connected stages 'Code → Test → Build → Deploy → Live', "
             "each stage is a node with green checkmark, arrow connections between them, "
@@ -290,6 +339,8 @@ GENERATION_QUEUE = [
         "id": "IG.23",
         "name": "ig_23_success_metrics_dashboard",
         "scene": "Scene 11: Metrics Dashboard (00:16:45)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Modern dashboard infographic grid: four metric cards in a 2x2 grid, "
             "'Compliance: 100%' in green, 'Accuracy: 98.5%' in blue, 'Uptime: 99.9%' in cyan, "
@@ -302,6 +353,8 @@ GENERATION_QUEUE = [
         "id": "IG.24",
         "name": "ig_24_call_to_action",
         "scene": "Scene 12: CTA Steps (00:17:50)",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Step-by-step call to action infographic: four numbered steps vertically — "
             "'1. Take Assessment', '2. Watch Simulation', '3. Clone Repository', '4. Build Your Future', "
@@ -313,6 +366,8 @@ GENERATION_QUEUE = [
         "id": "IG.25",
         "name": "ig_25_zero_capital_quote",
         "scene": "Scene 5: Zero Capital Quote",
+        "seed_key": "SEED_002",
+        "model": DEFAULT_MODEL,
         "prompt": (
             "Inspirational quote infographic: 'Zero Capital, Infinite Potential' in large bold "
             "white serif typography on dark background, subtle gold particle burst behind text, "
@@ -322,130 +377,49 @@ GENERATION_QUEUE = [
 ]
 
 
-def generate_asset(asset_config: Dict, idx: int, total: int, cost_so_far: float, timestamp: str) -> Dict:
-    """Generate a single infographic asset using fal.ai"""
-    name = asset_config["name"]
-    scene = asset_config["scene"]
+class InfographicsGenerator(BaseAssetGenerator):
+    """Generator for infographic assets using base class architecture."""
 
-    print(f"\n[{idx}/{total}] Generating: {name}")
-    print(f"   Scene: {scene}")
-    print(f"   Cost so far: ${cost_so_far:.2f} / ${BUDGET_LIMIT:.2f}")
-
-    # Budget guard
-    if cost_so_far + COST_PER_IMAGE > BUDGET_LIMIT:
-        msg = f"Budget exceeded (${cost_so_far:.2f} + ${COST_PER_IMAGE:.2f} > ${BUDGET_LIMIT:.2f})"
-        print(f"   ⛔ {msg}")
-        return {"success": False, "error": msg}
-
-    try:
-        result = fal_client.subscribe(
-            MODEL,
-            arguments={
-                "prompt": asset_config["prompt"],
-                "image_size": IMAGE_SIZE,
-                "num_inference_steps": NUM_INFERENCE_STEPS,
-                "num_images": 1,
-            },
+    def __init__(self, output_dir: Path, seeds: Dict[str, int], brand_colors: Dict[str, str]):
+        super().__init__(
+            output_dir=output_dir,
+            seeds=seeds,
+            brand_colors=brand_colors,
+            asset_type='infographic',
+            output_format='png'
         )
 
-        if result and "images" in result and len(result["images"]) > 0:
-            image_url = result["images"][0]["url"]
-            filename = f"{name}_{timestamp}.png"
-            image_path = OUTPUT_DIR / filename
-            urllib.request.urlretrieve(image_url, image_path)
-            print(f"   ✅ Saved: {filename}")
-            return {
-                "success": True,
-                "url": image_url,
-                "local_path": str(image_path),
-                "filename": filename,
-            }
-        else:
-            print("   ❌ No images returned")
-            return {"success": False, "error": "No images returned"}
-
-    except Exception as e:
-        print(f"   ❌ Error: {e}")
-        return {"success": False, "error": str(e)}
+    def get_generation_queue(self) -> List[Dict]:
+        """Return the infographics generation queue."""
+        return GENERATION_QUEUE
 
 
 def main():
-    """Main execution — no interactive prompt."""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    total = len(GENERATION_QUEUE)
-    estimated_cost = total * COST_PER_IMAGE
+    """Main execution using base class architecture."""
+    # Get latest weekly paths or use default
+    weekly_id = get_latest_weekly_id() or "2026-02-15"
+    paths = get_weekly_paths(weekly_id)
+    output_dir = paths['output']
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     print("=" * 60)
-    print("📊 FAL.AI INFOGRAPHICS GENERATOR")
-    print(f"   Model: {MODEL} (~${COST_PER_IMAGE}/image)")
-    print(f"   Infographics: {total}")
-    print(f"   Estimated cost: ${estimated_cost:.2f} (budget: ${BUDGET_LIMIT:.2f})")
-    print(f"   Output: {OUTPUT_DIR}")
+    print("📊 FAL.AI INFOGRAPHICS GENERATOR (Base Class Architecture)")
+    print(f"   Weekly ID: {weekly_id}")
+    print(f"   Output: {output_dir}")
     print("=" * 60)
 
-    for i, item in enumerate(GENERATION_QUEUE, 1):
-        print(f"  {i:>3}. [{item['id']}] {item['scene']}")
+    # Initialize generator
+    generator = InfographicsGenerator(
+        output_dir=output_dir,
+        seeds=SEEDS,
+        brand_colors=BRAND_COLORS
+    )
 
-    print(f"\n💰 Total estimated cost: ${estimated_cost:.2f}")
+    # Generate all assets
+    results = generator.generate_batch()
 
-    # Check API key
-    api_key = os.environ.get("FAL_KEY")
-    if not api_key:
-        print("\n❌ ERROR: FAL_KEY not set. export FAL_KEY='your-key'")
-        return
-
-    # Generate
-    results = []
-    cost_so_far = 0.0
-
-    for i, asset in enumerate(GENERATION_QUEUE, 1):
-        result = generate_asset(asset, i, total, cost_so_far, timestamp)
-        results.append({"asset_id": asset["id"], "name": asset["name"], **result})
-        if result["success"]:
-            cost_so_far += COST_PER_IMAGE
-
-    # Summary
-    successful = [r for r in results if r["success"]]
-    failed = [r for r in results if not r["success"]]
-
-    print("\n" + "=" * 60)
-    print("📊 GENERATION SUMMARY")
-    print("=" * 60)
-    print(f"✅ Successful: {len(successful)}/{total}")
-    print(f"❌ Failed:     {len(failed)}/{total}")
-    print(f"💰 Total cost: ${cost_so_far:.2f} / ${BUDGET_LIMIT:.2f} budget")
-
-    if successful:
-        print(f"\n✅ Generated infographics:")
-        for r in successful:
-            print(f"   • {r['name']} → {r['filename']}")
-
-    if failed:
-        print(f"\n❌ Failed:")
-        for r in failed:
-            print(f"   • {r['name']} — {r.get('error', 'unknown')}")
-
-    # Save summary JSON
-    summary_path = OUTPUT_DIR / f"infographics_summary_{timestamp}.json"
-    with open(summary_path, "w") as f:
-        json.dump(
-            {
-                "generator": "BatchAssetGeneratorInfographics",
-                "model": MODEL,
-                "timestamp": timestamp,
-                "total": total,
-                "successful": len(successful),
-                "failed": len(failed),
-                "total_cost_usd": cost_so_far,
-                "budget_usd": BUDGET_LIMIT,
-                "results": results,
-            },
-            f,
-            indent=2,
-        )
-
-    print(f"\n💾 Summary: {summary_path}")
-    print("✅ Done!")
+    # Display results
+    generator.display_summary(results)
 
 
 if __name__ == "__main__":

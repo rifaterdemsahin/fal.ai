@@ -333,9 +333,9 @@ class BaseAssetGenerator(ABC):
             print("❌ No GEMINI_API_KEY found for fallback.")
             return {"success": False, "error": "No Gemini API Key"}
 
-        print("✨ Generating with Gemini (Imagen 3)...")
-        
-        # Endpoint for Imagen 3 on Generative Language API
+        print("✨ Generating with Gemini (Imagen 4)...")
+
+        # Endpoint for Imagen 4 on Generative Language API
         url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key={api_key}"
         
         headers = {"Content-Type": "application/json"}
