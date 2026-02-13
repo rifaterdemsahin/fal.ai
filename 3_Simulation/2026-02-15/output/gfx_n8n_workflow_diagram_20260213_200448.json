@@ -1,0 +1,11 @@
+{
+  "id": "graphic_17",
+  "name": "n8n_workflow_diagram",
+  "prompt": "Professional video graphic asset. Title: n8n Workflow Diagram. Type: Animated workflow. Style: Node-based diagram. Modern tech aesthetic. GitHub colors (#24292e black, #0366d6 blue). Clean minimalist design. Sharp edges, professional look. 16:9 aspect ratio for video overlay",
+  "scene": "Graphic 17",
+  "category": "graphic",
+  "type": "Animated workflow",
+  "filename": "gfx_n8n_workflow_diagram_20260213_200448.png",
+  "generated_at": "20260213_200448",
+  "model": "imagen-4.0-generate-001"
+}

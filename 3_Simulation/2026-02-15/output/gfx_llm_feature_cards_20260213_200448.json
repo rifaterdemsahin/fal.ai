@@ -1,0 +1,11 @@
+{
+  "id": "graphic_15",
+  "name": "llm_feature_cards",
+  "prompt": "Professional video graphic asset. Title: LLM Feature Cards. Type: Feature cards for each LLM. Style: Card-based layout with icons. Modern tech aesthetic. GitHub colors (#24292e black, #0366d6 blue). Clean minimalist design. Sharp edges, professional look. 16:9 aspect ratio for video overlay",
+  "scene": "Graphic 15",
+  "category": "graphic",
+  "type": "Feature cards for each LLM",
+  "filename": "gfx_llm_feature_cards_20260213_200448.png",
+  "generated_at": "20260213_200448",
+  "model": "imagen-4.0-generate-001"
+}

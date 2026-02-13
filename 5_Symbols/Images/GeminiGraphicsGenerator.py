@@ -217,9 +217,11 @@ def generate_all_graphics(prompts: List[Dict], client, output_dir: Path) -> List
         image_data = generate_image_gemini(client, item['prompt'])
         
         if image_data:
-            # Generate filename
+            # Generate filename - sanitize to remove invalid characters
             safe_name = item.get('name', item.get('id', 'graphic'))
-            safe_name = safe_name.replace(' ', '_').replace(':', '').replace('"', '').lower()
+            # Remove all characters that are problematic for filenames
+            safe_name = re.sub(r'[^\w\-]', '_', safe_name.lower())
+            safe_name = re.sub(r'_+', '_', safe_name).strip('_')
             filename = f"gfx_{safe_name}_{timestamp}.png"
             
             # Save image

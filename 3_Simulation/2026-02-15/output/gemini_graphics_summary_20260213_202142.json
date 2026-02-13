@@ -1,0 +1,162 @@
+{
+  "total": 31,
+  "successful": 0,
+  "failed": 31,
+  "results": [
+    {
+      "success": false,
+      "name": "240_workflows_stat",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "the_pivot_title_card",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "split_screen_labels",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "breaking_chains_animation",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "step_1,_2,_3_process_overlay",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "command_highlights",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "tool_comparison_table",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "cloning_yourself_metaphor",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "3d_printer_progress_bar",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "consistency_=_magic_shield_quote",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "family-friendly_badge",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "tech_company_logos",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "speed_multiplier",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "speed_comparison",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "llm_feature_cards",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "100_tablets_number_visual",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "n8n_workflow_diagram",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "internet_kill_switch_label",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "github_pages_preview",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "37+_commits_counter",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "ci/cd_pipeline_visual",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "success_metrics_dashboard",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "call_to_action",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "final_title_card",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "end_screen_elements",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "240_workflows_stat",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "speed_1000x_multiplier",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "static_vs_dynamic_comparison",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "3_step_process_checklist",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "family_friendly_badge",
+      "error": "Generation failed"
+    },
+    {
+      "success": false,
+      "name": "consistency_magic_shield_quote",
+      "error": "Generation failed"
+    }
+  ]
+}
