@@ -5,8 +5,12 @@ Generates YouTube chapter markers from EDL
 """
 
 import re
+import sys
 from pathlib import Path
 from typing import Dict, List
+
+# Add parent directory to path to import base modules
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from base.base_asset_generator import BaseAssetGenerator
 from base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
@@ -14,10 +18,10 @@ from base.generator_config import SEEDS, BRAND_COLORS, DEFAULT_EDL_PATH
 
 class AudioAssetGenerator(BaseAssetGenerator):
     """Generator for audio/chapter marker text files"""
-    
-    # Regex patterns for EDL parsing
-    SCENE_PATTERN = re.compile(r'^### \*\*SCENE \d+: (.+)\*\*\s*$')
-    DURATION_PATTERN = re.compile(r'\*\*Duration:\*\* (\d+:\d+)')
+
+    # Regex patterns for EDL parsing (table format)
+    # Matches: | **01** | 01:00:00 | **The Pivot** | Host holding...
+    TABLE_ROW_PATTERN = re.compile(r'\|\s*\*\*(\d+)\*\*\s*\|\s*([\d:]+)\s*\|\s*\*\*(.+?)\*\*\s*\|')
     
     def __init__(self, edl_path: Path = None):
         super().__init__(
@@ -36,11 +40,20 @@ class AudioAssetGenerator(BaseAssetGenerator):
         self.output_file = self.output_dir / "chapter_markers.txt"
     
     def parse_timecode(self, time_str: str) -> str:
-        """Normalize timecode (e.g., 0:00 -> 00:00)"""
+        """Convert timecode from HH:MM:SS to MM:SS for YouTube chapters"""
+        time_str = time_str.strip()
         parts = time_str.split(':')
-        if len(parts) == 2:
+
+        if len(parts) == 3:
+            # Format: HH:MM:SS -> convert to MM:SS
+            h, m, s = parts
+            total_minutes = int(h) * 60 + int(m)
+            return f"{total_minutes:02d}:{s}"
+        elif len(parts) == 2:
+            # Format: MM:SS -> ensure 2-digit minutes
             m, s = parts
             return f"{int(m):02d}:{s}"
+
         return time_str
     
     def format_title(self, text: str) -> str:
@@ -78,27 +91,23 @@ class AudioAssetGenerator(BaseAssetGenerator):
         lines = content.splitlines()
 
         markers = []
-        current_scene_title = None
 
         for line in lines:
             line = line.strip()
-            
-            scene_match = self.SCENE_PATTERN.match(line)
-            if scene_match:
-                raw_title = scene_match.group(1).strip()
-                current_scene_title = self.format_title(raw_title)
-                continue
 
-            duration_match = self.DURATION_PATTERN.search(line)
-            if duration_match and current_scene_title:
-                start_time = duration_match.group(1)
-                formatted_time = self.parse_timecode(start_time)
-                
-                marker_line = f"{formatted_time} {current_scene_title}"
+            # Match table rows like: | **01** | 01:00:00 | **The Pivot** | ...
+            table_match = self.TABLE_ROW_PATTERN.search(line)
+            if table_match:
+                scene_num = table_match.group(1)
+                timestamp = table_match.group(2)
+                title = table_match.group(3).strip()
+
+                formatted_time = self.parse_timecode(timestamp)
+                formatted_title = self.format_title(title)
+
+                marker_line = f"{formatted_time} {formatted_title}"
                 markers.append(marker_line)
-                print(f"   â€¢ Found: {marker_line}")
-                
-                current_scene_title = None
+                print(f"   • Scene {scene_num}: {marker_line}")
 
         if markers:
             self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -149,8 +158,27 @@ class AudioAssetGenerator(BaseAssetGenerator):
 
 def main():
     """Main execution"""
-    generator = AudioAssetGenerator()
-    generator.run()
+    # Set directories from arguments or use defaults
+    input_dir = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/input")
+    output_dir = Path("/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output")
+
+    edl_path = input_dir / "source_edl.md"
+
+    print("=" * 60)
+    print("🎵 AUDIO CHAPTER MARKERS GENERATOR")
+    print("=" * 60)
+    print(f"💰 Cost: $0.00 (FREE! Text processing)")
+    print(f"📥 Input EDL:  {edl_path}")
+    print(f"📤 Output:     {output_dir}")
+    print("=" * 60)
+
+    # Override output directory
+    generator = AudioAssetGenerator(edl_path=edl_path)
+    generator.output_dir = output_dir
+    generator.output_file = output_dir / "chapter_markers.txt"
+
+    # Run without confirmation prompt for automation
+    generator.run(confirm=False)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-02-13T23:01:41.159102",
+  "sfx": {
+    "success": true,
+    "count": 8,
+    "files": [
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_whoosh_transition.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_tech_beep.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_success_chime.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_error_beep.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_ui_click.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_riser_buildup.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_impact_hit.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx/sfx_typing_sequence.wav"
+    ],
+    "directory": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/sfx"
+  },
+  "music": {
+    "success": true,
+    "count": 5,
+    "files": [
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music/track_01_opening_theme.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music/track_02_transformation.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music/track_03_innovation.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music/track_04_tech_ecosystem.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music/track_05_the_feast.wav"
+    ],
+    "directory": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/music"
+  },
+  "ambient": {
+    "success": true,
+    "count": 3,
+    "files": [
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/ambient/ambient_tech_office.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/ambient/ambient_futuristic_city.wav",
+      "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/ambient/ambient_digital_space.wav"
+    ],
+    "directory": "/Users/rifaterdemsahin/projects/fal.ai/3_Simulation/2026-02-15/output/audio/ambient"
+  }
+}
